@@ -1,0 +1,273 @@
+
+\documentclass[12pt]{article}
+%\usepackage[T1]{fontenc}
+%\usepackage{libertine}	
+\usepackage{titlesec}
+\usepackage{enumerate,amsmath,amssymb}
+\usepackage{epsfig}
+\usepackage{booktabs}
+\usepackage{graphicx}	
+\usepackage{fancyhdr}
+\usepackage{ifpdf}
+\usepackage{color}
+\ifpdf
+  \usepackage[pdftex]{hyperref}
+\else
+  \usepackage[hypertex]{hyperref}
+\fi
+
+%%%%%%%%%%%%%
+\oddsidemargin -0.1in
+\evensidemargin -0.1in
+\textwidth 6.5in
+\headheight 0.4in
+\topmargin -0.5in
+\textheight 10.0in
+%\footheight 1.0in
+%%%%%%%%%%%%
+
+\begin{document}
+\pagestyle{fancy}
+\fancyhead[LO,LE]{\bf{Math 241 }}
+\fancyhead[CO,CE]{\bf{Calculus III Recitation}}
+\fancyhead[RO,RE]{\bf{Fall 2014}}
+\subsection*{Course Information}
+
+\begin{tabular}{ll }
+\textbf{Instructor :} & Wenqiang Feng \\
+\textbf{Office :} & 109 Ayres Hall\\
+\textbf{Email :}& wfeng1@vols.utk.edu\\
+\textbf{Phone :}& 865-898-6089\\
+\textbf{Office Hours :}& Monday 4:00PM-5:00PM.
+\end{tabular}
+
+\vskip0.2in\noindent\begin{tabular}{ll}
+\textbf{Time:}& Tuesday, 08:10am-09:25am (Section 1),\\
+ &Tuesday, 11:10am-12:25pm (Section 4),\\
+\textbf{Location:}& Ayres Hall 123\\
+\textbf{Web:}& \href{http://www.math.utk.edu/~xchen/241-b.html}{http://www.math.utk.edu/~xchen/241-b.html}\\
+& \href{http://web.utk.edu/~wfeng1}{http://web.utk.edu/~wfeng1/}\\
+\textbf{Textbook:} & Calculus ($2^{ed}$ edition), by Jon Rogawski, chapters 12-17\\
+\end{tabular}
+
+\subsubsection*{Course Goals}
+The Calculus III recitation has three primary goals.  The primary goal is to {\bf \emph{review the content which was taught in the lecture}}.
+Emphasis is placed on reviewing the former content, Consolidating the knowledge points, expanding the knowledge points; The second goal of the Calculus III recitation is to {\bf \emph{help students master problem solving method, understand and experience the mathematical thought}}.
+Emphasis is placed on teaching the problem solving method; The last goal is to {\bf \emph{test what the students have learned}}.
+
+% Emphasis is placed on preparing graduate students to teach their first course, however much of the material will be relavent to TAs as
+%well as more experience graduate instructors.  The ultimate aim is to start TAs on the path to be excellent mathematics teachers
+%throughout their academic careers.  Thus, the second goal of the teaching seminar is to {\bf \emph{help graduate students prepare
+% for the academic job market}}.  This includes understanding the interview process and developing a teaching portfolio.
+\subsubsection*{Homework and Quizzes}
+On each Tuesday at 8: 00 AM (Section1) and 11:10AM (Section 4) (beginning of the class), the assigned homework of the previous week are collected and selected problems are graded.
+Quizzes are taken at the last 15 minutes in recitation course.
+\textcolor{red}{No late homework will be accepted, missed quizzes and PRS will not be made up.}
+\subsubsection*{Exam}
+There will be 3 Midterms and one Final Exam. \\
+
+\begin{tabular}{|r|c|c|c|c|}
+\hline
+&Exam 1 & Exam 2& Exam 3& Final Exam\\
+\hline
+Date&Sep.10, 2014& Oct.8, 2014& Nov.12, 2014&Dec. 5, 2014\\
+\hline
+Time&9:05a.m- 9:55a.m& 9:05a.m- 9:55a.m& 9:05a.m- 9:55a.m& 8:00 a.m.-10:00 a.m\\
+\hline
+\end{tabular}
+%There will be 3 Midterms exams form 5:00PM-5:50PM on the following Thursdays in BCH 120: Sept 6, sept 27, Oct 25, and Nov 29. The final exam will be
+%on Thursday, Dec 13, from 1:30PM-3:30PM.
+%\subsubsection*{Topics}
+%The topics to be covered include (but are not limited to) the following:
+%exams (), quizzes, homework, etc.)
+%understanding students' perspectives, preparing lectures and other learning activities,
+%creating assessments (exams, quizzes, homework, etc.), writing a syllabus; practical
+%experience lecturing (a ``mock lecture"); interviewing, preparing a teaching portfolio.
+\subsubsection*{Grading Policy}
+On all of your papers, you are expected to show your work clearly and completely.  You will
+be graded on your work as well as your answers.  There will be 10 total points for each homework and quiz. 
+The final grade (as a percentage of the total points) will be computed using the following weights: \\
+\newpage
+\begin{tabular}{|r|c|c|c|c|c|}
+\hline
+&Final Exam & Midterms & Quizzes& Homeworks\\
+\hline
+Distribution&30\%& 30\%& 20\%&20\%\\
+\hline
+\end{tabular}\\
+
+Letter grades will be assigned according to the following scale (subject to change):\\
+
+\begin{tabular}{|r|c|c|c|c|c|c|}
+\hline
+&A & B & C & D&E\\
+\hline
+Range&$90\leq S \leq 100$& $80\leq S \leq 89$&$65\leq S \leq 79$&$50\leq S \leq 64$&$0\leq S \leq 49$\\
+\hline
+\end{tabular}\\
+
+
+
+\subsubsection*{Attendance}
+Students are expected to attend every class. Borderline grade decisions will be based on attendance, among other factors.
+
+\subsubsection*{Disability Policy}
+
+Students who have a disability that require accommodation(s) should make an appointment with the Office of Disability Services (974-6087) to discuss their specific needs as well as schedule an appointment with me during my office hours.
+
+\subsubsection*{Academic Honesty}
+
+Students must be familiar with the ACADEMIC STANDARDS OF CONDUCT section of the \href{http://dos.utk.edu/publications/hilltopics/index.html}{\underline{Hilltopics handbook}}.
+%(Each homework assignment is worth 10 points, 4 points for each of the 2 selected problems and 2 points for the completion, best 10 will count
+%toward to your final grade),
+%130 for quizzes (Each quiz is worth 10 points, best 10 will count
+%toward to your final grade), 400 for the hour exams (Each exam is worth 100 points), 200 points for the final exam and 150 for PRS. If have 90\% or higher overall average and
+%87.5\% or higher average on the four hour exams, then you are guaranteed to earn an A and do not need to take the final exam.
+%At last, If you score 900 or more of all possible points, you are guaranteed to earn an A; 800 or more guarantees a B; 700 or
+%more guarantees a C; 600 or more guarantees a D if applicable, less than 600, you will be failed.
+
+%On all of your papers, you are expected to show your work clearly and completely.  You will
+%be graded on your work as well as your answers.  There will be 1000 total points ¨C120 for homework
+%(Each homework assignment is worth 10 points, 4 points for each of the 2 selected problems and 2 points for the completion, best 10 will count
+%toward to your final grade),
+%130 for quizzes (Each quiz is worth 10 points, best 10 will count
+%toward to your final grade), 400 for the hour exams (Each exam is worth 100 points), 200 points for the final exam and 150 for PRS. If have 90\% or higher overall average and
+%87.5\% or higher average on the four hour exams, then you are guaranteed to earn an A and do not need to take the final exam.
+%At last, If you score 900 or more of all possible points, you are guaranteed to earn an A; 800 or more guarantees a B; 700 or
+%more guarantees a C; 600 or more guarantees a D if applicable, less than 600, you will be failed.
+
+%score
+%430 or more of all possible points, you are guaranteed to earn an A; 360 or more guarantees a B; 300 or
+%more guarantees a C; and 250 or more guarantees a D if applicable.
+%100 for the midterm
+%exam, 200 points for the final exam, 100 for the independent study, and 100 in homework.  If you score
+%430 or more of all possible points, you are guaranteed to earn an A; 360 or more guarantees a B; 300 or
+%more guarantees a C; and 250 or more guarantees a D if applicable.
+%This course information syllabus is intended as a syllabus template so here is a little grading table with a sample grading structure:
+%\vskip0.2in
+%\begin{center}
+%\begin{tabular}{l|r|c}
+%Exams (3) & \,\,300 & Exams each worth 100 pts\\
+%Homework & 50 & Total points for HW are scaled to 50 pts\\
+%Final Exam & 150 & Accounts for 30\% of course grade\\
+%Total & 500 &
+%\end{tabular}
+%\end{center}
+%\subsubsection*{Mock Lectures}
+%The mock lecture is a central component of the teaching seminar.  Prior to being assigned as an instructor for a Notre Dame course, graduate students must present a mock lecture.  Details regarding its format are given at:
+%
+%\noindent\begin{center}{\verb+http://ndmathed.blogspot.com/2007/03/mathed-teaching-seminar-mock-lectures.html+}\end{center}
+%
+%Both students and faculty are expected to provide constructive criticism, keeping in mind that this is the first lecturing experience for many graduate students.  For questions on courses offered at Mathematics department, assignments
+%and other related matters, please contact Bei Hu at b1hu@nd.edu or x1-5352.
+%
+%\subsubsection*{Certification}
+%Together with the Kaneb Center for Teaching and Learning, the Notre Dame Mathematics Department is preparing a joint certification for graduate mathematics instructors called {\bf\emph{Striving for Excellence in Teaching Mathematics}}.  The requirements for this certification are successful completion of the Kaneb Center's certification program as described by
+%
+%\noindent\begin{center}{\verb+http://kaneb.nd.edu/ta/workshops/striving_cert.html+}\end{center}
+%
+%\noindent
+%together with satisfactory completion of this course (Math 83990) including the mock lecture and a short written summary of how your mock lecture critiques will be incorporated into your teaching.
+%
+\newpage
+\subsection*{Course Schedule}
+
+\begin{tabular}{r|l}
+\hline
+\textbf{\textsc{Chapter 12}} & \uppercase{vector geimetry}\\
+& \emph{12.1(Aug. 20)} : 5, 18, 24, 37, 57\\
+& \emph{12.2(Aug. 22)}:  3, 11, 14, 25, 27, 33, 37, 41, 53\\
+& \emph{12.3(Aug. 25)}: 1, 11, 14, 15, 23, 27, 34, 71, 88\\
+& \emph{12.4(Aug. 27)}: 1, 5, 9, 11, 15, 26, 30, 36, 39, 43, 44\\
+& \emph{12.5(Aug. 29)}: 3, 17, 21, 27, 31, 37, 49, 59\\
+\hline
+\textbf{\textsc{ Aug.29, 2014}} &  Last day to add, change, or drop without a "W"\\
+\hline
+ Sep. 1, 2014 &  Labor Day break\\
+\hline
+& \emph{12.6(Sep. 3)}: 2, 8, 14, 16, 26, 28, 30\\
+\hline
+\textbf{\textsc{Chapter 13}} & \uppercase{calculus of vector-valued functions}\\
+&  \emph{13.1-2(Sep. 5)}: 4, 5, 9, 13, 15, 21; 13.2: 9, 31, 33, 39, 47, 51\\
+& \emph{13.3(Sep. 8)}: 3, 5, 9, 19\\
+\hline
+ Sep. 10, 2014 & \textbf{\textsc{Exam 1 (9:05AM-9:55AM)}}\\
+\hline
+& \emph{13.4(Sep. 12)}: 3, 7, 11, 13\\
+& \emph{13.5(Sep. 15)}: 3, 15, 17, 19, 21\\
+\hline
+\textbf{\textsc{Chapter 14}}  & \uppercase{differentiation in several variables}\\
+& \emph{14.1(Sep. 17)}: 13, 15, 20, 21, 27, 38\\
+& \emph{14.2(Sep. 19)}: 1, 5, 7, 14, 15\\
+& \emph{14.2(Sep. 22)}: 3 -11 (odd), 17, 19, 25, 35, 43, 57, 59, 63, 76, 79\\
+& \emph{14.3(Sep. 24)}: 57, 59, 63, 76, 78, 79\\
+& \emph{14.4(Sep. 26)}: 1, 5, 9, 13, 19, 21, 25, 31\\
+& \emph{14.5(Sep. 29)}: 1, 3, 9, 19, 21, 29, 33, 35, 36, 39, 43\\
+& \emph{14.5(Oct. 1)}: 1, 3, 9, 19, 21, 29, 33, 35, 36, 39, 43\\
+& \emph{14.6(Oct. 3)}: 3, 5, 11, 25, 27\\
+& \emph{14.7(Oct. 6)}: 3, 7, 11\\
+\hline
+ Oct. 8, 2014 & \textbf{\textsc{Exam 2 (9:05AM-9:55AM)}}\\
+\hline
+& \emph{14.7(Oct. 10)}: 37, 43, 45, 46\\
+& \emph{14.8(Oct. 13)}: 5, 11, 19\\
+& \emph{14.8(Oct. 15)}: 39, 41\\
+\hline
+ Oct.16-17, 2014 & Fall Break\\
+\hline
+\textbf{\textsc{Chapter 15}}  & \uppercase{multiple integration}\\
+& \emph{15.1(Oct. 20)}: 3, 15, 17, 27, 35, 39, 41, 44, 45\\
+& \emph{15.2(Oct. 22)}: 5, 7, 11, 13, 15, 21, 29, 33, 43, 45, 49\\
+& \emph{15.2(Oct. 24)}: 5, 7, 11, 13, 15, 21, 29, 33, 43, 45, 49\\
+& \emph{15.3(Oct. 27)}: 3, 9-15 (odd), 21, 25\\
+& \emph{12.7(Oct. 29)}: 1-7 (odd), 11, 15, 17, 26\\
+& \emph{12.7(Oct. 31)}: 31, 33, 37, 39, 47, 49, 53, 59, 64\\
+& \emph{15.4(Nov. 3)}: 15, 19, 21, 27, 31, 33\\
+& \emph{15.4(Nov. 5)}: 41, 45, 49, 51\\
+& \emph{15.5(Nov. 7)}: 3, 7, 21, 23, 28\\
+%\hline
+%Chapter 17 & \uppercase{fundamental theorems of vector analysis}\\
+%\hline
+%& \emph{17.1(Nov. 24)}: 2, 3, 8, 9, 13, 15, 17, 26\\
+%& \emph{17.2(Nov. 26)}: 1-11 (odd), 14, 18\\
+%& \emph{17.3(Dec. 1)}: 1, 6, 7, 11, 13, 15, 19, 21, 29, 31, 37\\
+%&REVIEW\\
+%\hline
+% Dec. 5, 2014 & Final Exam (8:00AM-10:00AM)\\
+ \hline
+\end{tabular}
+
+\subsection*{Course Schedule (Cont.)}
+
+\begin{tabular}{r|l}
+\hline
+\textbf{\textsc{Chapter 16}}  & \uppercase{line and surface integrals}\\
+& \emph{16.1(Nov. 10)}: 10, 12, 22, 31\\
+\hline
+ Nov. 12, 2014 &\textbf{\textsc{Exam 3 (9:05AM-9:55AM)}}\\
+\hline
+& \emph{16.2(Nov. 14)}: 9, 11, 15, 19, 23, 24, 29, 37, 45, 51\\
+& \emph{16.3(Nov. 17)}: 1, 3, 5, 9, 13, 17, 19, 27\\
+& \emph{16.4(Nov. 20)}:  3, 6, 7, 9, 13, 17, 18, 21, 25, 35, 37\\
+& \emph{16.5(Nov. 21)}: 3 -9 (odd), 21, 23\\
+\hline
+\textbf{\textsc{Chapter 17}} & \uppercase{fundamental theorems of vector analysis}\\
+\hline
+& \emph{17.1(Nov. 24)}: 2, 3, 8, 9, 13, 15, 17, 26\\
+& \emph{17.2(Nov. 26)}: 1-11 (odd), 14, 18\\
+\hline
+ Nov. 28, 2014 & Thanksgiving break\\
+\hline
+& \emph{17.3(Dec. 1)}: 1, 6, 7, 11, 13, 15, 19, 21, 29, 31, 37\\
+%&REVIEW\\
+\hline
+ Dec. 5, 2014 & \textbf{\textsc{Final Exam (8:00AM-10:00AM)}}\\
+ \hline
+\end{tabular}
+%\subsection*{Kaneb Center Workshop Schedule}
+%
+%The Kaneb Center for Teaching and Learning offers a variety of workshops designed to help teachers who are interested in improving their skills.  These workshops are a key component of the certification program.  For details regarding the scheduling of these workshops, please refer to the Kaneb Center website at
+%
+%\noindent\begin{center}{\verb+http://kaneb.nd.edu/events.html+}\end{center}
+
+\end{document} 

@@ -1,0 +1,666 @@
+%multigrid{\cal F}
+\newcommand{\calFc}{\mathcal{F}_c}
+\newcommand{\calFe}{\mathcal{F}_e}
+\newcommand{\Rh}{\mathcal{R}_h}
+\newcommand{\Bisel}{\mathcal{B}_\ell}
+\newcommand{\Biselml}{\mathcal{B}_{\ell-1}}
+\newcommand{\Rsel}{\mathcal{R}_\ell}
+\newcommand{\pRselml}{\mathcal{R}_{\ell-1}}
+\newcommand{\pRj}{\mathcal{R}_{j}}
+\newcommand{\bil}[1]{a\left (#1\right)}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\MG}[1]{\textsc{MG}\left(#1\right)}
+\newcommand{\TGsl}[1]{\textsc{TG}_1\left(#1\right)}
+\newcommand{\TGsel}[1]{\textsc{TG}_\ell\left(#1\right)}
+\newcommand{\Mn}{\mathcal{M}_{n}}
+\newcommand{\Mnn}{\mathcal{M}_{n\times n}}
+\newcommand{\Mmn}{\mathcal{M}_{m\times n}}
+\newcommand{\vomega}{\vec{\omega}}
+\newcommand{\vomegaseln}{\vec{\omega}_\ell}
+\newcommand{\vomegasel}[1]{\vec{\omega}_\ell^{(#1)}}
+\newcommand{\epislonsel}[1]{{\epsilon}_\ell^{(#1)}}
+\newcommand{\vomegaselsk}{\vec{\omega}~_\ell^{(k)}}
+\newcommand{\vomegaselml}{\vec{\omega}_{\ell-1}}
+\newcommand{\omeso}{\omega_0}
+\newcommand{\epssk}{\epsilon_k}
+\newcommand{\epssnk}{\epsilon_{n_1+1-k}}
+\newcommand{\alphask}{\alpha_k}
+\newcommand{\alphasno}{\alpha_{n_0+1}}
+\newcommand{\betask}{\beta_k}
+\newcommand{\etaselsk}{\eta_\ell^{(k)}}
+\newcommand{\betasno}{\beta_{n_0+1}}
+\newcommand{\no}{n_0}
+\newcommand{\nsel}{n_\ell}
+\newcommand{\msel}{m_\ell}
+\newcommand{\hsel}{h_\ell}
+\newcommand{\hselml}{h_{\ell-1}}
+\newcommand{\nselml}{n_{\ell-1}}
+\newcommand{\rhosone}{\rho_1}
+\newcommand{\rhosel}{\rho_\ell}
+\newcommand{\Tso}{\mathcal{T}_0}
+\newcommand{\Tsl}{\mathcal{T}_1}
+\newcommand{\Tsel}{\mathcal{T}_\ell}
+\newcommand{\Tselml}{\mathcal{T}_{\ell-1}}
+\newcommand{\Vsel}{V_\ell}
+\newcommand{\Hsel}{H_\ell}
+\newcommand{\BselsV}{B_\ell^V}
+\newcommand{\BselsW}{B_\ell^W}
+\newcommand{\Wsel}{W_\ell}
+\newcommand{\Vselml}{V_{\ell-1}}
+\newcommand{\vselml}{v_{\ell-1}}
+\newcommand{\vselmlsi}{v_{\ell-1,i}}
+\newcommand{\vselsi}{v_{\ell,i}}
+\newcommand{\vselsj}{v_{\ell,j}}
+\newcommand{\vsel}{v_\ell}
+\newcommand{\wsel}{w_\ell}
+\newcommand{\vvselsnsel}{\vec{v}_\ell^{(n_\ell)}}
+\newcommand{\vvselsl}{\vec{v}_\ell^{(1)}}
+\newcommand{\vvselsp}{\vec{v}~_\ell^{'}}
+\newcommand{\vvselstp}{\vec{v}~_\ell^{''}}
+\newcommand{\Bsel}{B_\ell}
+\newcommand{\Bselml}{B_{\ell-1}}
+\newcommand{\TsL}{\mathcal{T}_L}
+\newcommand{\Tsx}[1]{\mathcal{T}_{#1}}
+\newcommand{\Io}{I_o}
+\newcommand{\il}{I_1}
+\newcommand{\Cl}{C_1}
+\newcommand{\Laml}{\Lambda_1}
+\newcommand{\lamselsl}{\lambda_\ell^{(1)}}
+\newcommand{\lamselsnsel}{\lambda_\ell^{(\nsel)}}
+\newcommand{\lamselsk}{\lambda_\ell^{(k)}}
+\newcommand{\Lamsel}{\Lambda_\ell}
+\newcommand{\Lamselsml}{\Lambda_\ell^{-1}}
+\newcommand{\invLaml}{\Lambda_1^{-1}}
+\newcommand{\ml}{m_1}
+\newcommand{\mll}{m_2}
+\newcommand{\nl}{n_1}
+\newcommand{\Ao}{A_0}
+\newcommand{\AL}{A_L}
+\newcommand{\AsL}{A_L}
+\newcommand{\Ah}{A_h}
+\newcommand{\AH}{A_H}
+\newcommand{\Al}{A_1}
+\newcommand{\Ael}{A_\ell}
+\newcommand{\Asel}{A_\ell}
+\newcommand{\Msel}{M_\ell}
+\newcommand{\Asj}{A_j}
+\newcommand{\Aselml}{A_{\ell-1}}
+\newcommand{\Relml}{R_{\ell-1}}
+\newcommand{\Pselml}{P_{\ell-1}}
+\newcommand{\Ro}{R_0}
+\newcommand{\Rl}{R_1}
+\newcommand{\Rel}{R_\ell}
+\newcommand{\Rselml}{R_{\ell-1}}
+\newcommand{\nelml}{n_{\ell-1}}
+\newcommand{\Po}{P_0}
+\newcommand{\Pl}{P_1}
+\newcommand{\Psel}{P_\ell}
+\newcommand{\QselsL}{Q_\ell^L}
+\newcommand{\Pelml}{P_{\ell-1}}
+%\newcommand{\Pselml}{P_{\ell-1}}
+\newcommand{\vu}{\vec{u}}
+\newcommand{\vz}{\vec{z}}
+\newcommand{\vv}{\vec{v}}
+\newcommand{\vvkl}{\vec{v}~^{k+1}}
+\newcommand{\vx}{\vec{x}}
+\newcommand{\vuk}{\vec{u}~^k}
+\newcommand{\vukhalf}{\vec{u}~^{k+1/2}}
+\newcommand{\vuo}{\vec{u}~^0}
+\newcommand{\uo}{u_0}
+\newcommand{\ul}{u_1}
+\newcommand{\vo}{\vec{0}}
+\newcommand{\vul}{\vec{u}~^1}
+\newcommand{\usel}{\vec{u}_\ell}
+\newcommand{\vusL}{\vec{u}_L}
+\newcommand{\vvsL}{\vec{v}_L}
+\newcommand{\vwsj}{\vec{w}_j}
+\newcommand{\husel}{\hat{u}_\ell}
+\newcommand{\huselml}{\hat{u}_{\ell-1}}
+\newcommand{\hesel}{\hat{e}_\ell}
+\newcommand{\heselml}{\hat{e}_{\ell-1}}
+\newcommand{\hvesel}{\hat{\vec{e}}_\ell}
+\newcommand{\heso}{\hat{e}_0}
+\newcommand{\uselss}{{u}_\ell^*}
+\newcommand{\uselmlss}{{u}_{\ell-1}^*}
+\newcommand{\uselmlsp}{{u}~'_{\ell-1}}
+\newcommand{\vuselmlsp}{\vec{u}~'_{\ell-1}}
+\newcommand{\vusLsk}{\vec{u}~_L^k}
+\newcommand{\vusLskpl}{\vec{u}~_L^{k+1}}
+\newcommand{\vuselso}{\vec{u}~_\ell^{(0)}}
+\newcommand{\vuselsth}{\vec{u}~_\ell^{(3)}}
+\newcommand{\vuselst}{\vec{u}~_\ell^{(2)}}
+\newcommand{\vuselsl}{\vec{u}~_\ell^{(1)}}
+\newcommand{\vuselss}{\vec{u}~_\ell^{*}}
+\newcommand{\vuselslml}{\vec{u}~_\ell^{(1, m_1)}}
+\newcommand{\vuselslo}{\vec{u}~_\ell^{(1,0)}}
+\newcommand{\vuselstho}{\vec{u}~_\ell^{(3,0)}}
+\newcommand{\vuselssi}{\vec{u}~_\ell^{(\sigma)}}
+\newcommand{\vuselssipl}{\vec{u}~_\ell^{(\sigma+1)}}
+\newcommand{\vuselslsi}{\vec{u}~_\ell^{(1,\sigma)}}
+\newcommand{\vuselslsipl}{\vec{u}~_\ell^{(1,\sigma+1)}}
+\newcommand{\vuselsthsi}{\vec{u}~_\ell^{(3,\sigma)}}
+\newcommand{\vuselsthsipl}{\vec{u}~_\ell^{(3,\sigma+1)}}
+\newcommand{\vuselsthmt}{\vec{u}~_\ell^{(3, m_2)}}
+\newcommand{\vwsel}{\vec{w}_\ell}
+\newcommand{\vrselsl}{\vec{r}~_\ell^{(1)}}
+\newcommand{\vrselmlsl}{\vec{r}~_{\ell-1}^{(1)}}
+\newcommand{\vqselslo}{\vec{q}~_\ell^{(1,0)}}
+\newcommand{\vqselml}{\vec{q}_{\ell-1}}
+\newcommand{\vqselmlslo}{\vec{q}~_{\ell-1}^{(1,0)}}
+%\newcommand{\vqselml}{\vec{q}_{\ell-1}}
+\newcommand{\vqselmlsl}{\vec{q}~_{\ell-1}^{(1)}}
+\newcommand{\vqselmlsp}{\vec{q}~_{\ell-1}^{(p)}}
+\newcommand{\vqselmlslsi}{\vec{q}~_{\ell-1}^{(1,\sigma)}}
+\newcommand{\vqselmlsll}{\vec{q}~_{\ell-1}^{(1,1)}}
+\newcommand{\vqselmlslp}{\vec{q}~_{\ell-1}^{(1,p)}}
+\newcommand{\vqselmlslsipl}{\vec{q}~_{\ell-1}^{(1,\sigma+1)}}
+\newcommand{\vgsel}{\vec{g}_\ell}
+\newcommand{\vgso}{\vec{g}_0}
+\newcommand{\vule}{\vec{u}~_1^{E}}
+\newcommand{\vusl}{\vec{u}_1}
+\newcommand{\Ssel}{S_\ell}
+\newcommand{\vusel}{\vec{u}_\ell}
+\newcommand{\psiselsi}{\psi_{\ell,i}}
+\newcommand{\phiselsi}{\phi_{\ell,i}}
+\newcommand{\phiselsj}{\phi_{\ell,j}}
+\newcommand{\psiselsI}{\psi_{\ell,I}}
+%\newcommand{\psiselsj}{\psi_{\ell,j}}
+\newcommand{\psiselsJ}{\psi_{\ell,J}}
+\newcommand{\psiselmlsi}{\psi_{\ell-1,i}}
+\newcommand{\psiselmlsj}{\psi_{\ell-1,j}}
+\newcommand{\psiselsj}{\psi_{\ell,j}}
+\newcommand{\vNselsi}{\vec{N}_{\ell,i}}
+\newcommand{\vNselsj}{\vec{N}_{\ell,j}}
+\newcommand{\vNwselsj}{\vec{N}_{\ell,j}^W}
+\newcommand{\vNselmlsi}{\vec{N}_{\ell-1,i}}
+\newcommand{\vNselmlsj}{\vec{N}_{\ell-1,j}}
+\newcommand{\Nselsj}{{N}_{\ell,j}}
+\newcommand{\pselmlsjsi}{p_{\ell-1,j,i}}
+\newcommand{\pselmlsisj}{p_{\ell-1,i,j}}
+\newcommand{\pselmlsJsj}{p_{\ell-1,J,j}}
+\newcommand{\pselmlsIsi}{p_{\ell-1,I,i}}
+\newcommand{\Psjsel}{P_j^{\ell}}
+\newcommand{\Rsjsel}{R_j^{\ell}}
+\newcommand{\Pisjsel}{\Pi_j^{\ell}}
+\newcommand{\vvsel}{\vec{v}_\ell}
+\newcommand{\vvselsk}{\vec{v}~_\ell^{(k)}}
+\newcommand{\vzsl}{\vec{z}_1}
+\newcommand{\vvsl}{\vec{v}_1}
+\newcommand{\vusls}{\vec{u}~_1^{(\sigma)}}
+\newcommand{\vuslsl}{\vec{u}~_1^{(\sigma+1)}}
+\newcommand{\vrslssl}{\vec{r}~_1^{(\sigma+1)}}
+\newcommand{\vull}{\vec{u}~_1^{(1)}}
+\newcommand{\vuslsk}{\vec{u}~_1^{(k)}}
+\newcommand{\laslsk}{\lambda_1^{(k)}}
+\newcommand{\lasosk}{\lambda_0^{(k)}}
+\newcommand{\vvslsk}{\vec{v}~_1^{(k)}}
+\newcommand{\vvslsi}{\vec{v}~_1^{(i)}}
+\newcommand{\vvslsj}{\vec{v}~_1^{(j)}}
+\newcommand{\vvslsnk}{\vec{v}~_1^{(n_1+1-k)}}
+\newcommand{\vvsosnk}{\vec{v}~_0^{(n_1+1-k)}}
+\newcommand{\vvsosk}{\vec{v}~_0^{(k)}}
+\newcommand{\muslsk}{\mu_1^{(k)}}
+\newcommand{\nusk}{\nu_k}
+\newcommand{\muselsk}{\mu_\ell^{(k)}}
+\newcommand{\muslsnk}{\mu_1^{(n_1+1-k)}}
+\newcommand{\epsskss}{\epsilon_k^{(\sigma)}}
+\newcommand{\vvslisk}{\vec{v}~_{1,i}^{(k)}}
+\newcommand{\xsli}{x_{1,i}}
+\newcommand{\vult}{\vec{u}~_1^{(2)}}
+\newcommand{\muslsl}{\mu~_1^{(1)}}
+\newcommand{\vulth}{\vec{u}~_1^{(3)}}
+\newcommand{\vulthm}{\vec{u}~_1^{(3,m_2)}}
+\newcommand{\vulk}{\vec{u}~^k_1}
+\newcommand{\vuselsE}{\vec{u}~_{\ell}^E}
+\newcommand{\vvselml}{\vec{v}_{\ell-1}}
+\newcommand{\vuselml}{\vec{u}_{\ell-1}}
+\newcommand{\hvusel}{\hat{\vec{u}}_{\ell}}
+\newcommand{\hvuselml}{\hat{\vec{u}}_{\ell-1}}
+\newcommand{\vulo}{\vec{u}~^{(1,0)}_1}
+\newcommand{\vuso}{\vec{u}_0}
+\newcommand{\vusLsE}{\vec{u}~_L^E}
+\newcommand{\vuslsE}{\vec{u}~_1^E}
+%\newcommand{\vusLsk}{\vec{u}~_L^k}
+\newcommand{\vusLsb}{\vec{u}~_L^\Box}
+\newcommand{\vuslso}{\vec{u}~_1^{(0)}}
+\newcommand{\vultho}{\vec{u}~^{(3,0)}_1}
+\newcommand{\vuls}{\vec{u}~^{(1, \sigma)}_1}
+\newcommand{\vulths}{\vec{u}~^{(3, \sigma)}_1}
+\newcommand{\vulml}{\vec{u}~^{(1, m_1)}_1}
+\newcommand{\vulsl}{\vec{u}~^{(1, \sigma+1)}_1}
+\newcommand{\veslsk}{\vec{e}~^{k}_1}
+\newcommand{\veslskpl}{\vec{e}~^{k+1}_1}
+\newcommand{\veslssl}{\vec{e}~^{(\sigma+1)}_1}
+\newcommand{\veslss}{\vec{e}~^{(\sigma)}_1}
+\newcommand{\vulthsl}{\vec{u}~^{(3, \sigma+1)}_1}
+\newcommand{\vukl}{\vec{u}~^{k+1}}
+\newcommand{\vulfd}{\vec{u}~_1^{FD}}
+\newcommand{\vflfd}{\vec{f}~_1^{FD}}
+\newcommand{\vfsL}{\vec{f}_L}
+\newcommand{\vfsl}{\vec{f}_1}
+\newcommand{\vulfe}{\vec{u}~_1^{FE}}
+\newcommand{\vflfe}{\vec{f}~_1^{FE}}
+\newcommand{\vrsLsb}{\vec{r}~_L^{\Box}}
+\newcommand{\vesLsb}{\vec{e}~_L^{\Box}}
+\newcommand{\vesLsk}{\vec{e}~_L^{k}}
+\newcommand{\vesLskpl}{\vec{e}~_L^{k+1}}
+\newcommand{\vfL}{\vec{f}_L}
+\newcommand{\vrk}{\vec{r}~^k}
+\newcommand{\vrkl}{\vec{r}~^k}
+\newcommand{\vrll}{\vec{r}~_1^{(1)}}
+\newcommand{\vrol}{\vec{r}~_0^{(1)}}
+\newcommand{\vqol}{\vec{q}~_0^{(1)}}
+\newcommand{\vf}{\vec{f}}
+\newcommand{\vfo}{\vec{f}_0}
+\newcommand{\vfl}{\vec{f}_1}
+\newcommand{\vfk}{\vec{f}~^k}
+\newcommand{\vek}{\vec{e}~^k}
+\newcommand{\vell}{\vec{e}~_1^{(1)}}
+\newcommand{\velt}{\vec{e}~_1^{(2)}}
+\newcommand{\velth}{\vec{e}~_1^{(3)}}
+\newcommand{\veo}{\vec{e}~^0}
+\newcommand{\vekl}{\vec{e}~^{k+1}}
+\newcommand{\veslsll}{\vec{e}~_1^{\ell+1}}
+\newcommand{\veslsl}{\vec{e}~_1^{\ell}}
+\newcommand{\velkl}{\vec{e}~_1^{k+1}}
+\newcommand{\velk}{\vec{e}~_1^{k}}
+\newcommand{\veli}{\vec{e}~_1^{(i)}}
+\newcommand{\vuli}{\vec{u}~_1^{(i)}}
+\newcommand{\vekml}{\vec{e}~^{k-1}}
+\newcommand{\hpd}[1]{#1 ^H} %
+\newcommand{\spd}[1]{#1 ^T} %
+\newcommand{\vhpd}[1]{\vec{#1}~^H} %
+\newcommand{\vspd}[1]{\vec{#1}~^T} %
+\newcommand{\inner}[1]{\left (#1\right )} %
+\newcommand{\sinner}[1]{\left (#1\right )_*} %
+\newcommand{\abilinear}[1]{a\left (#1\right )} %
+\newcommand{\ainner}[1]{\left (#1\right )_A} %
+\newcommand{\jinner}[1]{\left (#1\right )_j} %
+\newcommand{\ajinner}[1]{\left (#1\right )_{A_j}} %
+\newcommand{\Lllinner}[1]{\left (#1\right )_{L^2}} %
+\newcommand{\Ltinner}[1]{\left (#1\right )_{L^2(\Omega)}} %
+\newcommand{\aelinner}[1]{\left (#1\right )_{A_\ell}} %
+\newcommand{\aelmlinner}[1]{\left (#1\right )_{A_{\ell-1}}} %
+\newcommand{\elinner}[1]{\left (#1\right )_\ell} %
+\newcommand{\elmlinner}[1]{\left (#1\right )_{\ell-1}} %
+\newcommand{\alinner}[1]{\left (#1\right )_{A_\ell}} %
+\newcommand{\cinner}[1]{\left (#1\right )_C} %
+\newcommand{\bminner}[1]{\left (#1\right )_{B^{-1}}} %
+\newcommand{\tpil}{\tilde{\Pi}_1} %
+\newcommand{\Tsjsel}{T_j^\ell} %
+\newcommand{\tpiselj}{\tilde{\Pi}_{\ell,j}} %
+\newcommand{\tpiseli}{\tilde{\Pi}_{\ell,i}} %
+\newcommand{\tpisji}{\tilde{\Pi}_{j,i}} %
+\newcommand{\Piselj}{{\Pi}_{\ell,j}} %
+\newcommand{\tTselj}{\tilde{T}_{\ell,j}} %
+\newcommand{\tpiselelml}{\tilde{\Pi}_{\ell,j}} %
+\newcommand{\tPisl}{\tilde{\Pi}_1} %
+\newcommand{\tpileqn}{P_0A_0^{-1}R_0A_1} %
+\newcommand{\pio}{{\Pi}_0} %
+\newcommand{\Kl}{{K}_1} %
+\newcommand{\Kbar}{\overline{K}} %
+\newcommand{\Kbarsel}{\overline{K}_\ell} %
+\newcommand{\Kslsm}{{K}_1^m} %
+\newcommand{\Kslss}{{K}_\ell^*} %
+\newcommand{\Iel}{{I}_\ell} %
+\newcommand{\Eel}{{E}_\ell} %
+\newcommand{\Fsel}{{F}_\ell} %
+%\newcommand{\Ssel}{{S}_\ell} %
+\newcommand{\Eselml}{{E}_{\ell-1}} %
+\newcommand{\Jsel}{{J}_\ell} %
+\newcommand{\Jselss}{{J}_\ell^*} %
+\newcommand{\Jselml}{{J}_{\ell-1}} %
+\newcommand{\EsL}{{E}_L} %
+\newcommand{\Aelml}{{A}_{\ell-1}} %
+\newcommand{\Sel}{{S}_\ell} %
+\newcommand{\Piel}{{\Pi}_{\ell}} %
+\newcommand{\tPisel}{\tilde{\Pi}_{\ell}} %
+\newcommand{\Pielml}{{\Pi}_{\ell-1}} %
+\newcommand{\Pslml}{{P}_{\ell-1}} %
+\newcommand{\Mselj}{{M}_{\ell,j}} %
+\newcommand{\Rslml}{{R}_{\ell-1}} %
+\newcommand{\Kslsml}{{K}_1^{m_1}} %
+%\newcommand{\Bl}{{B}_1} %
+\newcommand{\El}{{E}_1} %
+\newcommand{\Eo}{{E}_0} %
+\newcommand{\Esel}{{E}_\ell} %
+\newcommand{\Dsel}{{D}_\ell} %
+\newcommand{\QsjsL}{{Q}_j^L} %
+\newcommand{\Eselspre}{{E}_\ell^{\text{pre}}} %
+\newcommand{\Eselswpre}{{E}_\ell^{w,\text{pre}}} %
+\newcommand{\Eselspost}{{E}_\ell^{\text{post}}} %
+\newcommand{\Eselmlsp}{{E}_{\ell-1}^p} %
+\newcommand{\Ksel}{{K}_\ell} %
+\newcommand{\Kselss}{{K}_\ell^*} %
+\newcommand{\Kselsm}{{K}_\ell^{m}} %
+\newcommand{\Ksjsm}{{K}_j^{m}} %
+\newcommand{\Kselsml}{{K}_\ell^{m_1}} %
+\newcommand{\Il}{{I}_1} %
+\newcommand{\Isel}{{I}_\ell} %
+\newcommand{\Isj}{{I}_j} %
+\newcommand{\Iselml}{{I}_{\ell-1}} %
+\newcommand{\Piselml}{{\Pi}_{\ell-1}} %
+\newcommand{\Sl}{{S}_1} %
+\newcommand{\Sk}{{S}_k} %
+\newcommand{\Ck}{{C}_k} %
+\newcommand{\Tli}{{T}_{1, i}} %
+\newcommand{\dudx}{\frac{du}{dx}} %
+\newcommand{\duhdx}{\frac{du_h}{dx}} %
+\newcommand{\dphiidx}{\frac{d\phi_{1, i}}{dx}} %
+\newcommand{\dphiimldx}{\frac{d\phi_{1, i-1}}{dx}} %
+\newcommand{\phili}{\phi_{1, i}} %
+\newcommand{\philj}{\phi_{1, j}} %
+\newcommand{\dphijdx}{\frac{d\phi_{1, j}}{dx}} %
+\newcommand{\dvdx}{\frac{dv}{dx}} %
+\newcommand{\dvhdx}{\frac{dv_h}{dx}} %
+\newcommand{\xli}{{x}_{1, i}} %
+\newcommand{\holol}{{H}_0^1(0,1)} %
+\newcommand{\Vh}{{V}_h} %
+\newcommand{\Vl}{{V}_1} %
+\newcommand{\Vo}{{V}_0} %
+\newcommand{\VH}{{V}_H} %
+\newcommand{\uh}{{u}_h} %
+\newcommand{\vh}{{v}_h} %
+\newcommand{\uH}{{u}_H} %
+\newcommand{\vH}{{u}_H} %
+\newcommand{\pl}{\mathbb{P}_1} %
+\newcommand{\coool}{{C}_0^0([0,1])} %
+\newcommand{\nestbltti}[1]{\left(#1\right)_{L^2(T_{1, i})}} %
+%\newcommand{\cond}[1]{ \kappa{\left( #1 \right)} %
+%others
+\newcommand{\note}[1]{\textcolor{blue}{#1} }%
+\newcommand{\xk}{\mathbf{x}^k}
+\newcommand{\xkl}{\mathbf{x}^{k+1}}
+\newcommand{\xstar}{\mathbf{x}^*}
+\newcommand{\fk}{\mathbf{f}(\mathbf{x}^k)}
+\newcommand{\Jxi}{\mathbf{J}(\mathbf{\xi})}
+\newcommand{\fstar}{\mathbf{f}(\mathbf{x}^*)}
+\newcommand{\Jxo}{\mathbf{J}(\mathbf{x}^0)}
+\newcommand{\invJxo}{\left[\mathbf{J}(\mathbf{x}^0)\right ]^{-1}}
+\newcommand{\Jxk}{\mathbf{J}(\mathbf{x}^k)}
+\newcommand{\invJxk}{\left[\mathbf{J}(\mathbf{x}^k)\right ]^{-1}}
+\newcommand{\bfx}{\mathbf{x}}
+\newcommand{\bff}{\mathbf{f}}
+\newcommand{\yn}{y_n}
+\newcommand{\ynl}{y_{n+1}}
+\newcommand{\ynll}{y_{n+2}}
+\newcommand{\ynlll}{y_{n+3}}
+\newcommand{\xn}{x_n}
+\newcommand{\xnl}{x_{n+1}}
+\newcommand{\xnll}{x_{n+2}}
+\newcommand{\xnlll}{x_{n+3}}
+\newcommand{\unj}{u_j^n}
+\newcommand{\unjpl}{u_{j+1}^n}
+\newcommand{\unjml}{u_{j-1}^n}
+\newcommand{\unlj}{u_j^{n+1}}
+\newcommand{\unljpl}{u_{j+1}^{n+1}}
+\newcommand{\unljml}{u_{j-1}^{n+1}}
+\newcommand{\enj}{e_j^n}
+\newcommand{\enjpl}{e_{j+1}^n}
+\newcommand{\enjml}{e_{j-1}^n}
+\newcommand{\enlj}{e_j^{n+1}}
+\newcommand{\enljpl}{e_{j+1}^{n+1}}
+\newcommand{\enljml}{e_{j-1}^{n+1}}
+\newcommand{\eunj}{\bar{u}_j^n}
+\newcommand{\eunjpl}{\bar{u}_{j+1}^n}
+\newcommand{\eunjml}{\bar{u}_{j-1}^n}
+\newcommand{\eunlj}{\bar{u}_j^{n+1}}
+\newcommand{\eunljpl}{\bar{u}_{j+1}^{n+1}}
+\newcommand{\eunljml}{\bar{u}_{j-1}^{n+1}}
+\newcommand{\tn}{t_n}
+\newcommand{\tnl}{t_{n+1}}
+\newcommand{\en}{e_n}
+%\newcommand{\vesLsb}{\vec{e}~_L^\Box}
+\newcommand{\enl}{e_{n+1}}
+\newcommand{\ytn}{y(t_n)}
+\newcommand{\dytn}{y'(t_n)}
+\newcommand{\ddytn}{y''(t_n)}
+\newcommand{\ytnl}{y(t_{n+1})}
+\newcommand{\dytnl}{y'(t_{n+1})}
+\newcommand{\ddytnl}{y''(t_{n+1})}
+\newcommand{\R}{\mathbb{R}} %
+\newcommand{\Renl}{\mathbb{R}^{n_\ell}} %
+\newcommand{\Renlml}{\mathbb{R}^{n_{\ell-1}}} %
+\newcommand{\Rn}{\mathbb{R}^n}
+\newcommand{\Rno}{\mathbb{R}^{n_0}} %
+\newcommand{\Rnl}{\mathbb{R}^{n_1}} %
+\newcommand{\RnL}{\mathbb{R}^{n_L}} %
+\newcommand{\Rm}{\mathbb{R}^m}  
+\newcommand{\Cn}{\mathbb{C}^n} 
+\newcommand{\Cm}{\mathbb{C}^m} 
+\newcommand{\Rnn}{\mathbb{R}^{n \times n}} %
+\newcommand{\Rnono}{\mathbb{R}^{n_0 \times n_0}} %
+\newcommand{\Rnlnl}{\mathbb{R}^{n_1 \times n_1}} %
+\newcommand{\Renlmlnl}{\mathbb{R}^{n_{\ell-1} \times n_\ell}} %
+\newcommand{\Renlnlml}{\mathbb{R}^{n_\ell\times n_{\ell-1}}} %
+\newcommand{\Renlnl}{\mathbb{R}^{n_\ell\times n_\ell}} %
+\newcommand{\Renlnj}{\mathbb{R}^{n_\ell\times n_j}} %
+\newcommand{\Renjnl}{\mathbb{R}^{n_j\times n_\ell}} %
+\newcommand{\RenL}{\mathbb{R}^{n_L}} %
+\newcommand{\RenLmj}{\mathbb{R}^{n_L\times m_j}} %
+\newcommand{\Rnlno}{\mathbb{R}^{n_1 \times n_0}} %
+\newcommand{\Rnonl}{\mathbb{R}^{n_0 \times n_1}} %
+\newcommand{\Rmn}{\mathbb{R}^{m\times n}} %
+\newcommand{\Cnn}{\mathbb{C}^{n \times n}} %
+\newcommand{\Cmn}{\mathbb{C}^{m\times n}} %
+\newcommand{\C}{\mathbb{C}} %
+\newcommand{\rank}[1]{\operatorname{rank}(#1)} %
+%\newcommand{\span}{\operatorname{span}} %
+\newcommand{\mydet}[1]{\operatorname{det}(#1)} %
+\newcommand{\transpo}[1]{{#1}^T} %
+\newcommand{\range}[1]{\operatorname{range}(#1)} %
+\newcommand{\Z}{\mathbb{Z}} %
+\newcommand{\order}{\mathcal{O}} %
+\newcommand{\Rey}{\mathcal{R}} %
+\newcommand{\commentout}[1]{{}} % for large block comments
+\newcommand{\tint}{\int\!\!\int\!\!\int} % triple integral
+\newcommand{\dint}{\int\!\!\int} % doubld integral
+\newcommand{\lap}{\Delta } % laplace
+\newcommand{\grad}{\nabla} % gradient 
+\newcommand{\dive}{\nabla\cdot } % laplace
+\newcommand{\inv}[1]{{#1}^{-1}} % inverse
+\newcommand{\tran}[1]{{#1}^{T}} % transpot
+\newcommand{\conj}[1]{{#1}^{*}} % inverse
+% bracket 
+%\newcommand{\abs}[1]{\left|#1\right|} %
+\newcommand{\absp}[3]{\left|#1\right|^{#2}_{#3}} %
+\newcommand{\nest}[1]{\left\{#1\right\}} %
+\newcommand{\sbra}[1]{\left [#1\right ]} %
+\newcommand{\nestb}[1]{\left(#1\right)} %
+\newcommand{\nestbltol}[1]{\left(#1\right)_{L^2(0,1)}} %
+\newcommand{\nestbl}[1]{\left(#1\right)_1} %
+\newcommand{\nestbAl}[1]{\left(#1\right)_{A_1}} %
+\newcommand{\trib}[1]{\left<#1\right>} %
+\newcommand{\nestbint}[1]{\left(#1\right)_{\mathcal{T}_h}} %
+\newcommand{\nestbintk}[1]{\left(#1\right)_{K}} %
+\newcommand{\tribint}[2]{\left<#1\right>_{\mathcal{E}^{#2}_{h}}} %
+\newcommand{\tribintk}[1]{\left<#1\right>_{\partial{K}}} %
+\newcommand{\tribinte}[1]{\left<#1\right>_{e}} %
+%\newcommand{\R}{\mathbb{R}} %
+%\newcommand{\C}{\mathbb{C}} %
+\newcommand{\krylov}{\mathcal{K}}
+\newcommand{\N}{\mathbb{N}} %
+\newcommand{\poly}{\mathbb{P}} %
+\newcommand{\simfun}{\mathcal{S}}
+\newcommand{\ball}{B_r(x)}
+\newcommand{\apm}[1]{\alpha_{i,#1}^{\pm}}
+\newcommand{\ballxo}{B_r(x_0)}
+\newcommand{\ballo}{B_r(0)}
+\newcommand{\ballol}{B_1(0)}
+\newcommand{\parad}{U_T}
+\newcommand{\cparad}{\bar U_T}
+\newcommand{\ubarsLsel}{\bar u_L^\ell}
+\newcommand{\supp}{supp}
+\newcommand{\Hll}{H^2(\Omega)} %
+\newcommand{\completion}[1]{\overline{#1}}
+\newcommand{\parab}{\partial U_T}
+\newcommand{\heatsp}{\mathbb{R}^n \times(0,\infty)}
+\newcommand{\heatspT}{\mathbb{R}^n \times(0,T]}
+
+\newcommand{\module}[1]{|#1|}
+\newcommand{\interpsel}{\mathcal{I}_{\ell}} %interpolation operator
+\newcommand{\interpselml}{\mathcal{I}_{\ell-1}} %interpolation operator
+\newcommand{\interp}[1]{\mathcal{I}_{#1}} %interpolation operator
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\semiHl}[1]{\left|#1\right|_{H^1}} %
+\newcommand{\semiHlO}[1]{\left|#1\right|_{H^1(\Omega)}} %
+\newcommand{\semiHlK}[1]{\left|#1\right|_{H^1(K)}} %
+\newcommand{\semiHll}[1]{\left|#1\right|_{H^2}} %
+\newcommand{\norml}[1]{\left\|#1\right\|_1}
+\newcommand{\normel}[1]{\left\|#1\right\|_\ell}
+\newcommand{\normAl}[1]{\left\|#1\right\|_{A_1}}
+\newcommand{\normAsel}[1]{\left\|#1\right\|_{A_\ell}}
+\newcommand{\normAselml}[1]{\left\|#1\right\|_{A_{\ell-1}}}
+\newcommand{\innerAselml}[1]{\left (#1\right )_{A_{\ell-1}}}
+\newcommand{\innerAsel}[1]{\left (#1\right )_{A_{\ell}}}
+\newcommand{\normAselst}[1]{\left\|#1\right\|_{A_\ell^2}}
+\newcommand{\normAls}[1]{\left\|#1\right\|_{A_1^2}}
+\newcommand{\innerAl}[1]{\left (#1\right)_{A_1}}
+\newcommand{\innerAL}[1]{\left (#1\right)_{A_L}}
+\newcommand{\normCselsml}[1]{\left \|#1\right\|_{C_\ell^{-1}}}
+\newcommand{\innerA}[1]{\left (#1\right)_{A}}
+\newcommand{\innerCml}[1]{\left (#1\right)_{C^{-1}}}
+\newcommand{\innerCselsml}[1]{\left (#1\right)_{C_\ell^{-1}}}
+\newcommand{\innerel}[1]{\left (#1\right)_{\ell}}
+\newcommand{\innerelml}[1]{\left (#1\right)_{\ell-1}}
+\newcommand{\innerl}[1]{\left(#1\right)_{1}}
+\newcommand{\normt}[1]{\left\|#1\right\|_2}
+\newcommand{\infnorm}[1]{\left\|#1\right\|_\infty}
+\newcommand{\disnorm}[1]{\left\|#1\right\|_{2,h}}
+\newcommand{\llhnorm}[1]{\left\|#1\right\|_{2,h}}
+\newcommand{\Bhnorm}[1]{\left\|\left|#1\right|\right\|_{B_h}}
+\newcommand{\Lnorm}[2]{\left\|#1\right\|_{L^#2(\Omega)}}
+\newcommand{\Llnorm}[1]{\left\|#1\right\|_{L^1(\Omega)}}
+\newcommand{\Lllnorm}[1]{\left\|#1\right\|_{L^2(\Omega)}}
+\newcommand{\Ltnorm}[1]{\left\|#1\right\|_{L^2}}
+\newcommand{\Lllenorm}[1]{\left\|#1\right\|_{L^2(e)}}
+\newcommand{\LllnormK}[1]{\left\|#1\right\|_{L^2(K)}}
+\newcommand{\Hnorm}[2]{\left\|#1\right\|_{H^#2(\Omega)}}
+\newcommand{\Hlnorm}[1]{\left\|#1\right\|_{H^1(\Omega)}}
+\newcommand{\Hllnorm}[1]{\left\|#1\right\|_{H^2(\Omega)}}
+\newcommand{\Lnorme}[2]{\left\|#1\right\|_{L^#2(\partial\Omega)}}
+%The notation for DG
+\newcommand{\dlll}[2]{\left\|#1\right\|_{\ell^#2}}% discrete l norm
+\newcommand{\Normal}{\cdot\bold{n}}
+\newcommand{\Normali}{{n}^{(i)}}
+\newcommand{\Normalik}{{n}_K^{(i)}}
+\newcommand{\Normalei}{{n_e}^{(i)}}
+\newcommand{\Th}{\mathcal{T}_h}
+\newcommand{\femspace}[1]{\mathbb{V}_{#1}} %
+%\newcommand{\Vh}[1]{\mathbb{V}_{#1}^h} %piecewise polynomials
+%\newcommand{\avg}[1]{\left\{#1\right\}} % average
+%\newcommand{\jump}[1]{\left\llbracket#1\right\rrbracket} % jump
+%\newcommand{\edge}[2]{\mathcal{E}^{#1}_{#2}} % edge
+\newcommand{\partition}[1]{\mathcal{T}_#1} % 
+%The notation for DWDG
+\newcommand{\PrT}{\mathbb{P}_r(T)}
+\newcommand{\Ioperator}{\mathcal{I}_h}
+\newcommand{\dglhnorm}[1]{\left\|\left|#1\right|\right\|_{1,h}} % 
+\newcommand{\dgBhnorm}[1]{\left\|\left|#1\right|\right\|_{B_h}} %
+\newcommand{\dgahnorm}[1]{\left\|\left|#1\right|\right\|_{\alpha_h}} %
+\newcommand{\dglthnorm}[1]{\left\|#1\right\|_{L^2(\mathcal{T}_h)}} %
+\newcommand{\dglenorm}[1]{\left\|#1\right\|_{L^2(e)}} %
+\newcommand{\dglTnorm}[1]{\left\|#1\right\|_{L^2(T)}} %
+\newcommand{\dglOnorm}[1]{\left\|#1\right\|_{L^2(\Omega)}} %   
+\newcommand{\sgn}{\text{sgn}} % 
+\newcommand{\sume}{\sum_{e\in\mathcal{E}_h^I}} % 
+\newcommand{\sumT}{\sum_{T\in\mathcal{T}_h}} % 
+\newcommand{\nuh}{\mathcal{V}_h}
+\newcommand{\proj}{\mathcal{P}_h} % 
+%\newcommand{\dgpartialpm}[2]{\partial_{#1}^\pm{#2}} %
+\newcommand{\dgpartial}[1]{\partial_{h,{x_{#1}}}} %
+\newcommand{\dgpartialpm}[1]{\partial_{h,{x_{#1}}}^\pm} %
+\newcommand{\dgpartialp}[1]{\partial_{h,{x_{#1}}}^+} %
+\newcommand{\dgpartialm}[1]{\partial_{h,{x_{#1}}}^-} %
+\newcommand{\dgpartialG}[1]{\partial_{h,{x_{#1}}}^g} %
+\newcommand{\dgpartialpmG}[1]{\partial_{h,{x_{#1}}}^{\pm,g}} %
+\newcommand{\dggradpm}[1]{\nabla_h^\pm{#1}} %
+\newcommand{\dggradmp}[1]{\nabla_h^\mp{#1}} %
+\newcommand{\dggradpmG}[1]{\nabla_{h,g}^\pm{#1}} %
+\newcommand{\dggradmpG}[1]{\nabla_{h,g}^\mp{#1}} %
+\newcommand{\dgdivpm}[1]{\text{div}_h^\pm{#1}} %
+\newcommand{\dgdivmp}[1]{\text{div}_h^\mp{#1}} %
+\newcommand{\dggradp}[1]{\nabla_h^+{#1}} %
+\newcommand{\dggradm}[1]{\nabla_h^-{#1}} %
+\newcommand{\dgdiv}[1]{\text{div}_h{#1}} 
+\newcommand{\dgdivp}[1]{\text{div}_h^+{#1}} %
+\newcommand{\dgdivm}[1]{\text{div}_h^-{#1}} %
+\newcommand{\dglimit}{\mathbb{Q}_i} %
+\newcommand{\limitp}{\mathbb{Q}_i^+} %
+\newcommand{\limitm}{\mathbb{Q}_i^-} %
+\newcommand{\limitpm}{\mathbb{Q}_i^\pm} %
+%\newcommand{\dgdivm}[1]{\text{div}_h^-{#1}} %
+% with boundary data
+\newcommand{\dgdivpmG}[1]{\text{div}_{h,g}^\pm{#1}} %
+\newcommand{\dgdivmpG}[1]{\text{div}_{h,g}^\mp{#1}} %
+\newcommand{\dgdivpG}[1]{\text{div}_{h,g}^+{#1}} %
+\newcommand{\dgdivmG}[1]{\text{div}_{h,g}^-{#1}} %
+% triangle
+% difference method
+ \newcommand{\back}{\bar{\delta}}
+
+\newenvironment{solution}
+               {\let\oldqedsymbol=\qedsymbol
+                \renewcommand{\qedsymbol}{$\blacktriangleleft$}
+                \begin{proof}[\bfseries\upshape \textcolor{blue}{Solution}]}
+               {\end{proof}
+                \renewcommand{\qedsymbol}{\oldqedsymbol}}
+\newenvironment{pf}
+               {\let\oldqedsymbol=\qedsymbol
+                \renewcommand{\qedsymbol}{$\blacktriangleleft$}
+                \begin{proof}[\bfseries\upshape \textcolor{blue}{Proof}]}
+               {\end{proof}
+                \renewcommand{\qedsymbol}{\oldqedsymbol}}
+%\newtheorem{theo}{Theorem}[section]            
+%\newtheorem{hypoth}[theo]{Hypothesis}
+%\newtheorem{problem}[theo]{\textcolor{blue}{Problem}}%[section]
+%\newtheorem*{example}{\textcolor{blue}{Example}}
+%\newtheorem{claim}[theo]{ \textcolor{blue}{Claim}}%[section]
+%\newtheorem{comparsion}[theo]{ \textcolor{blue}{Comparsion}}%[section]
+%\newtheorem{corollary}[theo]{ \textcolor{blue}{Corollary}}%[section]
+%\newtheorem{properties}[theo]{ \textcolor{blue}{Properties}}%[section]
+%\newtheorem{proposition}[theo]{ \textcolor{blue}{Proposition}}%[section]
+%\newtheorem{definition}[theo]{ \textcolor{blue}{Definition}}%[section]
+%\newtheorem{theorem}[theo]{ \textcolor{blue}{Theorem}}%[section]
+%\newtheorem{lemma}[theo]{ \textcolor{blue}{Lemma}}%[section]
+%\newtheorem{remark}[theo]{ \textcolor{blue}{Remark}}%[section]
+%%\newtheorem{hypoth}{Hypothesis}
+%\newtheorem{myalgorithm}[theo]{\textcolor{blue}{Algorithm}}%[section]
+%\newtheorem{corollary}{Corollary}[section]
+%\newtheorem{definition}{Definition}[section]
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{lemma}{Lemma}[section]
+%\newtheorem{remark}{Remark}[section]
+%%%%%%%%%%%%The environments%%%%%%%%%%%%%%%%%%%
+\newcommand{\statetheoremhoriz}[2][\textwidth]{
+ \par\noindent\tikzstyle{mybox} = [draw=blue,left color=cyan!50,
+  right color=cyan!5,thick,rectangle,inner sep=6pt]
+ \begin{tikzpicture}
+  \node [mybox] (box){%
+   \begin{minipage}{#1}{#2}\end{minipage}
+  };
+ \end{tikzpicture}
+}
+\newcommand{\statetheoremvert}[2][0.85\textwidth]{
+ \par\noindent\tikzstyle{mybox} = [draw=blue,top color=white,
+  bottom color=white,thick,rectangle,inner sep=6pt]
+ \begin{tikzpicture}
+  \node [mybox] (box){%
+   \begin{minipage}{#1}{#2}\end{minipage}
+  };
+ \end{tikzpicture}
+}
+\newcommand{\statetheoremsolid}[2][\textwidth]{
+ \par\noindent\tikzstyle{mybox} = [draw=blue,fill=cyan!50,
+  thick,rectangle,inner sep=6pt]
+ \begin{tikzpicture}
+  \node [mybox] (box){%
+   \begin{minipage}{#1}{#2}\end{minipage}
+  };
+ \end{tikzpicture}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+

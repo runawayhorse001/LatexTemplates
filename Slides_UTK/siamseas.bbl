@@ -1,0 +1,26 @@
+\begin{thebibliography}{}
+
+\bibitem[Braess, 2007]{braess2007finite}
+Braess, D. (2007).
+\newblock {\em Finite elements: Theory, fast solvers, and applications in solid
+  mechanics}.
+\newblock Cambridge University Press.
+
+\bibitem[F. et~al., 2015]{feng2015fast}
+F., Salgado, A., Wise, S., and Wang, C. (2015).
+\newblock Fast solvers for convex splitting scheme of {$L^2$} epitaxial thin
+  film growth model.
+\newblock {\em prepared}.
+
+\bibitem[F. et~al., 2016]{feng2015multigrid}
+F., Salgado, A., Wise, S., and Wang, C. (2016).
+\newblock Multigrid preconditioned steepest descent solvers for aviles-giga
+  type energy: Application to thin film epitaxy.
+\newblock {\em preparing}.
+
+\bibitem[Huang et~al., 2007]{huang2007preconditioned}
+Huang, Y., Li, R., and Liu, W. (2007).
+\newblock Preconditioned descent algorithms for p-laplacian.
+\newblock {\em Journal of Scientific Computing}, 32(2):343--371.
+
+\end{thebibliography}

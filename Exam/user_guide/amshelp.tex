@@ -1,0 +1,4919 @@
+%%% amshelp.tex
+%%% This is an AMS-LaTeX file
+
+%%% Copyright (c) 1992, 2000, 2008, 2009, 2011, 2013 Philip S. Hirschhorn
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2003/12/01 or later.
+
+
+%%% Philip Hirschhorn
+%%% Department of Mathematics
+%%% Wellesley College
+%%% Wellesley, MA 02481
+%%% psh@math.mit.edu
+%%% psh@poincare.wellesley.edu
+
+
+%%% This is an attempt to explain how to get up and running with
+%%% AmS-LaTeX for someone having some familiarity with TeX,
+%%% AMS-TeX, or LaTeX.
+
+
+
+
+\newcommand{\filedate}{January 28, 2013}
+%\newcommand{\filedate}{\today}
+\newcommand{\fileversion}{Version 2.3}
+
+%---------------------------------------------------------------------
+%\documentclass[12pt]{amsart}
+\documentclass{amsart}
+
+\usepackage{url}
+
+%\usepackage[pdfborderstyle={/S/U/W 1},hyperfootnotes=false]{hyperref}
+%\usepackage[colorlinks=false,pdfborder={0 0 0}]{hyperref}
+%\usepackage[colorlinks,pdfborder={0 0 0}]{hyperref}
+\usepackage[colorlinks]{hyperref}
+%\usepackage{hyperref}
+
+% In case we're not using hyperref.sty:
+\providecommand{\texorpdfstring}[2]{#1}
+% The following can safely be used in \section commands
+% without causing pdf warnings:
+\newcommand{\bs}{\texorpdfstring{\char`\\}{}}
+
+% We have to load amsrefs *after* hyperref.  (Most packages must
+% be loaded before hyperref; amsrefs is an exception to that.)
+
+% We have to load amsrefs *before* loading Xy-pic, or else the
+% \newcommand{\cir}{\textasciicircum} in textcmds.sty will complain.
+% We can also use the optional argument ``lite'', as in
+% \usepackage[lite]{amsrefs}, to avoid the problem by suppressing
+% the reading of textcmds.sty
+\usepackage[lite]{amsrefs}
+
+\usepackage[all,cmtip]{xy}
+\let\objectstyle=\displaystyle
+
+
+
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+
+\numberwithin{equation}{section}
+
+
+%       Theorem environments
+
+\theoremstyle{plain} %% This is the default, anyway
+\newtheorem{thm}[equation]{Theorem}
+\newtheorem{cor}[equation]{Corollary}
+\newtheorem{lem}[equation]{Lemma}
+\newtheorem{prop}[equation]{Proposition}
+
+
+\theoremstyle{definition}
+\newtheorem{defn}[equation]{Definition}
+
+\theoremstyle{remark}
+\newtheorem{rem}[equation]{Remark}
+\newtheorem{ex}[equation]{Example}
+\newtheorem{notation}[equation]{Notation}
+\newtheorem{terminology}[equation]{Terminology}
+
+
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+
+\begin{document}
+
+
+\title[Running \AmS-\LaTeX]{Getting up and running\\
+                            with \AmS-\LaTeX}
+
+\author{Philip S. Hirschhorn}
+
+\address{Department of Mathematics\\
+         Wellesley College\\
+         Wellesley, Massachusetts 02481}
+
+\email{psh@math.mit.edu}
+
+\date{\filedate, \fileversion}
+
+\begin{abstract}
+  Together with the template file \texttt{template.tex}, these notes
+  are an attempt to tell you enough about \LaTeX{} and \AmS-\LaTeX{}
+  so that you can get started without having to read the book.
+\end{abstract}
+
+\maketitle
+
+\tableofcontents
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+\section{Introduction}
+
+This is an attempt to get you up and running with \AmS-\LaTeX{} as
+quickly as possible.  These instructions (along with the template file
+\texttt{template.tex}) won't be a substitute for the full
+documentation, but they'll give you enough to get started quickly and
+only occasionally have to refer to the main documentation.
+
+The current version of \AmS-\LaTeX{} (version 2.2) is a collection of
+document classes and optional packages for the current version of
+standard \LaTeX.  \AmS-\LaTeX{} provides the document classes
+\texttt{amsart}, \texttt{amsproc}, and \texttt{amsbook} (see
+section~\ref{sec:DocClsCom}) to replace the standard document classes
+\texttt{article}, \texttt{proc}, and \texttt{book}, and several
+optional packages (mainly \texttt{amsmath}) that can be used with the
+standard \LaTeX{} document classes.  Thus, using \AmS-\LaTeX{} is
+really using a variety of \LaTeX.  If you're new to \LaTeX{}, and
+these last few sentences made no sense to you at all, don't worry
+about it.  You don't have to know what the standard \LaTeX{} document
+classes are in order to use the \AmS-\LaTeX{} replacements for them.
+
+I'll be assuming that you have at least some experience with either
+plain \TeX, \AmS-\TeX{} or \LaTeX, and I'll try to tell you what you
+need to know so that you can get started with \AmS-\LaTeX{}
+\emph{without} actually reading the \LaTeX{} user's
+guide~\cite{latex}, or even taking much of a look at the \AmS-\LaTeX{}
+user's guide~\cite{amslatexusersguide} or the short math guide for
+\LaTeX~\cite{mathguide}.
+
+If you've never used \emph{any} version of \TeX{} or \LaTeX, then I
+recommend ``The not so short introduction to \LaTeXe{}'' by Tobias
+Oetiker, Hubert Partl, Irene Hyna, and Elisabeth Schlegl
+\cite{NotShort}.  This is intended for those with no knowledge of
+\TeX{} or \LaTeX, and concisely gives a description of what a \LaTeX{}
+document looks like and how you type text and simple mathematics in a
+\LaTeX{} document.
+
+These instructions come with a template file \verb"template.tex",
+which is an attempt to give you enough to fake your way through an
+\AmS-\LaTeX{} file \emph{almost} without even reading these
+instructions.  I've included the text of that file in these
+instructions as section~\ref{sec:template}, so you might want to take
+a look at that now, and then just use the table of contents of these
+instructions to find more information on whatever in that file
+confuses you.
+
+In case you haven't guessed, these instructions were printed using the
+\texttt{amsart} document class of \AmS-\LaTeX, so you can get some
+idea what it all looks like.
+
+
+
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+\section{Basic \LaTeX{} stuff}
+\label{sec:basicstuff}
+
+In this section, we'll describe the three commands that must appear in
+every \LaTeX{} document: \verb"\documentclass",
+\verb"\begin{document}", and \verb"\end{document}".  The complete
+explanation of these can be found in the \LaTeX{} User's
+Guide~\cite{latex} or in \emph{The not so short introduction to
+  \LaTeXe}~\cite{NotShort}.  We'll also explain how to begin a new
+section or subsection of the paper, and how \LaTeX{} manages to get
+the cross-references right (which is also the explanation of why you
+need to run a file through \LaTeX{} \emph{twice} to be sure that all
+the cross-references are correct).
+
+%--------------------------------------------------------------------
+\subsection{The \texttt{\bs documentclass} command}
+\label{sec:DocClsCom}
+
+Before you type anything that actually appears in the paper, you must
+include a \verb"\documentclass" command.  It's easiest to just put the
+\verb"\documentclass" command at the very beginning of the file,
+possibly with a few lines of comments before it.
+
+It's the choice of document class that determines whether you're using
+\AmS-\LaTeX{} or just plain old \LaTeX.  \AmS-\LaTeX{} provides the
+document classes \texttt{amsart}, \texttt{amsproc}, and
+\texttt{amsbook} as replacements for the standard \LaTeX{} document
+classes \texttt{article}, \texttt{proc}, and \texttt{book}.  If for
+some reason you prefer to use the standard \LaTeX{} classes
+\texttt{article}, \texttt{proc}, or \texttt{book}, you can still get
+many of the features of \AmS-\LaTeX{} by including the command
+\verb"\usepackage{amsmath}" after your \verb"\documentclass" command.
+I'll only be discussing the \texttt{amsart} document class here.  For
+the others, see the \AmS-\LaTeX{} User's
+Guide~\cite{amslatexusersguide}.
+
+The simplest version of the \texttt{\bs documentclass} command is
+\begin{center}
+  \verb"\documentclass{amsart}"
+\end{center}
+This will give you the default type size, which is 10~point type.  If
+you'd like to use 12~point type, then you should include the optional
+argument \verb"[12pt]"; this makes the command
+\begin{center}
+  \verb"\documentclass[12pt]{amsart}"
+\end{center}
+
+%--------------------------------------------------------------------
+\subsection{Loading optional packages}
+\label{sec:optpack}
+
+There are at least three optional packages that are of interest.  The
+first is the \texttt{amsrefs} package, which makes it much easier to
+create a bibliography (see section~\ref{sec:amsrefs}).  To load the
+\texttt{amsrefs} package, you put the line
+\begin{center}
+  \verb"\usepackage[lite]{amsrefs}"
+\end{center}
+after the \verb"\documentclass" command.  (For an explanation of why
+we recommend using the optional argument \texttt{lite}, see
+section~\ref{sec:refoptions}.)
+
+Another important package is for when you want to use some of the
+special symbols contained in the \AmS-Fonts package.  These are
+listed, along with all of the standard \LaTeX{} symbols, in
+\texttt{symbols.pdf}, available at
+\begin{center}
+  \url{http://www.ctan.org/tex-archive/info/symbols/math/symbols.pdf}
+\end{center}
+If you want the standard names for these symbols to be defined for
+your use, then you need to use the optional package \texttt{amssymb}.
+Thus, to use the default 10~point type, use \texttt{amsrefs} to create
+a bibliography, and have the special symbols defined, use the commands
+\begin{center}
+  \begin{tabular}{l}
+    \verb"\documentclass{amsart}"\\
+    \verb"\usepackage[lite]{amsrefs}"\\
+    \verb"\usepackage{amssymb}"
+  \end{tabular}
+\end{center}
+
+Another widely used optional package is \Xy-pic, which enables you to
+draw commutative diagrams as part of your \LaTeX{} file rather than
+creating them with a graphics package and importing the graphics.
+(For commutative diagrams, see section~\ref{sec:xypic}).  To use
+\Xy-pic, you should include the commands
+\begin{center}
+  \begin{tabular}{l}
+    \verb"\usepackage[all,cmtip]{xy}"\\
+    \verb"\let\objectstyle=\displaystyle"
+  \end{tabular}
+\end{center}
+That loads the \Xy-pic package and sets it so that the arrowheads used
+are the same ones used in the rest of the document and the nodes in
+the diagram are, by default, in \verb"\displaystyle".  If you'd like
+the default style for the nodes to be \verb"\textstyle", you should
+omit the second of those two lines.
+
+This document uses all of those packages, and so we used the commands
+\begin{center}
+  \begin{tabular}{l}
+    \verb"\documentclass{amsart}"\\
+    \verb"\usepackage[lite]{amsrefs}"\\
+    \verb"\usepackage{amssymb}"\\
+    \verb"\usepackage[all,cmtip]{xy}"\\
+    \verb"\let\objectstyle=\displaystyle"
+  \end{tabular}
+\end{center}
+
+%---------------------------------------------------------------------
+
+\subsection{\texttt{\bs begin\{document\}} and  \texttt{\bs end\{document\}}}
+
+Everything that is to appear in the document must appear in between
+the \verb"\begin{document}" and \verb"\end{document}" commands. There
+are no optional arguments for these commands, so they always look the
+same.  Anything following the \verb"\end{document}" command is
+ignored.  In addition to \verb"\usepackage" commands (see
+section~\ref{sec:optpack}), you are allowed to have macro definitions
+(i.e., newcommands; see section~\ref{sec:definitions}) before the
+\verb"\begin{document}", and that's actually a good place for them,
+  but that's about all.
+
+%---------------------------------------------------------------------
+\subsection{Sections and subsections}
+\label{sec:sections}
+
+To begin a new section, you give the command
+\begin{center}
+  \verb"\section{Section name}"
+\end{center}
+To begin the present section, I gave the command
+\begin{center}
+  \verb"\section{Basic \LaTeX{} stuff}"
+\end{center}
+A section number is supplied automatically.  If you want to be able to
+make reference to that section, then you need to \emph{label} it.
+Since I wanted to be able to demonstrate the cross-reference commands,
+I actually began this section with the lines
+\begin{center}
+  \begin{tabular}{l}
+    \verb"\section{Basic \LaTeX{} stuff}"\\
+    \verb"\label{sec:basicstuff}"
+  \end{tabular}
+\end{center}
+This allows me to type ``\verb"section~\ref{sec:basicstuff}"'' and
+have it printed as ``section~\ref{sec:basicstuff}''.
+
+To begin a new subsection, you give the command
+\begin{center}
+  \verb"\subsection{Subsection name}"
+\end{center}
+To begin the present subsection, I gave the command
+\begin{center}
+  \verb"\subsection{Sections and subsections}"
+\end{center}
+A subsection number is supplied automatically.  If you want to be able
+to make reference to that subsection, then you need to \emph{label}
+it.  This subsection was begun with the lines
+\begin{center}
+  \begin{tabular}{l}
+    \verb"\subsection{Sections and subsections}"\\
+    \verb"\label{sec:sections}"
+  \end{tabular}
+\end{center}
+so if we type ``\verb"section~\ref{sec:sections}",'' it is printed as
+``section~\ref{sec:sections}''.
+
+Labels always take the number of the smallest enclosing structure.
+Thus, a \verb"\label" command that's inside a section but \emph{not}
+inside a subsection or Theorem or anything else will take the value of
+the section counter, while a \verb"\label" command that's inside the
+statement of a Theorem will take the value of that Theorem number.
+For more information on this, see section~\ref{sec:xreferences}.
+
+%--------------------------------------------------------------------
+\subsubsection{Yes, there are subsubsections too}
+
+I began this subsubsection with the command
+\begin{center}
+  \verb"\subsubsection{Yes, there are subsubsections too}"
+\end{center}
+
+%--------------------------------------------------------------------
+\subsubsection*{Sections without numbers}
+
+I began this subsubsection with the command
+\begin{center}
+  \verb"\subsubsection*{Sections without numbers}"
+\end{center}
+and got a subsubsection that wasn't numbered.  If you give the command
+\begin{center}
+  \verb"\section*{A Section Title}"
+\end{center}
+then you'll begin a new section that will not have a number.
+
+
+%---------------------------------------------------------------------
+\subsection{Italics \emph{for emphasis}}
+
+If you want to use italics to emphasize a word or two, the \LaTeX{}
+convention is not to explicitly switch to italics, but rather to use
+the command \verb"\emph" (which means \emph{emphasize}).  This command
+works just like a font change command, except that it switches you
+\emph{into} italics if the current font is upright and switches you
+\emph{out of} italics if the current font is italics.
+
+For example, if you type
+\begin{center}
+  \verb"The whole is \emph{more} than the sum of its parts."
+\end{center}
+you'll get
+\begin{center}
+  The whole is \emph{more} than the sum of its parts.
+\end{center}
+but if you type
+\begin{verbatim}
+\begin{thm}
+  The whole is \emph{more} than the sum of its parts.
+\end{thm}
+\end{verbatim}
+you'll get
+\begin{thm}
+  The whole is \emph{more} than the sum of its parts.
+\end{thm}
+
+\subsubsection*{Note}
+
+The \verb"\emph" command is a recent addition to \LaTeX, and it has
+the feature that it automatically inserts an italic correction where
+needed.  If you don't know what an italic correction is, you can
+safely ignore this paragraph, but I will at least mention that all
+those ``\verb"\/"'' commands frequently seen in \TeX{} (and older
+\LaTeX) documents are all inserting italic corrections; the point of
+this paragraph is that, with the current version of \LaTeX, you don't
+have to do that anymore.
+
+%---------------------------------------------------------------------
+\subsection{Cross references and the table of contents}
+
+This is an explanation of how \LaTeX{} manages to fill in
+cross-references (see section~\ref{sec:xreferences}) to parts of the
+file it hasn't processed yet, and what those \verb".aux" and
+\verb".toc" files are.
+
+%--------------------------------------------------------------------
+\subsubsection*{Cross-References}
+
+Every time \LaTeX{} processes your file, it writes an \emph{auxiliary}
+file.  Since the file containing these instructions is called
+\verb"amshelp.tex", the auxiliary file is called \verb"amshelp.aux".
+The auxiliary file contains the definitions of all the keys used for
+cross-references.  When \LaTeX{} begins to process your file, it first
+looks for an \verb".aux" file, and reads it in if it exists.  Of
+course, this is the \verb".aux" file that was produced the \emph{last}
+time that your file was processed, so the Theorem numbers, Section
+numbers, etc., are all the ones from the last time the file was
+processed.
+
+The very first time that \LaTeX{} processes your file, there is no
+\verb".aux" file, and so \LaTeX{} gives \emph{lots} of warning
+messages about undefined labels, or whatever.  Ignore all of this.
+The \emph{next} time that you run \LaTeX, there \emph{will} be an
+\verb".aux" file, and all the references will be filled in.  (Yes, it
+is possible, at least in theory, for some page number to change every
+time you run \LaTeX{} on your file, even without any changes in the
+source file, but this isn't very likely.)
+
+\subsubsection*{The Table of Contents}
+
+If you give the command \verb"\tableofcontents", then \LaTeX{} will
+try to write a table of contents at that point, including the page
+numbers of the sections.  Obviously, \LaTeX{} can't know those page
+numbers or section titles yet, so as \LaTeX{} processes your file, it
+writes a \verb".toc" file containing the information it needs.  (The
+\verb".toc" file for these instructions is \verb"amshelp.toc".)  Once
+again, \LaTeX{} is always using the information from the \emph{last}
+time that it processed your file.
+
+If you \emph{do} include a table of contents in your document, and if
+the table of contents takes up at least a page or so of space, then
+you might have to run \LaTeX{} \emph{three} times in order to get all
+of the cross-references right.  The reason for this is that the first
+time you run \LaTeX{} there isn't any \verb".toc" file listing the
+section titles, and so the table of contents has nothing in it.  The
+second time you run \LaTeX{} you'll get a table of contents that lists
+the page numbers for the sections from the last time you ran \LaTeX,
+when the table of contents took up no space at all.  Unfortunately,
+during this second run, the table of contents will be created, and
+will take up enough space to change the page numbers of the sections
+from what they were during the first run.  Only during the
+\emph{third} run will the correct page numbers be written into the
+table of contents.  Since this doesn't change the amount of space that
+the table of contents occupies, this version will be correct.
+
+\subsubsection*{How do I know when everything is correct?}
+
+After processing your file, \LaTeX{} checks whether all the
+cross-reference numbers that it read from the \verb".aux" file are
+correct.  If any of them are incorrect, it prints a warning on the
+screen at the very end of the run advising you that labels may have
+changed and that you should run \LaTeX{} again to get the
+cross-references right.  Unfortunately, \LaTeX{} doesn't seem to check
+that the table of contents entries are correct, so if you change the
+name of a section in a way that doesn't make any page references
+incorrect, you won't be warned to run \LaTeX{} again.
+
+
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+\section{Title, Author, and the \texttt{\bs maketitle} command}
+
+This stuff should go right after the \verb"\begin{document}" command.
+I'll give a quick sketch here, which is probably all you'll ever
+need, but the full explanation is given in \emph{Instructions for
+  preparation of papers and monographs: \AmS-\LaTeX} \cite{instr-l}.
+If you are already familiar with \LaTeX, then you should be warned
+that this part is slightly different from what you do when using the
+standard \LaTeX{} \verb"article" document class.
+
+%---------------------------------------------------------------------
+\subsection{The title}
+You specify the title with the command
+\begin{center}
+  \verb"\title[Optional running title]{Actual title}"
+\end{center}
+These instructions used the title command
+\begin{verbatim}
+\title[Running \AmS-\LaTeX]{Getting up and running\\
+                            with \AmS-\LaTeX}
+\end{verbatim}
+Notice that you indicate line breaks in the title with a double
+backslash.  If I had decided to omit the line break and also to have
+the full title printed in the head of the odd numbered pages, I would
+have used the command
+\begin{center}
+  \verb"\title{Getting up and running with \AmS-\LaTeX}"
+\end{center}
+
+%---------------------------------------------------------------------
+\subsection{The author, and the author's address}
+
+The author is specified with an \verb"author" command:
+\begin{center}
+\verb"\author{Author's name}"
+\end{center}
+These directions used the command
+\verb"\author{Philip S. Hirschhorn}".
+The author's address is given in an address command, with double
+backslashes to indicate line breaks.  These instructions used the
+command
+\begin{center}
+  \begin{tabular}{l}
+    \verb"\address{Department of Mathematics\\"\\
+    \verb"Wellesley College\\"\\
+    \verb"Wellesley, Massachusetts 02481}"
+  \end{tabular}
+\end{center}
+If the author's current address is different from the address at which
+the research was carried out, then you can specify the current address
+with the command \verb"\curraddr".  For example, you might type
+\begin{center}
+  \begin{tabular}{l}
+    \verb"\curraddr{Department of Mechanics\\"\\
+    \verb"Brake and Wheel Bearing Division\\"\\
+    \verb"Serene Service Center\\"\\
+    \verb"Salem, Massachusetts 02139}"
+  \end{tabular}
+\end{center}
+You can also include an email address, with the \verb"\email"
+command.  These instructions used the command
+\begin{center}
+  \verb"\email{psh@math.mit.edu}"
+\end{center}
+To acknowledge support, use the command \verb"\thanks", e.g.,
+\begin{center}
+  \verb"\thanks{Supported in part by NSF grant 3.14159}"
+\end{center}
+This will be printed as a footnote on the first page.
+
+%--------------------------------------------------------------------
+\subsubsection*{Multiple authors}
+
+If there are several authors, then each one should have a separate
+\verb"\author" command, with each individual's address, current
+address, email address, and thanks following that individual's
+\verb"\author" command, in its own \verb"\address" command (and
+\verb"\curraddr" command, and \verb"\thanks" command, and
+\verb"\email" command).  If there \emph{are} several authors, and
+their combined names are too long for the running head on the even
+numbered pages, you can give an optional argument to each
+\verb"\author" command to supply a shortened form to use in the
+running head, as in
+\begin{center}
+  \verb"\author[P.S. Hirschhorn]{Philip S. Hirschhorn}".
+\end{center}
+(It's apparently a convention that the running head in a multiple
+author paper should have only initials for the first and middle names,
+but I don't think that I was invited to that convention.)
+
+
+%---------------------------------------------------------------------
+\subsection{The date}
+
+This is pretty straightforward:
+\begin{center}
+\verb"\date{Whatever date you please}"
+\end{center}
+To have the date of processing used, use the command
+\verb"\date{\today}".
+
+%---------------------------------------------------------------------
+\subsection{\texttt{\bs maketitle}}
+
+After you've given all of the commands mentioned in this section, you
+can give the command \verb"\maketitle".  If you \emph{don't} give the
+command \verb"\maketitle", a title won't be made.  The exact
+arrangement of all this information is determined by the document
+class.  In particular, the \verb"amsart" document class puts the
+author's address at the \emph{end} of the paper.
+
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+\section{Theorems, Propositions, Lemmas, etc.}
+
+The instructions in this section assume that you're using the
+\verb"\newtheorem" commands that I put in the file \verb"template.tex"
+(see section~\ref{sec:template}).
+
+%--------------------------------------------------------------------
+\subsection{Stating theorems, propositions, etc.}
+\label{sec:theorems}
+
+To state a theorem, you do the following:
+\begin{verbatim}
+\begin{thm}
+  The square of the hypotenuse of a right triangle is equal to the
+  sum of the squares of the two adjacent sides.
+\end{thm}
+\end{verbatim}
+If you do that, you'll get the following:
+\begin{thm}
+  \label{pythagthm}
+  The square of the hypotenuse of a right triangle is equal to the sum
+  of the squares of the two adjacent sides.
+\end{thm}
+If you thought that it was only a proposition, you'd use
+\begin{verbatim}
+\begin{prop}
+  The square of the hypotenuse of a right triangle is equal to the
+  sum of the squares of the two adjacent sides.
+\end{prop}
+\end{verbatim}
+and you'd get
+\begin{prop}
+  The square of the hypotenuse of a right triangle is equal to the sum
+  of the squares of the two adjacent sides.
+\end{prop}
+
+If you think it's a theorem again, but you'd like to make reference to
+it in some other part of the paper, you have to choose a \emph{key}
+with which you'll refer to it, and then \emph{label} the theorem.  If
+you want to use the key \emph{pythagthm}, then it would look like the
+following:
+\begin{verbatim}
+\begin{thm}
+  \label{pythagthm}
+  The square of the hypotenuse of a right triangle is equal to the
+  sum of the squares of the two adjacent sides.
+\end{thm}
+\end{verbatim}
+If you later give the command \verb"\ref{pythagthm}", then that
+command will expand to the \emph{number} that was assigned to that
+theorem (in this case, \ref{pythagthm}).  For more explanation of
+cross-references, see section~\ref{sec:xreferences}.
+
+If you'd like to state a theorem and give a \emph{name} to it, then
+you can add an optional argument to the \verb"\begin{thm}" command. 
+If you type
+\begin{verbatim}
+\begin{thm}[Pythagoras]
+  The square of the hypotenuse of a right triangle is equal to the
+  sum of the squares of the two adjacent sides.
+\end{thm}
+\end{verbatim}
+you'll get
+\begin{thm}[Pythagoras]
+  The square of the hypotenuse of a right triangle is equal to the sum
+  of the squares of the two adjacent sides.
+\end{thm}
+
+%--------------------------------------------------------------------
+\subsubsection*{Summary of environments provided in the template}
+
+All of the following structures are numbered in the same sequence,
+in the form SectionNumber.Number.  Equations (i.e., displayed
+formulas, whether they are equations or not) will be numbered in the
+same sequence.
+\begin{displaymath}
+  \begin{tabular}{c@{\hspace{4em}}l@{\hspace{4em}}c}
+    \multicolumn{3}{c}{Theorem Environments}\\*[8pt]
+    \hspace{1em}Name&  Printed Form& Body font\\*[6pt]
+    \texttt{thm}&           \textbf{Theorem}&      Italic\\
+    \texttt{cor}&           \textbf{Corollary}&    Italic\\
+    \texttt{lem}&           \textbf{Lemma}&        Italic\\
+    \texttt{prop}&          \textbf{Proposition}&  Italic\\
+    \texttt{defn}&          \textbf{Definition}&   Normal\\
+    \texttt{rem}&           \textit{Remark}&       Normal\\
+    \texttt{ex}&            \textit{Example}&      Normal\\
+    \texttt{notation}&      \textit{Notation}&     Normal\\
+    \texttt{terminology}&   \textit{Terminology}&  Normal\\*[3pt]
+  \end{tabular}
+\end{displaymath}
+For full details, see the beginning of the template file (reproduced
+here in section~\ref{sec:template}), after the comment ``The Theorem
+Environments.''
+
+%---------------------------------------------------------------------
+\subsection{Proofs}
+
+To give a proof, you do the following:
+\begin{verbatim}
+\begin{proof}
+  As any fool can plainly see, it's true!
+\end{proof}
+\end{verbatim}
+and you'll get the following:
+\begin{proof}
+  As any fool can plainly see, it's true!
+\end{proof}
+If the theorem said that a condition was both necessary and sufficient
+for something, and you want to prove each part separately,
+you can do the following:
+\begin{verbatim}
+\begin{proof}[Proof (sufficiency)]
+  Well, it's \emph{obviously} sufficient!
+\end{proof}
+\end{verbatim}
+and you'll get
+\begin{proof}[Proof (sufficiency)]
+  Well, it's \emph{obviously} sufficient!
+\end{proof}
+That is, the \verb"proof" environment allows you to use an optional
+second argument that will appear in place of the word \verb"Proof".
+
+If the proof of Theorem~\ref{pythagthm} does not appear immediately
+after its statement, you might use the following:
+\begin{verbatim}
+\begin{proof}[Proof of Theorem~\ref{pythagthm}]
+  As any fool can plainly see, it's true!
+\end{proof}
+\end{verbatim}
+and you'd get
+\begin{proof}[Proof of Theorem~\ref{pythagthm}]
+  As any fool can plainly see, it's true!
+\end{proof}
+
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+\section{Cross-References}
+\label{sec:xreferences}
+
+This section explains how to make reference to numbered sections,
+theorems, equations, and bibliography items, with the correct
+reference numbers filled in automatically by \LaTeX.
+
+%---------------------------------------------------------------------
+\subsection{References to sections, theorems and equations}
+\label{sec:thmrefs}
+
+For each structure in the manuscript to which you'll be making
+reference, you must assign a \emph{key} that you'll use to refer to
+that structure.  For sections, theorems, numbered equations, and items
+in an enumerated list (see section~\ref{sec:enumref}), you assign the
+key using the \verb"\label" command and refer to it using either the
+\verb"\ref" command or the \verb"\eqref" command.  Each of these
+commands takes one argument, which is the \emph{key} you're assigning
+to the object.  The command \verb"\ref{key}" produces the number that
+was assigned to that structure and the command \verb"\eqref{key}"
+produces that number enclosed in parentheses.  (The \verb"\eqref"
+command also ensures that the number and parentheses are always in an
+upright font; see section~\ref{sec:EqRef}.)  The convention is to use
+\verb"\eqref" to refer to equation numbers, \verb"\cite" to refer to
+bibliography entries (see section~\ref{sec:bibreferences}), and
+\verb"\ref" to refer to everything else.
+
+Consider the following example.
+\begin{thm}
+  \label{homotopy}
+  If the maps $f\colon X \to Y$ and $g\colon X \to Y$ are homotopic,
+  then the induced homomorphisms $f_{*} \colon \mathrm{H}_{*}X \to
+  \mathrm{H}_{*}Y$ and $g_{*} \colon \mathrm{H}_{*}X \to
+  \mathrm{H}_{*}Y$ are equal.
+\end{thm}
+
+We typed that theorem as follows.
+\begin{verbatim}
+\begin{thm}
+  \label{homotopy}
+  If the maps $f\colon X \to Y$ and $g\colon X \to Y$ are homotopic,
+  then the induced homomorphisms $f_{*} \colon \mathrm{H}_{*}X \to
+  \mathrm{H}_{*}Y$ and $g_{*} \colon \mathrm{H}_{*}X \to
+  \mathrm{H}_{*}Y$ are equal.
+\end{thm}
+\end{verbatim}
+If we now type ``\verb"see Theorem~\ref{homotopy}",'' then it will be
+printed as ``see Theorem~\ref{homotopy}.''
+
+%--------------------------------------------------------------------
+\subsubsection*{So, what exactly is the label labeling?}
+
+The command \verb"\label{key}" assigns to \verb"key" the value of the
+\emph{smallest enclosing structure}.  For example, we began this
+section by typing
+\begin{center}
+  \begin{tabular}{l}
+    \verb"\section{Cross-References}"\\
+    \verb"\label{sec:xreferences}"
+  \end{tabular}
+\end{center}
+and we began this subsection by typing
+\begin{center}
+  \begin{tabular}{l}
+    \verb"\subsection{References to sections, theorems and equations}"\\
+    \verb"\label{sec:thmrefs}"
+  \end{tabular}
+\end{center}
+The phrase ``\verb"See section~\ref{sec:xreferences}"'' is printed as
+``See section~\ref{sec:xreferences}'' while the phrase
+%
+``\verb"See section~\ref{sec:thmrefs}"'' is printed as ``See
+section~\ref{sec:thmrefs}'' because the key \verb"sec:xreferences" was
+defined inside of section~\ref{sec:xreferences} but outside of
+section~\ref{sec:thmrefs}, while the key \verb"sec:thmrefs" was
+defined inside of section~\ref{sec:thmrefs}.
+
+%--------------------------------------------------------------------
+\subsubsection{References to equations}
+\label{sec:EqRef}
+
+To make reference to a numbered equation, you assign the \emph{key} as
+before, but you replace \verb"\ref" with \verb"\eqref", so that
+parentheses will be printed around the equation number.  For example,
+if you type
+\begin{verbatim}
+\begin{equation}
+  \label{additivity}
+  \mathrm{H}_{*} \bigvee_{\alpha\in A} X_{\alpha}   \approx
+    \bigoplus_{\alpha\in A}\mathrm{H}_{*} X_{\alpha}
+\end{equation}
+\end{verbatim}
+then you'll get
+\begin{equation}
+  \label{additivity}
+  \mathrm{H}_{*} \bigvee_{\alpha\in A} X_{\alpha}   \approx
+    \bigoplus_{\alpha\in A}\mathrm{H}_{*} X_{\alpha}
+\end{equation}
+If we now type
+\begin{verbatim}
+\begin{thm}
+  Equation~\eqref{additivity} is true for all sorts of functors
+  $\mathrm{H}$.
+\end{thm}
+\end{verbatim}
+then we'll get
+\begin{thm}
+  Equation~\eqref{additivity} is true for all sorts of functors
+  $\mathrm{H}$.
+\end{thm}
+Notice the parentheses around the equation number, and the fact that
+even though the theorem is set in slanted type, the equation number is
+set in an upright font?  This is the difference between \verb"\eqref"
+and \verb"\ref"; the command \verb"\eqref" provides parentheses,
+arranges it so that the number and surrounding parentheses are in an
+upright font no matter what the surrounding font, and supplies an
+italic correction if it's needed.
+
+%---------------------------------------------------------------------
+\subsection{References to page numbers}
+
+If you want to make reference to the \emph{page} that contains a
+label, rather than to the structure that is labeled, use the command
+\verb"\pageref{key}".  For example, if you type
+\begin{verbatim}
+See page~\pageref{homotopy} to find Theorem~\ref{homotopy}.
+\end{verbatim}
+you'll get ``See page~\pageref{homotopy} to find
+Theorem~\ref{homotopy}.''
+
+%---------------------------------------------------------------------
+\subsection{Bibliographic references}
+\label{sec:bibreferences}
+
+Each bibliography item receives a \emph{key} as part of its basic
+structure, and you refer to that item using the command
+\verb"\cite{key}".
+
+When using the \texttt{amsrefs} package, each item in the bibliography
+is begun with
+\begin{verbatim}
+\bib{key}{TypeOfItem}{
+\end{verbatim}
+For example, the bibliography of these instructions contains the entry
+\begin{verbatim}
+\bib{HA}{book}{
+  author={Quillen, Daniel G.},
+  title={Homotopical Algebra},
+  series={Lecture Notes in Mathematics},
+  volume={43},
+  publisher={Springer-Verlag},
+  address={Berlin-New York},
+  date={1967}
+}
+\end{verbatim}
+If we type ``\verb"This is the work of Quillen~\cite{HA}",'' then it
+will be printed as ``This is the work of Quillen~\cite{HA}.''  Notice
+that square brackets have been inserted around the bibliography item
+number.
+
+The \verb"\cite" command takes an optional argument, which allows you
+to annotate the reference.  If we type
+``\verb"see~\cite[Chapter I]{HA}"'', then it will be printed as
+``see~\cite[Chapter I]{HA}''.  If you're using \texttt{amsrefs} (which
+we strongly recommend), then there's an alternate form available: If
+we type ``\verb"\cite{HA}*{Chapter I}"'', then we also get
+``\cite{HA}*{Chapter I}'', and this second form is less likely to
+cause errors when used, e.g., in the optional argument to a
+\verb"\begin{theorem}" command (see section~\ref{sec:theorems}).
+
+%--------------------------------------------------------------------
+\subsubsection{Multiple references}
+\label{sec:mulref}
+
+If you're using \texttt{amsrefs} and when you refer to multiple
+bibliography items you want to have the item numbers automatically
+sorted and compressed (e.g., replacing ``7, 6, 5, 8'' with ``5--8''),
+you can use the \verb"\cites" command.  For example, if we type
+\verb"\cites{HA,yellowmonster}" then we get \cites{HA,yellowmonster}.
+
+If you want some of the references in the list to have annotations,
+you put your \verb"\cite" commands into the argument of a
+\verb"\citelist" command.  For example, if we type
+\verb"\citelist{\cite{HA}*{Chapter I} \cite{yellowmonster}}" then we
+get \citelist{\cite{HA}*{Chapter I} \cite{yellowmonster}}.
+
+%--------------------------------------------------------------------
+\subsubsection{Author-year citations}
+\label{sec:authyrcit}
+
+If you're using \texttt{amsrefs} and you use the \texttt{author-year}
+option to convert your references to the author-year format (see
+section~\ref{sec:refoptions}), then there are two variations on the
+\verb"\cite" command (\verb"\ycite" and \verb"\ocite") that are
+useful.  If we were using the \texttt{author-year} option in this
+document, then
+\begin{center}
+  \begin{tabular}{l@{ would be typeset as }l}
+    ``\verb"\cite{yellowmonster}"''& ``(Bousfield and Kan, 1972)''\\
+    ``\verb"\ycite{yellowmonster}"''& ``(1972)''\\
+    ``\verb"\ocite{yellowmonster}"''& ``Bousfield and Kan (1972)''
+  \end{tabular}
+\end{center}
+Thus, you could type ``For further details, see
+\verb"\cite{yellowmonster}"'', or ``Bousfield and Kan
+\verb"\ycite{yellowmonster}" showed\ldots'', or ``This can be found in
+\verb"\ocite{yellowmonster}"''.
+
+
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+\section{Mathematics in running text}
+
+This is pretty much exactly as it is in plain \TeX, except that you
+have an extra option (which you can ignore).  The simplest thing is to
+just enclose between dollar signs any material that should be in math
+mode.  Thus, if you type
+\begin{center}
+  \verb"Let $f\colon X \to Y$ be a continuous function."
+\end{center}
+you'll get
+\begin{center}
+  Let $f\colon X \to Y$ be a continuous function.
+\end{center}
+(Note that if we had typed that as ``\verb"f: X \to Y"'' then the
+spacing around the colon would be wrong, since the colon symbol is
+typeset as a binary relation, with spaces on the two sides equal.)
+The only novelty that \LaTeX{} introduces is that, instead of using a
+dollar sign to toggle math mode on and off, you can use `\verb"\("' to
+\emph{begin} math mode, and `\verb"\)"' to \emph{end} math mode.
+Thus, the example above could also be typed as
+\begin{center}
+\verb"Let \(f\colon X \to Y\) be a continuous function."
+\end{center}
+This provides a tiny bit more error checking, but can
+otherwise be safely ignored.
+
+The reference \cite{mathguide} is an excellent concise summary of the
+features of \AmS-\LaTeX{} for typesetting mathematics, both displayed
+and in running text.  It also includes lists of symbols available for
+mathematics.
+
+%--------------------------------------------------------------------
+%---------------------------------------------------------------------
+\section{Displayed mathematics}
+
+For a complete discussion of the environments for displayed
+mathematics, including options for customizing equation numbers,
+see~\cite[section~3]{amslatexusersguide}.
+
+%--------------------------------------------------------------------
+\subsection{Single line displays}
+\label{sec:SngLne}
+
+To display mathematics and number the display (so that you can refer
+to it from elsewhere in the paper) you use the \verb"equation"
+environment.  (\LaTeX{} calls all such numbers \emph{equation
+  numbers}, whether or not the display has anything to do with
+equations.)  If you type
+\begin{verbatim}
+\begin{equation}
+  \pi_{1}(X \vee Y) \approx \pi_{1}X * \pi_{1}Y
+\end{equation}
+\end{verbatim}
+you'll get
+\begin{equation}
+  \label{pi1eqn}
+  \pi_{1}(X \vee Y) \approx \pi_{1}X * \pi_{1}Y
+\end{equation}
+
+If you'd like to be able to make reference to the equation number,
+you need to \emph{label} the equation, using a \emph{key} that you
+can use for referencing it:
+\begin{verbatim}
+\begin{equation}
+  \label{pi1eqn}
+  \pi_{1}(X \vee Y) \approx \pi_{1}X * \pi_{1}Y
+\end{equation}
+\end{verbatim}
+If you later type ``\verb"see formula~\eqref{pi1eqn}"'' you'll get 
+``see formula~\eqref{pi1eqn}.''  (For more on cross-references to
+formulas, see section~\ref{sec:thmrefs}.)
+
+To display a single line of mathematics without an equation number,
+you use the \verb"equation*" environment.  (This is a common \LaTeX
+ism: Adding an asterisk to the name of a numbered \LaTeX{} environment
+often gives the unnumbered equivalent.)  If you type
+\begin{verbatim}
+\begin{equation*}
+  \pi_{1}(X \vee Y) \approx \pi_{1}X * \pi_{1}Y
+\end{equation*}
+\end{verbatim}
+then you'll get
+\begin{equation*}
+  \pi_{1}(X \vee Y) \approx \pi_{1}X * \pi_{1}Y
+\end{equation*}
+The \texttt{displaymath} environment is equivalent to this; you can
+produce the same unnumbered display by typing
+\begin{verbatim}
+\begin{displaymath}
+  \pi_{1}(X \vee Y) \approx \pi_{1}X * \pi_{1}Y
+\end{displaymath}
+\end{verbatim}
+You can also produce that same unnumbered display by typing
+\begin{verbatim}
+\[
+  \pi_{1}(X \vee Y) \approx \pi_{1}X * \pi_{1}Y
+\]
+\end{verbatim}
+but some people think that that makes your \LaTeX{} source file less
+readable.  Although you can also produce the same thing by typing
+\begin{verbatim}
+$$
+  \pi_{1}(X \vee Y) \approx \pi_{1}X * \pi_{1}Y
+$$
+\end{verbatim}
+using double dollar signs is definitely deprecated.
+
+%--------------------------------------------------------------------
+\subsection{Text in displayed mathematics}
+\label{sec:text}
+
+To include text in a displayed mathematics environment you use the
+\verb"\text" command, as in \verb"\text{here's some text}".  The
+\verb"\text" command is preferable to the standard \LaTeX{}
+\verb"\mbox" command because \verb"\text" correctly adjusts its size
+for use in subscripts and superscripts.  For example, if you type
+\begin{verbatim}
+\begin{equation*}
+  \pi_{1}(X) \approx G * H
+  \quad\text{where $G$ is torsion and $H$ is torsion free}
+\end{equation*}
+\end{verbatim}
+then you'll get
+\begin{equation*}
+  \pi_{1}(X) \approx G * H
+  \quad\text{where $G$ is torsion and $H$ is torsion free}
+\end{equation*}
+and if you type
+\begin{verbatim}
+\begin{equation*}
+  X_{n} = \coprod_{\text{monomorphisms $[k] \to [n]$}} S_{k}
+\end{equation*}
+\end{verbatim}
+then you'll get
+\begin{equation*}
+  X_{n} = \coprod_{\text{monomorphisms $[k] \to [n]$}} S_{k}
+\end{equation*}
+
+
+%--------------------------------------------------------------------
+\subsection{Displaying multiple lines without alignment}
+\label{sec:gather}
+
+You can put several displayed lines together, each one centered, with
+no alignment between the different lines, using the \verb"gather"
+environment.  When typing this, the lines are separated by a double
+backslash \verb"\\".  For example, if you type
+\begin{verbatim}
+\begin{gather}
+  (X\otimes L) \amalg_{(X\otimes K)} (Y\otimes K)
+    \longrightarrow Y\otimes L\\
+  X^{L} \longrightarrow X^{K} \times_{Y^{K}} Y^{L}
+\end{gather}
+\end{verbatim}
+then you'll get
+\begin{gather}
+  \label{eq:push}
+  (X\otimes L) \amalg_{(X\otimes K)} (Y\otimes K)
+    \longrightarrow Y\otimes L\\
+  \label{eq:pull}
+  X^{L} \longrightarrow X^{K} \times_{Y^{K}} Y^{L}
+\end{gather}
+The \verb"gather*" environment would produce the same thing without
+the equation numbers.  You can also label each line so that you can
+refer to them: If you had typed that as
+\begin{verbatim}
+\begin{gather}
+  \label{eq:push}
+  (X\otimes L) \amalg_{(X\otimes K)} (Y\otimes K)
+    \longrightarrow Y\otimes L\\
+  \label{eq:pull}
+  X^{L} \longrightarrow X^{K} \times_{Y^{K}} Y^{L}
+\end{gather}
+\end{verbatim}
+and then typed ``\verb"see \eqref{eq:push} or \eqref{eq:pull}"'',
+you'd get ``see \eqref{eq:push} or \eqref{eq:pull}''.
+
+There is also a \texttt{gathered} environment, which does not produce
+a display of its own but rather produces a block of centered lines of
+mathematics that can be used inside of another displayed mathematics
+environment (see section~\ref{sec:gathered}).
+%--------------------------------------------------------------------
+\subsection{Displays with linebreaks}
+\label{sec:multline}
+
+For a long display that must be broken across several lines, you can
+use the \texttt{multline} environment.  (There is also a
+\texttt{multline*} environment, which is similar except that it omits
+the equation number.)  When typing this, the lines are separated by a
+double backslash \verb"\\".  The first line will be shifted left of
+center, the last will be shifted right of center, and the lines in
+between those will be centered.  For example, if you type
+\begin{verbatim}
+\begin{multline}
+  \label{eq:BigComp}
+  \mathrm{F} X\otimes\Delta[n]   \xrightarrow{1 \otimes D}
+    \mathrm{F} X\otimes(\Delta[n]\times\Delta[n])\\
+  \xrightarrow{\sigma} 
+    \mathrm{F}\bigl(X\otimes(\Delta[n]\times\Delta[n])\bigr)
+    \approx
+    \mathrm{F}\bigl((X\otimes\Delta[n])\otimes\Delta[n]\bigr)\\
+  \xrightarrow{\mathrm{F}(\alpha\otimes 1)}
+    \mathrm{F}(Y\otimes\Delta[n]) \xrightarrow{\mathrm{F}(\beta)}
+    \mathrm{F}(Z)
+\end{multline}
+\end{verbatim}
+then you'll get
+\begin{multline}
+  \label{eq:BigComp}
+  \mathrm{F} X\otimes\Delta[n]   \xrightarrow{1 \otimes D}
+    \mathrm{F} X\otimes(\Delta[n]\times\Delta[n])\\
+  \xrightarrow{\sigma} 
+    \mathrm{F}\bigl(X\otimes(\Delta[n]\times\Delta[n])\bigr)
+    \approx
+    \mathrm{F}\bigl((X\otimes\Delta[n])\otimes\Delta[n]\bigr)\\
+  \xrightarrow{\mathrm{F}(\alpha\otimes 1)}
+    \mathrm{F}(Y\otimes\Delta[n]) \xrightarrow{\mathrm{F}(\beta)}
+    \mathrm{F}(Z)
+\end{multline}
+You can then type ``\verb"the composition \eqref{eq:BigComp}"" and it
+will appear as ``the composition \eqref{eq:BigComp}''.
+
+%--------------------------------------------------------------------
+\subsection{Displays with alignment}
+\label{sec:align}
+
+There are a number of ways to produce displays with multiple lines and
+horizontal alignment between the lines.
+\begin{itemize}
+\item The \texttt{align} and \texttt{align*} environments allow
+  horizontal alignment of characters chosen from each line (see
+  section~\ref{sec:SingAlign}).
+\item The \texttt{aligned} and \texttt{split} environments produce
+  alignments that can be be part of a larger display (see
+  section~\ref{sec:aligned}).
+\item The \texttt{gathered} environment produces a block of several
+  lines, each centered as in the \texttt{gather} environment (see
+  section~\ref{sec:gather}), that can be part of a larger display (see
+  section~\ref{sec:gathered}).  (Of course, this doesn't involve
+  horizontal alignment, but the \texttt{gathered} environment is often
+  used in conjunction with other display environments.)
+\item The \texttt{align} and \texttt{align*} environments also allow
+  for multiple columns with alignment in each column (see
+  section~\ref{sec:MulAlign}).
+\item The \texttt{flalign} and \texttt{flalign*} environments allow
+  multiple alignment points and place the outermost aligned blocks
+  flush against the margins (see section~\ref{sec:flalign}).
+\item The \texttt{alignat} and \texttt{alignat*} environments allow
+  multiple alignment points and allow you to choose the spacing
+  between the columns (see section~\ref{sec:alignat}).
+\item The \texttt{alignedat} environment is similar to the
+  \texttt{alignat*} environment, except that it produces an alignment
+  intended to be part of a larger display (see
+  section~\ref{sec:alignedat}).
+\end{itemize}
+%--------------------------------------------------------------------
+\subsubsection{Displays with a single alignment point}
+\label{sec:SingAlign}
+
+To display several lines of mathematics with horizontal alignment, you
+use the \texttt{align} environment.  (There is also an \texttt{align*}
+environment, which is similar except that it omits the equation
+numbers.)  When typing this, the lines are separated by a double
+backslash \verb"\\" and each line has an ampersand \verb"&"
+immediately preceding the symbol to be aligned with the corresponding
+symbols on the other lines.  For example, if you type
+\begin{verbatim}
+\begin{align}
+  \label{eq:pi1}
+  \pi_{1}(X\vee Y) &\approx \pi_{1}X * \pi_{1}Y\\
+  \label{eq:additivity}
+  \widetilde{\mathrm{H}}_{*}(X\vee Y) &\approx
+    \widetilde{\mathrm{H}}_{*}X \oplus \widetilde{\mathrm{H}}_{*}Y
+\end{align}
+\end{verbatim}
+then you'll get
+\begin{align}
+  \label{eq:pi1}
+  \pi_{1}(X\vee Y) &\approx \pi_{1}X * \pi_{1}Y\\
+  \label{eq:additivity}
+  \widetilde{\mathrm{H}}_{*}(X\vee Y) &\approx
+    \widetilde{\mathrm{H}}_{*}X \oplus \widetilde{\mathrm{H}}_{*}Y
+\end{align}
+and if you type ``\verb"see \eqref{eq:pi1} or \eqref{eq:additivity}"''
+then you'll get ``see \eqref{eq:pi1} or \eqref{eq:additivity}''.  For
+another example, if you type
+\begin{verbatim}
+\begin{align*}
+  \mathcal{M}\bigl((\operatorname{colim} \boldsymbol{X})
+    \otimes K,Y\bigr) &\approx
+    \mathcal{M}(\operatorname{colim} \boldsymbol{X},Y^K)\\
+  &\approx \lim \mathcal{M}(\boldsymbol{X},Y^K)\\
+  &\approx \lim \mathcal{M}(\boldsymbol{X} \otimes K,Y)\\
+  &\approx \mathcal{M}\bigl(\operatorname{colim}
+    (\boldsymbol{X} \otimes K),Y\bigr)
+\end{align*}
+\end{verbatim}
+then you'll get
+\begin{align*}
+  \mathcal{M}\bigl((\operatorname{colim} \boldsymbol{X})
+    \otimes K,Y\bigr) &\approx
+    \mathcal{M}(\operatorname{colim} \boldsymbol{X},Y^K)\\
+  &\approx \lim \mathcal{M}(\boldsymbol{X},Y^K)\\
+  &\approx \lim \mathcal{M}(\boldsymbol{X} \otimes K,Y)\\
+  &\approx \mathcal{M}\bigl(\operatorname{colim}
+    (\boldsymbol{X} \otimes K),Y\bigr)
+\end{align*}
+Both the \texttt{align} and \texttt{align*} environments allow you to
+have multiple columns in the display; for this, see
+section~\ref{sec:MulAlign}.
+
+%--------------------------------------------------------------------
+\subsubsection{Alignments that are part of a larger display}
+\label{sec:aligned}
+
+The \texttt{aligned} environment does not create a display of its own.
+Instead, it allows you to have several lines of mathematics, with
+alignment as in the \texttt{align*} environment (see
+section~\ref{sec:SingAlign}), which can then be used inside of a
+displayed mathematics environment.
+
+The \textbf{aligned} environment doesn't produce any equation numbers
+of its own.  If the enclosing display environment produces a number,
+and if the \texttt{aligned} environment doesn't use the optional
+argument of \texttt{[t]} or \texttt{[b]} (see \eqref{eq:dbltop} and
+\eqref{eq:dblbot}), then that number is centered vertically in the
+contents of the \texttt{aligned} environment.  For an example of this,
+see \eqref{eq:longeq}.
+
+There is also a \texttt{split} environment, which is similar to the
+\texttt{aligned} environment except that the \texttt{aligned}
+environment has options (changing the vertical alignment (see the
+examples in this section) or having multiple alignment points (see
+section~\ref{sec:MulAlign})) that are not possible with the
+\texttt{split} environment.  Thus, a \texttt{split} environment can
+always be replaced by an \texttt{aligned} environment.
+
+For example, if you type
+\begin{verbatim}
+\begin{equation}
+  \label{eq:dblaligned}
+  \begin{aligned}
+    a &= b + c\\
+    d &= e + f
+  \end{aligned}
+  \qquad\text{which, of course, leads to}\qquad
+  \begin{aligned}
+    g &= h + i\\
+    j &= k + l
+  \end{aligned}
+\end{equation}
+\end{verbatim}
+then you'll get
+\begin{equation}
+  \label{eq:dblaligned}
+  \begin{aligned}
+    a &= b + c\\
+    d &= e + f
+  \end{aligned}
+  \qquad\text{which, of course, leads to}\qquad
+  \begin{aligned}
+    g &= h + i\\
+    j &= k + l
+  \end{aligned}
+\end{equation}
+
+The above example illustrates that, by default, when an
+\texttt{aligned} (or \texttt{aligned*}) environment is used as part of
+a display involving other elements, it is vertically aligned at its
+center.  The \texttt{aligned} environment can take an optional
+argument of \texttt{[t]} or \texttt{[b]} to cause the alignment to be
+vertically aligned at either the top or the bottom row.  For example,
+if you type
+\begin{verbatim}
+\begin{equation}
+  \label{eq:dbltop}
+  \begin{aligned}[t]
+    a &= b + c\\
+    d &= e + f
+  \end{aligned}
+  \qquad\text{which, of course, leads to}\qquad
+  \begin{aligned}[t]
+    g &= h + i\\
+    j &= k + l
+  \end{aligned}
+\end{equation}
+\end{verbatim}
+then you'll get
+\begin{equation}
+  \label{eq:dbltop}
+  \begin{aligned}[t]
+    a &= b + c\\
+    d &= e + f
+  \end{aligned}
+  \qquad\text{which, of course, leads to}\qquad
+  \begin{aligned}[t]
+    g &= h + i\\
+    j &= k + l
+  \end{aligned}
+\end{equation}
+and if you type
+\begin{verbatim}
+\begin{equation}
+  \label{eq:dblbot}
+  \begin{aligned}[b]
+    a &= b + c\\
+    d &= e + f
+  \end{aligned}
+  \qquad\text{which, of course, leads to}\qquad
+  \begin{aligned}[b]
+    g &= h + i\\
+    j &= k + l
+  \end{aligned}
+\end{equation}
+\end{verbatim}
+then you'll get
+\begin{equation}
+  \label{eq:dblbot}
+  \begin{aligned}[b]
+    a &= b + c\\
+    d &= e + f
+  \end{aligned}
+  \qquad\text{which, of course, leads to}\qquad
+  \begin{aligned}[b]
+    g &= h + i\\
+    j &= k + l
+  \end{aligned}
+\end{equation}
+
+The display created by an \texttt{aligned} environment can be used as
+an element of a display.  For example, if you type
+\begin{verbatim}
+\begin{equation*}
+  \left .
+    \begin{aligned}
+      f(x) &= \sin^{2} x\\
+      g(x) &= \cos^{2} x\\
+      h(x) &= \sin x + \cos x
+    \end{aligned}
+  \right \}
+  \qquad \text{A nice collection of functions}
+\end{equation*}
+\end{verbatim}
+then you'll get
+\begin{equation*}
+  \left .
+    \begin{aligned}
+      f(x) &= \sin^{2} x\\
+      g(x) &= \cos^{2} x\\
+      h(x) &= \sin x + \cos x
+    \end{aligned}
+  \right \}
+  \qquad \text{A nice collection of functions}
+\end{equation*}
+
+
+%--------------------------------------------------------------------
+\subsubsection{Several centered lines as part of a larger display}
+\label{sec:gathered}
+
+The \texttt{gathered} environment does not create a display of its
+own.  Instead, it allows you to have several lines of mathematics,
+each one centered as in the \texttt{gather} environment (see
+section~\ref{sec:gather}), which can then be used inside of a
+displayed mathematics environment.  For example, if you type
+\begin{verbatim}
+\begin{equation}
+  \begin{gathered}
+    x^{2} + y^{2} = z^{2}\\
+    a = b + c
+  \end{gathered}
+  \qquad \text{and, in addition,}\qquad
+  \begin{aligned}
+    A &= B+C\\
+    &= D+E
+  \end{aligned}
+\end{equation}
+\end{verbatim}
+then you'll get
+\begin{equation}
+  \begin{gathered}
+    x^{2} + y^{2} = z^{2}\\
+    a = b + c
+  \end{gathered}
+  \qquad \text{and, in addition,}\qquad
+  \begin{aligned}
+    A &= B+C\\
+    &= D+E
+  \end{aligned}
+\end{equation}
+
+The \texttt{gathered} environment can take the same optional argument
+of \texttt{[t]} or \texttt{[b]} that the \texttt{aligned} argument can
+take (see section~\ref{sec:aligned}) to cause the vertical alignment
+to be on either the top or the bottom line.  For example, if you type
+\begin{verbatim}
+\begin{equation}
+  \begin{gathered}[t]
+    x^{2} + y^{2} = z^{2}\\
+    a = b + c
+  \end{gathered}
+  \qquad \text{and, in addition,}\qquad
+  \begin{aligned}[t]
+    A &= B+C\\
+    &= D+E
+  \end{aligned}
+\end{equation}
+\end{verbatim}
+then you'll get
+\begin{equation}
+  \begin{gathered}[t]
+    x^{2} + y^{2} = z^{2}\\
+    a = b + c
+  \end{gathered}
+  \qquad \text{and, in addition,}\qquad
+  \begin{aligned}[t]
+    A &= B+C\\
+    &= D+E
+  \end{aligned}
+\end{equation}
+
+%--------------------------------------------------------------------
+\subsubsection{Multiple alignment points}
+\label{sec:MulAlign}
+
+The \texttt{align} and \texttt{align*} environments (see
+section~\ref{sec:SingAlign}) as well as the \texttt{aligned}
+environment (see section~\ref{sec:aligned}) can be used to create
+displays in which each line is broken into several pieces, with each
+piece horizontally aligned at a chosen character.  That is: they can
+be used to create a display with several columns, with alignment
+within each column.
+
+When typing this, the lines are separated by a double backslash
+\verb"\\", the different displays on each line are separated by an
+ampersand \verb"&", and the symbols to be aligned are preceded by an
+ampersand \verb"&".  For example, if you type
+\begin{verbatim}
+\begin{align*}
+  K &\approx G * H&   i&= j+k&  B &\subset C\\
+  H &\approx A_{0}*B_{0}&  i'&= j'+k'&  C &= D\cap E\\
+  G &\approx \coprod_{\alpha\in A} L_{\alpha}&  i''&=j''+k''&
+                                        A &= D \cup E
+\end{align*}
+\end{verbatim}
+then you'll get
+\begin{align*}
+  K &\approx G * H&   i&= j+k&  B &\subset C\\
+  H &\approx A_{0}*B_{0}&  i'&= j'+k'&  C &= D\cap E\\
+  G &\approx \coprod_{\alpha\in A} L_{\alpha}&  i''&=j''+k''&
+                                        A &= D \cup E
+\end{align*}
+When typing such an alignment with $n$ columns, each line will have at
+most $2n-1$ ampersands.
+
+For another example, if you type
+\begin{verbatim}
+\begin{align*}
+  \pi_{1}(X\vee Y) &\approx \pi_{1}(X) * \pi_{1}(Y)
+    &&\text{(by the van Kampen theorem)}\\
+  &\approx G*H &&\text{(by the computation in the previous section)}
+\end{align*}
+\end{verbatim}
+then you'll get
+\begin{align*}
+  \pi_{1}(X\vee Y) &\approx \pi_{1}(X) * \pi_{1}(Y)
+    &&\text{(by the van Kampen theorem)}\\
+  &\approx G*H &&\text{(by the computation in the previous section)}
+\end{align*}
+If you want to specify the separation between the columns in the
+alignment, you should use the \texttt{alignat} environment (see
+section~\ref{sec:alignat}).
+
+
+%--------------------------------------------------------------------
+\subsubsection{Alignments flush left and flush right}
+\label{sec:flalign}
+
+To produce alignments similar to those in section~\ref{sec:MulAlign}
+except with the leftmost column flush left and the rightmost column
+flush right, you use the \texttt{flalign} environment (or, to omit the
+equation numbers, the \texttt{flalign*} environment).  For example, if
+you type
+\begin{verbatim}
+\begin{flalign*}
+  K &\approx G * H&   i&= j+k&  B &\subset C\\
+  H &\approx A_{0}*B_{0}&  i'&= j'+k'&  C &= D\cap E\\
+  G &\approx \coprod_{\alpha\in A} L_{\alpha}&  i''&=j''+k''&
+                                        A &= D \cup E
+\end{flalign*}
+\end{verbatim}
+then you'll get
+\begin{flalign*}
+  K &\approx G * H&   i&= j+k&  B &\subset C\\
+  H &\approx A_{0}*B_{0}&  i'&= j'+k'&  C &= D\cap E\\
+  G &\approx \coprod_{\alpha\in A} L_{\alpha}&  i''&=j''+k''&
+                                        A &= D \cup E
+\end{flalign*}
+
+%--------------------------------------------------------------------
+\subsubsection{Multiple alignment points with chosen spacing}
+\label{sec:alignat}
+
+To produce alignments as in section~\ref{sec:MulAlign} except with the
+ability to choose the amount of horizontal space between the columns,
+you use the \texttt{alignat} environment (or, to omit the equation
+numbers, the \texttt{alignat*} environment).  These environments don't
+insert any horizontal space between the columns, and so you can insert
+the exact amount of space you want by including it at the beginning of
+one of the columns.
+
+The format of \texttt{alignat} is slightly different from that of the
+\texttt{align} environment in that you must include an argument
+specifying the number of columns.  For example, if you type
+\begin{verbatim}
+\begin{alignat}{2}
+  K &\approx G*H&  \qquad&\text{(by an earlier theorem)}\\
+  A &\approx \lim_{i\in I} A_{i}&  &\text{(by the definition of $A$)}
+\end{alignat}
+\end{verbatim}
+then you'll get
+\begin{alignat}{2}
+  K &\approx G*H&  \qquad&\text{(by an earlier theorem)}\\
+  A &\approx \lim_{i\in I} A_{i}&  &\text{(by the definition of $A$)}
+\end{alignat}
+Note that it's only necessary to insert the \verb"\qquad" space in one
+row; the alignment forces the space to appear in all rows.
+
+%--------------------------------------------------------------------
+\subsubsection{Multiple alignment points with chosen spacing as part of a larger display}
+\label{sec:alignedat}
+
+The \texttt{alignedat} environment is similar to the \texttt{aligned}
+environment (see section~\ref{sec:aligned}), in that neither of them
+create a display of their own but are instead used as a part of a
+larger display, but the \texttt{alignedat} environment allows you to
+choose the spacing between the columns.  That is, the
+\texttt{alignedat} environment doesn't insert any space between the
+columns, so you can insert the exact amount of space you want by
+including it at the beginning of one of the columns.  The
+\texttt{alignedat} environment also has a required argument stating
+the number of columns.  For example, if you type
+\begin{verbatim}
+\begin{equation*}
+  \left \{
+    \begin{alignedat}{2}
+      a &= b + c& d &= e + f\\
+      A &= B + C \qquad&  D &= E + F
+    \end{alignedat}
+  \right \}
+  \qquad \text{Twin pairs of equations}
+\end{equation*}
+\end{verbatim}
+then you'll get
+\begin{equation*}
+  \left \{
+    \begin{alignedat}{2}
+      a &= b + c& d &= e + f\\
+      A &= B + C \qquad&  D &= E + F
+    \end{alignedat}
+  \right \}
+  \qquad \text{Twin pairs of equations}
+\end{equation*}
+Note that it's only necessary to insert the \verb"\qquad" space in one
+row; the alignment forces the space to appear in all rows.
+
+
+%--------------------------------------------------------------------
+\subsection{The \texttt{cases} environment}
+\label{sec:cases}
+
+There is a \texttt{cases} environment, which constructs the usual
+display of several cases, and which is used as a part of one of the
+displayed mathematics environments.  For example, if you type
+\begin{verbatim}
+\begin{equation}
+  \label{eq:abs}
+  |x| =
+  \begin{cases}
+    x& \text{if $x \ge 0$}\\
+    -x& \text{if $x < 0$}
+  \end{cases}
+\end{equation}
+\end{verbatim}
+then you'll get
+\begin{equation}
+  \label{eq:abs}
+  |x| =
+  \begin{cases}
+    x& \text{if $x \ge 0$}\\
+    -x& \text{if $x < 0$}
+  \end{cases}
+\end{equation}
+
+For another example, if you type
+\begin{verbatim}
+\begin{align*}
+  d_{i} \sigma &=
+  \begin{cases}
+    \alpha_{1} \xrightarrow{\sigma_{1}} \alpha_{2}
+          \xrightarrow{\sigma_{2}} \cdots
+          \xrightarrow{\sigma_{n-1}} \alpha_{n} 
+      &\text{if $i=0$}\\
+    \alpha_0 \xrightarrow{\sigma_{0}} \cdots
+          \xrightarrow{\sigma_{i-2}} \alpha_{i-1}
+          \xrightarrow{\sigma_{i}\sigma_{i-1}} \alpha_{i+1} 
+          \xrightarrow{\sigma_{i+1}} \cdots 
+          \xrightarrow{\sigma_{n-1}} \alpha_{n}
+      &\text{if $0<i<n$}\\
+    \alpha_{0} \xrightarrow{\sigma_{0}} \alpha_{1}
+          \xrightarrow{\sigma_1} \cdots
+          \xrightarrow{\sigma_{n-2}} \alpha_{n-1} 
+      &\text{if $i=n$}
+  \end{cases}\\
+  s_{i} \sigma &= \alpha_{0} \xrightarrow{\sigma_{0}} \cdots 
+    \xrightarrow{\sigma_{i-1}} \alpha_{i}
+    \xrightarrow{1_{\alpha_{i}}} \alpha_{i}
+    \xrightarrow{\sigma_{i}} \alpha_{i+1}
+    \xrightarrow{\sigma_{i+1}} \cdots 
+    \xrightarrow{\sigma_{n-1}} \alpha_{n}
+\end{align*}
+\end{verbatim}
+then you'll get
+\begin{align*}
+  d_{i} \sigma &=
+  \begin{cases}
+    \alpha_{1} \xrightarrow{\sigma_{1}} \alpha_{2}
+          \xrightarrow{\sigma_{2}} \cdots
+          \xrightarrow{\sigma_{n-1}} \alpha_{n} 
+      &\text{if $i=0$}\\
+    \alpha_0 \xrightarrow{\sigma_{0}} \cdots
+          \xrightarrow{\sigma_{i-2}} \alpha_{i-1}
+          \xrightarrow{\sigma_{i}\sigma_{i-1}} \alpha_{i+1} 
+          \xrightarrow{\sigma_{i+1}} \cdots 
+          \xrightarrow{\sigma_{n-1}} \alpha_{n}
+      &\text{if $0<i<n$}\\
+    \alpha_{0} \xrightarrow{\sigma_{0}} \alpha_{1}
+          \xrightarrow{\sigma_1} \cdots
+          \xrightarrow{\sigma_{n-2}} \alpha_{n-1} 
+      &\text{if $i=n$}
+  \end{cases}\\
+  s_{i} \sigma &= \alpha_{0} \xrightarrow{\sigma_{0}} \cdots 
+    \xrightarrow{\sigma_{i-1}} \alpha_{i}
+    \xrightarrow{1_{\alpha_{i}}} \alpha_{i}
+    \xrightarrow{\sigma_{i}} \alpha_{i+1}
+    \xrightarrow{\sigma_{i+1}} \cdots 
+    \xrightarrow{\sigma_{n-1}} \alpha_{n}
+\end{align*}
+
+%--------------------------------------------------------------------
+\subsection{Multiple lines with equation numbers on some of them}
+\label{sec:MuEqOneNo}
+
+By default, most of the environments for displayed mathematics either
+have an equation number on every line or no equation numbers at all.
+In this section we discuss how to have multiple lines with either one
+equation number for the entire display (see
+sections~\ref{sec:MulLinOneNo} and \ref{sec:GatherCenter}) or equation
+numbers on some of the lines but not all of them (see
+section~\ref{sec:notag}).
+
+%--------------------------------------------------------------------
+\subsubsection{Multiple lines with horizontal alignment and one equation number}
+\label{sec:MulLinOneNo}
+
+To display multiple lines with horizontal alignment but with only one
+equation number for the entire display, you use the \texttt{equation}
+environment (see section~\ref{sec:SngLne}) to produce the equation
+number and you put an \texttt{aligned} environment (see
+section~\ref{sec:aligned}) inside of that to produce the alignment.
+For example, if you type
+\begin{verbatim}
+\begin{equation}
+  \label{eq:BothCoprod}
+  \begin{aligned}
+    \pi_{1}(X\vee Y) &\approx \pi_{1}X * \pi_{1}Y\\
+    \widetilde{\mathrm{H}}_{*}(X\vee Y) &\approx
+    \widetilde{\mathrm{H}}_{*}X \oplus \widetilde{\mathrm{H}}_{*}Y
+  \end{aligned}
+\end{equation}
+\end{verbatim}
+then you'll get
+\begin{equation}
+  \label{eq:BothCoprod}
+  \begin{aligned}
+    \pi_{1}(X\vee Y) &\approx \pi_{1}X * \pi_{1}Y\\
+    \widetilde{\mathrm{H}}_{*}(X\vee Y) &\approx
+    \widetilde{\mathrm{H}}_{*}X \oplus \widetilde{\mathrm{H}}_{*}Y
+  \end{aligned}
+\end{equation}
+and if you type ``\verb"the isomorphisms~\eqref{eq:BothCoprod}"'' then
+you'll get ``the isomorphisms~\eqref{eq:BothCoprod}''.
+
+For another example, if you type
+\begin{verbatim}
+\begin{equation}
+  \label{eq:longeq}
+  \begin{aligned}
+    F(a,b,c,d) &= \int_{a}^{b} \sin^{3}x \cos^{2}x \, dx
+      + \int_{c}^{d} \sin^{3}x \cos x \, dx\\
+    &\quad + \int_{a}^{b} \sin^{2} x \cos^{2} x \, dx + \int_{c}^{d}
+      \sin x \cos x \, dx
+  \end{aligned}
+\end{equation}
+\end{verbatim}
+then you'll get
+\begin{equation}
+  \label{eq:longeq}
+  \begin{aligned}
+    F(a,b,c,d) &= \int_{a}^{b} \sin^{3}x \cos^{2}x \, dx
+      + \int_{c}^{d} \sin^{3}x \cos x \, dx\\
+    &\quad + \int_{a}^{b} \sin^{2} x \cos^{2} x \, dx + \int_{c}^{d}
+      \sin x \cos x \, dx
+  \end{aligned}
+\end{equation}
+
+If you'd like to specify the exact amount of horizontal space between
+the columns, you'd use the \texttt{alignedat} environment (see
+section~\ref{sec:alignedat}) in place of the \texttt{aligned}
+environment.
+
+%--------------------------------------------------------------------
+\subsubsection{Multiple lines without horizontal alignment and with one equation number}
+\label{sec:GatherCenter}
+
+To create a display of multiple lines without horizontal alignment but
+with each line centered, and to have a single equation number for the
+entire display, you use the \texttt{equation} environment (see
+section~\ref{sec:SngLne}) to produce the equation number and you put a
+\texttt{gathered} environment (see section~\ref{sec:gathered}) inside
+of that.  For example, if you type
+\begin{verbatim}
+\begin{equation}
+  \label{eq:Corner}
+  \begin{gathered}
+    (X\otimes L) \amalg_{(X\otimes K)} (Y\otimes K)
+    \longrightarrow Y\otimes L\\
+    X^{L} \longrightarrow X^{K} \times_{Y^{K}} Y^{L}
+  \end{gathered}
+\end{equation}
+\end{verbatim}
+then you'll get
+\begin{equation}
+  \label{eq:Corner}
+  \begin{gathered}
+    (X\otimes L) \amalg_{(X\otimes K)} (Y\otimes K)
+    \longrightarrow Y\otimes L\\
+    X^{L} \longrightarrow X^{K} \times_{Y^{K}} Y^{L}
+  \end{gathered}
+\end{equation}
+and if you type ``\verb"see~\eqref{eq:Corner}"'' then you'll get
+``see~\eqref{eq:Corner}''.
+
+%--------------------------------------------------------------------
+\subsubsection{Suppressing some equation numbers: {\normalfont \texttt{\bs notag}}}
+\label{sec:notag}
+
+If you want to have equation numbers on some but not all of the lines
+of a display, you can use an environment that numbers every line and
+then suppress the equation number on particular lines by typing
+\begin{center}
+  \verb"\notag"
+\end{center}
+at the end of each of those lines, either just before the double
+backslash that ends the line or at the end of the last line.  For
+example, if you type
+\begin{verbatim}
+\begin{align}
+  a^{2} + b^{2} &= c^{2} \notag\\
+  \label{eq:ABC}
+  A^{2} + B^{2} &= C^{2}\\
+  p^{2} + q^{2} &- r^{2} \notag\\
+  \label{eq:PQR}
+  P^{2} + Q^{2} &= R^{2}
+\end{align}
+\end{verbatim}
+then you'll get
+\begin{align}
+  a^{2} + b^{2} &= c^{2} \notag\\
+  \label{eq:ABC}
+  A^{2} + B^{2} &= C^{2}\\
+  p^{2} + q^{2} &- r^{2} \notag\\
+  \label{eq:PQR}
+  P^{2} + Q^{2} &= R^{2}
+\end{align}
+and if you type ``\verb"equations~\eqref{eq:ABD} and \eqref{eq:PQR}"''
+then you'll get``equations~\eqref{eq:ABC} and \eqref{eq:PQR}''.
+
+%--------------------------------------------------------------------
+\subsection{Overriding equation numbers}
+\label{sec:EqNoOver}
+
+There are commands \verb"\tag" and \verb"\tag*" that allow you to
+override the normal equation numbering for any line of any of the
+displayed mathematics environments.  You can also suppress the equation
+number entirely using the \verb"\notag" command (see
+section~\ref{sec:notag}).
+
+If you put the command ``\verb"\tag{stuff}"'' at the end of a line of
+a display (either just before the double backslash that ends the line
+or at the end of the last line), where ``\texttt{stuff}'' is arbitrary
+text, then that arbitrary text will be placed on the page, enclosed in
+parentheses, in place of an equation number.  The command
+``\verb"\tag*{stuff}"'' is similar, but it does not add the
+parentheses.  If these commands are used in a display that normally
+has unnumbered lines, then ``\texttt{stuff}'' will be inserted anyway.
+
+For example, if you type
+\begin{verbatim}
+\begin{equation}
+  \label{eq:add}
+  \widetilde{\mathrm{H}}_{*}(X\vee Y) \approx
+  \widetilde{\mathrm{H}}_{*}X \oplus \widetilde{\mathrm{H}}_{*}Y
+  \tag*{$(*)$}
+\end{equation}
+\end{verbatim}
+then you'll get
+\begin{equation}
+  \label{eq:add}
+  \widetilde{\mathrm{H}}_{*}(X\vee Y) \approx
+  \widetilde{\mathrm{H}}_{*}X \oplus \widetilde{\mathrm{H}}_{*}Y
+  \tag*{$(*)$}
+\end{equation}
+and if you type
+%
+``\verb"equation~\ref{eq:add} is additivity"'' then you'll get
+``equation~\ref{eq:add} is additivity''.  Note that we used the
+command \verb"\tag*" and inserted the parentheses as part of the tag,
+rather than using the command \verb"\tag", because we wanted cross
+references to show the parentheses surrounding the asterisk.
+
+
+
+%--------------------------------------------------------------------
+%--------------------------------------------------------------------
+\section{Commutative diagrams using \texorpdfstring{\Xy-pic}{Xy-pic}}
+\label{sec:xypic}
+
+\Xy-pic is a powerful package that enables you to draw very complex
+commutative diagrams within your \LaTeX{} file, avoiding the need to
+create the graphics separately and then import them.  \Xy-pic isn't a
+part of \AmS-LaTeX, but \Xy-pic and \AmS-LaTeX{} work quite well
+together.  We'll describe the most important features of \Xy-pic's
+commutative diagram macros here.  The full documentation for
+commutative diagrams can be found in the \emph{\Xy-pic User's Guide}
+\cite{xyguide}, and the full documentation for all of \Xy-pic, which
+can do quite a bit more than draw commutative diagrams, can be found
+in the \emph{\Xy-pic Reference Manual} \cite{xyrefer}.
+
+%--------------------------------------------------------------------
+\subsection{Basic diagrams}
+\label{sec:basicdiag}
+
+To use \Xy-pic to draw commutative diagrams, you include the lines
+\begin{center}
+  \begin{tabular}{l}
+    \verb"\usepackage[all,cmtip]{xy}"\\
+    \verb"\let\objectstyle=\displaystyle"
+  \end{tabular}
+\end{center}
+in the preamble of your document, i.e., after the
+\verb"\documentclass" command and before the \verb"\begin{document}"
+command.  You can omit the second of those two lines if you want the
+nodes of your diagram to be in \verb"\textstyle" by default.
+
+You create a diagram using the \verb"\xymatrix" command, immediately
+followed by a pair of braces that enclose the diagram specification.
+The diagram is described in a manner similar to the way matrices are
+described:
+\begin{enumerate}
+\item There is a rectangular array of nodes of the diagram.  A node
+  should not begin with a macro or with an asterisk, and so it's
+  safest (although not always required) to enclose each node in braces
+  \verb"{}".
+\item The nodes in a row are separated by an ampersand \verb"&",
+  and the rows are separated by a double backslash \verb"\\".
+\item An arrow is specified immediately following the node that is its
+  source (although this is not actually required; see
+  section~\ref{sec:SrcTrgt}).  A straight line arrow is specified by
+  \verb"\ar[target]", where \verb"target" is
+  \begin{itemize}
+  \item \verb"r" for the node one place to the right,
+  \item \verb"l" for the node one place to the left,
+  \item \verb"d" for the node one place down,
+  \item \verb"u" for the node one place up,
+  \item \verb"rr" for the node two places to the right,
+  \item \verb"dr" for the node one place down and one place to the
+    right,
+  \item etc.
+  \end{itemize}
+\end{enumerate}
+It's also possible to have labels on the arrows (see
+section~\ref{sec:labelarrow}), arrows that are built of things other
+than a single solid line with a single arrowhead at the end (see
+section~\ref{sec:arstyle}), curved arrows (see
+section~\ref{sec:arcurve}), and arrows that pass over or under other
+arrows (see sections~\ref{sec:ArUnder} and~\ref{sec:CrossArrow}).
+
+For example,
+if you type
+\begin{verbatim}
+\begin{equation}
+  \xymatrix{
+    {A}\ar[r] \ar[d]
+    &{B} \ar[d]\\
+    {C} \ar[r]
+    &{D}
+  }
+\end{equation}
+\end{verbatim}
+then you'll get
+\begin{equation}
+  \xymatrix{
+    {A}\ar[r] \ar[d]
+    &{B} \ar[d]\\
+    {C} \ar[r]
+    &{D}
+  }
+\end{equation}
+If you'd like the equation number to be centered vertically with
+respect to the diagram, you should enclose the \verb"\xymatrix"
+command in a \verb"\vcenter", as in
+\begin{verbatim}
+\begin{equation}
+  \vcenter{
+    \xymatrix{
+      {A}\ar[r] \ar[d]
+      &{B} \ar[d]\\
+      {C} \ar[r]
+      &{D}
+    }
+  }
+\end{equation}
+\end{verbatim}
+in which case you'll get
+\begin{equation}
+  \vcenter{
+    \xymatrix{
+      {A}\ar[r] \ar[d]
+      &{B} \ar[d]\\
+      {C} \ar[r]
+      &{D}
+    }
+  }
+\end{equation}
+
+Not all nodes need appear.  To omit a node in the middle of a line,
+just type the \verb"&" that moves you on to the next node.  To omit a
+node at the end of the line, just type the line-ending \verb"\\" and
+go on to the next line.  For example, if you type
+\begin{verbatim}
+\begin{equation*}
+  \xymatrix{
+    {A} \ar[rr] \ar[dr] \ar[d]
+    && {B} \ar[dd]\\
+    {C} \ar[d] \ar[drr]
+    & {D} \ar[l] \ar[ur]\\
+    {E} \ar[rr]
+    &&{F}
+  }
+\end{equation*}
+\end{verbatim}
+you'll get
+\begin{equation*}
+  \xymatrix{
+    {A} \ar[rr] \ar[dr] \ar[d]
+    && {B} \ar[dd]\\
+    {C} \ar[d] \ar[drr]
+    & {D} \ar[l] \ar[ur]\\
+    {E} \ar[rr]
+    &&{F}
+  }
+\end{equation*}
+Note that that diagram has three rows and three columns, but two of
+the nodes in the second column and one of the nodes in the third
+column are missing.
+
+%--------------------------------------------------------------------
+\subsection{Changing the spacing}
+\label{sec:ChgSpc}
+
+You can change the space between the rows of a diagram and the space
+between the columns of a diagram.  The following commands can be
+inserted following the command \verb"\xymatrix" and before the left
+brace that begins the diagram specification:
+\begin{center}
+  \begin{tabular}{ll}
+    \texttt{@=dimen}& set row and column spacing to \texttt{dimen}\\
+    \texttt{@R=dimen}& set row spacing to \texttt{dimen}\\
+    \texttt{@C=dimen}& set column spacing to \texttt{dimen}
+  \end{tabular}
+\end{center}
+The \texttt{dimen} in all of these commands can be positive, zero, or
+negative.  (Negative \texttt{dimen}'s can be useful in diagrams with
+very wide entries; see \eqref{diag:wide}.)  Although you can use
+whatever units you like for \texttt{dimen} (e.g., inches
+(\texttt{in}), centimeters (\texttt{cm}), points (\texttt{pt}), etc.),
+it's a good idea to measure vertical distances in \texttt{ex} (roughly
+the height of an upper case ``X'') and horizontal distances in
+\texttt{em} (roughly the width of an upper case ``M''), so that the
+distance will be roughly correct even if you change font sizes.
+
+For example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \vcenter{
+    \xymatrix@=2ex{
+      {A} \ar[r] \ar[d]
+      & {B} \ar[d]\\
+      {C} \ar[r]
+      & {D}
+    }% \xymatrix
+  }% \vcenter
+  \qquad\text{or}\qquad
+  \vcenter{
+    \xymatrix{
+      {A} \ar[r] \ar[d]
+      & {B} \ar[d]\\
+      {C} \ar[r]
+      & {D}
+    }% \xymatrix
+  }% \vcenter
+  \qquad\text{or}\qquad
+  \vcenter{
+    \xymatrix@C=10ex{
+      {A} \ar[r] \ar[d]
+      & {B} \ar[d]\\
+      {C} \ar[r]
+      & {D}
+    }% \xymatrix
+  }% \vcenter
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \vcenter{
+    \xymatrix@=2ex{
+      {A} \ar[r] \ar[d]
+      & {B} \ar[d]\\
+      {C} \ar[r]
+      & {D}
+    }% \xymatrix
+  }% \vcenter
+  \qquad\text{or}\qquad
+  \vcenter{
+    \xymatrix{
+      {A} \ar[r] \ar[d]
+      & {B} \ar[d]\\
+      {C} \ar[r]
+      & {D}
+    }% \xymatrix
+  }% \vcenter
+  \qquad\text{or}\qquad
+  \vcenter{
+    \xymatrix@C=10ex{
+      {A} \ar[r] \ar[d]
+      & {B} \ar[d]\\
+      {C} \ar[r]
+      & {D}
+    }% \xymatrix
+  }% \vcenter
+\end{displaymath}
+For an example of the usefulness of negative column spacing: If you
+type
+\begin{verbatim}
+\newcommand{\pushout}[3]{#1\mathbin{\mathord{\amalg}_{#2}}#3}
+\begin{equation}
+  \label{diag:wide}
+  \vcenter{
+    \xymatrix@C=-12em{
+      {\pushout{(A\otimes L)}
+               {A\otimes K}
+               {(B\otimes K)}
+             } \ar[r] \ar[dr]
+      & {B\otimes L}
+      & {\pushout{(P\otimes L)}
+                 {P\otimes M}
+                 {(Q\otimes M)}
+             } \ar[l] \ar[dl]\\
+      & {\pushout{\bigl(\pushout{(A\otimes L)}
+                                {A\otimes K}
+                                {(B\otimes K)}\bigr)}
+                 {\pushout{(X\otimes L)}
+                          {X\otimes K}
+                          {(Y\otimes K)}}
+                 {\bigl(\pushout{(P\otimes L)}
+                                {P\otimes M}
+                                {(Q\otimes M)}\bigr)}
+             } \ar[u]
+    }
+  }       
+\end{equation}
+\end{verbatim}
+then you'll get
+\newcommand{\pushout}[3]{#1\mathbin{\mathord{\amalg}_{#2}}#3}
+\begin{equation}
+  \label{diag:wide}
+  \vcenter{
+    \xymatrix@C=-12em{
+      {\pushout{(A\otimes L)}
+               {A\otimes K}
+               {(B\otimes K)}
+             } \ar[r] \ar[dr]
+      & {B\otimes L}
+      & {\pushout{(P\otimes L)}
+                 {P\otimes M}
+                 {(Q\otimes M)}
+             } \ar[l] \ar[dl]\\
+      & {\pushout{\bigl(\pushout{(A\otimes L)}
+                                {A\otimes K}
+                                {(B\otimes K)}\bigr)}
+                 {\pushout{(X\otimes L)}
+                          {X\otimes K}
+                          {(Y\otimes K)}}
+                 {\bigl(\pushout{(P\otimes L)}
+                                {P\otimes M}
+                                {(Q\otimes M)}\bigr)}
+             } \ar[u]
+    }
+  }       
+\end{equation}
+which would never fit on the page without negative column spacing.
+
+%--------------------------------------------------------------------
+\subsection{Shifting nodes sideways}
+\label{sec:ShiftSide}
+
+You can shift a node to the right by enclosing it in braces and
+preceding the opening brace with \verb"*+[r]" and shift it to the left
+by enclosing it in braces and preceding the opening brace with
+\verb"*+[l]".  This can be useful, for example, if you want a node to
+consist of both the name of something and its definition, but you want
+the arrows to the node to point to the name, rather than to the center
+of the node.  For example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r] \ar[d]
+    & *+[r]{B = \{x \in W \mid f(x) > 0\}} \ar[d]\\
+    {C} \ar[r]
+    & {D}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r] \ar[d]
+    & *+[r]{B = \{x \in W \mid f(x) > 0\}} \ar[d]\\
+    {C} \ar[r]
+    & {D}
+  }
+\end{displaymath}
+Note that the large node at the upper right caused the columns to be
+far apart, even though that node was shifted to the right before being
+placed onto the page.  To counteract that, you can decrease the column
+spacing: If you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix@C=-2em{
+    {A} \ar[r] \ar[d]
+    & *+[r]{B = \{x \in W \mid f(x) > 0\}} \ar[d]\\
+    {C} \ar[r]
+    & {D}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix@C=-2em{
+    {A} \ar[r] \ar[d]
+    & *+[r]{B = \{x \in W \mid f(x) > 0\}} \ar[d]\\
+    {C} \ar[r]
+    & {D}
+  }
+\end{displaymath}
+
+
+
+%--------------------------------------------------------------------
+\subsection{Arrows passing under nodes; crossing arrows}
+\label{sec:ArUnder}
+
+Arrows can be created that go to a sequence of nodes, passing under
+(i.e., leaving a small gap at) all the intermediate nodes.  If an
+arrow is created that passes under an empty node while a second arrow
+crosses that node in the normal way, the effect is that the first
+arrow passes under the second arrow.  (For another way to have one
+arrow pass under another, see section~\ref{sec:CrossArrow}.)
+
+To draw an arrow that passes under a sequence of nodes and then goes
+on to a final node, the \verb"\ar" is followed by \verb"'[node]" for
+each node that you pass under, followed by \verb"[finalnode]".  For
+example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar '[r] '[rr] [rrr]
+    & {B}
+    & {}
+    & {D}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar '[r] '[rr] [rrr]
+    & {B}
+    & {}
+    & {D}
+  }
+\end{displaymath}
+For an example of crossing arrows, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix@=3ex{
+    {A} \ar[rr] \ar[dd] \ar'[dr][ddrr]
+    && {B} \ar[dd] \ar[ddll]\\
+    & {}\\
+    {C} \ar[rr]
+    && {D}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix@=3ex{
+    {A} \ar[rr] \ar[dd] \ar'[dr][ddrr]
+    && {B} \ar[dd] \ar[ddll]\\
+    & {}\\
+    {C} \ar[rr]
+    && {D}
+  }
+\end{displaymath}
+Note that that diagram has three rows and three columns, but nothing
+appears in either the second row or the second column.  (For an
+explanation of the command \verb"@=3ex", which changes the size of the
+diagram, see section~\ref{sec:ChgSpc}.)  For a more elaborate example,
+if you type
+\begin{verbatim}
+\begin{displaymath} 
+  \xymatrix@=2ex{ 
+    {A} \ar[rr] \ar[dr] \ar[dd]
+    && {B} \ar[dr] \ar'[d][dd]\\ 
+    & {A'} \ar[rr] \ar[dd]
+    && {B'} \ar[dd]\\ 
+    {C} \ar'[r][rr] \ar[dr] 
+    && {D} \ar[dr]\\ 
+    & {C'} \ar[rr]
+    && {D'} 
+    } 
+\end{displaymath} 
+\end{verbatim}
+then you'll get
+\begin{displaymath} 
+  \xymatrix@=2ex{ 
+    {A} \ar[rr] \ar[dr] \ar[dd]
+    && {B} \ar[dr] \ar'[d][dd]\\ 
+    & {A'} \ar[rr] \ar[dd]
+    && {B'} \ar[dd]\\ 
+    {C} \ar'[r][rr] \ar[dr] 
+    && {D} \ar[dr]\\ 
+    & {C'} \ar[rr]
+    && {D'} 
+    } 
+\end{displaymath} 
+
+
+
+%--------------------------------------------------------------------
+\subsection{Labeling the arrows}
+\label{sec:labelarrow}
+
+It's possible to label an arrow, on one or both sides of the arrow.
+(It's also possible to have the label ``break'' the arrow; for this,
+see section~\ref{sec:arbreak}.)  By default, the label is located
+halfway from the center of the source to the center of the target.
+This will often be halfway along the arrow, but not if the source and
+the target are of different sizes.  There are also options to place
+the label along the midpoint of the arrow (see
+section~\ref{sec:arcent}) or at an arbitrary point between the center
+of the source and the center of the target (see
+section~\ref{sec:LblArb}).
+
+To put a label above an arrow (where ``above'' means when the paper is
+oriented so that the arrow goes left to right), you type
+\verb"^{thelabel}" either before or after the target.  To put a label
+below an arrow (where ``below'' means when the paper is oriented so
+that the arrow goes left to right), you type \verb"_{thelabel}" either
+before or after the target.  Thus, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A}\ar[r]^{f} \ar[d]_{g}
+    &{B} \ar[d]^{h}\\
+    {C} \ar[r]_{k}^{\text{above}}
+    &{D}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A}\ar[r]^{f} \ar[d]_{g}
+    &{B} \ar[d]^{h}\\
+    {C} \ar[r]_{k}^{\text{above}}
+    &{D}
+  }
+\end{displaymath}
+
+%--------------------------------------------------------------------
+\subsubsection{Centering the labels on the arrows}
+\label{sec:arcent}
+
+If you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {X\cup_{Y}Z} \ar[r]^{f} \ar[d]_{g}
+    &{B} \ar[d]^{h}\\
+    {C} \ar[r]_{k}
+    &{D}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {X\cup_{Y}Z} \ar[r]^{f} \ar[d]_{g}
+    &{B} \ar[d]^{h}\\
+    {C} \ar[r]_{k}
+    &{D}
+  }
+\end{displaymath}
+Note that the label $f$ is halfway from the center of the arrow's
+source to the center of the arrow's target, but it is not centered
+along the arrow.  To have that label centered along the arrow, we
+insert a \verb"-" immediately following the \verb"^", so that we type
+it as
+\begin{center}
+  \verb"\ar[r]^-{f}"
+\end{center}
+and we then get
+\begin{displaymath}
+  \xymatrix{
+    {X\cup_{Y}Z} \ar[r]^-{f} \ar_{g}[d]
+    &{B} \ar^{h}[d]\\
+    {C} \ar_{k}[r]
+    &{D}
+  }
+\end{displaymath}
+For another example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A \amalg_{B} C} \ar[r]^{\text{Add}}_{\sigma} \ar[d]
+    & {X} \ar[d]^{\psi}\\
+    {Y} \ar[r]^{\alpha}_{\text{Lifted}} \ar[r]
+    & {P\times_{Q}R}
+  }
+\end{displaymath}
+\end{verbatim}
+you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A \amalg_{B} C} \ar[r]^{\text{Add}}_{\sigma} \ar[d]
+    & {X} \ar[d]^{\psi}\\
+    {Y} \ar[r]^{\alpha}_{\text{Lifted}} \ar[r]
+    & {P\times_{Q}R}
+  }
+\end{displaymath}
+but if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A \amalg_{B} C} \ar[r]^-{\text{Add}}_-{\sigma} \ar[d]
+    & {X} \ar[d]\\
+    {Y} \ar[r]^-{\alpha}_-{\text{Lifted}}
+    & {P\times_{Q}R}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A \amalg_{B} C} \ar[r]^-{\text{Add}}_-{\sigma} \ar[d]
+    & {X} \ar[d]\\
+    {Y} \ar[r]^-{\alpha}_-{\text{Lifted}}
+    & {P\times_{Q}R}
+  }
+\end{displaymath}
+
+%--------------------------------------------------------------------
+\subsubsection{Arbitrary placement of labels}
+\label{sec:LblArb}
+
+In addition to the possibility of centering a label along an arrow
+(see section~\ref{sec:arcent}), it is possible to place a label at an
+arbitrary point between the center of the source and the center of the
+target.  If \texttt{a} is a number between $0$ and $1$, then you can
+place a label \texttt{a} of the way from the center of the source to
+the center of the target by typing \verb"(a)" immediately following
+the \verb"^" or \verb"_".  For example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix@C=8em{
+    {A} \ar[r]^(.3){f} \ar[d]
+    & {B} \ar[d]\\
+    {C} \ar[r]^{g} \ar[d]
+    & {D} \ar[d]\\
+    {E} \ar[r]_(.7){h}
+    & {F}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix@C=8em{
+    {A} \ar[r]^(.3){f} \ar[d]
+    & {B} \ar[d]\\
+    {C} \ar[r]^{g} \ar[d]
+    & {D} \ar[d]\\
+    {E} \ar[r]_(.7){h}
+    & {F}
+  }
+\end{displaymath}
+For a more elaborate example, with labels along segments of segmented
+arrows, see diagram~\ref{diag:LblCube}.
+
+
+%--------------------------------------------------------------------
+\subsubsection{Labeling each segment of a segmented arrow}
+\label{sec:LblSeg}
+
+An arrow that uses the ``arrows passing under'' feature (see
+section~\ref{sec:ArUnder}) will be in several segments, and a label
+can be attached to each of the segments.  For example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar '[r]^{f} '[rr]^{g} [rrr]^{h}
+    & {B}
+    & {}
+    & {D}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar '[r]^{f} '[rr]^{g} [rrr]^{h}
+    & {B}
+    & {}
+    & {D}
+  }
+\end{displaymath}
+For a more elaborate example, if you type
+\begin{verbatim}
+\begin{equation} 
+  \label{diag:LblCube}
+  \vcenter{
+    \xymatrix@=2ex{ 
+      {A} \ar[rr]^{f} \ar[dr] \ar[dd]_{i}
+      && {B} \ar[dr] \ar'[d][dd]^(.3){j}\\ 
+      & {A'} \ar[rr]^(.3){f'} \ar[dd]^(.25){i'}
+      && {B'} \ar[dd]^{j'}\\ 
+      {C} \ar'[r]^{g}[rr] \ar[dr] 
+      && {D} \ar[dr]\\ 
+      & {C'} \ar[rr]_{g'}
+      && {D'} 
+    }
+  }
+\end{equation} 
+\end{verbatim}
+then you'll get
+\begin{equation} 
+  \label{diag:LblCube}
+  \vcenter{
+    \xymatrix@=2ex{ 
+      {A} \ar[rr]^{f} \ar[dr] \ar[dd]_{i}
+      && {B} \ar[dr] \ar'[d][dd]^(.3){j}\\ 
+      & {A'} \ar[rr]^(.3){f'} \ar[dd]^(.25){i'}
+      && {B'} \ar[dd]^{j'}\\ 
+      {C} \ar'[r]^{g}[rr] \ar[dr] 
+      && {D} \ar[dr]\\ 
+      & {C'} \ar[rr]_{g'}
+      && {D'} 
+    }
+  }
+\end{equation} 
+
+
+%--------------------------------------------------------------------
+\subsubsection{Breaking an arrow with a label}
+\label{sec:arbreak}
+
+Instead of placing a label to the side of an arrow, you can have the
+label ``break'' the arrow.  For this, you use the vertical bar
+character \verb"|" in place of either \verb"^" or \verb"_".
+
+For example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r]|{f}
+    & {B} \ar[r]|{g}
+    & {C}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r]|{f}
+    & {B} \ar[r]|{g}
+    & {C}
+  }
+\end{displaymath}
+
+A label that breaks an arrow can be positioned anywhere along the
+arrow, just as for labels placed alongside the arrow (see
+sections~\ref{sec:arcent} and \ref{sec:LblArb}).  For example, if you
+type
+\begin{verbatim}
+\begin{equation*}
+  \xymatrix{
+    {A \amalg_{B} C} \ar[r]|-{f} \ar[d]_{i}
+    & {X} \ar[r]|(.7){m} \ar[d]^{p}
+    & {Y} \ar[dl]|(.3)n\\
+    {D} \ar[r]|-{g}
+    & {W \times_{Z} Y}
+  }
+\end{equation*}
+\end{verbatim}
+then you'll get
+\begin{equation*}
+  \xymatrix{
+    {A \amalg_{B} C} \ar[r]|-{f} \ar[d]_{i}
+    & {X} \ar[r]|(.7){m} \ar[d]^{p}
+    & {Y} \ar[dl]|(.3)n\\
+    {D} \ar[r]|-{g}
+    & {W \times_{Z} Y}
+  }
+\end{equation*}
+%--------------------------------------------------------------------
+\subsection{More crossing arrows}
+\label{sec:CrossArrow}
+
+In section~\ref{sec:ArUnder} we presented a method of having an arrow
+pass over another arrow by having them cross at an empty node.  We
+present here another method of having one arrow pass over another.
+
+To have one arrow appear to cross over another, we create a small gap
+in the second arrow at the spot at which the first arrow will cross.
+We do this by breaking that second arrow with a label, as in
+section~\ref{sec:arbreak}, using the special label \verb"\hole", which
+just leaves an empty hole in the arrow.  For example, if you type
+\begin{verbatim}
+\begin{equation*}
+  \xymatrix{
+    {A} \ar[dr]|{\hole}
+    & {B} \ar[dl]\\
+    {C}
+    & {D}
+  }
+\end{equation*}
+\end{verbatim}
+then you'll get
+\begin{equation*}
+  \xymatrix{
+    {A} \ar[dr]|{\hole}
+    & {B} \ar[dl]\\
+    {C}
+    & {D}
+  }
+\end{equation*}
+
+For another example, if you type
+\begin{verbatim}
+\begin{equation*}
+  \xymatrix{
+    {A} \ar[dr] \ar[r] \ar[d]
+    & {B} \ar[r]
+    & {C}\\
+    {D} \ar[urr]|(.33){\hole} \ar[r]
+    & {E}
+  }
+\end{equation*}
+\end{verbatim}
+then you'll get
+\begin{equation*}
+  \xymatrix{
+    {A} \ar[dr] \ar[r] \ar[d]
+    & {B} \ar[r]
+    & {C}\\
+    {D} \ar[urr]|(.33){\hole} \ar[r]
+    & {E}
+  }
+\end{equation*}
+(see section~\ref{sec:LblArb}).  It took some trial and error to
+figure out that \texttt{.33} was the number to use in the arrow with
+the hole, but there's a much better way specify the location of the
+hole: Instead of inserting that number between 0 and 1 that specifies
+how far from the center of the source to the center of the target the
+break should appear, you can specify the place to put the break using
+the notation \verb"!{[node1];[node2]}" to denote the point on the
+arrow at which a straight line from \verb"[node1]" to \verb"[node2]"
+would cross the arrow.  (\emph{Note:} This method only works for
+straight line arrows.)  That is, if you type
+\begin{verbatim}
+\begin{equation*}
+  \xymatrix{
+    {A} \ar[dr] \ar[r] \ar[d]
+    & {B} \ar[r]
+    & {C}\\
+    {D} \ar[urr]|!{[u];[r]}{\hole} \ar[r]
+    & {E}
+  }
+\end{equation*}
+\end{verbatim}
+then you'll get
+\begin{equation*}
+  \xymatrix{
+    {A} \ar[dr] \ar[r] \ar[d]
+    & {B} \ar[r]
+    & {C}\\
+    {D} \ar[urr]|!{[u];[r]}{\hole} \ar[r]
+    & {E}
+  }
+\end{equation*}
+The position of the hole is specified as \verb"!{[u];[r]}" because the
+arrow with the hole begins at $D$ and, relative to that node, the
+arrow that crosses over goes from the node \verb"[u]" to the node
+\verb"[r]".
+
+For another example, if you type
+\begin{verbatim}
+\begin{equation*}
+  \xymatrix{
+    {A} \ar[d] \ar[dr]
+    & {B} \ar[d] \ar[dr]
+    & {C} \ar[d]\\
+    {D}
+    \ar[urr]|!{[u];[r]}{\hole}
+            |!{[ur];[r]}{\hole}
+            |!{[ur];[rr]}{\hole}
+    & {E}
+    & {F}
+  }
+\end{equation*}
+\end{verbatim}
+then you'll get
+\begin{equation*}
+  \xymatrix{
+    {A} \ar[d] \ar[dr]
+    & {B} \ar[d] \ar[dr]
+    & {C} \ar[d]\\
+    {D}
+    \ar[urr]|!{[u];[r]}{\hole}
+            |!{[ur];[r]}{\hole}
+            |!{[ur];[rr]}{\hole}
+    & {E}
+    & {F}
+  }
+\end{equation*}
+
+
+%--------------------------------------------------------------------
+\subsection{Making room for large labels}
+\label{sec:labelroom}
+
+Although \Xy-pic automatically leaves enough room for large nodes, it
+ignores the size of the labels on the arrows when constructing the
+diagram.  Thus, if you have a particularly large label, it may
+overwrite the nodes if you don't do something to make the diagram
+larger.  You can do that either by enlarging the entire diagram (see
+section~\ref{sec:LblEnlrgeDiag}) or by creating a row (or column) all
+of whose nodes are empty and have the arrows span the empty row (or
+column) (see section~\ref{sec:emptynodes}).
+
+%--------------------------------------------------------------------
+\subsubsection{Enlarging the entire diagram}
+\label{sec:LblEnlrgeDiag}
+
+To enlarge the entire diagram, we use the spacing commands described
+in section~\ref{sec:ChgSpc}.  For example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A\amalg B} \ar[d]
+    \ar[r]^-{\operatorname{amalgamate}}
+    & {X} \ar[r] \ar[d]
+    & {P} \ar[d]\\
+    {C \amalg D}
+    \ar[r]_-{\operatorname{amalgamate}}
+    & {Y} \ar[r]
+    & {Q}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A\amalg B} \ar[d]
+    \ar[r]^-{\operatorname{amalgamate}}
+    & {X} \ar[r] \ar[d]
+    & {P} \ar[d]\\
+    {C \amalg D}
+    \ar[r]_-{\operatorname{amalgamate}}
+    & {Y} \ar[r]
+    & {Q}
+  }
+\end{displaymath}
+but if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix@C=6em{
+    {A\amalg B} \ar[d] \ar[r]^-{\operatorname{amalgamate}}
+    & {X} \ar[r] \ar[d]
+    & {P} \ar[d]\\
+    {C \amalg D} \ar[r]_-{\operatorname{amalgamate}}
+    & {Y} \ar[r]
+    & {Q}
+  }
+\end{displaymath}
+\end{verbatim}
+(see section~\ref{sec:ChgSpc}) then you'll get
+\begin{displaymath}
+  \xymatrix@C=6em{
+    {A\amalg B} \ar[d] \ar[r]^-{\operatorname{amalgamate}}
+    & {X} \ar[r] \ar[d]
+    & {P} \ar[d]\\
+    {C \amalg D} \ar[r]_-{\operatorname{amalgamate}}
+    & {Y} \ar[r]
+    & {Q}
+  }
+\end{displaymath}
+If you don't want to have to make the entire diagram larger, you can
+just create a column of empty nodes (see
+section~\ref{sec:emptynodes}).
+%--------------------------------------------------------------------
+\subsubsection{Creating a column of empty nodes}
+\label{sec:emptynodes}
+
+We continue the discussion of section~\ref{sec:LblEnlrgeDiag}: Instead
+of enlarging the entire diagram, you can create an additional column
+in between the first two columns and have all the nodes in the new
+column be empty.  For example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A\amalg B} \ar[d] \ar[rr]^-{\operatorname{amalgamate}}
+    && {X} \ar[r] \ar[d]
+    & {P} \ar[d]\\
+    {C \amalg D} \ar[rr]_-{\operatorname{amalgamate}}
+    && {Y} \ar[r]
+    & {Q}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A\amalg B} \ar[d] \ar[rr]^-{\operatorname{amalgamate}}
+    && {X} \ar[r] \ar[d]
+    & {P} \ar[d]\\
+    {C \amalg D} \ar[rr]_-{\operatorname{amalgamate}}
+    && {Y} \ar[r]
+    & {Q}
+  }
+\end{displaymath}
+Note that that diagram has four columns, but both of the nodes in the
+second column are empty, and the labelled arrows are created as
+\verb"\ar[rr]".  If you'd like to create even more space for that
+large label, you can put an \verb"\hspace" command into one of the
+nodes in the second column.  For example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A\amalg B} \ar[d] \ar[rr]^-{\operatorname{amalgamate}}
+    & {\hspace{3em}}
+    & {X} \ar[r] \ar[d]
+    & {P} \ar[d]\\
+    {C \amalg D} \ar[rr]_-{\operatorname{amalgamate}}
+    && {Y} \ar[r]
+    & {Q}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A\amalg B} \ar[d] \ar[rr]^-{\operatorname{amalgamate}}
+    & {\hspace{3em}}
+    & {X} \ar[r] \ar[d]
+    & {P} \ar[d]\\
+    {C \amalg D} \ar[rr]_-{\operatorname{amalgamate}}
+    && {Y} \ar[r]
+    & {Q}
+  }
+\end{displaymath}
+Note that we only put the \verb"\hspace" command into the first row;
+there's no need to put it into every row.
+
+%--------------------------------------------------------------------
+\subsection{Different arrow styles}
+\label{sec:arstyle}
+
+It's possible to have arrows with tails, multiple heads, dotted,
+dashed, or multiple shafts, and any combination of these (see
+Table~\ref{tab:ArSty}).  You can even omit both the head and the tail,
+or omit the arrow entirely, which is useful for placing things into
+the diagram in places outside of the grid of nodes (see
+Diagram~\ref{diag:CentEq}).
+\begin{table}
+  \centering
+  \begin{tabular}{c@{\qquad\qquad}l}
+    To produce:& \multicolumn{1}{c}{Type:}\\[1ex]
+    $\xymatrix{\ar@{.>}[r]&}$& \verb"\ar@{.>}[r]"\\
+    $\xymatrix{\ar@{-->}[r]&}$& \verb"\ar@{-->}[r]"\\
+    $\xymatrix{\ar@{=>}[r]&}$& \verb"\ar@{=>}[r]"\\
+    $\xymatrix{\ar@{:>}[r]&}$& \verb"\ar@{:>}[r]"\\
+    $\xymatrix{\ar@{->>}[r]&}$& \verb"\ar@{->>}[r]"\\
+    $\xymatrix{\ar@{>->}[r]&}$& \verb"\ar@{>->}[r]"\\
+    $\xymatrix{\ar@{<->}[r]&}$& \verb"\ar@{<->}[r]"\\
+    $\xymatrix{\ar@{-->>}[r]&}$& \verb"\ar@{-->>}[r]"\\
+    $\xymatrix{\ar@{>-->}[r]&}$& \verb"\ar@{>-->}[r]"\\
+    $\xymatrix{\ar@{<-->}[r]&}$& \verb"\ar@{<-->}[r]"\\
+    $\xymatrix{\ar@{|->}[r]&}$& \verb"\ar@{|->}[r]"\\
+    $\xymatrix{\ar@{^{(}->}[r]&}$& \verb"\ar@{^{(}->}[r]"\\
+    $\xymatrix{\ar@{_{(}->}[r]&}$& \verb"\ar@{_{(}->}[r]"\\
+    $\xymatrix{\ar@{=>>}[r]&}$& \verb"\ar@{=>>}[r]"\\
+    $\xymatrix{\ar@{<=>}[r]&}$& \verb"\ar@{<=>}[r]"\\
+    $\xymatrix{\ar@{:>>}[r]&}$& \verb"\ar@{:>>}[r]"\\
+    $\xymatrix{\ar@{<:>}[r]&}$& \verb"\ar@{<:>}[r]"\\
+    $\xymatrix{\ar@{-}[r]&}$& \verb"\ar@{-}[r]"\\
+    $\xymatrix{\ar@{.}[r]&}$& \verb"\ar@{.}[r]"\\
+    $\xymatrix{\ar@{=}[r]&}$& \verb"\ar@{=}[r]"\\
+    $\xymatrix{\ar@{}[r]&}$& \verb"\ar@{}[r]"\\[1ex]
+  \end{tabular}
+  \caption{Arrow Styles}
+  \label{tab:ArSty}
+\end{table}
+
+All of these arrows can point in whatever direction you choose; we
+used \verb"[r]" in the table just for readability.  For an example of
+the use of invisible arrows: If you type
+\begin{verbatim}
+\begin{equation}
+  \label{diag:CentEq}
+  \vcenter{
+    \xymatrix{
+      {A} \ar@{.>}[r] \ar@{.>}[d] \ar@{}[dr]|{=}
+      & {B} \ar[d]\\
+      {C} \ar[r]
+      & {D}
+    }
+  }
+\end{equation}
+\end{verbatim}
+then you'll get
+\begin{equation}
+  \label{diag:CentEq}
+  \vcenter{
+    \xymatrix{
+      {A} \ar@{.>}[r] \ar@{.>}[d] \ar@{}[dr]|{=}
+      & {B} \ar[d]\\
+      {C} \ar[r]
+      & {D}
+    }
+  }
+\end{equation}
+Note that the equals sign is inserted by having it break the middle of
+the invisible arrow from the upper left node to the lower right node.
+
+%--------------------------------------------------------------------
+\subsection{Curved arrows}
+\label{sec:arcurve}
+
+It's possible to have arrows curve, either by specifying the amount
+that they curve or by specifying the direction in which they leave
+their source and the direction from which they arrive at their
+target.
+
+%--------------------------------------------------------------------
+\subsubsection{Specifying the amount of the curve}
+
+To have an arrow curve in the up direction (where ``up'' means when
+the paper is oriented so that the arrow goes left to right) by a
+default amount you follow the \verb"\ar" with \verb"@/^/"; that is,
+you type \verb"\ar@/^/[target]".  To have it curve in the down
+direction by a default amount you follow the \verb"\ar" with
+\verb"@/_/"; that is, you type \verb"\ar@/_/[target]" (or, if you want
+to label the arrow, \verb"\ar@/_/[target]^{label}").  Thus, if you
+type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar@/^/[drr]^{p} \ar@{.>}[dr]|{\exists!} \ar@/_/[ddr]_{q}\\
+    & {B} \ar[r] \ar[d]
+    & {C} \ar[d]\\
+    & {D} \ar[r]
+    & {E}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar@/^/[drr]^{p} \ar@{.>}[dr]|{\exists!} \ar@/_/[ddr]_{q}\\
+    & {B} \ar[r] \ar[d]
+    & {C} \ar[d]\\
+    & {D} \ar[r]
+    & {E}
+  }
+\end{displaymath}
+If you'd like to specify the amount of curve, you can specify a
+dimension following the \verb"^" or the \verb"_", as in
+\verb"\ar@/^1ex/[target]".  (Although you can use whatever units you
+like for \texttt{dimen} (e.g., inches (\texttt{in}), centimeters
+(\texttt{cm}), points (\texttt{pt}), etc.), it's a good idea to
+measure vertical distances in \texttt{ex} (roughly the height of an
+upper case ``X'') and horizontal distances in \texttt{em} (roughly the
+width of an upper case ``M''), so that the distance will be roughly
+correct even if you change font sizes.)  For example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar@/^3ex/[drr]^{p} \ar@{.>}[dr]|{\exists!}
+        \ar@/_3ex/[ddr]_{q}\\
+    & {B} \ar[r] \ar[d]
+    & {C} \ar[d]\\
+    & {D} \ar[r]
+    & {E}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar@/^3ex/[drr]^{p} \ar@{.>}[dr]|{\exists!}
+        \ar@/_3ex/[ddr]_{q}\\
+    & {B} \ar[r] \ar[d]
+    & {C} \ar[d]\\
+    & {D} \ar[r]
+    & {E}
+  }
+\end{displaymath}
+and if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar@{>->}[r]^{i}
+    & {B} \ar@{->>}[r]^{p}
+    & {C} \ar@{.>}@/_4ex/[l]_{s}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar@{>->}[r]^{i}
+    & {B} \ar@{->>}[r]^{p}
+    & {C} \ar@{.>}@/_4ex/[l]_{s}
+  }
+\end{displaymath}
+
+
+%--------------------------------------------------------------------
+\subsubsection{Specifying the start and end directions}
+\label{sec:CrvStEd}
+
+To specify the start and end directions of a curved arrow you type
+\verb"\ar@(start,end)[target]" where ``\verb"start"'' is the direction
+towards which the arrow begins and ``\verb"end"'' is the direction
+from which the arrow ends.  For example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[dr]|{p} \ar@(r,u)[dr]^{f} \ar@(d,l)[dr]_{g}\\
+    & {B}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[dr]|{p} \ar@(r,u)[dr]^{f} \ar@(d,l)[dr]_{g}\\
+    & {B}
+  }
+\end{displaymath}
+and if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar@(ur,ul)[rr]^{1_{A}} \ar[r]_{f}
+    & {B} \ar[r]_{g} \ar@(dr,dl)[rr]_{1_{B}}
+    & {A} \ar[r]_{f}
+    & {B}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar@(ur,ul)[rr]^{1_{A}} \ar[r]_{f}
+    & {B} \ar[r]_{g} \ar@(dr,dl)[rr]_{1_{B}}
+    & {A} \ar[r]_{f}
+    & {B}
+  }
+\end{displaymath}
+Since the current node is denoted \verb"[]" (i.e., a pair of square
+brackets with nothing inside), if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar@(ur,dr)[]^{f}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar@(ur,dr)[]^{f}
+  }
+\end{displaymath}
+
+%--------------------------------------------------------------------
+\subsection{Sliding arrows sideways; multiple arrows}
+\label{sec:arslide}
+
+It's possible to slide arrows sideways, so that you can have more than
+one straight line arrow between a single pair of nodes.  To do this,
+you type \verb"\ar@<dimen>" to move the arrow ``upwards'' by
+\verb"dimen" (where ``upwards'' means when the paper is held so that
+the arrow goes from left to right).  (A negative \verb"dimen" will
+move the arrow ``downwards''.)  Although you can use whatever units
+you like for \texttt{dimen} (e.g., inches (\texttt{in}), centimeters
+(\texttt{cm}), points (\texttt{pt}), etc.), it's a good idea to
+measure vertical distances in \texttt{ex} (roughly the height of an
+upper case ``X'') and horizontal distances in \texttt{em} (roughly the
+width of an upper case ``M''), so that the distance will be roughly
+correct even if you change font sizes.  For example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar@<1ex>[r]
+    & {B} \ar[r]
+    & {C} \ar@<-1ex>[r]
+    & {D}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar@<1ex>[r]
+    & {B} \ar[r]
+    & {C} \ar@<-1ex>[r]
+    & {D}
+  }
+\end{displaymath}
+For another example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{ 
+    {\coprod_{i \in I} A_{i}\quad}
+      \ar@<+.7ex>[r]^-{\phi} \ar@<-.7ex>[r]_-{\psi} 
+    & {\quad\coprod_{i \in I} B_{i}}
+  } 
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{ 
+    {\coprod_{i \in I} A_{i}\quad}
+      \ar@<+.7ex>[r]^-{\phi} \ar@<-.7ex>[r]_-{\psi} 
+    & {\quad\coprod_{i \in I} B_{i}}
+  } 
+\end{displaymath}
+It's also possible to slide curved arrows sideways.  For example, if
+you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar@/^ 1ex/[r] \ar@/^ 1ex/@<1ex>[r]
+    & {B}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar@/^ 1ex/[r] \ar@/^ 1ex/@<1ex>[r]
+    & {B}
+  }
+\end{displaymath}
+
+
+%--------------------------------------------------------------------
+\subsection{Specifying both the source and the target of an arrow}
+\label{sec:SrcTrgt}
+
+Up until now, all of our examples of arrows have gone from the current
+node to a node specified in the code for the arrow.  It's possible,
+however, to specify both the source and the target of an arrow, rather
+than letting the source be the current node.  This allows you to save
+the description of all of the arrows of a diagram until the end.
+
+To draw an arrow who's source may not be at the current node, you type
+\begin{center}
+  \verb"\ar[source];[target]"
+\end{center}
+instead of just \verb"\ar[target]".  Since the current node is denoted
+\verb"[]", typing \verb"\ar[target]" is the same as typing
+\verb"\ar[];[target]".
+
+For example, if you
+type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A}
+    & {B}\\
+    {C}
+    & {D}
+    \ar^{f}[ul];[u]
+    \ar_{g}[l];[]
+    \ar_{h}[ul];[l]
+    \ar^{k}[u];[]
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A}
+    & {B}\\
+    {C}
+    & {D}
+    \ar^{f}[ul];[u]
+    \ar_{g}[l];[]
+    \ar_{h}[ul];[l]
+    \ar^{k}[u];[]
+  }
+\end{displaymath}
+Note that when we drew the arrows the current node was $D$, and so,
+e.g., the target of the arrow labelled $g$ was specified as \verb"[]"
+(which denotes the current node).
+
+%--------------------------------------------------------------------
+\subsection{Absolute specification of the source and target of an arrow}
+\label{sec:AbsDesc}
+
+Up until now, the target and source (see section~\ref{sec:SrcTrgt}) of
+an arrow were always specified relative to the current node (see
+section~\ref{sec:basicdiag}).  It is possible to give instead an
+absolute specification of the target and source of an arrow.
+
+Each node of a diagram can be specified as
+\begin{center}
+  \verb!"p,q"!
+\end{center}
+(including the double quote symbols) where \verb"p" is the row number
+(counting from the top, where the first row is row number $1$) and
+\verb"q" is the column number (counting from the left, where the first
+column is column number $1$).  For example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar^{f}"1,2" \ar_{h}"2,1"
+    & {B} \ar^{k}"2,2"\\
+    {C} \ar_{g}"2,2"
+    & {D}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar^{f}"1,2" \ar_{h}"2,1"
+    & {B} \ar^{k}"2,2"\\
+    {C} \ar_{g}"2,2"
+    & {D}
+  }
+\end{displaymath}
+In that example, each arrow began at the current node.  For example,
+the arrow labelled $f$ began at the current node $A$ (and so it's
+source was not specified) and its target $B$ was specified as
+\verb!"1,2"! because it is in the first row, second column.
+
+As described in section~\ref{sec:SrcTrgt}, you can also specify both
+the source and target of an arrow, and this allows you to save the
+specification of all the arrows until the end of the diagram.  For
+example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A}
+    & {B}
+    & {C}\\
+    {D}
+    & {E}
+    & {F}
+    \ar_{f} "1,1";"1,2"
+    \ar_{g} "1,2";"1,3"
+    \ar@(ur,ul)^{h} "1,1";"1,3"
+    \ar"1,1";"2,1"
+    \ar"1,2";"2,2"
+    \ar"1,3";"2,3"
+    \ar^{p} "2,1";"2,2"
+    \ar^{q} "2,2";"2,3"
+    \ar@(dr,dl)_{r} "2,1";"2,3"
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A}
+    & {B}
+    & {C}\\
+    {D}
+    & {E}
+    & {F}
+    \ar_{f} "1,1";"1,2"
+    \ar_{g} "1,2";"1,3"
+    \ar@(ur,ul)^{h} "1,1";"1,3"
+    \ar"1,1";"2,1"
+    \ar"1,2";"2,2"
+    \ar"1,3";"2,3"
+    \ar^{p} "2,1";"2,2"
+    \ar^{q} "2,2";"2,3"
+    \ar@(dr,dl)_{r} "2,1";"2,3"
+  }
+\end{displaymath}
+(For a description of the curved arrows, see
+section~\ref{sec:CrvStEd}.)  Note that, e.g., the arrow labelled $f$
+is specified as
+\begin{center}
+  \verb!\ar_{f} "1,1";"1,2"!
+\end{center}
+because it starts at $A$, which is in row $1$ column $1$, and goes to
+$B$, which is in row $1$ column $2$.
+
+%--------------------------------------------------------------------
+\subsection{Nodes off of the grid}
+\label{sec:NdOffGrd}
+
+It's possible to place a node at an arbitrary point in the diagram
+without affecting the positioning of the other nodes.  You can also
+assign a \emph{name} to the node that you can use later to draw arrows
+to or from that node.
+
+You place a node off the grid using the \emph{excursion} commands
+\begin{center}
+  \verb"\save"\qquad and\qquad\verb"\restore"
+\end{center}
+In between those commands you can put commands to
+\begin{itemize}
+\item move from the current node using a displacement vector
+  ``\verb"[]+<Dx,Dy>"'' (where \verb"Dx" is the horizontal
+  displacement and \verb"Dy" is the vertical displacement),
+\item typeset a node there using ``\verb"*+{stuff}"'',
+\item optionally name that node using ``\verb!*+{stuff}="name"!'', and
+\item optionally draw arrows from whatever you've typeset there to
+  other nodes in the diagram.  If you've named the new node, you can
+  specify the arrows later on, and the arrows can either start from
+  this node or go to this node (or both, as in the second example in
+  this section).
+\end{itemize}
+Although you can use whatever units you like for the displacements
+(e.g., inches (\texttt{in}), centimeters (\texttt{cm}), points
+(\texttt{pt}), etc.), it's a good idea to measure vertical distances
+in \texttt{ex} (roughly the height of an upper case ``X'') and
+horizontal distances in \texttt{em} (roughly the width of an upper
+case ``M''), so that the displacement will be roughly correct even if
+you change font sizes.
+
+For example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r] \ar[d]
+    & {B} \ar[d]
+    \save []+<3em, 3em>*+{H}
+      \ar@(l,ur)_{p}[l] \ar@(d,ur)^{r}[d] \ar_{q}[]
+    \restore
+    \\
+    {C} \ar[r]
+    & {D}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r] \ar[d]
+    & {B} \ar[d]
+    \save []+<3em, 3em>*+{H}
+      \ar@(l,ur)_{p}[l] \ar@(d,ur)^{r}[d] \ar_{q}[]
+    \restore
+    \\
+    {C} \ar[r]
+    & {D}
+  }
+\end{displaymath}
+We created the node $H$ off of the grid by starting at the node $B$
+(in the first row, second column) and moving \verb"3em" to the right
+and \verb"3em" up.  We then drew three arrows starting at that node:
+\begin{itemize}
+\item The arrow $p$ goes to the node $A$, and so its target is
+  specified as \verb"[l]" since that is one node to the left of the
+  node $B$ (which is the current node from which we were on an
+  excursion),
+\item the arrow $q$ goes to the node $B$, and so its target is
+  specified as \verb"[]" (a pair of square brackets with nothing
+  inside) since that is the current node, and
+\item the arrow $r$ goes to the node $D$, and so its target is
+  specified as \verb"[d]" since it is one node below the current
+  node.
+\end{itemize}
+
+For another example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r] \ar[d]
+    & {B} \ar[d]\\
+    {C} \ar[r]
+    & {D}
+    \save []+<4em,1em>*+{H}="firstthing" \restore
+    \save []+<-1em,-3em>*+{K}="secondthing" \restore
+    \ar"firstthing";"1,2"_{p}
+    \ar"firstthing";"2,2"_{q}
+    \ar@(d,r)"firstthing";"secondthing"^{r}
+    \ar"secondthing";"2,2"_{s}
+    \ar"secondthing";"2,1"^{t}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r] \ar[d]
+    & {B} \ar[d]\\
+    {C} \ar[r]
+    & {D}
+    \save []+<4em,1em>*+{H}="firstthing" \restore
+    \save []+<-1em,-3em>*+{K}="secondthing" \restore
+    \ar"firstthing";"1,2"_{p}
+    \ar"firstthing";"2,2"_{q}
+    \ar@(d,r)"firstthing";"secondthing"^{r}
+    \ar"secondthing";"2,2"_{s}
+    \ar"secondthing";"2,1"^{t}
+  }
+\end{displaymath}
+In this diagram, the only nodes on the grid are $A$, $B$, $C$, and
+$D$.  After creating the nodes and arrows on the grid, we created the
+nodes $H$ and $K$ and the arrows that go to and from these nodes.
+\begin{itemize}
+\item We created each of the nodes $H$ and $K$ with an excursion from
+  the node $D$, giving the name \texttt{firstthing} to the node $H$
+  and the name \texttt{secondthing} to the node \verb"K".
+\item Each of the arrows to or from the nodes $H$ and $K$ specify both
+  their source and their target (a semicolon separates the source from
+  the target; see section~\ref{sec:SrcTrgt}).
+\item Each of the arrows from either $H$ or $K$ to one of the nodes on
+  the grid describes that node on the grid absolutely (see
+  section~\ref{sec:AbsDesc}).
+\end{itemize}
+The arrow from $H$ to $K$ begins \verb"\ar@(d,r)" because it is a
+curved arrow (see section~\ref{sec:CrvStEd}).  Since that arrow goes
+from the node $H$ (named \texttt{firsthing}) to the node $K$ (named
+\texttt{secondthing}), the arrow is specified as
+\begin{center}
+  \verb!\ar@(d,r)"firstthing";"secondthing"!
+\end{center}
+Finally, that arrow is labelled $r$, and so the complete specification
+is
+\begin{center}
+  \verb!\ar@(d,r)"firstthing";"secondthing"^{r}!
+\end{center}
+
+For another example, we show how to annotate ``diagram chase'' proofs
+in homological algebra.  If you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r]^{\alpha} \ar[d]_{f}
+    & {B} \ar[r]^{\beta} \ar[d]_{g}
+    % Add the element b of B:
+    \save []+<2ex,3ex>*+{b}="b"\restore
+    & {C} \ar[r]^{\gamma} \ar[d]_{h}
+    % Add the element c of C:
+    \save []+<0ex,3ex>*+{c}="c"\restore
+    & {D} \ar[r]^{\delta} \ar[d]_{j}
+    % Add the element d of D:
+    \save []+<2ex,3ex>*+{d}="d"\restore
+    & {E} \ar[d]_{k}\\
+    {A'} \ar[r]^{\alpha'}
+    & {B'} \ar[r]^{\beta'}
+    % Add the element b' of B':
+    \save []+<2ex,-5ex>*+{b'}="bprime"\restore
+    & {C'} \ar[r]^{\gamma'}
+    % Add the element c' of C':
+    \save []+<0ex,-3ex>*+{c'}="cprime"\restore
+    % Add the element c'-gamma(c) of C':
+    \save []+<1.5ex,-5ex>*+{(c'-\gamma(c))}="cprimeminus"\restore
+    & {D'} \ar[r]^{\delta'}
+    % Add the element \gamma'(c') of D':
+    \save []+<2ex,-3ex>*+{\gamma'(c')}="gammacprime"\restore
+    & {E'}
+    % Add the arrows connecting the elements:
+    \ar@{|->}"b";"bprime"
+    \ar@{|->}"c";"d"
+    \ar@{|->}"d";"gammacprime"
+    \ar@{|->}"cprime";"gammacprime"
+    \ar@{|->}"bprime";"cprimeminus"
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get the following diagram, which that might be used in
+part of the proof of the ``five lemma''.
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r]^{\alpha} \ar[d]_{f}
+    & {B} \ar[r]^{\beta} \ar[d]_{g}
+    % Add the element b of B:
+    \save []+<2ex,3ex>*+{b}="b"\restore
+    & {C} \ar[r]^{\gamma} \ar[d]_{h}
+    % Add the element c of C:
+    \save []+<0ex,3ex>*+{c}="c"\restore
+    & {D} \ar[r]^{\delta} \ar[d]_{j}
+    % Add the element d of D:
+    \save []+<2ex,3ex>*+{d}="d"\restore
+    & {E} \ar[d]_{k}\\
+    {A'} \ar[r]^{\alpha'}
+    & {B'} \ar[r]^{\beta'}
+    % Add the element b' of B':
+    \save []+<2ex,-5ex>*+{b'}="bprime"\restore
+    & {C'} \ar[r]^{\gamma'}
+    % Add the element c' of C':
+    \save []+<0ex,-3ex>*+{c'}="cprime"\restore
+    % Add the element c'-gamma(c) of C':
+    \save []+<1.5ex,-5ex>*+{(c'-\gamma(c))}="cprimeminus"\restore
+    & {D'} \ar[r]^{\delta'}
+    % Add the element \gamma'(c') of D':
+    \save []+<2ex,-3ex>*+{\gamma'(c')}="gammacprime"\restore
+    & {E'}
+    % Add the arrows connecting the elements:
+    \ar@{|->}"b";"bprime"
+    \ar@{|->}"c";"d"
+    \ar@{|->}"d";"gammacprime"
+    \ar@{|->}"cprime";"gammacprime"
+    \ar@{|->}"bprime";"cprimeminus"
+  }
+\end{displaymath}
+
+%--------------------------------------------------------------------
+\subsection{Text objects}
+\label{sec:TextObj}
+
+You can insert a text object into a diagram by typing
+\begin{center}
+  \verb"*\txt{Some text}"\quad or\quad \verb"*\txt<width>{Some text}"
+\end{center}
+In the first form you create linebreaks with a double backslash
+``\verb"\\"'' and in the second form the lines are broken
+automatically.  Text objects by default don't have any blank space
+around them, but you can add a bit of space by typing them as
+\verb"*+\txt{Some text}", or even more space by typing them as
+\verb"*++\txt{Some text}".
+
+For example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    *+\txt{Roses are red,\\ Violets are blue.\\
+      This is a contrived example,\\ And the rhyme is bad too.}
+    \ar@{=>}[r]
+    & *\txt<2in>{Four score and seven years ago our fathers brought
+      forth on this continent a new nation, conceived in liberty,
+      and dedicated to the proposition that all men are created
+      equal.}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    *+\txt{Roses are red,\\ Violets are blue.\\
+      This is a contrived example,\\ And the rhyme is bad too.}
+    \ar@{=>}[r]
+    & *\txt<2in>{Four score and seven years ago our fathers brought
+      forth on this continent a new nation, conceived in liberty,
+      and dedicated to the proposition that all men are created
+      equal.}
+  }
+\end{displaymath}
+We typed that first one as \verb"*+\txt" so that the arrow wouldn't
+start too close to the text.
+
+You can also shift a text object to the left (so that arrows to or
+from the object will go to its right end instead of its center) by
+typing it as
+%
+\verb"*+[l]\txt{Some text}" or to the right (so that arrows to or from
+the object will go to its left end instead of its center) by typing it
+as
+%
+\verb"*+[r]\txt{Some text}" (see section~\ref{sec:ShiftSide}).  For
+example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    *+[l]\txt{Interior} \ar[r] \ar[d]
+    & *+[r]\txt{Exterior} \ar[d]\\
+    {A} \ar[r]
+    & {B}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    *+[l]\txt{Interior} \ar[r] \ar[d]
+    & *+[r]\txt{Exterior} \ar[d]\\
+    {A} \ar[r]
+    & {B}
+  }
+\end{displaymath}
+
+Text objects are mostly used for adding annotations to a diagram (see
+section~\ref{sec:Drop}).
+
+%--------------------------------------------------------------------
+\subsection{Arrows off of the grid}
+\label{sec:OffGrid}
+
+It's possible to draw arrows that begin or end at points other than
+nodes.  To do this, you specify the point by choosing a node and then
+adding a displacement vector ``\verb"+<Dx,Dy>"'' from that node (where
+\verb"Dx" is the horizontal displacement and \verb"Dy" is the vertical
+displacement).  (Although you can use whatever units you like for the
+displacements (e.g., inches (\texttt{in}), centimeters (\texttt{cm}),
+points (\texttt{pt}), etc.), it's a good idea to measure vertical
+distances in \texttt{ex} (roughly the height of an upper case ``X'')
+and horizontal distances in \texttt{em} (roughly the width of an upper
+case ``M''), so that the displacement will be roughly correct even if
+you change font sizes.)  For example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[d]+<4em,0ex>\\
+    {B}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[d]+<4em,0ex>\\
+    {B}
+  }
+\end{displaymath}
+since the arrow is pointing to the spot 4em to the right of the $B$.
+
+For another example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A}
+    & {B}\\
+    {C}
+    & {D}
+    \ar[ul]+<-2em,0ex>;[]+<2em,0ex>
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A}
+    & {B}\\
+    {C}
+    & {D}
+    \ar[ul]+<-2em,0ex>;[]+<2em,0ex>
+  }
+\end{displaymath}
+(see section~\ref{sec:SrcTrgt}) because we specified the source as
+being \verb"[ul]+<-2em,0ex>", i.e., 2em to the left of the node that's
+one up and one to the left of the current node ($D$) and the target as
+being \verb"[]+<2em,0ex>", i.e., 2em to the right of the current node
+($D$).
+
+For an example that combines displacements of source and target along
+with curving arrows and labelled arrows: if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r]+<0em,-3ex>^{f}
+    & {B} \ar@(ur,ur)[d]+<2em,0ex>^{g}\\
+    {C}
+    & {D} \ar@/^ 2ex/[l];[]^{h}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r]+<0em,-3ex>^{f}
+    & {B} \ar@(ur,ur)[d]+<2em,0ex>^{g}\\
+    {C}
+    & {D} \ar@/^ 2ex/[l];[]^{h}
+  }
+\end{displaymath}
+
+Realistic examples of arrows off of the grid can be found in
+section~\ref{sec:Drop}, where we show how to drop objects into a
+diagram at either the source or the target of an arrow.
+
+%--------------------------------------------------------------------
+\subsection{Dropping objects into a diagram; annotations}
+\label{sec:Drop}
+
+You can drop an object at an arbitrary point of a diagram (i.e., not
+necessarily at a node) by drawing an arrow to or from that point (see
+section~\ref{sec:OffGrid}) and dropping the object at one of the ends
+of the arrow.  The object can be either mathematics or a text object
+(see section~\ref{sec:TextObj}).
+
+For example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r] \ar[d]
+    & {B} \ar[d]
+    \ar[]+<5em,-5ex>*+\txt{This space\\is compact.};[]\\
+    {C} \ar[r]
+    & {D}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r] \ar[d]
+    & {B} \ar[d]
+    \ar[]+<5em,-5ex>*+\txt{This space\\is compact.};[]\\
+    {C} \ar[r]
+    & {D}
+  }
+\end{displaymath}
+Note that the text and the arrow from it was typed by first creating
+the arrow
+\begin{center}
+  \verb"\ar[]+<5em,-5ex>;[]"
+\end{center}
+whose source is displaced from the current node (see
+sections~\ref{sec:SrcTrgt} and \ref{sec:OffGrid}) and whose target is
+the current node, and then dropping the text object (see
+section~\ref{sec:TextObj}) at the source by inserting
+\begin{center}
+  \verb"*+\txt{This space\\is compact.}"
+\end{center}
+immediately after the specification of the source.
+
+Note that the arrows to or from a text object by default go to its
+center, and if a text object is dropped at a specified point by
+default it's the center of the text object that lands at that point.
+Thus, if you're typing a wide text object, you should be sure either
+to leave enough room so that it doesn't overlap other parts of the
+diagram or to shift the text object sideways (as in
+section~\ref{sec:ShiftSide}).  For example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r] \ar[d]
+    & {B} \ar[d]
+    \ar[]+<5em,-5ex>*+\txt{This topological space is compact.};[]\\
+    {C} \ar[r]
+    & {D}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r] \ar[d]
+    & {B} \ar[d]
+    \ar[]+<5em,-5ex>*+\txt{This topological space is compact.};[]\\
+    {C} \ar[r]
+    & {D}
+  }
+\end{displaymath}
+but if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r] \ar[d]
+    & {B} \ar[d]
+    \ar[]+<10em,-5ex>*+\txt{This topological space is compact.};[]\\
+    {C} \ar[r]
+    & {D}
+  }
+\end{displaymath}
+\end{verbatim}
+(in which we increased the horizontal displacement to 10em) then
+you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r] \ar[d]
+    & {B} \ar[d]
+    \ar[]+<10em,-5ex>*+\txt{This topological space is compact.};[]\\
+    {C} \ar[r]
+    & {D}
+  }
+\end{displaymath}
+and if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r] \ar[d]
+    & {B} \ar[d]
+    \ar[]+<5em,-5ex>*+[r]\txt{This topological space is compact.};[]\\
+    {C} \ar[r]
+    & {D}
+  }
+\end{displaymath}
+\end{verbatim}
+(in which we typed
+\begin{center}
+  \verb"*+[r]\txt{This topological space is compact.}"
+\end{center}
+to create the text object, i.e., we added ``\verb"[r]"'' to shift the
+text object to the right; see section~\ref{sec:ShiftSide}) then you'll
+get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r] \ar[d]
+    & {B} \ar[d]
+    \ar[]+<5em,-5ex>*+[r]\txt{This topological space is compact.};[]\\
+    {C} \ar[r]
+    & {D}
+  }
+\end{displaymath}
+
+If you want to drop an object onto a spot other than at a node without
+printing an arrow to or from that spot, you can draw an invisible
+arrow going to that spot and drop the object at the end of the
+invisible arrow.  For example, if you type
+\begin{verbatim}
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r] \ar[d]_{f}
+    & {B} \ar[d]^{g}
+    \ar@{}[]+<8em,-4ex>*+\txt{Both $f$ and $g$\\are fibrations.}\\
+    {C} \ar[r]
+    & {D}
+  }
+\end{displaymath}
+\end{verbatim}
+then you'll get
+\begin{displaymath}
+  \xymatrix{
+    {A} \ar[r] \ar[d]_{f}
+    & {B} \ar[d]^{g}
+    \ar@{}[]+<8em,-4ex>*+\txt{Both $f$ and $g$\\are fibrations.}\\
+    {C} \ar[r]
+    & {D}
+  }
+\end{displaymath}
+The arrow to the text object is invisible because we typed it starting
+with \verb"\ar@{}" (see section~\ref{sec:arstyle} and
+Diagram~\ref{diag:CentEq}).  After that, we typed
+\begin{center}
+  \verb"[]+<8em,-4ex>*+\txt{Both $f$ and $g$\\are fibrations.}"
+\end{center}
+so that the arrow would go to the point 8em to the right and 4ex below
+the current node, and we dropped the text object at that point.
+
+
+%--------------------------------------------------------------------
+%--------------------------------------------------------------------
+\section{Including graphics}
+\label{sec:graphics}
+
+If you have graphics files that you want to include in your document,
+then you should load the \verb"graphicx" package by putting the
+command
+\begin{center}
+\verb"\usepackage{graphicx}"
+\end{center}
+after your \verb"\documentclass" command.  (Note: The spelling
+\verb"graphicx" is correct; the package graphicx.sty is the updated
+version of the older package graphics.sty.)  You can then include
+graphics using the \verb"\includegraphics" command.
+
+The standard practice is to include graphics inside of a \verb"figure"
+environment, so that it can float to the next page if there isn't
+enough room for it on the current page.  This also allows you to give
+a caption (printed below the graphics) and a label (for use in a
+\verb"\ref" command).  Thus, if you want to include the contents of
+\verb"mygraphic.eps", you might type
+\begin{verbatim}
+\begin{figure}[h]
+  \centering
+  \includegraphics{mygraphics.eps}
+  \caption{A pretty picture}
+  \label{fig:pretty}
+\end{figure}
+\end{verbatim}
+and you can then refer to it as \verb"figure~\ref{fig:pretty}".  (The
+\verb"\centering" command centers the graphics in the figure; this is
+preferable to using a \verb"center" environment, which would add
+additional vertical space.)  It's important to note that the
+\verb"\label" command must come \emph{after} the \verb"\caption"
+command, since it's the \verb"\caption" command that creates the
+number that the \verb"\label" command labels.  You can also put the
+\verb"\label" command \emph{inside} the caption, as in
+\begin{center}
+\verb"\caption{A pretty picture\label{fig:pretty}}"
+\end{center}
+and some people find that this helps prevent errors.
+
+
+%--------------------------------------------------------------------
+\subsection{Graphic formats: Postscript or pdf}
+
+One problem to watch out for is that different versions of \LaTeX{}
+require different types of graphics files:
+\begin{itemize}
+\item Standard \verb"latex" (which produces dvi files) requires
+  encapsulationed postscript graphics files, while
+\item \verb"pdflatex" (which directly produces pdf files) requires pdf
+  graphics files.
+\end{itemize}
+This can be confusing, because some installations of \LaTeX{} give you
+a \verb"latex" command that is actually running \verb"pdflatex".  In
+particular, the standard installation of \TeX Shop for Mac OS X gives
+you a \verb"latex" command that actually runs \verb"pdflatex" and
+produces a pdf file.  \TeX Shop can be configured to run standard
+\verb"latex" to produce dvi files and then convert them to pdf; for
+this, see the list of frequently asked questions at
+\begin{center}
+  \url{http://www.ams.org/authors/author-faq.html}
+\end{center}
+and search that page for ``texshop''.
+
+On most systems, if you need to include encapsulated postscript
+graphics and produce a pdf file, you can use plain old \verb"latex" to
+produce a dvi file and then use \verb"dvipdf" to create the pdf file.
+Another option is to use the \verb"epstopdf" program to create a
+postscript file from your eps file.
+
+
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+\section{Macro definitions, a.k.a.\ \texttt{\bs newcommand}}
+\label{sec:definitions}
+
+\LaTeX{} allows you to use the same \verb"\def" command that you use
+in plain \TeX, but it's considered bad style.  Instead, \LaTeX{} has
+the \verb"\newcommand" and \verb"\renewcommand" commands, which do a
+little error checking for you.  In plain \TeX, you might use the
+command
+\begin{center}
+  \verb"\def\tensor{\otimes}"
+\end{center}
+but in \LaTeX{} the preferred form is
+\begin{center}
+  \verb"\newcommand{\tensor}{\otimes}"
+\end{center}
+The advantage of this is that \LaTeX{} will check to see if there
+already is a command with the name \verb"\tensor" and give you an
+error message if there is.  If you know that there is a previous
+definition of \verb"\tensor" but you \emph{want} to override it,
+then you use the command
+\begin{center}
+  \verb"\renewcommand{\tensor}{\otimes}"
+\end{center}
+
+If you want to use macros with replaceable parameters, both
+\verb"\newcommand" and \verb"\renewcommand" allow this.  For the
+equivalent of the plain \TeX{} command
+\begin{center}
+  \verb"\def\pushout#1#2#3{#1\cup_{#2}#3}"
+\end{center}
+you use the \LaTeX{} command
+\begin{center}
+  \verb"\newcommand{\pushout}[3]{#1\cup_{#2}#3}"
+\end{center}
+i.e., the command name is enclosed in braces, and the number of
+parameters is enclosed in square brackets.
+
+
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+\section{Lists: \texttt{itemize, enumerate, and description}}
+
+There are three list making environments:
+\begin{itemize}
+\item \texttt{itemize},
+\item \texttt{enumerate}, and
+\item \texttt{description}.
+\end{itemize}
+The \texttt{itemize} environment just lists the items with a marker in
+front of each one.  If you type
+\begin{verbatim}
+\begin{itemize}
+\item This is the first item in the list, which runs on long enough
+  to spill over onto a second line.
+\item This is the second item in the list, which is a bit shorter.
+\item This is the last item.
+\end{itemize}
+\end{verbatim}
+then you'll get
+\begin{itemize}
+\item This is the first item in the list, which runs on long enough
+  to spill over onto a second line.
+\item This is the second item in the list, which is a bit shorter.
+\item This is the last item.
+\end{itemize}
+
+The \texttt{enumerate} environment looks the same, except that the
+items in the list are numbered.  If you type
+\begin{verbatim}
+\begin{enumerate}
+\item This is the first item in the list, which runs on long enough
+  to spill over onto a second line.
+\item This is the second item in the list, which is a bit shorter.
+\item This is the last item.
+\end{enumerate}
+\end{verbatim}
+then you'll get
+\begin{enumerate}
+\item This is the first item in the list, which runs on long enough
+  to spill over onto a second line.
+\item This is the second item in the list, which is a bit shorter.
+\item This is the last item.
+\end{enumerate}
+
+The \texttt{description} environment requires an argument for each
+\verb"\item" command, which will be printed at the beginning of the
+item.  If you type
+\begin{verbatim}
+\begin{description}
+\item[sedge] A green plant, found in both wetlands and uplands.
+  Sedges are often confused with grasses and rushes.
+\item[grass] A green plant, found in both wetlands and uplands.
+  Grasses are often confused with sedges and rushes.
+\item[rush] A green plant, found in both wetlands and uplands.
+  Rushes are often confused with sedges and grasses
+\end{description}
+\end{verbatim}
+you'll get
+\begin{description}
+\item[sedge] A green plant, found in both wetlands and uplands.
+  Sedges are often confused with grasses and rushes.
+\item[grass] A green plant, found in both wetlands and uplands.
+  Grasses are often confused with sedges and rushes.
+\item[rush] A green plant, found in both wetlands and uplands.
+  Rushes are often confused with sedges and grasses
+\end{description}
+
+These environments can be inserted within each other, and the
+\verb"enumerate" environment keeps track of what level it's at, and
+numbers its items accordingly.  If you type
+\begin{verbatim}
+\begin{enumerate}
+\item I went to the dry cleaners.
+\item I went to the supermarket.  I bought
+  \begin{enumerate}
+  \item bread,
+  \item cheese, and
+  \item Tabasco sauce.
+  \end{enumerate}
+\item I went to the bank.
+\end{enumerate}
+\end{verbatim}
+you'll get
+\begin{enumerate}
+\item I went to the dry cleaners.
+\item I went to the supermarket.  I bought
+  \begin{enumerate}
+  \item bread,
+  \item cheese, and
+  \item Tabasco sauce.
+  \end{enumerate}
+\item I went to the bank.
+\end{enumerate}
+
+%--------------------------------------------------------------------
+
+\subsection{Referring to enumerated items by number}
+\label{sec:enumref}
+
+If you want to refer to an item in an enumerated list by item number,
+then you need to label the item using the \verb"\label" command and
+then refer to it using the \verb"\ref" command, just as you do for
+sections, subsections, theorems, etc.\ (see
+section~\ref{sec:xreferences}).  For example, if you type
+\begin{verbatim}
+\begin{enumerate}
+\item \label{step:trans} Put the transmission into drive.
+\item \label{step:brake} Release the parking brake.
+\item \label{step:move} Start moving.
+\end{enumerate}
+You must complete steps \ref{step:trans} and \ref{step:brake}
+before beginning step~\ref{step:move}.
+\end{verbatim}
+then you'll get
+\begin{enumerate}
+\item \label{step:trans} Put the transmission into drive.
+\item \label{step:brake} Release the parking brake.
+\item \label{step:move} Start moving.
+\end{enumerate}
+You must complete steps \ref{step:trans} and \ref{step:brake} before
+beginning step~\ref{step:move}.
+
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+\section{The bibliography}
+\label{sec:bibliography}
+
+The recommended way to create a bibliography is to use the
+\texttt{amsrefs} package (see section~\ref{sec:amsrefs}).  This makes
+it simple to type the bibliography items and have them correctly
+formatted and automatically numbered, and makes it possible to change
+the style of the bibliography without retyping the items.  At the same
+time, it allows you to preserve the structure of the information
+contained in the items, and (optionally) to create a database of
+possible references that can be reused in other documents.
+
+The \texttt{amsrefs} package is fairly new.  The classical method of
+creating a bibliography from a database of possible references uses
+Bib\TeX{}, which is a separate program that must be run in between the
+runs of \LaTeX.  If you already have one or more BiB\TeX{} databases,
+\texttt{amsrefs} can make use of them through a special Bib\TeX{}
+style file (see section~\ref{sec:bibtex}).
+
+If for some reason you want to avoid the use of \texttt{amsrefs} and
+of Bib\TeX, you can type and format the bibliography items any way you
+choose by creating a \texttt{thebibliography} environment (see
+section~\ref{sec:thebibliography}).
+
+
+
+%--------------------------------------------------------------------
+\subsection{Using \texttt{amsrefs}}
+\label{sec:amsrefs}
+
+To use \texttt{amsrefs}, you load it by putting the command
+\begin{center}
+  \verb"\usepackage[lite]{amsrefs}"
+\end{center}
+into the preamble of your document, i.e., after the
+\verb"\documentclass" command and before the \verb"\begin{document}"
+command.  You can then
+\begin{enumerate}
+\item begin the bibliography with the commands
+\begin{verbatim}
+\begin{bibdiv}
+  \begin{biblist}
+\end{verbatim}
+\item define the bibliography items using a \verb"\bib" command for
+  each item (see section~\ref{sec:bib}), and then
+\item end the bibliography with the commands
+\begin{verbatim}
+  \end{biblist}
+\end{bibdiv}
+\end{verbatim}
+\end{enumerate}
+The reason there are two different environments (the outer environment
+\texttt{bibdiv} containing the inner environment \texttt{biblist}) is
+that the \texttt{bibdiv} environment produces the chapter or section
+heading for the bibliography (depending on what's appropriate for the
+type of your document) and the \texttt{biblist} environment produces
+the actual list of references.  You can also type material in between
+the \verb"\begin{bibdiv}" and \verb"begin{biblist}" commands and it
+will be printed in between the heading for the list and the actual
+list.
+
+%--------------------------------------------------------------------
+\subsection{The \texttt{\bs bib} command}
+\label{sec:bib}
+
+The information for each bibliography item inside the \texttt{bibdiv}
+environment (see section~\ref{sec:amsrefs}) is entered using a
+\verb"\bib" command.  The format of a \verb"\bib" command is
+\begin{verbatim}
+\bib{ReferenceKey}{ReferenceType}{
+  comma separated list of keyword={value} statements
+}
+\end{verbatim}
+where \texttt{ReferenceKey} is the key that will be used to refer to
+the item with a \verb"\cite" command (see
+section~\ref{sec:bibreferences}) and \texttt{ReferenceType} is either
+\begin{quote}
+  \texttt{article}, \texttt{book}, \texttt{misc}, \texttt{report}, or
+  \texttt{thesis}.
+\end{quote}
+For example, the bibliography of these notes contains the following
+\verb"\bib" commands:
+\begin{verbatim}
+\bib{yellowmonster}{book}{
+  author={Bousfield, A.K.},
+  author={Kan, D.M.},
+  title={Homotopy Limits, Completions and Localizations},
+  date={1972},
+  series={Lecture Notes in Mathematics},
+  volume={304},
+  publisher={Springer-Verlag},
+  address={Berlin-New York}
+}
+
+\bib{quil:rht}{article}{
+  author={Quillen, Daniel G.},
+  title={Rational Homotopy Theory},
+  journal={Ann. of Math. (2)},
+  volume={90},
+  date={1969},
+  pages={205--295}
+}
+\end{verbatim}
+If those \verb"\bib" commands are in your \texttt{biblist}
+environment, you can type
+\begin{center}
+  \verb"see \cite{yellowmonster} and \cite{quil:rht}"
+\end{center}
+and it will be typeset as ``see \cite{yellowmonster} and
+\cite{quil:rht}''.
+
+Some of the rules governing the \verb"\bib" command are:
+\begin{itemize}
+\item The keywords must all be typed in lower case.  (This is
+  different from in Bib\TeX{} databases, in which the case of field
+  names is ignored.)
+\item The value in each ``\verb"keyword={value}"'' statement must
+  always be enclosed in braces.  (This is different from in Bib\TeX{}
+  databases, in which the braces can sometimes be omitted.)
+\item Author names must be typed in the form ``von Last, First, Jr.'',
+  as in ``\verb"author={Jones, John Paul}"'', or
+  ``\verb"author={van Beethoven, Ludwig}"'', or
+  ``\verb"author={Ford, Henry, Jr.}"''.  This ensures there won't be
+  errors in reversing the first and last names, or when
+  \texttt{amsrefs} replaces the first and middle names with initials
+  (when the \texttt{initials} option is used; see
+  section~\ref{sec:refoptions}), or when \texttt{amsrefs} creates a
+  label based on the last name (when the \texttt{alphabetic} option is
+  used; see section~\ref{sec:refoptions}).
+\item Multiple authors must each be listed in a separate \verb"author"
+  field.
+\item The capitalization in the title should be exactly as you want it
+  to appear in the bibliography.  (This is different from in Bib\TeX{}
+  databases, in which capitalization is often changed to fit a chosen
+  style.)
+\item The date must be written in the form \verb"date={1776}", or
+  \verb"date={1776-07}", or \verb"date={1776-07-04}".
+\end{itemize}
+The full list of simple fields (i.e., fields that can appear at most
+once) is
+\begin{quote}
+  \texttt{address}, \texttt{booktitle}, \texttt{date},
+  \texttt{edition}, \texttt{eprint}, \texttt{hyphenation},
+  \texttt{journal}, \texttt{label}, \texttt{language}, \texttt{note},
+  \texttt{number}, \texttt{organization}, \texttt{pages},
+  \texttt{part}, \texttt{publisher}, \texttt{series}, \texttt{status},
+  \texttt{subtitle}, \texttt{title}, \texttt{type}, \texttt{volume},
+  and \texttt{xref}
+\end{quote}
+The full list of repeatable fields is
+\begin{quote}
+  \texttt{author}, \texttt{editor}, \texttt{translator},
+  \texttt{isbn}, \texttt{issn}, and \texttt{review}.
+\end{quote}
+The full list of compound fields (for which the value of each is a
+comma separated list of \verb"keyword={value}" statements) is
+\begin{quote}
+  \texttt{book}, \texttt{conference}, \texttt{contribution},
+  \texttt{partial}, \texttt{reprint}, and \texttt{translation}.
+\end{quote}
+A description of the less obvious ones can be found in
+\cite[section~5.2]{amsrefsguide}.
+
+%--------------------------------------------------------------------
+\subsection{Obtaining bibliographic information from MathSciNet}
+\label{sec:mathscinet}
+
+If you have access to MathSciNet (at
+\url{http://www.ams.org/mathscinet}), then you can obtain a completely
+filled out \verb"\bib" command (see section~\ref{sec:bib}) for any of
+the publications listed there.  To do this:
+\begin{itemize}
+\item Use MathSciNet to find the Mathematical Reviews review of the
+  publication.
+\item Look near the upper left corner of the page for a pulldown menu
+  titled ``Select Alternative Format''.
+\item Select ``AMSRefs'' from that menu; you'll get a new page showing
+  the \verb"\bib" command for the publication.
+\item Copy that \verb"\bib" command and paste it into your \LaTeX{}
+  file.
+\end{itemize}
+
+
+%--------------------------------------------------------------------
+\subsection{Using a database of possible references}
+\label{sec:refbase}
+
+If your list of \verb"\bib" commands (see section~\ref{sec:bib}) grows
+so long that you don't want to include it in your \LaTeX{} file, or if
+you want to reuse a collection of \verb"\bib" commands from other
+papers, you can put all of your \verb"\bib" commands into a file and
+have \texttt{amsrefs} extract only the ones used in your current
+paper.  To do this, you create a file whose name ends in \verb".ltb",
+for example: \verb"myrefs.ltb", and put all of your \verb"\bib"
+commands into that file.  In such a file, it's important that each
+\verb"\bib" command begins on a new line, and that that line contains
+the first two arguments and the following open brace, as in
+\begin{center}
+  \verb"\bib{ReferenceKey}{ReferenceType}{"
+\end{center}
+You then delete all of the \verb"\bib" commands from your \LaTeX{}
+file and replace them with the single line
+\begin{center}
+  \verb"\bibselect{myrefs}"
+\end{center}
+and \texttt{amsrefs} will automatically read \verb"myrefs.ltb" and
+extract only those items that are cited in the current paper.  Thus,
+if you have the \verb"\bib" commands for all of your possible
+references in the file \verb"myrefs.ltb", and you've loaded
+\texttt{amsrefs} with the command \verb"\usepackage[lite]{amsrefs}" in
+your preamble (see section~\ref{sec:amsrefs}), then you would create
+the bibliography with the lines
+\begin{verbatim}
+\begin{bibdiv}
+  \begin{biblist}
+    \bibselect{myrefs}
+  \end{biblist}
+\end{bibdiv}
+\end{verbatim}
+If your \LaTeX{} file contains the above lines and your file is named
+\verb"mypaper.tex", then \LaTeX{} will create the file
+\verb"mypaper.bbl" which will contain the \verb"\bib" commands for
+only those references cited in your paper, and \verb"mypaper.bbl" will
+automatically be read and used in your \LaTeX{} file.
+
+If your \verb"\bib" commands are spread over several \verb".ltb"
+files, you can either list them all, separated by commas, in the
+argument of the \verb"\bibselect" command, as in
+\begin{center}
+  \verb"\bibselect{myfirstrefs,mysecondrefs}"
+\end{center}
+or just use multiple \verb"\bibselect" commands, as in
+\begin{center}
+  \begin{tabular}{l}
+    \verb"\bibselect{myfirstrefs}"\\
+    \verb"\bibselect{mysecondrefs}"
+  \end{tabular}
+\end{center}
+
+As described above, a \verb"\bibselect" command uses only the
+references actually cited in your document.  To list \emph{all} the
+references in an \verb".ltb" file, whether or not they're cited in
+your document, use the command
+\begin{center}
+  \verb"\bibselect*{myrefs}"
+\end{center}
+
+%--------------------------------------------------------------------
+\subsection{Using \texttt{amsrefs} with Bib\TeX}
+\label{sec:bibtex}
+
+If you already have a Bib\TeX{} database of possible references, you
+can use that by combining Bib\TeX{} with \texttt{amsrefs}.  If your
+references are in the Bib\TeX{} file \verb"myrefs.bib", then you would
+load the \texttt{amsrefs} package by putting the command
+\verb"\usepackage[lite]{amsrefs}" in your preamble (in the same way
+that you would load it if you were using \texttt{amsrefs} without
+Bib\TeX; see section~\ref{sec:amsrefs}) and put the single line
+\begin{center}
+  \verb"\bibliography{myrefs}"
+\end{center}
+where you want the bibliography to appear.  (That is, you don't create
+the \texttt{bibdiv} or \texttt{biblist} environments.)  You then run
+Bib\TeX{} on your file in the normal way, and Bib\TeX{} will create
+the \verb".bbl" file.  That \verb".bbl" file will contain the
+\texttt{bibdiv} and \texttt{biblist} environments, and \LaTeX{} will
+read it the next time that you run \LaTeX{} and create the
+bibliography.
+
+If you use this method, you don't use the \verb"\bibliographystyle"
+command (and any such command in your \LaTeX{} file will be ignored).
+
+%--------------------------------------------------------------------
+\subsection{Options for the \texttt{amsrefs} package}
+\label{sec:refoptions}
+
+There are a number of optional arguments that you can use when loading
+the \texttt{amsrefs} package (see section~\ref{sec:amsrefs}), most of
+which affect the formatting of the bibliography.  You use them by
+listing them as optional arguments to the \verb"\usepackage" command
+(see section~\ref{sec:amsrefs}).  For example, we suggested that you
+always use the optional argument \texttt{lite}, as in
+\begin{center}
+  \verb"\usepackage[lite]{amsrefs}"
+\end{center}
+We'll describe the most important options here; the full list can be
+found in \cite[section~6]{amsrefsguide}.
+\begin{description}
+\item[lite] We suggest that you always use this option in order to
+  avoid a conflict between \texttt{amsrefs} and the \Xy-pic package
+  (see section~\ref{sec:xypic}).  If you don't use the \texttt{lite}
+  option, then \texttt{amsrefs} automatically loads the packages
+  \texttt{mathscinet} (which defines a number of special characters
+  and accents that are sometimes encountered when downloading data
+  from MathSciNet) and \texttt{txtcmds} (which provides shorthand
+  commands for a number of characters that are usually specified via
+  ligatures).  The problem is that both \Xy-pic and the
+  \texttt{txtcmds} package define the command \verb"\cir" (they define
+  it to be entirely different things).  If you load \texttt{txtcmds}
+  \emph{before} loading \Xy-pic then \Xy-pic will redefine \verb"\cir"
+  as it pleases while putting a warning into your \verb".log" file,
+  but if you load \texttt{txtcmds} \emph{after} loading \Xy-pic then
+  \LaTeX{} will stop with an error, since the \texttt{txtcmds} package
+  uses \verb"\newcommand" to define \verb"\cir".  Unfortunately, if
+  you need to use the \texttt{mathscinet} package and you try to load
+  it by putting the command \verb"\usepackage{mathscinet}" after your
+  \verb"\documentclass" command, it will also load the
+  \texttt{txtcmds} package, so this doesn't avoid the conflict.
+
+  If you need to use both \Xy-pic and the definitions in the
+  \texttt{mathscinet} and \texttt{txtcmds} packages, you should load
+  \texttt{amsrefs} \emph{before} \Xy-pic, as in
+  \begin{center}
+    \begin{tabular}{l}
+      \verb"\usepackage{amsrefs}"\\
+      \verb"\usepackage[all,cmtip]{xy}"
+    \end{tabular}
+  \end{center}
+  to keep \LaTeX{} from generating an error when loading
+  \texttt{txtcmds}.  (Of course, the command \verb"\cir" as defined in
+  \texttt{textcmds} will not be available.)
+\item[initials] If you use this option, then all authors, editors, and
+  translators will have their first and middle names replaced by their
+  initials.
+\item[alphabetic] If you use this option, as in
+  \begin{center}
+    \verb"\usepackage[alphabetic,lite]{amsrefs}"
+  \end{center}
+  then instead of numbers being used to label the bibliography
+  entries, you will get alphabetic labels similar to the
+  \texttt{alpha} style used by Bib\TeX, consisting of the first
+  letter(s) of each author name plus the year of publication.
+\item[shortalphabetic] This is similar to the \texttt{alphabetic}
+  option, except that you'll get a shorter alphabetic label using only
+  the first letter of each author name.
+\item[y2k] If you use the \texttt{alphabetic} option, only the last
+  two digits of the year are normally used in the label.  If you also
+  use the \texttt{y2k} option, as in
+  \begin{center}
+    \verb"\usepackage[y2k,alphabetic,lite]{amsrefs}"
+  \end{center}
+  then the full year will be used.
+\item[author-year] If you use this option, then bibliography items
+  will not be labelled at all, and references to them will be in the
+  author-year format similar to that described in
+  \verb"The Chicago Manual of Style".  If you do use this option, you
+  may sometimes want to use the \verb"\ycite" and \verb"\ocite"
+  commands when referring to bibliography items (see
+  section~\ref{sec:authyrcit}).
+\end{description}
+
+
+
+%--------------------------------------------------------------------
+\subsection{Avoiding both \texttt{amsrefs} and Bib\TeX}
+\label{sec:thebibliography}
+
+If for some reason you don't want to use \texttt{amsrefs} or Bib\TeX,
+you can type each bibliography item exactly as you want it to appear
+and have the items numbered automatically.  To do this, you
+\begin{enumerate}
+\item  begin the bibliography with the command
+  \begin{center}
+    \verb"\begin{thebibliography}{number}"
+  \end{center}
+  where \emph{number} is any number that, when printed, is as wide as
+  the widest number of any item in the bibliography,
+\item define the bibliography items using a \verb"\bibitem" command
+  for each item (see section~\ref{sec:bibitem}), and then
+\item end the bibliography with the command
+    \begin{center}
+      \verb"\end{thebibliography}"
+  \end{center}
+\end{enumerate}
+The only use made of the \verb"number" in
+\verb"\begin{thebibliography}{number}" is that \LaTeX{} assumes that
+its width when printed is at least as large as the width of any number
+of an item in the bibliography.  For example, if the bibliography will
+contain between 10 and~99 items, you can use
+\verb"\begin{thebibliography}{99}".
+
+
+%--------------------------------------------------------------------
+\subsubsection{Bibliography items}
+\label{sec:bibitem}
+
+When using the commands \verb"\begin{thebibliography}" and
+\verb"\end{thebibliography}" to create the bibliography (see
+section~\ref{sec:thebibliography}), each item is begun with a
+\verb"\bibitem" command.  The format is
+\begin{center}
+  \verb"\bibitem{ReferenceKey}Item entry"
+\end{center}
+For example, had we not been using \texttt{amsrefs}, the bibliography
+in these instructions might have contained the entry
+\begin{verbatim}
+\bibitem{yellowmonster}
+A. K. Bousfield and D. M. Kan, \emph{Homotopy Limits, Completions
+and Localizations,} Lecture Notes in Mathematics number 304,
+Springer-Verlag, New York, 1972.
+\end{verbatim}
+
+The above entry would allow us to type
+\begin{verbatim}
+Homotopy inverse limits are discussed
+in~\cite[Chapter 11]{yellowmonster}.
+\end{verbatim}
+and have it print as ``Homotopy inverse limits are discussed
+in~\cite[Chapter 11]{yellowmonster}.''  For more on the \verb"\cite"
+command, see section~\ref{sec:bibreferences}.
+
+
+
+
+
+
+
+
+
+
+
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+\section{The template file}
+\label{sec:template}
+
+The following is the text of the file \verb"template.tex".
+
+\begin{verbatim}
+%%% template.tex
+%%% This is a template for making up an AMS-LaTeX file
+%%% Version of February 12, 2011
+%%%---------------------------------------------------------
+%%% The following command chooses the default 10 point type.
+%%% To choose 12 point, change it to
+%%% \documentclass[12pt]{amsart}
+\documentclass{amsart}
+
+%%% The following command loads the amsrefs package, which will be
+%%% used to create the bibliography:
+\usepackage[lite]{amsrefs}
+
+%%% The following command defines the standard names for all of the
+%%% special symbols in the AMSfonts package, listed in
+%%% http://www.ctan.org/tex-archive/info/symbols/math/symbols.pdf
+\usepackage{amssymb}
+
+%%% The following commands allow you to use \Xy-pic to draw
+%%% commutative diagrams.  (You can omit the second line if you want
+%%% the default style of the nodes to be \textstyle.)
+\usepackage[all,cmtip]{xy}
+\let\objectstyle=\displaystyle
+
+%%% If you'll be importing any graphics, uncomment the following
+%%% line.  (Note: The spelling is correct; the package graphicx.sty is
+%%% the updated version of the older graphics.sty.)
+% \usepackage{graphicx}
+
+
+
+%%% This part of the file (after the \documentclass command,
+%%% but before the \begin{document}) is called the ``preamble''.
+%%% This is where we put our macro definitions.
+
+%%% Comment out (or delete) any of these that you don't want to use.
+\newcommand{\tensor}{\otimes}
+\newcommand{\homotopic}{\simeq}
+\newcommand{\homeq}{\cong}
+\newcommand{\iso}{\approx}
+
+\DeclareMathOperator{\ho}{Ho}
+\DeclareMathOperator*{\colim}{colim}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\W}{\mathcal{W}}
+
+\newcommand{\itilde}{\tilde{\imath}}
+\newcommand{\jtilde}{\tilde{\jmath}}
+\newcommand{\ihat}{\hat{\imath}}
+\newcommand{\jhat}{\hat{\jmath}}
+
+
+
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%% The Theorem environments:
+%%%
+%%%
+%%% The following commands set it up so that:
+%%% 
+%%% All Theorems, Corollaries, Lemmas, Propositions, Definitions,
+%%% Remarks, Examples, Notations, and Terminologies  will be numbered
+%%% in a single sequence, and the numbering will be within each
+%%% section.  Displayed equations will be numbered in the same
+%%% sequence. 
+%%% 
+%%% 
+%%% Theorems, Propositions, Lemmas, and Corollaries will have the most
+%%% formal typesetting.
+%%% 
+%%% Definitions will have the next level of formality.
+%%% 
+%%% Remarks, Examples, Notations, and Terminologies will be the least
+%%% formal.
+%%% 
+%%% Theorem:
+%%% \begin{thm}
+%%% 
+%%% \end{thm}
+%%% 
+%%% Corollary:
+%%% \begin{cor}
+%%% 
+%%% \end{cor}
+%%% 
+%%% Lemma:
+%%% \begin{lem}
+%%% 
+%%% \end{lem}
+%%% 
+%%% Proposition:
+%%% \begin{prop}
+%%% 
+%%% \end{prop}
+%%% 
+%%% Definition:
+%%% \begin{defn}
+%%% 
+%%% \end{defn}
+%%% 
+%%% Remark:
+%%% \begin{rem}
+%%% 
+%%% \end{rem}
+%%% 
+%%% Example:
+%%% \begin{ex}
+%%% 
+%%% \end{ex}
+%%% 
+%%% Notation:
+%%% \begin{notation}
+%%% 
+%%% \end{notation}
+%%% 
+%%% Terminology:
+%%% \begin{terminology}
+%%% 
+%%% \end{terminology}
+%%% 
+%%%       Theorem environments
+
+% The following causes equations to be numbered within sections
+\numberwithin{equation}{section}
+
+% We'll use the equation counter for all our theorem environments, so
+% that everything will be numbered in the same sequence.
+
+%       Theorem environments
+
+\theoremstyle{plain} %% This is the default, anyway
+\newtheorem{thm}[equation]{Theorem}
+\newtheorem{cor}[equation]{Corollary}
+\newtheorem{lem}[equation]{Lemma}
+\newtheorem{prop}[equation]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{defn}[equation]{Definition}
+
+\theoremstyle{remark}
+\newtheorem{rem}[equation]{Remark}
+\newtheorem{ex}[equation]{Example}
+\newtheorem{notation}[equation]{Notation}
+\newtheorem{terminology}[equation]{Terminology}
+
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+\begin{document}
+
+%%% In the title, use a double backslash "\\" to show a linebreak:
+%%% Use one of the following two forms:
+%%% \title{Text of the title}
+%%% or
+%%% \title[Short form for the running head]{Text of the title}
+\title{}
+
+
+%%% If there are multiple authors, they're described one at a time:
+%%% First author: \author{} \address{} \curraddr{} \email{} \thanks{}
+%%% Second author: \author{} \address{} \curraddr{} \email{} \thanks{}
+%%% Third author: \author{} \address{} \curraddr{} \email{} \thanks{}
+\author{}
+
+%%% In the address, show linebreaks with double backslashes:
+\address{}
+
+%%% Current address is optional.
+% \curraddr{}
+
+%%% Email address is optional.
+% \email{}
+
+
+%%% If there's a second author:
+% \author{}
+% \address{}
+% \curraddr{}
+% \email{}
+
+
+%%% To have the current date inserted, use \date{\today}:
+\date{}
+
+%%% To include an abstract, uncomment the following two lines and type
+%%% the abstract in between them:
+% \begin{abstract}
+% \end{abstract}
+
+
+\maketitle
+
+%%% To include a table of contents, uncomment the following line:
+% \tableofcontents
+
+
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%% Start the body of the paper here!  E.G., maybe use:
+%%% \section{Introduction}
+%%% \label{sec:intro}
+
+%%% For a numbered display, use
+%%% \begin{equation}
+%%%   \label{something}
+%%%   The display goes here
+%%% \end{equation}
+%%% and you can refer to it as \eqref{something}.
+
+%%% For an unnumbered display, use
+%%% \begin{equation*}
+%%%   The display goes here
+%%% \end{equation*}
+
+%%% To import a graphics file, you must have said
+%%% \usepackage{graphicx}
+%%% in the preamble (i.e., before the \begin{document}).
+%%% Putting it into a figure environment enables it to float to the
+%%% next page if there isn't enough room for it on the current page.
+%%% The \label command must come after the \caption command.
+% \begin{figure}[h]
+%   \includegraphics{filename}
+%   \caption{Some caption}
+%   \label{somelabel}
+% \end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%% -------------------------------------------------------------------
+%%% -------------------------------------------------------------------
+%%% This is where we create the bibliography.
+
+\begin{bibdiv}
+  \begin{biblist}
+
+%%% The format of bibliography items is as in the following examples:
+%%% 
+%%% \bib{yellowmonster}{book}{
+%%%   author={Bousfield, A.K.},
+%%%   author={Kan, D.M.},
+%%%   title={Homotopy Limits, Completions and Localizations},
+%%%   date={1972},
+%%%   series={Lecture Notes in Mathematics},
+%%%   volume={304},
+%%%   publisher={Springer-Verlag},
+%%%   address={Berlin-New York}
+%%% }
+
+%%% \bib{HA}{book}{
+%%%   author={Quillen, Daniel G.},
+%%%   title={Homotopical Algebra},
+%%%   series={Lecture Notes in Mathematics},
+%%%   volume={43},
+%%%   publisher={Springer-Verlag},
+%%%   address={Berlin-New York},
+%%%   date={1967}
+%%% }
+
+%%% \bib{serre:shfs}{article}{
+%%%   author={Serre, Jean-Pierre},
+%%%   title={Homologie Singuli\`ere des Espaces Fibr\'es.  Applications},
+%%%   journal={Ann. of Math. (2)},
+%%%   date={1951},
+%%%   volume={54},
+%%%   pages={425--505}
+%%% }
+
+
+
+
+
+  \end{biblist}
+\end{bibdiv}
+
+\end{document}
+\end{verbatim}
+
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+
+
+
+
+
+\begin{bibdiv}
+  \begin{biblist}
+
+\bib{amslatexusersguide}{report}{
+  author={American Mathematical Society},
+  title={User's Guide for the \texttt{amsmath} Package},
+  edition={version 2.0},
+  date={2002-02-25},
+  eprint={ftp://ftp.ams.org/pub/tex/doc/amsmath/amsldoc.pdf},
+  note={also available from CTAN
+  (the Comprehensive \TeX{} Archive Network) at
+  \url{http://www.ctan.org/tex-archive/macros/latex/required/amslatex/math/amsldoc.pdf}}
+}
+
+\bib{instr-l}{report}{
+  author={American Mathematical Society},
+  title={Instructions for Preparation of Papers and Monographs:
+    \AmS-\LaTeX},
+  date={2004-08},
+  eprint={ftp://ftp.ams.org/pub/tex/doc/amscls/instr-l.pdf}
+}
+
+\bib{testmath}{misc}{
+  author={American Mathematical Society},
+  title={Sample Paper for the \texttt{amsmath} Package},
+  date={1996-11},
+  note={available at \url{ftp://ftp.ams.org/pub/tex/amslatex/math/testmath.tex}}
+}
+
+\bib{yellowmonster}{book}{
+  author={Bousfield, A.K.},
+  author={Kan, D.M.},
+  title={Homotopy Limits, Completions and Localizations},
+  date={1972},
+  series={Lecture Notes in Mathematics},
+  volume={304},
+  publisher={Springer-Verlag},
+  address={Berlin-New York}
+}
+
+\bib{mathguide}{report}{
+  author={Downes, Michael},
+  title={Short Math Guide for \LaTeX},
+  edition={version 1.09},
+  publisher={American Mathematical Society},
+  eprint={ftp://ftp.ams.org/pub/tex/doc/amsmath/short-math-guide.pdf}
+}
+
+\bib{amsrefsguide}{report}{
+  author={Jones, David M.},
+  title={User's Guide to the \texttt{amsrefs} Package},
+  publisher={American Mathematical Society},
+  date={2007-10-16},
+  eprint={ftp://ftp.ams.org/pub/tex/amsrefs/amsrdoc.pdf}
+}
+
+\bib{latex}{book}{
+  author={Lamport, Leslie},
+  title={\LaTeX: A Document Preparation System},
+  edition={2},
+  publisher={Addison-Wesley},
+  date={1994}
+}
+
+\bib{NotShort}{report}{
+  author={Oetiker, Tobias},
+  author={Partl, Hubert},
+  author={Hyna, Irene},
+  author={Schlegl, Elisabeth},
+  title={The Not So Short Introduction to \LaTeXe},
+  edition={version 4.24},
+  eprint={http://www.ctan.org/tex-archive/info/lshort/english/lshort.pdf}
+}
+
+\bib{HA}{book}{
+  author={Quillen, Daniel G.},
+  title={Homotopical Algebra},
+  series={Lecture Notes in Mathematics},
+  volume={43},
+  publisher={Springer-Verlag},
+  address={Berlin-New York},
+  date={1967}
+}
+
+\bib{quil:rht}{article}{
+  author={Quillen, Daniel G.},
+  title={Rational Homotopy Theory},
+  journal={Ann. of Math. (2)},
+  volume={90},
+  date={1969},
+  pages={205--295}
+}
+
+\bib{xyguide}{report}{
+  author={Rose, Kristoffer H.},
+  title={\Xy-pic User's Guide},
+  edition={version 3.85},
+  eprint={http://www.ctan.org/tex-archive/macros/generic/diagrams/xypic/xy-3.8.5/doc/xyguide.pdf}
+}
+
+\bib{xyrefer}{report}{
+  author={Rose, Kristoffer H.},
+  author={Moore, Ross},
+  title={\Xy-pic Reference Manual},
+  edition={version 3.85},
+  eprint={http://www.ctan.org/tex-archive/macros/generic/diagrams/xypic/xy-3.8.5/doc/xyrefer.pdf}
+}
+
+  \end{biblist}
+\end{bibdiv}
+
+
+
+\end{document}

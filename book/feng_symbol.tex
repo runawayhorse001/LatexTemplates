@@ -1,0 +1,435 @@
+\newcommand{\commentout}[1]{{}} % for large block comments
+\newcommand{\note}[1]{\textcolor{blue}{#1} }%
+\newcommand{\yn}{y_n}
+\newcommand{\ynl}{y_{n+1}}
+\newcommand{\tn}{t_n}
+\newcommand{\tnl}{t_{n+1}}
+\newcommand{\en}{e_n}
+\newcommand{\enl}{e_{n+1}}
+\newcommand{\ytn}{y(t_n)}
+\newcommand{\dytn}{y'(t_n)}
+\newcommand{\ddytn}{y''(t_n)}
+\newcommand{\ytnl}{y(t_{n+1})}
+\newcommand{\dytnl}{y'(t_{n+1})}
+\newcommand{\ddytnl}{y''(t_{n+1})}
+\newcommand{\tint}{\int\!\!\int\!\!\int} % triple integral
+\newcommand{\dint}{\int\!\!\int} % doubld integral
+\newcommand{\R}{\mathbb{R}} %
+\newcommand{\Rnn}{\mathbb{R}^{n \times n}} %
+\newcommand{\Rmn}{\mathbb{R}^{m\times n}} %
+\newcommand{\Cnn}{\mathbb{C}^{n \times n}} %
+\newcommand{\Cmn}{\mathbb{C}^{m\times n}} %
+\newcommand{\C}{\mathbb{C}} %
+\newcommand{\Z}{\mathbb{Z}} %
+\newcommand{\Po}{\mathbb{P}} %
+\newcommand{\order}{\mathcal{O}} %
+\newcommand{\ball}{B(x,r)}
+\newcommand{\ballxo}{B(x_0,r)}
+\newcommand{\ballo}{B(0,r)}
+\newcommand{\inv}[1]{{#1}^{-1}} % inverse
+\newcommand{\tran}[1]{{#1}^{T}} % transpot
+\newcommand{\conj}[1]{{#1}^{*}} % inverse
+\newcommand{\lap}[1]{\Delta {#1}} % laplace
+\newcommand{\grad}[1]{\nabla {#1}} % gradient
+\newcommand{\femspace}[1]{\mathbb{V}_{#1}} %
+\newcommand{\module}[1]{|#1|}
+\newcommand{\interp}[1]{\mathcal{I}_{#1}} %interpolation operator
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\Lone}[2]{\left\|#1\right\|_{L^1(#2)}}
+\newcommand{\Lnorm}[2]{\left\|#1\right\|_{L^#2(\Omega)}}
+\newcommand{\Hnorm}[2]{\left\|#1\right\|_{H^#2(\Omega)}}
+\newcommand{\Lnorme}[2]{\left\|#1\right\|_{L^#2(\partial\Omega)}}
+%The notation for DG
+\newcommand{\avg}[1]{\left\{\left\{#1\right\}\right\}} % average
+\newcommand{\jump}[1]{\left\llbracket#1\right\rrbracket} % jump
+\newcommand{\edge}[2]{\mathcal{E}^{#1}_{#2}} % edge
+\newcommand{\partition}[1]{\mathcal{T}_#1} %
+
+
+\newtheorem{hypoth}{Hypothesis}
+\newtheorem{problem}{\textcolor{blue}{Problem}}[section]
+\newenvironment{solution}
+               {\let\oldqedsymbol=\qedsymbol
+                \renewcommand{\qedsymbol}{$\blacktriangleleft$}
+                \begin{proof}[\bfseries\upshape \textcolor{blue}{Solution}]}
+               {\end{proof}
+                \renewcommand{\qedsymbol}{\oldqedsymbol}}
+\newenvironment{pf}
+               {\let\oldqedsymbol=\qedsymbol
+                \renewcommand{\qedsymbol}{$\blacktriangleleft$}
+                \begin{proof}[\bfseries\upshape \textcolor{blue}{Proof}]}
+               {\end{proof}
+                \renewcommand{\qedsymbol}{\oldqedsymbol}}
+
+\newtheorem{corollary}{ \textcolor{blue}{Corollary}}[section]
+\newtheorem{properties}{ \textcolor{blue}{Properties}}[section]
+\newtheorem{definition}{ \textcolor{blue}{Definition}}[section]
+\newtheorem{theorem}{ \textcolor{blue}{Theorem}}[section]
+\newtheorem{lemma}{ \textcolor{blue}{Lemma}}[section]
+\newtheorem{remark}{ \textcolor{blue}{Remark}}[section]
+%
+%%%%%%%%%%%%The environments%%%%%%%%%%%%%%%%%%%
+\newcommand{\statetheoremhoriz}[2][\textwidth]{
+ \par\noindent\tikzstyle{mybox} = [draw=blue,left color=cyan!50,
+  right color=cyan!5,thick,rectangle,inner sep=6pt]
+ \begin{tikzpicture}
+  \node [mybox] (box){%
+   \begin{minipage}{#1}{#2}\end{minipage}
+  };
+ \end{tikzpicture}
+}
+\newcommand{\statetheoremvert}[2][0.85\textwidth]{
+ \par\noindent\tikzstyle{mybox} = [draw=blue,top color=cyan!50,
+  bottom color=cyan!5,thick,rectangle,inner sep=6pt]
+ \begin{tikzpicture}
+  \node [mybox] (box){%
+   \begin{minipage}{#1}{#2}\end{minipage}
+  };
+ \end{tikzpicture}
+}
+\newcommand{\statetheoremsolid}[2][\textwidth]{
+ \par\noindent\tikzstyle{mybox} = [draw=blue,fill=cyan!50,
+  thick,rectangle,inner sep=6pt]
+ \begin{tikzpicture}
+  \node [mybox] (box){%
+   \begin{minipage}{#1}{#2}\end{minipage}
+  };
+ \end{tikzpicture}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\newcommand{\tint}{\int\!\!\int\!\!\int} % triple integral
+%\newcommand{\dint}{\int\!\!\int} % doubld integral
+%
+%\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+%\newcommand{\defeql}{\stackrel{\triangle}{=}}
+%\newcommand{\binomial}[2]{\left( \begin{array}{c} \textstyle #1 \\ \textstyle #2 \end{array} \right)}
+%\newcommand{\Frac}[2]{\frac{\textstyle #1}{\textstyle #2}}
+%\newcommand{\circup}[1]{\stackrel{\circ}{#1}}
+%\newcommand{\module}[1]{|#1|}
+%\newcommand{\norm}[1]{\left\|#1\right\|}
+%\newcommand{\seminorm}[1]{\left|#1\right|}
+%\newcommand{\abs}[1]{\left|#1\right|}
+%\newcommand{\inner}[2]{\Big<#1, #2\Big>}
+%\newcommand{\proofend}{ \begin{flushright}\rule{2mm}{2mm}\end{flushright} }
+%
+%\newcommand{\weak}{\rightharpoonup}
+%\newcommand{\weakst}{\stackrel{\ast}{\rightharpoonup}}
+%\newcommand{\weakstar}{\stackrel{\ast}{\rightharpoonup}}
+%\newcommand{\Divv}{\mbox{\rm div }}
+%\newcommand{\divv}{\mbox{\rm div }}
+%\newcommand{\Grad}{\mbox{\rm grad }}
+%\newcommand{\grad}{\nabla}
+%\newcommand{\ind}{\mbox{\rm ind }}
+%\newcommand{\Chi}{\chi}
+%\newcommand{\Curl}{\mbox{\rm curl }}
+%\newcommand{\curl}{\mbox{\rm curl }}
+%\newcommand{\cof}{\mbox{\rm cof }}
+%\newcommand{\body}{\Omega}
+%\newcommand{\eks}{\mbox{\underline{\sc x}}}
+%\newcommand{\R}{{\rm I\!R}}
+%\newcommand{\N}{{\rm I\!N}}
+%\newcommand{\enn}{{\rm I\!N}}
+%\newcommand{\eps}{\epsilon}
+%\newcommand{\Linp}{\mbox{\rm Lin$^+$ }}
+%%
+%\newcommand{\cA}{{\cal A}}
+%\newcommand{\cB}{{\cal B}}
+%\newcommand{\cC}{{\mathcal{C}}}
+%\newcommand{\cD}{{\cal D}}
+%\newcommand{\cE}{{\mathcal{E}}}
+%\newcommand{\cF}{\mbox{$\cal F$}}
+%\newcommand{\cG}{\mbox{${\cal G}$}}
+%\newcommand{\cH}{{\cal H}}
+%\newcommand{\cK}{{\cal K}}
+%\newcommand{\cL}{{\mathcal{L}}}
+%\newcommand{\cM}{{\cal M}}
+%\newcommand{\cN}{\mathcal{N}}
+%\newcommand{\cO}{{\cal O}}
+%\newcommand{\cP}{{\mathcal{P}}}
+%\newcommand{\cR}{{\mathcal{R}}}
+%\newcommand{\cS}{{\cal S}}
+%\newcommand{\cT}{\mathcal{T}}
+%\newcommand{\cU}{\mbox{$\cal U$}}
+%\newcommand{\cV}{\mbox{$\cal V$}}
+%\newcommand{\cW}{\mbox{$\cal W$}}
+%\newcommand{\cZ}{\mbox{$\cal Z$}}
+%%
+%
+%%
+%\newcommand{\bfA}{{\bf A}}
+%\newcommand{\bfa}{{\bf a}}
+%\newcommand{\bfB}{{\bf B}}
+%\newcommand{\bfb}{{\bf b}}
+%\newcommand{\bfC}{{\bf C}}
+%\newcommand{\bfc}{{\bf c}}
+%\newcommand{\bfD}{{\bf D}}
+%\newcommand{\bfd}{{\bf d}}
+%\newcommand{\bfE}{{\bf E}}
+%\newcommand{\bfe}{{\bf e}}
+%\newcommand{\bfF}{{\bf F}}
+%\newcommand{\bff}{{\bf f}}
+%\newcommand{\bfG}{{\bf G}}
+%\newcommand{\bfg}{{\bf g}}
+%\newcommand{\bfH}{{\bf H}}
+%\newcommand{\bfh}{{\bf h}}
+%\newcommand{\bfI}{{\bf I}}
+%\newcommand{\bfi}{{\bf i}}
+%\newcommand{\bfj}{{\bf j}}
+%\newcommand{\bfJ}{{\bf J}}
+%\newcommand{\bfk}{{\bf k}}
+%\newcommand{\bfK}{{\bf K}}
+%\newcommand{\bfl}{{\bf l}}
+%\newcommand{\bfL}{{\bf L}}
+%\newcommand{\bfM}{{\bf M}}
+%\newcommand{\bfm}{{\bf m}}
+%\newcommand{\bfn}{{\bf n}}
+%\newcommand{\bfN}{{\bf N}}
+%\newcommand{\bfP}{{\bf P}}
+%\newcommand{\bfp}{{\bf p}}
+%\newcommand{\bfQ}{{\bf Q}}
+%\newcommand{\bfq}{{\bf q}}
+%\newcommand{\bfR}{{\bf R}}
+%\newcommand{\bfr}{{\bf r}}
+%\newcommand{\bfs}{{\bf s}}
+%\newcommand{\bfS}{{\bf S}}
+%\newcommand{\bft}{{\bf t}}
+%\newcommand{\bfT}{{\bf T}}
+%\newcommand{\bfu}{{\bf u}}
+%\newcommand{\bfV}{{\bf V}}
+%\newcommand{\bfv}{{\bf v}}
+%\newcommand{\bfw}{{\bf w}}
+%\newcommand{\bfx}{{\bf x}}
+%\newcommand{\bfX}{{\bf X}}
+%\newcommand{\x}{{\bf x}}
+%\newcommand{\bfy}{{\bf y}}
+%\newcommand{\bfY}{{\bf Y}}
+%\newcommand{\bfz}{{\bf z}}
+%
+%\newcommand{\mbbR}{{\mathbb{R}}}
+%
+%\newcommand{\bfdelta}{{\bf \delta}}
+%\newcommand{\bfGamma}{{\bf \Gamma}}
+%\newcommand{\bfphi}{{\bf \phi}}
+%\newcommand{\bfPhi}{{\bf \Phi}}
+%\newcommand{\bfpsi}{{\bf \psi}}
+%\newcommand{\bfPsi}{{\bf \Psi}}
+%\newcommand{\bfsigma}{{\bf \sigma}}
+%\newcommand{\bftheta}{{\bf \theta}}
+%\newcommand{\bfxi}{{\bf \xi}}
+%
+%\newcommand{\tsigma}{{\tilde \sigma}}
+%
+%%
+%\newcommand{\hah}{{\widehat{h}}}
+%\newcommand{\yh}{{\widehat{\bfy}}}
+%\newcommand{\ph}{{\widehat{\bfp}}}
+%\newcommand{\inmi}{\int_{-\infty}^\infty}
+%%\newcommand{\proof}{\noindent{\bf Proof.} }
+%\newcommand{\dvx}{\;d\x}
+%\newcommand{\dax}{\;dS}
+%\newcommand{\onml}{{\bf n}}
+%\newcommand{\jmpl}{[}
+%\newcommand{\jmpr}{]}
+%\newcommand{\sgn}{{\rm sgn}}
+%\newcommand{\bull}{\rule[-.1ex]{.9ex}{.8ex}}
+%\newcommand{\err}{{\R}}
+%\newcommand{\xii}{\mbox{\boldmath $\xi$}}
+%\newcommand{\etaa}{\mbox{\boldmath $\eta$}}
+%\newcommand{\phii}{\mbox{\boldmath $\phi$}}
+%\newcommand{\zee}{{\rm Z\hspace{-4pt}Z}}
+%\newcommand{\xiip}{\xii'}
+%\newcommand {\real} {I\!\!R}
+%\newcommand {\nat} {{I\!\!N}}
+%\newcommand {\compl} {C\!\!\!\!I\;}
+%\newcommand {\meas} {{\mbox{meas}}}
+%\newcommand {\mspan} {{\mbox{span}}}
+%
+%\newcommand{\pderiv}[2]{\Frac{\partial \textstyle #1}{\partial \textstyle #2 }}
+%\newcommand{\pderivm}[3]{\Frac{\partial^{#3}\textstyle #1}{\partial \textstyle
+%#2^{#3} }}
+%
+%\newcommand{\oderiv}[2]{\Frac{d \textstyle #1}{d \textstyle #2 }}
+%\newcommand{\oderivm}[3]{\Frac{d^{#3}\textstyle #1 }{d \textstyle #2^{#3} } }
+%\newcommand{\dderiv}[1]{\stackrel{\cdot}{#1}}
+%
+%
+%\newcommand{\cir}[1]{\stackrel{\circ}{#1}}
+%
+%
+%\newcommand{\vA}{{\vec A}}
+%\newcommand{\va}{{\vec a}}
+%\newcommand{\vB}{{\vec B}}
+%\newcommand{\vb}{{\vec b}}
+%\newcommand{\vC}{{\vec C}}
+%\newcommand{\vc}{{\vec c}}
+%\newcommand{\vD}{{\vec D}}
+%\newcommand{\vd}{{\vec d}}
+%\newcommand{\vE}{{\vec E}}
+%\newcommand{\ve}{{\vec e}}
+%\newcommand{\vF}{{\vec F}}
+%\newcommand{\vf}{{\vec f}}
+%\newcommand{\vG}{{\vec G}}
+%\newcommand{\vg}{{\vec g}}
+%\newcommand{\vh}{{\vec h}}
+%\newcommand{\vI}{{\vec I}}
+%\newcommand{\vi}{{\vec i}}
+%\newcommand{\vj}{{\vec j}}
+%\newcommand{\vJ}{{\vec J}}
+%\newcommand{\vk}{{\vec k}}
+%\newcommand{\vn}{{\vec n}}
+%\newcommand{\vm}{{\vec m}}
+%\newcommand{\vp}{{\vec p}}
+%\newcommand{\vq}{{\vec q}}
+%\newcommand{\vr}{{\vec r}}
+%\newcommand{\vS}{{\vec S}}
+%\newcommand{\vt}{{\vec t}}
+%\newcommand{\vT}{{\vec T}}
+%\newcommand{\vu}{{\vec u}}
+%\newcommand{\vv}{{\vec v}}
+%\newcommand{\vw}{{\vec w}}
+%\newcommand{\vx}{{\vec x}}
+%\newcommand{\vy}{{\vec y}}
+%\newcommand{\vz}{{\vec z}}
+%
+%\newcommand{\vGamma}{{\vec {\Gamma}}}
+%\newcommand{\vPhi}{{\vec {\Phi}}}
+%\newcommand{\vsigma}{{\vec {\sigma}}}
+%\newcommand{\vtheta}{{\vec {\theta}}}
+%
+%\newcommand{\hA}{{\hat {A}}}
+%\newcommand{\ha}{{\hat {a}}}
+%\newcommand{\hB}{{\hat {B}}}
+%\newcommand{\hb}{{\hat {b}}}
+%\newcommand{\hC}{{\hat {C}}}
+%\newcommand{\hc}{{\hat {c}}}
+%\newcommand{\hD}{{\hat {D}}}
+%\newcommand{\hd}{{\hat {d}}}
+%\newcommand{\hE}{{\hat {E}}}
+%\newcommand{\he}{{\hat {e}}}
+%\newcommand{\hF}{{\hat {F}}}
+%\newcommand{\hf}{{\hat {f}}}
+%\newcommand{\hG}{{\hat {G}}}
+%\newcommand{\hg}{{\hat {g}}}
+%\newcommand{\hh}{{\hat {h}}}
+%\newcommand{\hH}{{\hat {H}}}
+%\newcommand{\hI}{{\hat {I}}}
+%\newcommand{\hi}{{\hat {i}}}
+%\newcommand{\hj}{{\hat {j}}}
+%\newcommand{\hJ}{{\hat {J}}}
+%\newcommand{\hk}{{\hat {k}}}
+%\newcommand{\hl}{{\hat {l}}}
+%\newcommand{\hL}{{\hat {L}}}
+%\newcommand{\hn}{{\hat {n}}}
+%\newcommand{\hm}{{\hat {m}}}
+%\newcommand{\hM}{{\hat {M}}}
+%\newcommand{\hP}{{\hat {P}}}
+%\newcommand{\hp}{{\hat {p}}}
+%\newcommand{\hQ}{{\hat {Q}}}
+%\newcommand{\hq}{{\hat {q}}}
+%\newcommand{\hr}{{\hat {r}}}
+%\newcommand{\hR}{{\hat {R}}}
+%\newcommand{\hs}{{\hat {s}}}
+%\newcommand{\hS}{{\hat {S}}}
+%%\newcommand{\ht}{{\hat {t}}}
+%\newcommand{\hT}{{\hat {T}}}
+%\newcommand{\hU}{{\hat {U}}}
+%\newcommand{\hu}{{\hat {u}}}
+%\newcommand{\hV}{{\hat {V}}}
+%\newcommand{\hv}{{\hat {v}}}
+%\newcommand{\hW}{{\hat {W}}}
+%\newcommand{\hw}{{\hat {w}}}
+%\newcommand{\hX}{{\hat {X}}}
+%\newcommand{\hx}{{\hat {x}}}
+%\newcommand{\hY}{{\hat {Y}}}
+%\newcommand{\hy}{{\hat {y}}}
+%\newcommand{\hZ}{{\hat {Z}}}
+%\newcommand{\hz}{{\hat {z}}}
+%
+%\newcommand{\hbfa}{{\hat {\bfa}}}
+%\newcommand{\hbfb}{{\hat {\bfb}}}
+%\newcommand{\hbfn}{{\hat {\bfn}}}
+%\newcommand{\hbfp}{{\hat {\bfp}}}
+%\newcommand{\hbfv}{{\hat {\bfv}}}
+%\newcommand{\hbfx}{{\hat {\bfx}}}
+%\newcommand{\hbfy}{{\hat {\bfy}}}
+%
+%\newcommand{\halpha}{{\hat{\alpha}}}
+%\newcommand{\hbeta}{{\hat{\beta}}}
+%\newcommand{\hdelta}{{\hat{\delta}}}
+%\newcommand{\hDelta}{{\hat{\Delta}}}
+%\newcommand{\heta}{{\hat{\eta}}}
+%\newcommand{\hlambda}{{\hat{\lambda}}}
+%\newcommand{\hmu}{{\hat{\mu}}}
+%\newcommand{\homega}{{\hat{\omega}}}
+%\newcommand{\hOmega}{{\hat{\Omega}}}
+%\newcommand{\hPhi}{{\hat{\Phi}}}
+%\newcommand{\hphi}{{\hat{\phi}}}
+%\newcommand{\hPi}{{\hat{\Pi}}}
+%\newcommand{\hpsi}{{\hat{\psi}}}
+%\newcommand{\hPsi}{{\hat{\Psi}}}
+%\newcommand{\hsigma}{{\hat {\sigma}}}
+%\newcommand{\hxi}{{\hat{\xi}}}
+%
+%\newcommand{\tA}{{\tilde {A}}}
+%\newcommand{\ta}{{\tilde {a}}}
+%\newcommand{\tB}{{\tilde {B}}}
+%\newcommand{\tb}{{\tilde {b}}}
+%\newcommand{\tC}{{\tilde {C}}}
+%\newcommand{\tc}{{\tilde {c}}}
+%\newcommand{\tD}{{\tilde {D}}}
+%\newcommand{\td}{{\tilde {d}}}
+%\newcommand{\tE}{{\tilde {E}}}
+%\newcommand{\te}{{\tilde {e}}}
+%\newcommand{\tF}{{\tilde {F}}}
+%\newcommand{\tf}{{\tilde {f}}}
+%\newcommand{\tG}{{\tilde {G}}}
+%\newcommand{\tg}{{\tilde {g}}}
+%\newcommand{\tH}{{\tilde {H}}}
+%%\newcommand{\th}{{\tilde {h}}}
+%\newcommand{\tI}{{\tilde {I}}}
+%\newcommand{\ti}{{\tilde {i}}}
+%\newcommand{\tj}{{\tilde {j}}}
+%\newcommand{\tJ}{{\tilde {J}}}
+%\newcommand{\tk}{{\tilde {k}}}
+%\newcommand{\tl}{{\tilde {l}}}
+%\newcommand{\tL}{{\tilde {L}}}
+%\newcommand{\tn}{{\tilde {n}}}
+%\newcommand{\tm}{{\tilde {m}}}
+%\newcommand{\tp}{{\tilde {p}}}
+%\newcommand{\tq}{{\tilde {q}}}
+%\newcommand{\tr}{{\tilde {r}}}
+%\newcommand{\tR}{{\tilde {R}}}
+%\newcommand{\tS}{{\tilde {S}}}
+%%\newcommand{\tt}{{\tilde {t}}}
+%\newcommand{\tT}{{\tilde {T}}}
+%\newcommand{\tU}{{\tilde {U}}}
+%\newcommand{\tu}{{\tilde {u}}}
+%\newcommand{\tV}{{\tilde {V}}}
+%\newcommand{\tv}{{\tilde {v}}}
+%\newcommand{\tW}{{\tilde {W}}}
+%\newcommand{\tw}{{\tilde {w}}}
+%\newcommand{\tX}{{\tilde {X}}}
+%\newcommand{\tx}{{\tilde {x}}}
+%\newcommand{\tY}{{\tilde {Y}}}
+%\newcommand{\ty}{{\tilde {y}}}
+%\newcommand{\tZ}{{\tilde {Z}}}
+%\newcommand{\tz}{{\tilde {z}}}
+%
+%\newcommand{\tOmega}{{\tilde {\Omega}}}
+%\newcommand{\tphi}{{\tilde {\phi}}}
+%
+%\newcommand{\mR}{{\mathbb{R}}}
+%
+%
+%
+%
+%\newcommand{\mcD}{{\mathcal{D}}}
+%\newcommand{\mcE}{{\mathcal{E}}}
+%\newcommand{\mcN}{{\mathcal{N}}}
+%\newcommand{\mcP}{{\mathcal{P}}}
+%\newcommand{\mcT}{{\mathcal{T}}}
+%
+%\newcommand{\afsimeq}{\stackrel{F}{\simeq}}
+%
+%\newcommand{\barOmega}{\overline{\Omega}}

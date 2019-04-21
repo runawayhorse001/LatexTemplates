@@ -1,0 +1,125 @@
+%  The Useful package I used
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The following packages help to define the default font and style
+\usepackage{perpage} %the perpage package
+\MakePerPage{footnote} %the perpage package command
+% to fix the footnote does not show
+%\protect\footnote{your note}
+\usepackage{multicol}% for multi column
+\usepackage{pdfpages} %using for adding PDF pages
+\usepackage{helvet}
+\usepackage[T1]{fontenc}
+\usepackage[math]{anttor}
+\usepackage[full]{textcomp}
+\usepackage{libris}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{color}
+\usepackage{subfigure}
+\usepackage[nottoc]{tocbibind}
+\usepackage{amsthm}
+\usepackage{psfrag,graphicx,amsmath,amssymb,amsfonts}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{latexsym}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{epsfig}
+\usepackage{nomencl}   % To generate the Notation
+\renewcommand{\nomname}{List of Notations}
+\renewcommand*{\pagedeclaration}[1]{\unskip\dotfill\hyperpage{#1}}
+\makenomenclature
+ \usepackage{kpfonts} %[uprightRoman, uprightgreeks]
+ \usepackage[T1]{fontenc}
+ \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,pagebackref]{hyperref}
+% \hypersetup{linkcolor = black}
+%\listoffigures
+%\hypersetup{linkcolor = red}
+ \usepackage[subfigure]{tocloft}
+   \setlength\cftbeforefigskip{1 ex} % list of figures
+   \setlength\cftbeforetabskip{1 ex} % list of tables
+   \setlength\cftbeforesecskip{1 em} % spacing before sec title
+   \setlength\cftaftertoctitleskip{1.8 em}
+   \setlength\cftbeforetoctitleskip{4 cm}
+   \setlength{\nomitemsep}{0.5 ex}
+ \usepackage{titlesec}
+ %\titleformat{\subsection} {\large \bfseries \color{blue}} {\thesubsection}{1 ex}{}
+ %\titleformat{\subsubsection}  {\normalsize  \bfseries  \color{blue}}       {\thesubsubsection}{1 ex}{}  %\slshape
+ \setcounter{tocdepth}{3}   % table of content depth
+\definecolor{RoyalBlue}{RGB}{0, 35, 102}
+\usepackage{lineno}  % To add the line number
+\setpagewiselinenumbers
+\modulolinenumbers[1]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings}  % Source Code display style
+
+\lstdefinestyle{customc}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=single,%single,L
+  xleftmargin=\parindent,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{blue!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+\lstdefinestyle{customasm}{
+  belowcaptionskip=1\baselineskip,
+  frame=L,
+  xleftmargin=\parindent,
+  language=[x86masm]Assembler,
+  basicstyle=\footnotesize\ttfamily,
+  commentstyle=\itshape\color{purple!40!black},
+}
+\lstset{escapechar=@,style=customc}
+
+
+%%%%%%%%%%%%%%The Appendix%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage[title,titletoc,toc]{appendix}
+\renewcommand{\appendix}{\newpage
+  \setcounter{section}{0}
+  \setcounter{subsection}{0}
+  \setcounter{figure}{0}
+  \setcounter{table}{0}
+  \addcontentsline{toc}{section}{Appendices}
+  \section*{Appendices}
+  \renewcommand\thesection{\Alph{section}}
+  \renewcommand\thefigure{\Alph{section}\arabic{figure}}
+  \renewcommand\thetable{\Alph{section}\arabic{table}}
+}
+
+%\newcommand{\startappendix}{%
+%\pagebreak%
+%\addcontentsline{toc}{section}{Appendices}%
+%%\fancyhead[L]{{\bfseries Appendices}}%
+%\setcounter{section}{0}%
+%\renewcommand{\thesection}{\Alph{section}}%
+%}
+%
+%\newenvironment{newappendix}[2]%
+%{\gdef\headername{#1}%
+%\phantomsection%
+%\refstepcounter{section}%
+%\addcontentsline{toc}{section}{Appendix \thesection~- #1}%
+%\label{app:#2}}
+%{\fancyhead[R]{Appendix \thesection~- \headername}
+%\newpage}
+%
+%%%%%%%%%%%The headers and footers %%%%%%%%%%%%%%%
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Wenqiang Feng}
+\chead{Prelim Exam note  for Numerical Analysis}
+\rhead{Page \thepage}
+\cfoot{ Page\ \thepage\ of\ \protect\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}

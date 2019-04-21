@@ -1,0 +1,808 @@
+\documentclass[amstex]{beamer}
+\usepackage{etex}
+\reserveinserts{28}
+\usepackage{movie15}
+\usepackage{CJK}
+\usepackage{subcaption}
+\setbeamercolor{structure }{bg=orange,fg=white }
+\usepackage{psfrag,graphicx,amsmath,amssymb}
+\usepackage{tikz,xcolor}
+\usepackage{lmodern}   
+ \usepackage[labelformat=empty,font=scriptsize,skip=0pt,justification=justified,singlelinecheck=false]{caption}
+\usepackage[justification=centering]{caption}
+%
+\RequirePackage{pgflibraryplotmarks}
+\usepackage{tkz-euclide}
+\usepackage{cmbright}
+\newcommand*{\xMin}{0}%
+\newcommand*{\xMax}{12}%
+\newcommand*{\yMin}{0}%
+\newcommand*{\yMax}{12}%
+%\setbeamertemplate{theorems}[unnumbered]
+%remove the icon
+\setbeamertemplate{bibliography item}{}
+%remove line breaks
+\setbeamertemplate{bibliography entry title}{}
+\setbeamertemplate{bibliography entry location}{}
+\setbeamertemplate{bibliography entry note}{}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{verbatim}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{latexsym}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{hyperref}
+%\usepackage[colorlinks=true,citecolor=blue]{hyperref}
+\usepackage{multirow}
+\usetikzlibrary{arrows,calc}
+\usetikzlibrary{shapes,fit,arrows,positioning,decorations.pathmorphing}
+\tikzstyle{vertex} = [circle, draw, thick, text centered]
+\tikzstyle{edge} = [draw, thick,->]
+\usetheme{Warsaw}
+\input{feng_symbol}
+\usepackage{beamerthemeshadow}
+\setbeamertemplate{theorems}[numbered]
+\newenvironment{sequation}{\begin{equation}\small}{\end{equation}}
+%\setbeamertemplate{proposition}[numbered]
+\hypersetup{
+colorlinks=false,
+citecolor=blue
+}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+%change the color of the block
+\setbeamercolor{block title}{fg=white, bg=orange}
+\setbeamercolor{block body}{fg=white, bg=orange!70}
+% set block example 
+\setbeamercolor*{block title example}{fg=white,
+bg= orange}
+\setbeamercolor*{block body example}{fg= white,
+bg= orange}
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+\tcbuselibrary{skins}
+
+\newcommand{\gatherblock}[2][]{\begin{gather*}\tcboxmath[#1]{#2}\end{gather*}}
+%\addtobeamertemplate{block begin}{%
+%  \setlength{\textwidth}{0.9\textwidth}%
+%}{}
+%
+%\addtobeamertemplate{block alerted begin}{%
+%  \setlength{\textwidth}{0.9\textwidth}%
+%}{}
+\addtobeamertemplate{block example begin}{%
+  \setlength{\textwidth}{0.9\textwidth}%
+}{}
+% define the 
+%\usepackage[customcolors,shadow,roundedcorners]{dynblocks}
+\usepackage[customcolors,roundedcorners]{dynblocks}
+% setting the block body color
+\usebeamercolor{block body}
+\definecolor{my block body}{named}{orange}
+\setbordercolor{my block body}
+\setblockcolor{my block body}
+% new enviroment always centered
+
+\usepackage{environ}
+\newsavebox\mybox
+% new environment cdyn: #1 => overlay specification
+\NewEnviron{cdyn}[1]{%
+    \sbox{\mybox}{$\BODY$}%
+    \begin{center}
+    \begin{dynblock}
+    \opaqueblock<#1>[\wd\mybox]{\[\BODY\]}
+    \end{dynblock}
+    \end{center}
+}{}%
+
+%Changing the section and subsection font color in contents page in beamer
+\setbeamercolor{section in toc}{fg=black}
+\setbeamercolor{subsection in toc}{fg=black}
+% changing the bullet color 
+\setbeamercolor*{item}{fg=orange!60}
+
+% change the color of section in contents
+\setbeamertemplate{sections/subsections in toc}[ball]
+\setbeamerfont{section number projected}{%
+  family=\rmfamily,series=\bfseries,size=\normalsize}
+\setbeamercolor{section number projected}{bg=orange,fg=white}
+
+\colorlet{titleleft}{white!5!orange}
+\colorlet{titleright}{orange}
+\setbeamercolor*{frametitle}{fg=white,bg=orange!70}
+%\setbeamercolor{frametitle}{fg=white,bg=orange}
+%\setbeamercolor{title}{use=structure,fg=white,bg=orange}
+\setbeamercolor{section in head/foot}{bg=orange}
+\setbeamercolor{subsection in sidebar}{fg=orange}
+\setbeamercolor{section in head/foot}{fg=white, bg=orange}
+\setbeamercolor{title}{use=structure,fg=white,bg=orange}
+\setbeamercolor{institute in head/foot}{fg=orange,bg=orange}
+\beamertemplatenavigationsymbolsempty
+\setbeamercolor{mycolor}{fg=red,bg=blue}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pgfdeclaremask{logomask}{ustc-tower-mask}
+\pgfdeclareimage[mask=logomask,height=1.5cm]{logo}{Images/index.png}
+
+\pgfdeclaremask{ustcmask}{ustc-mark-mask}
+\pgfdeclareimage[mask=ustcmask,height=0.32cm]{ustc}{figures/index.png}
+
+\pgfdeclaremask{titlemask}{ustc-ox2-mask}
+\pgfdeclareimage[mask=titlemask,height=2.5cm]{title}{Images/index.png}
+\logo{\vbox{\hbox{\hfill\pgfuseimage{logo}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                           ���ƻõ�Ƭ---�ض������塢�ֺ�����                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\song}{\CJKfamily{song}}    % ����   (Windows�Դ�simsun.ttf)
+\newcommand{\fs}{\CJKfamily{fs}}        % ������ (Windows�Դ�simfs.ttf)
+\newcommand{\kai}{\CJKfamily{kai}}      % ����   (Windows�Դ�simkai.ttf)
+\newcommand{\hei}{\CJKfamily{hei}}      % ����   (Windows�Դ�simhei.ttf)
+\newcommand{\li}{\CJKfamily{li}}        % ���   (Windows�Դ�simli.ttf)
+\newcommand{\you}{\CJKfamily{you}}      % ��Բ   (Windows�Դ�simyou.ttf)
+\newcommand{\chuhao}{\fontsize{42pt}{\baselineskip}\selectfont}     % �ֺ�����
+\newcommand{\xiaochuhao}{\fontsize{36pt}{\baselineskip}\selectfont} % �ֺ�����
+\newcommand{\yichu}{\fontsize{32pt}{\baselineskip}\selectfont}      % �ֺ�����
+\newcommand{\yihao}{\fontsize{28pt}{\baselineskip}\selectfont}      % �ֺ�����
+\newcommand{\erhao}{\fontsize{21pt}{\baselineskip}\selectfont}      % �ֺ�����
+\newcommand{\xiaoerhao}{\fontsize{18pt}{\baselineskip}\selectfont}  % �ֺ�����
+\newcommand{\sanhao}{\fontsize{15.75pt}{\baselineskip}\selectfont}  % �ֺ�����
+\newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont}      % �ֺ�����
+\newcommand{\xiaosihao}{\fontsize{12pt}{\baselineskip}\selectfont}  % �ֺ�����
+\newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}    % �ֺ�����
+\newcommand{\xiaowuhao}{\fontsize{9pt}{\baselineskip}\selectfont}   % �ֺ�����
+\newcommand{\liuhao}{\fontsize{7.875pt}{\baselineskip}\selectfont}  % �ֺ�����
+\newcommand{\qihao}{\fontsize{5.25pt}{\baselineskip}\selectfont}    % �ֺ�����
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{thm2}{Theorem}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{pro}{Proposition}[section]
+%\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{lem}[thm]{Lemma}
+    \newcommand{\mD}{\mathfrak D}
+    \newcommand{\md}{\mathfrak d}
+    \newcommand{\mA}{\mathfrak A}
+    \newcommand{\ma}{\mathfrak a}
+
+
+    \def\x{\mbox{\boldmath $x$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%define footer
+% \makeatletter
+% \usefoottemplate{
+%   \vbox{\tiny%
+%     \hbox{%
+%       \setbox\beamer@linebox=\hbox to\paperwidth{%
+%         \hbox to.5\paperwidth{\hfill\tiny\color{white}\textbf{\insertshortauthor,\quad\insertshortinstitute}\hskip.1cm\lower 0.35em\hbox{\pgfuseimage{ustc}}\hskip.3cm}%
+%         \hbox to.5\paperwidth{\hskip.3cm\tiny\color{white}\textbf{\insertshorttitle}\hfill}\hfill}%
+%       \ht\beamer@linebox=2.625ex%
+%       \dp\beamer@linebox=0pt%
+%       \setbox\beamer@linebox=\vbox{\box\beamer@linebox\vskip1.125ex}%
+%       \color{orange!90}\hskip-\Gm@lmargin\vrule width.5\paperwidth
+%       height\ht\beamer@linebox\color{orange}\vrule width.5\paperwidth
+%       height\ht\beamer@linebox\hskip-\paperwidth%
+%       \hbox{\box\beamer@linebox\hfill}\hfill\hskip-\Gm@rmargin}
+%   }
+% }
+% \makeatother
+%\makeatletter
+%\usefoottemplate{
+%  \vbox{
+%    \hbox{%
+%      \setbox\beamer@linebox=\hbox to\paperwidth{%
+%        \hbox to.5\paperwidth{\hfill\tiny\color{white}\textbf{\insertshortauthor\quad\insertshortinstitute}\hskip.5cm\lower 0.35em                                \hbox{\pgfuseimage{ustc}}
+%        \hskip.3cm}%
+%        \hbox to.5\paperwidth{\hskip.3cm\tiny\color{white}\textbf{\insertshorttitle}\hfill}\hfill}%
+%      \ht\beamer@linebox=2.625ex%
+%      \dp\beamer@linebox=0pt%
+%      \setbox\beamer@linebox=\vbox{\box\beamer@linebox\vskip1.125ex}%
+%      \color{orange!90}\hskip-\Gm@lmargin\vrule width.5\paperwidth
+%      height\ht\beamer@linebox\color{orange}\vrule width.5\paperwidth
+%      height\ht\beamer@linebox\hskip-\paperwidth%
+%      \hbox{\box\beamer@linebox\hfill}\hfill\hskip-\Gm@rmargin}
+%  }
+%}
+%\makeatother
+\setbeamercolor{mycolor1}{fg=white,bg=orange!70}
+\setbeamercolor{mycolor}{fg=white,bg=orange}
+
+\defbeamertemplate*{footline}{shadow theme}{%
+\leavevmode%
+\hbox{\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm plus1fil,rightskip=.3cm]{mycolor1}%
+    \usebeamerfont{author in head/foot}\hfill\insertshortauthor \quad (\insertshortinstitute)
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{mycolor}%
+    \usebeamerfont{title in head/foot}\insertshorttitle\hfill%
+\end{beamercolorbox}%
+%\begin{beamercolorbox}[wd=.1\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{mycolor}%
+%\hfill\insertframenumber\,/\,\inserttotalframenumber
+%\end{beamercolorbox}
+}%
+\vskip0pt%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+  \begin{CJK*}{GBK}{kai}
+    \title[Preconditioned Steepest Descent Solvers for TFE Equations]{Multigrid Preconditioned Steepest Descent Solvers for Aviles-Giga type Energy: Application to Thin Film Epitaxy}
+    %\subtitle{Run to America}
+    \author{Wenqiang Feng}
+    \institute[UTK]{
+   Department of Mathematics\\
+    The University of Tennessee at Knoxville \\
+    \vspace{1em}
+    Joint work with : Dr.  Steven M. Wise, Dr. Abner J. Salgado, Dr. Cheng Wang \\
+    \vspace{1em}
+    %{ Jointed work: Abner Salgado, Steven Wise and Cheng Wang \\}
+    {\xiaowuhao {\bf The 40th SIAM Southeastern Atlantic Section Conference}}
+}
+
+    \date{March 13, 2016}
+    \logo{%
+ % \includegraphics[width=1cm,height=1cm,keepaspectratio]{figures/index.png}%
+  \hspace{\dimexpr\paperwidth-2cm-2pt}%
+  \includegraphics[width=0.9cm,height=0.9cm,keepaspectratio]{figures/index.png}%
+}
+    %\titlegraphic{\pgfuseimage{title}}
+    \frame{\titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Outlines}
+ \begin{frame}
+      \frametitle{\wuhao{\bf  Outline}}
+        \begin{itemize}%[<+-| alert@+>]
+          \item \textcolor{orange}{Aviles-Giga Type Energy}
+           \item \textcolor{orange}{Thin Film Epitaxial Equations}
+          \item \textcolor{orange}{Convex Splitting Schemes}
+ 		  \item \textcolor{orange}{Preconditioned Steepest Decent Algorithm}
+ 	      \item \textcolor{orange}{Convergence Analysis}
+          \item \textcolor{orange}{Numerical Simulation Results}
+        \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%               SECTION                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{frame}
+ 	\frametitle{\wuhao{\bf  Outline}}
+ 	\begin{itemize}%[<+-| alert@+>]
+ 		\item \textcolor{orange}{Aviles-Giga Type Energy}
+ 		\item \textcolor{orange!10}{Thin Film Epitaxial Equations}
+ 		\item \textcolor{orange!10}{Convex Splitting Schemes}
+ 		\item \textcolor{orange!10}{Preconditioned Steepest Decent Algorithm}
+ 		\item \textcolor{orange!10}{Convergence Analysis}
+ 		\item \textcolor{orange!10}{Numerical Simulation Results}
+ 	\end{itemize}
+ \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{frame}
+ \frametitle{\wuhao{\bf Aviles-Giga Type Energy}}
+Aviles-Giga Type Energy:
+\begin{equation*}\label{energy}
+E(h) = \int_\Omega\left\{\epsilon\Psi(\phi) +W(p,q) +      \frac{\epsilon^2}{2}|\Delta \phi|^2 \right\}d{\bf x}
+\end{equation*} 
+where
+\begin{itemize}
+\item $ \phi:\Omega \subseteq {\bf R^2}\rightarrow {\bf R}$ is the height of the film;
+\item $\Psi$ is a height-dependent energy density; 
+\item $W$ is the slope energy density; 
+\item $p = \partial_x \phi$ and $q = \partial_y \phi$ are the height function gradients; 
+\item $\epsilon >0$ is a constant; 
+\item $\Delta \phi$ is a small-slope approximation of the curvature. 
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}
+% \frametitle{\wuhao{\bf Ehrlich-Schwoebel Effect}}
+%\begin{figure}[htp]
+%\centering
+%\includegraphics[width=\textwidth]{figures/esbarrier.png}\hfill
+%\caption{A schematic image of potential surface topography near a stage. $\Delta E_{ES}$ is the Ehrlich-Schwoebel barrier that the atom on the surface (a dark circle) has to bridge in addition to the $E_{diff}$ diffuse barrier on the terrace in order to cross the edge of stage and descend to the lower terrace. \\
+%Figure from \url{http://eng.thesaurus.rusnano.com/wiki/article555}}
+%\end{figure}
+%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%               SECTION                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{frame}
+ 	\frametitle{\wuhao{\bf  Outline}}
+ 	\begin{itemize}%[<+-| alert@+>]
+ 		\item \textcolor{orange!10}{Aviles-Giga Type Energy}
+ 		\item \textcolor{orange}{Thin Film Epitaxial Equations}
+ 		\item \textcolor{orange!10}{Convex Splitting Schemes}
+ 		\item \textcolor{orange!10}{Preconditioned Steepest Decent Algorithm}
+ 		\item \textcolor{orange!10}{Convergence Analysis}
+ 		\item \textcolor{orange!10}{Numerical Simulation Results}
+ 	\end{itemize}
+ \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{frame}
+ \frametitle{\wuhao{\bf  Thin Film Epitaxial Growth Energy}}
+ Thin Film Epitaxial Growth Energy:
+\begin{equation}\label{eqn:etfenergy}
+E(\phi) = \int_\Omega\left\{F(|\nabla \phi|)+      \frac{\epsilon^2}{2}|\Delta \phi|^2 \right\}d{\bf x}
+\end{equation} 
+\begin{enumerate}
+\item Without slope selection:
+\begin{eqnarray*}
+F_1(|\nabla \phi|) = -\frac{1}{2} \ln{(1+|\nabla \phi|^2)}
+\end{eqnarray*}
+\item With slope selection: 
+\begin{eqnarray*}
+F_2(|\nabla \phi|) = \frac{1}{4} (|\nabla \phi|^2-1)^2
+\end{eqnarray*}
+\end{enumerate}
+{\bf Note:}
+\begin{itemize}
+\item 1st term of (\ref{eqn:etfenergy}) represents a continuum description of the Ehrlich-Schwoebel effect
+\item 2nd term of (\ref{eqn:etfenergy}) represents the surface diffusion effect
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{frame}
+ \frametitle{\wuhao{\bf Ehrlich-Schwoebel Effect}}
+\begin{figure}[htp]
+\centering
+\includegraphics[width=\textwidth]{figures/esbarrier.png}\hfill
+\caption{A schematic image of potential surface topography near a stage. $\Delta E_{ES}$ is the Ehrlich-Schwoebel barrier that the atom on the surface (a dark circle) has to bridge in addition to the $E_{diff}$ diffuse barrier on the terrace in order to cross the edge of stage and descend to the lower terrace. \\
+Figure from \url{http://eng.thesaurus.rusnano.com/wiki/article555}}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{\wuhao{\bf Thin Film Epitaxial Equations with Slope Selection}}
+\begin{itemize}
+\item Energy:
+\begin{equation*}
+E(h) = \int_\Omega\left\{\frac{1}{4} (|\nabla \phi|^2-1)^2+      \frac{\epsilon^2}{2}|\Delta \phi|^2 \right\}d{\bf x}
+\end{equation*} 
+\item Chemical potential:
+\begin{equation*}
+\mu := \frac{\delta E}{\delta \phi}  =  - \nabla \cdot 
+  \left( \left| \nabla \phi \right|^2 \nabla \phi \right) 
+  +  \Delta \phi + \epsilon^2 \Delta^2 \phi.
+\end{equation*}
+\item Thin Film Epitaxy Equations with Slope Selection
+\begin{itemize}
+\item $L^2$ gradient flow:
+\begin{equation*}
+\frac{\partial \phi}{\partial t}=-M\mu.
+\end{equation*}
+
+\item $H^{-1}$ gradient flow:
+\begin{equation*}
+\frac{\partial \phi}{\partial t}=\Delta(M \mu).
+\end{equation*} 
+\end{itemize}
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}
+%\frametitle{\wuhao{\bf Thin Film Epitaxy Equations with Slope Selection}}
+%The initial-boundary-value problem:
+%\begin{equation*}
+%\left\{ \begin{array}{ll}
+%h_t = -\nabla\cdot\left[(1-G(|\nabla h|^2))\nabla h+\epsilon \nabla\Delta h\right],&  \text{in}~ \Omega \times (0, T], \\
+% h(\cdot,t) \text{is periodic}, & \forall~ t\in [0,T],\\
+%  h(x,0) = h_0(x), & \forall~ x\in\Omega,
+%\end{array} \right. 
+%\end{equation*}
+%where
+%\begin{equation*}
+%G(s)=\left\{ \begin{array}{ll}
+%G_1(s)=\frac{s}{1+s},~&\text{ without slope selection}, \\
+%G_2(s) = s, &\text{ with slope selection}.
+%\end{array} \right.
+%\end{equation*}
+%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%               SECTION                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{frame}
+ 	\frametitle{\wuhao{\bf  Outline}}
+ 	\begin{itemize}%[<+-| alert@+>]
+ 		\item \textcolor{orange!10}{Aviles-Giga Type Energy}
+ 		\item \textcolor{orange!10}{Thin Film Epitaxial Equations}
+ 		\item \textcolor{orange}{Convex Splitting Schemes}
+ 		\item \textcolor{orange!10}{Preconditioned Steepest Decent Algorithm}
+ 		\item \textcolor{orange!10}{Convergence Analysis}
+ 		\item \textcolor{orange!10}{Numerical Simulation Results}
+ 	\end{itemize}
+ \end{frame}
+ 
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+	\frametitle{\wuhao{\bf General Convex Splitting Scheme}}
+	%\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+	%\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+	%\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+	%\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+	%\tikzstyle{arrow} = [thick,->,>=stealth]
+	\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=white]
+	\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=white]
+	\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=white]
+	\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=white]
+	\tikzstyle{arrow} = [thick,->,>=stealth]
+	
+	\begin{center}
+		\begin{tikzpicture}[node distance=2cm]
+		\node (start) [startstop] {Total energy: $\mathcal{E}(\phi)$};
+		\node (pro1) [process, below left of=start,node distance=1.0in] {contractive : $\mathcal{E}_c$};
+		\node (pro2) [process, below right of=start,node distance=1.0in] {expansive: $\mathcal{E}_e$};
+		\node (out1) [io, below  of=pro1,node distance=0.6in] {$\mu_c(\phi)=\delta_\phi\mathcal{E}_c$};
+		\node (out2) [io, below  of=pro2,node distance=0.6in] {$\mu_e(\phi)=\delta_\phi\mathcal{E}_e$};
+		\node (out3) [startstop, below of=start,node distance=2.0in] {$\tilde\mu(\phi^{k+1},\phi^k)$=\color{orange}{$\mu_c(\phi^{k+1})$}-\color{blue}{$\mu_e(\phi^k)$}};
+		\draw [arrow] (start) --node[anchor=east]{splitting} (pro1);
+		\draw [arrow] (start) --node[anchor=west]{splitting} (pro2);
+		\draw [arrow] (pro1) --node[anchor=east]{$\delta_\phi$} (out1);
+		\draw [arrow] (pro2) --node[anchor=west]{$\delta_\phi$} (out2);
+		\draw [arrow] (out1) --node[anchor=east]{\textcolor{orange}{implicit}} (out3);
+		\draw [arrow] (out2) --node[anchor=west]{\textcolor{blue}{explicit}} (out3);
+		\end{tikzpicture}
+		\begin{eqnarray*}
+			{\color{blue}L^2}:  \phi^{k+1}-\phi^k = -s\tilde\mu \quad\quad {\color{blue} H^{-1}}: \phi^{k+1}-\phi^k = s\Delta\tilde\mu
+		\end{eqnarray*}
+	\end{center}
+	%\myblue{Note}: $\mathcal{E}_c(\phi)$ and $\mathcal{E}_c(\phi)$ are strictly convex.The Convex-Splitting 
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+	\frametitle{\wuhao{\bf Convex Splitting Scheme for TFE equation}}
+	\begin{itemize}
+		\item Free energy
+		\begin{eqnarray*}
+			E(\phi) = \int_\Omega\left\{ \frac{1}{4}\big(\left| \nabla \phi  \right|^2-1\big)^2
+			+ \frac{\epsilon^2}{2} \left| \Delta \phi \right|^2 \right\}d{\bf x} , 
+		\end{eqnarray*} 
+		\item Convex Splitting Choice: $E (\phi) = E_c (\phi) - E_e (\phi)$
+		\begin{eqnarray*} 
+			&& 
+			E_c (\phi) = \int_\Omega  \frac{1 }{4}  |\nabla\phi|^4+\frac{\epsilon^{2} }{2} |\Delta\phi|^2 d{\bf x}  ,~~
+			E_e (\phi) = \int_\Omega\frac{1}{2}|\nabla\phi|^2  d{\bf x}  , \nonumber
+		\end{eqnarray*} 
+		\item Convex Splitting Scheme 
+    	{\small \begin{eqnarray*} 
+			\frac{\phi^{k+1} - \phi^k}{s} &=& \nabla \cdot 
+			\left( \left| \nabla \phi^{k+1} \right|^2 \nabla \phi^{k+1}  \right) 
+			- \epsilon^2 \Delta^2 \phi^{k+1}  -  \Delta \phi^{k}\\
+			\frac{\phi^{k+1} - \phi^k}{s} &=& \Delta\left( -\nabla \cdot 
+						\left( \left| \nabla \phi^{k+1} \right|^2 \nabla \phi^{k+1}  \right) 
+						+ \epsilon^2 \Delta^2 \phi^{k+1} +  \Delta \phi^{k} \right)
+		\end{eqnarray*}}
+	\end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+	\frametitle{\wuhao{\bf Operator Format of the  Scheme for TFE equation ($L^{2}$)}}
+		\begin{itemize}
+			\item Convex Splitting Scheme ($L^2$)
+			\begin{eqnarray*} 
+				\frac{\phi^{k+1} - \phi^k}{s} &=& \nabla \cdot 
+				\left( \left| \nabla \phi^{k+1} \right|^2 \nabla \phi^{k+1}  \right) 
+				- \epsilon^2 \Delta^2 \phi^{k+1}  -  \Delta \phi^{k}
+			\end{eqnarray*}
+			
+			\item Nonlinear system $\mathcal{N}(\phi)=f$, where
+			\begin{eqnarray*}
+				\mathcal{N}(\phi) :=\phi-\phi^k- s\nabla \cdot \left( \left| \nabla \phi\right|^2 \nabla \phi \right) +s\epsilon^2 \Delta^2 \phi,
+				\quad f=-s\Delta \phi^{k}
+			\end{eqnarray*}
+			
+			\item Convex energy ($L^2$)
+			\begin{eqnarray*}
+				J_2(\phi) &=&  \frac{1}{2}\norm{\phi-\phi^k}^2_{L^2}+\frac{s}{4}\norm{\nabla\phi}^4_{L^4}+ \frac{s\epsilon^2}{2} \nrm{ \Delta \phi }^2_{L^2}-(f,\phi)
+			\end{eqnarray*} 
+%			\item Convex energy ($H^{-1}$)
+%			\begin{eqnarray*}
+%			J_{-1}(\phi) &=&  \frac{1}{2}\norm{\phi-\phi^k}^2_{H^{-1}}+\frac{s}{4}\norm{\nabla\phi}^4_{L^4}+ \frac{s\epsilon^2}{2} \nrm{ \Delta \phi }^2_{L^2}-(f,\phi)
+%		     \end{eqnarray*}
+%			\item Linearization system for Search Direction $\mathcal{L}(d_k) = r^k$
+%			\begin{equation*}
+%			{\color{blue}MG}: \mathcal{L}(d_k) = d_k- s\Delta d_k +s\epsilon^2 \Delta^2 d_k=r^k
+%			\end{equation*} 
+		\end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+	\frametitle{\wuhao{\bf Operator Format of the  Scheme for TFE equation ($H^{-1}$)}}
+	\begin{itemize}
+		\item Convex Splitting Scheme ($H^{-1}$)
+		{\small	\begin{eqnarray*} 
+				\frac{\phi^{k+1} - \phi^k}{s} &=& \Delta\left( -\nabla \cdot 
+				\left( \left| \nabla \phi^{k+1} \right|^2 \nabla \phi^{k+1}  \right) 
+				+ \epsilon^2 \Delta^2 \phi^{k+1} +  \Delta \phi^{k} \right)
+			\end{eqnarray*}}
+		
+		\item Nonlinear system $\mathcal{N}(\phi)=f$, where
+		{\small \begin{eqnarray*}
+		 \mathcal{N}(\phi) :=-\Delta^{-1}(\phi-\phi^k)- s\nabla \cdot \left( \left| \nabla \phi\right|^2 \nabla \phi \right) +s\epsilon^2 \Delta^2 \phi,
+			\quad f=-s\Delta \phi^{k}
+		\end{eqnarray*}}
+		
+		\item Convex energy ($H^{-1}$)
+		\begin{eqnarray*}
+			J_{-1}(\phi) &=&  \frac{1}{2}\norm{\phi-\phi^k}^2_{H^{-1}}+\frac{s}{4}\norm{\nabla\phi}^4_{L^4}+ \frac{s\epsilon^2}{2} \nrm{ \Delta \phi }^2_{L^2}-(f,\phi)
+		\end{eqnarray*}
+		%			\item Linearization system for Search Direction $\mathcal{L}(d_k) = r^k$
+		%			\begin{equation*}
+		%			{\color{blue}MG}: \mathcal{L}(d_k) = d_k- s\Delta d_k +s\epsilon^2 \Delta^2 d_k=r^k
+		%			\end{equation*} 
+	\end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%               SECTION                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\begin{itemize}%[<+-| alert@+>]
+		\item \textcolor{orange!10}{Aviles-Giga Type Energy}
+		\item \textcolor{orange!10}{Thin Film Epitaxial Equations}
+		\item \textcolor{orange!10}{Convex Splitting Schemes}
+		\item \textcolor{orange}{Preconditioned Steepest Decent Algorithm}
+		\item \textcolor{orange!10}{Convergence Analysis}
+		\item \textcolor{orange!10}{Numerical Simulation Results}
+	\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{\wuhao{\bf The Steepest Decent Algorithm}}
+	Steepest descent algorithm: minimize $J	 (x): \mathbb{R}^n\to \mathbb{R}$
+	\begin{center}
+		\colorbox{orange}{\color{white}{$x_{k+1}=x_{k} +\alpha_k d_k, \quad x_0\in\mathbb{R}^n$}}
+	\end{center}
+	where
+	\begin{itemize}
+		\item $d_k$ is search direction of steepest descent of $J$ at point $x_k$:
+		\begin{eqnarray*}
+			d_k := -\nabla J(x_{k})=-r_k
+		\end{eqnarray*}
+		\item $\alpha_k$ is search step 
+		%\begin{eqnarray*}
+		$\alpha_k :=\argmin_{\alpha\geq 0}  J(x_{k}-\alpha\nabla J(x_{k}))$
+		%\end{eqnarray*}
+	\end{itemize}
+	{\bf Note:}
+	\begin{itemize}
+		\item This requires one dimensional optimization over $\alpha>0$,
+		\item $d_k$ is descent direction because $d_k^T\nabla J(x_{k})=-\norm{\nabla J(x_{k})}^2<0$, whenever $\nabla J(x_{k})\neq 0$.
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{\wuhao{\bf Properties of Steepest Descent}}
+	%\begin{lemma}[\cite{braess2007finite}]
+	%The Kantorovich Inequality: Let $A$ be a symmetric, positive definite matrix with spectral condition number $\kappa=\frac{\lambda_{\max}(A)}{\lambda_{\min}(A)}$. Then
+	%\begin{eqnarray*}
+	%\frac{(x'Ax)(x'A^{-1}x)}{x'x}^2\leq \big(\frac{1}{2}\sqrt{\kappa}\frac{1}{2}\sqrt{\kappa^{-1}}\big)^2
+	%\end{eqnarray*}
+	%for Every vector $x\neq 0$.
+	%\end{lemma}      
+	\begin{theorem}[\cite{braess2007finite}]
+		Suppose A is a p.s.d. matrix with spectral condition number $\kappa$, then the gradient method to $f(x)=\frac{1}{2}x'Ax-b'x$ generates a sequence with 
+		\begin{eqnarray*}
+			\norm{x_k-x^*}_A\leq \bigg(\frac{\kappa-1}{\kappa+1}\bigg)^k \norm{x_0-x^*}_A
+		\end{eqnarray*}
+	\end{theorem}
+	{\bf Note}: Convergence behavior for large condition numbers:
+	If the condition number $\kappa$ is very large, then the convergence rate
+	\begin{eqnarray*}
+		{\color{blue}\frac{\kappa-1}{\kappa+1}\approx 1- \frac{2}{\kappa} \to 1,}
+	\end{eqnarray*}
+	which indicates the algorithm will be very slow.
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{\wuhao{\bf Preconditioned Steepest Decent Algorithm}}
+	\begin{enumerate}
+	\item $L^2$ gradient flow {\color{blue}{\cite{feng2015fast,huang2007preconditioned}}}
+    \begin{itemize}
+    	\item  Nonlinear system $\mathcal{N}(\phi)=f$, where
+    	\begin{eqnarray*}
+    		\mathcal{N}(\phi) :=\phi-\phi^k- s\nabla \cdot \left( \left| \nabla \phi\right|^2 \nabla \phi \right) +s\epsilon^2 \Delta^2 \phi
+    	\end{eqnarray*}
+    	\item Linearized system for Search Direction $\mathcal{L}(d_k) =f-\mathcal{N}(\phi)$
+    	   \begin{eqnarray*}
+    	   {\color{blue} \mathcal{L}(d^k) := d^k- s \Delta d^k +s\epsilon^2 \Delta^2 d^k}
+    	   \end{eqnarray*}
+    \end{itemize}
+    
+	\item $H^{-1}$ gradient flow {\color{blue}{\cite{feng2015multigrid}}}
+	    \begin{itemize}
+	    	\item  Nonlinear system $\mathcal{N}(\phi)=f$, where
+		{\small \begin{eqnarray*}
+		\mathcal{N}(\phi) :=-\Delta^{-1}(\phi-\phi^k)- s\nabla \cdot \left( \left| \nabla \phi\right|^2 \nabla \phi \right) +s\epsilon^2 \Delta^2 \phi
+				\end{eqnarray*}}
+		\item Linearized system for Search Direction $\mathcal{L}(d_k) =f-\mathcal{N}(\phi)$ 
+				{\small \begin{eqnarray*}
+					{\color{blue}	\mathcal{L}(d^k) :=-\Delta^{-1} d^k- s\Delta d^k +s\epsilon^2 \Delta^2 d^k}
+					\end{eqnarray*}}
+	     \end{itemize}
+	\end{enumerate}
+		
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%               SECTION                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\begin{itemize}%[<+-| alert@+>]
+		\item \textcolor{orange!10}{Aviles-Giga Type Energy}
+		\item \textcolor{orange!10}{Thin Film Epitaxial Equations}
+		\item \textcolor{orange!10}{Convex Splitting Schemes}
+		\item \textcolor{orange!10}{Preconditioned Steepest Decent Algorithm}
+		\item \textcolor{orange}{Convergence Analysis}
+		\item \textcolor{orange!10}{Numerical Simulation Results}
+	\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{\wuhao{\bf Convergence Analysis}}
+	\begin{theorem} \label{theorem:convergence}
+Let $\phi^{k+1,(n)}$ be the sequence generated by our algorithm. Then there exists a constant $C^*>0$ such that
+\begin{eqnarray*}
+e_n \leq (C^*)^n e_0 ,  \quad \mbox{with} \quad  C^* = 1 - \frac{1}{2 C_3 C_4} .  
+ \label{error convergence-0}
+\end{eqnarray*}
+\end{theorem}
+\begin{corollary}\label{cor:phicov}
+  Let $\phi^{k+1,(n)}$ be the sequence generated by our algorithm. Then 
+  {\scriptsize\begin{eqnarray*} 
+    \frac12 \| \phi^{k+1,(n)} - \phi \|_{\square,h}^2 + \frac{\epsilon^2 s}{2} \| \Delta_h (\phi^{k+1,(n)} - \phi) \|_2^2 \le s ( C^*)^n R_k, \label{error-phi-2}   
+  \end{eqnarray*}}
+  where 
+  {\scriptsize\begin{eqnarray*}
+   R_k  = \frac14 ( \norm{\nabla_h \phi^k}_4^4 - \norm{\nabla_h \phi}_4^4 )
+      +\frac{\epsilon^2}{2} ( \norm{\Delta_h \phi^k}_2^2  - \norm{\Delta_h \phi}_2^2 )
+      - ( \Delta_h \phi^k , \phi^k - \phi ).
+  \end{eqnarray*}}
+\end{corollary}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\begin{itemize}%[<+-| alert@+>]
+		\item \textcolor{orange!10}{Aviles-Giga Type Energy}
+		\item \textcolor{orange!10}{Thin Film Epitaxial Equations}
+		\item \textcolor{orange!10}{Convex Splitting Schemes}
+		\item \textcolor{orange!10}{Preconditioned Steepest Decent Algorithm}
+		\item \textcolor{orange!10}{Convergence Analysis}
+		\item \textcolor{orange}{Numerical Simulation Results}
+	\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{frame}
+ 	\frametitle{\wuhao{\bf Numerical Results: Convergence Rate}}
+ 	
+ 	In this test, $\Omega=[0, 3.2]^2$, $\epsilon=0.1$, $dt=0.1h^2$ and $T=3.2\times 10^{-2}$ {\color{blue}\cite{feng2015multigrid}}%\cite{feng2015multigrid}
+ 	\scriptsize\begin{eqnarray*}
+ 		\phi_0(x,y) = 0.1\big(\sin({3\pi x}/{3.2})\sin({2\pi y}/{3.2})+\sin({5\pi x}/{3.2})\sin({5\pi y}/{3.2})\big). 
+ 	\end{eqnarray*} 
+ 	\begin{table}[!htb]
+ 		\begin{center}
+ 			%\caption{$L_h^2$ Cauchy convergence test for source (\ref{eqn:source3}).} \label{tab:cov}
+ 			\begin{tabular}{cccccc}
+ 				%\hline &&\multicolumn{2}{c}{FAS}\\
+ 				\hline &&\multicolumn{2}{c}{PSD-$L^2$}&\multicolumn{2}{c}{PSD-$H^{-1}$}\\
+ 				\hline $h_c$&$h_{f}$&$\norm{\delta_\phi}_{2}$ & Rate& $\norm{\delta_\phi}_{2}$ & Rate\\
+ 				\hline $\frac{3.2}{16}$&$\frac{3.2}{32}$& $6.191\times 10^{-3}$&- &$ 5.0305\times 10^{-3}$&-
+ 				\\$\frac{3.2}{32}$&$\frac{3.2}{64}$& $1.121\times 10^{-3}$ &2.47&$ 1.0290\times 10^{-3}$ &2.29
+ 				\\ $\frac{3.2}{64}$ &$\frac{3.2}{128}$& $2.449\times 10^{-4}$&2.19 &$2.4184\times 10^{-4}$&2.09
+ 				\\ $\frac{3.2}{128}$ & $\frac{3.2}{256}$ &$5.842\times 10^{-5}$&2.07 &$5.9421\times 10^{-5}$&2.02
+ 				\\ $\frac{3.2}{256}$ & $\frac{3.2}{512}$&$1.441\times 10^{-5}$&2.02&$1.4789\times 10^{-5}$&2.01 \\
+ 				\hline
+ 			\end{tabular}
+ 		\end{center}
+ 	\end{table}
+ 	
+ \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{\wuhao{\bf Numerical Results: Long Time Behavior Test  $L^2$ }}
+\begin{figure}\centering
+\includemovie[poster,repeat=false,autoplay=true,autostop=true,controls=true,rate=1,text={\small(Loading Video...)}]{0.9\textwidth}{0.5\textwidth}{mov/simulation.avi}
+\caption{Animation of the evolution with PSD solver for $L^2$ gradient flow up to $t=10^4$.}
+\vspace{0.5cm}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{\wuhao{\bf Numerical Results: Long Time Behavior Test  $H^{-1}$ }}
+\begin{figure}\centering
+\includemovie[poster,repeat=false,autoplay=true,autostop=true,controls=true,rate=1,text={\small(Loading Video...)}]{0.9\textwidth}{0.5\textwidth}{mov/etfhm1.avi}
+\vspace{0.5cm}
+\caption{Animation of the evolution with PSD solver for $H^{-1}$ gradient flow up to $t=10^4$.}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{\wuhao{\bf Numerical Results: One third power law verification $L^2$}}
+\begin{figure}[ht]
+	\begin{center}
+		%\includegraphics[width=4in]{figures/oneThirdEnergy.eps}
+		\begin{subfigure}{0.45\textwidth}
+			\includegraphics[width=\textwidth]{figures/psdWRandom.eps} 
+			\caption{Roughness evolution}
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\includegraphics[width=\textwidth]{figures/psdEhRandom.eps}
+			\caption{Energy evolution}
+		\end{subfigure}
+	\end{center}
+	\caption{Loglog plot of Roughness and energy evolution for $L^{2}$ simulation }
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{\wuhao{\bf Numerical Results: One third power law verification $H^{-1}$}}
+\begin{figure}[ht]
+	\begin{center}
+		%\includegraphics[width=4in]{figures/oneThirdEnergy.eps}
+		\begin{subfigure}{0.45\textwidth}
+			\includegraphics[width=\textwidth]{figures/hm1roughness.eps} 
+			\caption{Roughness evolution}
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\includegraphics[width=\textwidth]{figures/hm1energy.eps}
+			\caption{Energy evolution}
+		\end{subfigure}
+	\end{center}
+	\caption{Loglog plot of Roughness and energy evolution for $H^{-1}$ simulation }
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}%[allowframebreaks]%in case more than 1 slide needed
+ \frametitle{\wuhao{\bf Main reference}}
+    {\footnotesize
+    \bibliographystyle{apalike}
+    \bibliography{ref}
+    }
+\end{frame}
+%\section{ Conclusions and future work}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{\wuhao{\bf Preliminary Results for Squared Phase Field Crystal Equation}}
+\begin{figure}[ht]
+	\begin{center}
+		%\includegraphics[width=4in]{figures/oneThirdEnergy.eps}
+		\begin{subfigure}{0.49\textwidth}
+                 \includemovie[poster,repeat=true,autoplay=true,autostop=true,controls=true,
+                 rate=0.2,text={\small(Loading Video...)}]{\textwidth}{0.6\textwidth}{mov/cline.avi}
+		\end{subfigure}
+		\begin{subfigure}{0.49\textwidth}
+                 \includemovie[poster,repeat=true,autoplay=true,autostop=true,controls=true,
+                 rate=0.2,text={\small(Loading Video...)}]{\textwidth}{0.6\textwidth}{mov/one.avi}
+		\end{subfigure}
+		\begin{subfigure}{0.49\textwidth}
+                 \includemovie[poster,repeat=true,autoplay=true,autostop=true,controls=true,
+                 rate=0.2,text={\small(Loading Video...)}]{\textwidth}{0.6\textwidth}{mov/two.avi}
+		\end{subfigure}
+		\begin{subfigure}{0.49\textwidth}
+                 \includemovie[poster,repeat=true,autoplay=true,autostop=true,controls=true,
+                 rate=0.2,text={\small(Loading Video...)}]{\textwidth}{0.6\textwidth}{mov/four.avi}
+		\end{subfigure}
+	\end{center}
+	%\caption{Loglog plot of Roughness and energy evolution for $H^{-1}$ simulation }
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\begin{center}
+{\yichu\textcolor{orange}{\li {\bf Thank you!}}}\bigskip
+
+%\includegraphics[height=30mm]{Images/ustc.png}\bigskip
+
+Email:~\textcolor[rgb]{0.00,0.20,1.00}{\kai wfeng1@utk.edu}
+\end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{CJK*}
+\end{document} 

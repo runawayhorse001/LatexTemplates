@@ -1,0 +1,3076 @@
+\documentclass[cmbright]{mymmaauth}
+
+\usepackage{moreverb}
+\usepackage[makeroom]{cancel}
+\usepackage{latexsym}
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+\usepackage{amsthm,amsmath}
+
+\usepackage[colorlinks,bookmarksopen,bookmarksnumbered,citecolor=red,urlcolor=red]{hyperref}
+
+\newcommand\BibTeX{{\rmfamily B\kern-.05em \textsc{i\kern-.025em b}\kern-.08em
+T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\def\volumeyear{2015}
+\def\volumenumber{v1}
+\def\DOI{}
+\input{feng_symbol}
+\newcommand{\rmv}[1]{\textcolor{blue}{\sout{#1}}}
+\newcommand{\crm}[1]{\textcolor{blue}{\cancel{#1}}}
+\newcommand{\notes}[1]{\textcolor{blue}{#1} }%
+%\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\hF}{\widehat{F}}
+\newcommand{\cE}{\mathcal{E}_h}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\hcP}{\widetilde{\mathcal{P}}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\bfR}{\mathbf{R}}
+\newcommand{\bv}{{\bm v}}
+\newcommand{\Ome}{\Omega}
+\newcommand{\oOme}{\overline{\Omega}} 
+\renewcommand{\div}{\mbox{\rm div\,}}
+\newcommand{\curl}{\mbox{\rm curl\,}}
+\newcommand{\tr}{\mbox{\rm tr}}
+\newcommand{\mce}{\mathcal{E}_h}
+\newcommand{\mct}{\mathcal{T}_h}
+\newcommand{\bV}{\bm V}
+\newcommand{\bT}{\bm T}
+\newcommand{\bn}{\bm n}
+\newcommand{\p}{\partial}
+\newcommand{\Div}{{\rm div}}
+\newcommand{\nab}{\nabla}
+\newcommand{\bH}{\bm H}
+\newcommand{\bC}{\bm C}
+\newcommand{\bl}{\big\langle}
+\newcommand{\br}{\big\rangle}
+\newcommand{\Bl}{\Big\langle}
+\newcommand{\Br}{\Big\rangle}
+\newcommand{\bcurl}{{\bf curl}}
+\newcommand{\Del}{\Delta}
+\newcommand{\btau}{{\bm \tau}}
+\newcommand{\bR}{{\bm R}}
+\newcommand{\bL}{{\bm L}}
+\newcommand{\bw}{{\bm w}}
+\newcommand{\bP}{{\bm {P}}}
+\newcommand{\bsigma}{{\bm \sigma}}
+\newcommand{\bq}{\bm q}
+\newcommand{\us}{\tilde}
+\newcommand{\bA}{\bm A}
+\newcommand{\bld}[1]{\boldsymbol{#1}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\bg}{\bm g}
+\newcommand{\bz}{\bm z}
+\newcommand{\bmu}{\bm \mu}
+\newcommand{\bW}{\bm W}
+\newcommand{\pol}{\mathcal{P}}
+\newcommand{\nonum}{\nonumber}
+\newcommand{\bpol}{\boldsymbol{\mathcal{P}}}
+\newcommand{\mI}{\mathcal{I}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\bcV}{{\boldsymbol{\mathcal{V}}}}
+\newcommand{\bbp}{\mathbb{P}}
+\newcommand{\bcQ}{\boldsymbol{\mathcal{Q}}}
+\newcommand{\bu}{\bm u}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\jump}[1]{\big[\hspace{-0.065cm}\big[{#1}\big]\hspace{-0.065cm}\big]}
+\newcommand{\avg}[1]{\big\{\hspace{-0.095cm}\big\{{#1}\big\}\hspace{-0.095cm}\big\}}
+\newcommand{\sjump}[1]{\big[{#1}\big]}
+\newcommand{\savg}[1]{\big\{ {#1} \big\} }
+\newcommand{\abs}[1]{\big| {#1} \big| }
+\newcommand{\tbar}[1]{\left|\hspace{-0.045cm}\left|\hspace{-0.045cm}\left|{#1}\right|\hspace{-0.045cm}\right|\hspace{-0.045cm}\right|}
+\newcommand{\ipx}[1]{ \Big( {#1} \Big) } 
+\newcommand{\ips}[1]{ \Big\langle {#1} \Big\rangle}
+\newcommand{\hh}{\hspace*{\fill}}
+
+\if@mathematic
+   \def\bvec#1{\ensuremath{\mathchoice
+                     {\mbox{\boldmath$\displaystyle\mathbf{#1}$}}
+                     {\mbox{\boldmath$\textstyle\mathbf{#1}$}}
+                     {\mbox{\boldmath$\scriptstyle\mathbf{#1}$}}
+                     {\mbox{\boldmath$\scriptscriptstyle\mathbf{#1}$}}}}
+\else
+   \def\bvec#1{\ensuremath{\mathchoice
+                     {\mbox{\boldmath$\displaystyle#1$}}
+                     {\mbox{\boldmath$\textstyle#1$}}
+                     {\mbox{\boldmath$\scriptstyle#1$}}
+                     {\mbox{\boldmath$\scriptscriptstyle#1$}}}}
+\fi
+
+
+
+	\newtheorem{remark}{Remark}[section]
+	\newtheorem{example}{Example}[section]
+	\newtheorem{theorem}{Theorem}[section]
+	\newtheorem{lemma}{Lemma}[section]
+	\newtheorem{proposition}{Proposition}[section]
+	\newtheorem{corollary}{Corollary}[section]
+	\newtheorem{definition}{Definition}[section]
+%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{stmt}{Theorem}
+\newtheorem{cor}{ Corollary }
+\newtheorem{lm}{Lemma}
+\newtheorem{defi}{Definition}
+
+\def\pd#1#2  {{\frac{\partial #1}{\partial #2}}}
+\def\QED{$sqcup\!\!\!\!\sqcap$}
+\def\RR{R\!\!\!\!\!I~}
+\def\eps{\varepsilon}
+\def\DOT{\!\cdot\!}
+\def\del{\partial}
+\def\bar{\overline}
+\def\dt{{\triangle t}}
+\def\dx{{\triangle x}}
+\def\dy{{\triangle y}}
+\def\lap{{\triangle}}
+\def\dz{{\triangle z}}
+\def\a{\mbox{\boldmath $a$}}
+\def\b{\mbox{\boldmath $b$}}
+\def\c{\mbox{\boldmath $c$}}
+\def\e{\mbox{\boldmath $e$}}
+\def\f{\mbox{\boldmath $f$}}
+\def\g{\mbox{\boldmath $g$}}
+\def\h{\mbox{\boldmath $h$}}
+\def\n{\mbox{\boldmath $n$}}
+\def\q{\mbox{\boldmath $q$}}
+\def\r{\mbox{\boldmath $r$}}
+\def\btau{\mbox{\boldmath $\tau$}}
+\def\dspace{\displaystyle \vspace{.05in}}
+\def\t{\mbox{\boldmath $t$}}
+\def\u{\mbox{\boldmath $u$}}
+\def\U{\mbox{\boldmath $U$}}
+\def\v{\mbox{\boldmath $v$}}
+\def\V{\mbox{\boldmath $V$}}
+\def\w{\mbox{\boldmath $w$}}
+\def\W{\mbox{\boldmath $W$}}
+\def\x{\mbox{\boldmath $x$}}
+\def\R{\mbox{\boldmath $R$}}
+\def\exac{{\mbox \tiny e}}
+\def\qed{\hbox{\hskip 6pt\vrule width6pt height7pt
+depth1pt  \hskip1pt}\bigskip}
+
+\newcommand{\nrm}[1]{\left\| #1 \right\|}
+
+
+\newcommand{\Dtil}{\widetilde{D}}
+%---------------------------------------------------------------------------------------------------------------------------------------%
+%                                   begin document 
+%---------------------------------------------------------------------------------------------------------------------------------------%
+\begin{document}
+ \allowdisplaybreaks
+\runninghead{W.~Feng et al.}
+%---------------------------------------------Title------------------------------------------------------------------------------------%
+\title{Numerical Method for Phase Field Equations}
+\author{Wenqiang~Feng}
+%\author{W.~Feng\affil{a}, T.L.~Lewis\affil{b}\corrauth\ and S.M.~Wise\affil{a}}
+
+%\address{\affilnum{a}Mathematics Department, The University of Tennessee, Knoxville, TN, 37996}
+%	\\
+%\affilnum{b}Department of Mathematics and Statistics, 
+%The University of North Carolina at Greensboro, Greensboro, NC, 27402}
+
+%\corraddr{E-mail: }
+
+%\cgs{NSF DMS number}
+%---------------------------------------------------------------------------------------------------------------------------------------%
+%                                                                    abstract
+%---------------------------------------------------------------------------------------------------------------------------------------%
+%\begin{abstract}
+%My research interest focus on the Finite Element Method for Phase Field Equations\cite{allen1979microscopic,shen2010numerical,feng2003numerical,feng2007analysis,kessler2004posteriori,freefem++}. 
+%\end{abstract}
+%%---------------------------------------------\keywords-----------------------------------------------------------------------------%
+%\keywords{Finite Element Method,  Allen-Cahn Equation}
+\maketitle\vspace{-6pt}
+%%---------------------------------------------------------------------------------------------------------------------------------------%
+%%                                                       \section{Preliminaries}
+%%---------------------------------------------------------------------------------------------------------------------------------------%
+%\section{Preliminaries}\label{pre-section}
+%\begin{definition}
+%Let $F$ be a functional and suppose it may be written as 
+%\begin{eqnarray*}
+%F[\phi]=\int f(\phi^{(n)}(x), \phi^{(n-1)}(x), \cdots, \phi^{'}(x), x) d{\bvec{x}},
+%\end{eqnarray*}
+% for some function $f$ which depends on the derivatives of $\phi$ up to order $n$. The the functional derivative 
+% of $F$ is 
+% \begin{eqnarray*}
+%\delta_\phi F:=\frac{\delta F}{\delta \phi}=\sum_{i=1}^{n} (-1)^i \frac{d^i}{dx^i}\frac{\partial f}{\partial \phi^{(i)}}.
+%\end{eqnarray*}
+%\end{definition}
+%\begin{example}
+%Let 
+%\begin{eqnarray*}
+%f=\phi^3+\frac{\phi_x^2}{2}.
+%\end{eqnarray*}
+% Then the functional derivative of $F$ is 
+% \begin{eqnarray*}
+%\delta_\phi F: =\frac{\delta F}{\delta \phi}=\frac{\partial f}{\partial \phi}-\frac{d}{dx}\frac{\partial f}{\partial \phi'}=3\phi^2-\phi_{xx}.
+%\end{eqnarray*}
+%\end{example}
+%---------------------------------------------------------------------------------------------------------------------------------------%
+%                                                       \section{Introduction}
+%---------------------------------------------------------------------------------------------------------------------------------------%
+\section{Mathematical Model}
+\label{intro-section}
+The standard Allen-Cahn energy is given by 
+\begin{equation}\label{energy-CH}
+E(\phi) =\int_\Omega \nest{\frac{1}{2} \abs{\grad\phi}^2+\frac{1}{\epsilon^2}F(\phi)}d\bvec{x}, 
+\end{equation} 
+where $\Omega\subset {\bf R}^d$, where $d = 2$ or 3, 
+$\phi:\Omega\rightarrow {\bf R}$ is the concentration field,  $\epsilon$ is a constant, and $F(\phi)$ is a given energy potential
+ (e.g. the Ginzburg-Landau double-well potential ( Figure.\ref{fig:GLpotential}) $F(\phi)=\frac{1}{4}(\phi^2-1)^2$ which has been widely used).
+In turn, the chemical potential is defined as
+\begin{equation}\label{chem-pot}
+\mu_{AC} := \delta_\phi E =-\lap\phi+\frac{1}{\epsilon^2}F'(\phi)=-\lap \phi+\frac{1}{\epsilon^2}f(\phi). 
+\end{equation}
+\begin{figure}[!htp]
+\begin{center}
+\begin{tikzpicture}[>=latex,scale=2] 
+%  \path [domain=-2:1, pattern color=blue,
+%         pattern=north east lines,
+%         fill=yellow,
+%         ] (0,1)--(0,0) --(1,0) --cycle ;  
+        % \draw [red,domain=-2.5:2.5,samples=100, thick]  plot (\x,\x-1) ;  
+  \draw [blue,domain=-1.9:1.9,samples=100, thick]  plot (\x,\x*\x*\x*\x/4-\x*\x/2+0.25) ;  
+    \draw[->,thin] (-2,0) -- (2,0) node[right]{$\phi$};
+  \draw[->,thin] (0,-0.2) -- (0,2)node[above]{$F(\phi)$};  
+ % \draw[->, thick,blue](0.5,-1)--(0.5,2);
+\node[mark size=2pt,color=black] at (-1,0) {\pgfuseplotmark{*}};
+\node[below] at (-1,0) {-1};\node[below] at (1,0) {1};
+\node[mark size=2pt,color=black] at (1,0) {\pgfuseplotmark{*}};
+  %\node[below] at (1,0){$_{(1,0)}$}; \node[left] at (0,1){$_{(0,1)}$};
+%  \draw[->,thick] (0,0) -- (1,0) ;
+%  \draw[->,thick] (0,0) -- (0,1);        
+\end{tikzpicture}
+\end{center}
+\caption{The Ginzburg-Landau double-well potential.}\label{fig:GLpotential}
+\end{figure}
+
+The standard Cahn-Hilliard equation is given by 
+\begin{equation}\label{eqn:stdch} \left\{ \begin{array}{ll}
+\phi_t =  \lap \phi-\frac{1}{\epsilon^2} f(\phi),&  \text{in}~ \Omega \times (0, T], \\
+  \frac{\partial \phi}{\partial \bvec{n}} = 0, & \text{in}~ \partial\Omega \times  (0, T], \\
+\phi(\bvec{x},0) = \phi_0(\bvec{x}), &  \text{in}~ \Omega \times \nest{0}. \\
+\end{array} \right. 
+\end{equation}
+
+
+%---------------------------------------------------------------------------------------------------------------------------------------%
+%                                                       \section{Introduction}
+%---------------------------------------------------------------------------------------------------------------------------------------%
+\section{Semi-implicit linearization scheme}
+%---------------------------------------------------------------------------------------------------------------------------------------%
+%                                                       \subsection{Introduction}
+%---------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{Weak Formulation of Mixed FEM}
+The mixed weak formulation of (\ref{eqn:stdch}) is derived as follows:
+\begin{enumerate}
+\item First (\ref{eqn:stdch}) can be splited as the following system
+\begin{equation} \left\{ \begin{array}{ll}
+u_t & = \Delta v, \\
+v & = -\varepsilon^2 \Delta u + u^3 - u.
+\end{array} \right. \end{equation} 
+\item Then the weak formations for the system is 
+\begin{equation} \left\{ \begin{array}{ll}
+\int_\Omega u_t \varphi - \int_\Omega \Delta v \varphi & = 0 ,\\
+\int_\Omega v \psi + \varepsilon^2 \int_\Omega \Delta u \psi - \int_\Omega(u^3 - u) \psi & = 0.
+\end{array} \right. 
+\end{equation}
+And integration by parts gives 
+\begin{equation} \left\{ \begin{array}{ll}
+\int_\Omega u_t \varphi - \int_{\partial\Omega} (\nabla u \cdot \bvec{n})\varphi + \int_\Omega \nabla v \nabla \varphi & = 0 \\
+\int_\Omega v \psi + \varepsilon^2 \int_{\partial\Omega}(\nabla u \cdot \bvec{n})\psi - \varepsilon^2 \int_\Omega \nabla u \nabla \psi - \int_\Omega(u^3 - u) \psi & = 0
+\end{array} \right. 
+\end{equation}
+Applying the boundary conditions
+$\nabla u \cdot \bvec{n} = \frac{\partial u}{\partial \bvec{n}} = 0$
+and 
+$\nabla v \cdot \bvec{n} = \frac{\partial v}{\partial \bvec{n}} = 0$
+on $\partial\Omega$ yields 
+\begin{equation} \left\{ \begin{array}{ll}
+\int_\Omega u_t \varphi + \int_\Omega \nabla v \nabla \varphi & = 0 \\
+\int_\Omega v \psi - \varepsilon^2 \int_\Omega \nabla u \nabla \psi - \int_\Omega(u^3 - u) \psi & = 0
+\end{array} \right. 
+\end{equation}
+\end{enumerate}
+
+%---------------------------------------------------------------------------------------------------------------------------------------%
+%                                                       \subsection{Introduction}
+%---------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{Time Discretization}
+\begin{enumerate}
+\item  We use forward-Euler time discretization and  substitut $u^{n+1}$ with $a u^{n} + (1-a) u^{n+1}$:
+\begin{equation} \left\{ \begin{array}{ll}
+\int_\Omega \frac{u^{n+1} - u^{n}}{\tau} \varphi + \int_\Omega \nabla v \nabla \varphi & = 0 \\
+\int_\Omega v \psi - \varepsilon^2 \int_\Omega \nabla u^{n+1} \nabla \psi - \int_\Omega(\nestb{u^{n}}^3 - a u^{n} - (1-a)u^{n+1}) \psi & = 0
+\end{array} \right. \end{equation}
+\item We use backward-Euler time discretization
+\begin{equation} \left\{ \begin{array}{ll}
+\int_\Omega{\frac{u^{n+1}-u^n}{\tau}}\varphi+\nabla v^{n+1}\cdot\nabla\varphi=0&\forall \varphi\in H^1\\
+\int_\Omega v^{n+1}\psi-\varepsilon^2\nabla
+u^{n+1}\cdot\nabla\psi-f'(u^{n+1})\psi=0&\forall \psi\in H^1
+\end{array} \right. \end{equation}
+%\begin{eqnarray}
+%&\int_\Omega{\frac{u^{n+1}-u^n}{\tau}}\varphi+\nabla
+%v^{n+1}\cdot\nabla\varphi=0&\forall \varphi\in H^1\\
+%&\int_\Omega v^{n+1}\psi-a\nabla
+%u^{n+1}\cdot\nabla\psi-f'(u^{n+1})\psi=0&\forall \psi\in H^1
+%\end{eqnarray}
+\end{enumerate}
+%---------------------------------------------------------------------------------------------------------------------------------------%
+%                                                       \section{Introduction}
+%---------------------------------------------------------------------------------------------------------------------------------------%
+\section{Some numerical Results}
+%\begin{enumerate}
+%\item{2D regular domain}
+%\begin{figure}[!htb]
+%\centering\includegraphics[width=0.55\linewidth]{figures/square.eps}
+%\caption{The simulation result on square domain.}\label{partition}
+%\end{figure}
+%
+%\item{2D irregular domain}
+%\begin{figure}[!htb]
+%\centering\includegraphics[width=0.55\linewidth]{figures/cassini.eps}
+%\caption{The simulation result on cassini domain.}\label{cassini}
+%\end{figure}
+%
+%\item{3D regular domain}
+%\item{Cuboid domain}
+%\begin{figure}[!htb]
+%\centering\includegraphics[width=0.55\linewidth]{figures/cube}
+%\caption{The simulation result on cuboid domain}\label{cuboid}
+%\end{figure}
+%
+%\item{Cylindrical  domain}
+%\begin{figure}[!htb]
+%\centering\includegraphics[width=0.55\linewidth]{figures/cylinder}
+%\caption{The simulation result on cylindrical domain}\label{cylindrical}
+%\end{figure}
+%
+%\end{enumerate}
+%---------------------------------------------------------------------------------------------------------------------------------------%
+%                                                       \subsection{Introduction}
+%---------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{Time Discretization}
+\begin{enumerate}
+\item  We use forward-Euler time discretization and  substitut $u^{n+1}$ with $a u^{n} + (1-a) u^{n+1}$:
+\begin{equation} \left\{ \begin{array}{ll}
+\int_\Omega \frac{u^{n+1} - u^{n}}{\tau} \varphi + \int_\Omega \nabla v \nabla \varphi & = 0 \\
+\int_\Omega v \psi - \varepsilon^2 \int_\Omega \nabla u^{n+1} \nabla \psi - \int_\Omega(\nestb{u^{n}}^3 - a u^{n} - (1-a)u^{n+1}) \psi & = 0
+\end{array} \right. \end{equation}
+\item We use backward-Euler time discretization
+\begin{equation} \left\{ \begin{array}{ll}
+\int_\Omega{\frac{u^{n+1}-u^n}{\tau}}\varphi+\nabla v^{n+1}\cdot\nabla\varphi=0&\forall \varphi\in H^1\\
+\int_\Omega v^{n+1}\psi-\varepsilon^2\nabla
+u^{n+1}\cdot\nabla\psi-f'(u^{n+1})\psi=0&\forall \psi\in H^1
+\end{array} \right. \end{equation}
+%\begin{eqnarray}
+%&\int_\Omega{\frac{u^{n+1}-u^n}{\tau}}\varphi+\nabla
+%v^{n+1}\cdot\nabla\varphi=0&\forall \varphi\in H^1\\
+%&\int_\Omega v^{n+1}\psi-a\nabla
+%u^{n+1}\cdot\nabla\psi-f'(u^{n+1})\psi=0&\forall \psi\in H^1
+%\end{eqnarray}
+\end{enumerate}
+%---------------------------------------------------------------------------------------------------------------------------------------%
+%                                                       \subsection{Introduction}
+%---------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{Time Discretization}
+\begin{enumerate}
+\item  We use forward-Euler time discretization and  substitut $u^{n+1}$ with $a u^{n} + (1-a) u^{n+1}$:
+\begin{equation} \left\{ \begin{array}{ll}
+\int_\Omega \frac{u^{n+1} - u^{n}}{\tau} \varphi + \int_\Omega \nabla v \nabla \varphi & = 0 \\
+\int_\Omega v \psi - \varepsilon^2 \int_\Omega \nabla u^{n+1} \nabla \psi - \int_\Omega(\nestb{u^{n}}^3 - a u^{n} - (1-a)u^{n+1}) \psi & = 0
+\end{array} \right. \end{equation}
+\item We use backward-Euler time discretization
+\begin{equation} \left\{ \begin{array}{ll}
+\int_\Omega{\frac{u^{n+1}-u^n}{\tau}}\varphi+\nabla v^{n+1}\cdot\nabla\varphi=0&\forall \varphi\in H^1\\
+\int_\Omega v^{n+1}\psi-\varepsilon^2\nabla
+u^{n+1}\cdot\nabla\psi-f'(u^{n+1})\psi=0&\forall \psi\in H^1
+\end{array} \right. \end{equation}
+%\begin{eqnarray}
+%&\int_\Omega{\frac{u^{n+1}-u^n}{\tau}}\varphi+\nabla
+%v^{n+1}\cdot\nabla\varphi=0&\forall \varphi\in H^1\\
+%&\int_\Omega v^{n+1}\psi-a\nabla
+%u^{n+1}\cdot\nabla\psi-f'(u^{n+1})\psi=0&\forall \psi\in H^1
+%\end{eqnarray}
+\end{enumerate}
+%---------------------------------------------------------------------------------------------------------------------------------------%
+%                                                       \subsection{Introduction}
+%---------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{Time Discretization}
+\begin{enumerate}
+\item  We use forward-Euler time discretization and  substitut $u^{n+1}$ with $a u^{n} + (1-a) u^{n+1}$:
+\begin{equation} \left\{ \begin{array}{ll}
+\int_\Omega \frac{u^{n+1} - u^{n}}{\tau} \varphi + \int_\Omega \nabla v \nabla \varphi & = 0 \\
+\int_\Omega v \psi - \varepsilon^2 \int_\Omega \nabla u^{n+1} \nabla \psi - \int_\Omega(\nestb{u^{n}}^3 - a u^{n} - (1-a)u^{n+1}) \psi & = 0
+\end{array} \right. \end{equation}
+\item We use backward-Euler time discretization
+\begin{equation} \left\{ \begin{array}{ll}
+\int_\Omega{\frac{u^{n+1}-u^n}{\tau}}\varphi+\nabla v^{n+1}\cdot\nabla\varphi=0&\forall \varphi\in H^1\\
+\int_\Omega v^{n+1}\psi-\varepsilon^2\nabla
+u^{n+1}\cdot\nabla\psi-f'(u^{n+1})\psi=0&\forall \psi\in H^1
+\end{array} \right. \end{equation}
+%\begin{eqnarray}
+%&\int_\Omega{\frac{u^{n+1}-u^n}{\tau}}\varphi+\nabla
+%v^{n+1}\cdot\nabla\varphi=0&\forall \varphi\in H^1\\
+%&\int_\Omega v^{n+1}\psi-a\nabla
+%u^{n+1}\cdot\nabla\psi-f'(u^{n+1})\psi=0&\forall \psi\in H^1
+%\end{eqnarray}
+\end{enumerate}
+
+\bibliographystyle{siam}
+\bibliography{research.bib}
+\end{document}
+%In this paper, we further develop the use of discontinuous Galerkin (DG) derivative operators originally considered in \cite{FengLewisNeilan13} as a means for understanding and motivating  the approximation of second order elliptic problems. An optimally convergent symmetric DG method, the dual-wind discontinuous Galerkin (DWDG) method, will be developed.  A key feature of the DWDG method is that it does not require the addition of interior or boundary penalty terms. We relate the DWDG method to other known approximation methods as a means for better understanding the inherent stability of the new method. We also derive many norm equivalencies so that existing DG estimates can be readily extended for our new method. Thus, this paper lays the foundation for the future application of DWDG methodologies to other problems. For transparency, our main emphasis will be on 
+%the prototypical second order elliptic partial differential equation (PDE) 
+%	\begin{subequations} 
+%	\label{problem_neumann}
+%	\label{PDE}
+%	\begin{alignat}{2}
+%-\Del u & =f \qquad &&\text{in }\Ome,
+%	\\
+%\frac{\partial u}{\partial n} & =g\qquad &&\text{on }\p\Ome, 
+%	\end{alignat}
+%	\end{subequations}
+%where $\Ome\subset \mathbb{R}^d$ is an open, polygonal, convex domain, 
+%with boundary $\partial\Omega$ and piece-wise constant, outward-pointing unit normal vector $\bvec{n}$; 
+%$\Del \equiv \sum_{j=1}^d \frac{\p^2}{\p x_j^2}$ denotes the Laplacian operator; 
+%and $\frac{\partial u}{\partial n} \equiv \bvec{n}\cdot\nabla u$. 
+%We assume $f \in L^2(\Omega)$ and $g \in L^2(\partial \Omega)$ such that 
+%$\int_\Omega f \, dx + \int_{\partial \Omega} g \, ds = 0$. 
+%Thus, there exists a unique solution in the subset of $H^2(\Omega)$ consisting of zero-average functions.  
+%
+%This paper is meant to complement the original paper concerning the 
+%DWDG method (\cite{LewisNeilan12}), 
+%which focussed primarily on the convergence analysis of the proposed method 
+%with respect to Dirichlet boundary conditions.  
+%However, this paper has a different emphasis than the original paper.  
+%We will focus on how various DG methods can be constructed through 
+%DG derivative operators, and then use the common framework to analytically 
+%compare properties of the various methods.  
+%We will also provide more motivation concerning how the DWDG method 
+%fully eliminates the need for penalization.   
+%Thus, we are seeking to provide more insight into the workings of the DWDG 
+%method, especially with regards to stability.  
+%We also note that many of the analytic properties of the DG derivative operators 
+%presented in this paper extend the results found in \cite{FengLewisNeilan13}, 
+%where the calculus of DG derivative operators was first developed.  
+%
+%When discretizing a PDE, one must take into account two main questions.  
+%The first question is how to discretize the derivative operators that form the PDE.  
+%The second question is how to enforce the boundary conditions.  
+%In this paper, we are concerned with discontinuous Galerkin methods.  
+%We will see that the choice for how to discretize derivative operators is the deciding 
+%factor on whether interior penalization is necessary.  
+%Built into this ideology is the choice of the mesh, the choice of the basis functions, 
+%and the choice of interior face/edge-normal vectors, 
+%all of which play a key role in defining our DG derivative operators.  
+%We will also see that the choice of how to enforce boundary conditions is actually 
+%linked back to how the derivative operators are discretized due to the fact that 
+%boundary conditions become ``natural" for some choices of DG derivative operators 
+%and not others.  
+%When a boundary condition is not ``natural", boundary penalization is necessary.  
+%However, even when a boundary condition does appear naturally in the scheme, 
+%partial boundary penalization is often necessary.  
+%By exploring this relationship, we will develop a way to naturally enforce boundary 
+%conditions without the need for boundary penalties.  
+%
+%The remainder of this paper is organized as follows.  
+%In Section~\ref{background-section}, 
+%we develop the motivational background for how we will eliminate both interior and 
+%boundary penalization.  We will also 
+%introduce some standard DG notation 
+%and the definitions of various DG derivative operators along with some preliminary results.  
+%The DWDG method is introduced in Section~\ref{dwdg-section}.  
+%Within this section, we also consider the symmetric Interior Penalty Discontinuous Galerkin (IPDG) method, 
+%the Local Discontinuous Galerkin (LDG) method, and the Minimal Dissipation Local Discontinuous Galerkin
+% (MD-LDG) method with regards to how they can be 
+%related to the DWDG method using the common framework of DG derivative operators.  
+%Several norm equivalencies will be derived that yield immediate results concerning 
+%the DWDG method.  
+%The DWDG method will also be related to the unified framework found in \cite{unified}.  
+%In Section~\ref{numerics-section}, we provide some numerical experiments that 
+%support the theoretical observations, and, in Section~\ref{conclusion-section}, 
+%we provide some concluding remarks.  
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	\section{Background}
+%	\label{background-section} 
+%
+%In this section, we introduce both standard DG notation and 
+%the notation for our DG derivative operators.  
+%To motivate our use of DG derivative operators and the theme for how 
+%to eliminate both interior and boundary penalization, we provide 
+%some motivational facts.    
+%We also record some preliminary facts about DG derivative operators.  
+%A more detailed exposition on DG derivative operators can be found in \cite{FengLewisNeilan13}.  
+%Note, the notation in this paper has been slightly updated from the notation 
+%originally found in \cite{FengLewisNeilan13} and \cite{LewisNeilan12}.  
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	\subsection{Notation}
+%	\label{dg_notation-section}
+%
+%We begin by introducing notation for broken Sobolev spaces.  
+%First, we must introduce some (standard) notation.  
+%For simplicity, we assume $\Omega$ is polygonal.  
+%Let $\mct$ denote a locally quasi-uniform and shape-regular simplicial ``triangulation" of $\Omega$
+%(see \cite{Ciarlet78,Brenner}).  
+%Let $\mce$ denote the set of all ($d$-1)-dimensional face (or edge) simplices in the triangulation. 
+%Let $\mce^I \subset \mce$ denote the set of all interior faces, and 
+%$\mce^B \subset \mce$ denote the set of all boundary faces in the triangulation.  
+%We take the convention that each simplex $K\in \mct$ is open, 
+%and we define $h_K$ as the diameter of $K \in \mct$. 
+%It follows that each face simplex $e\in \mce$ is open in $\mathbb{R}^{d-1}$, 
+%and we define $h_e$ as the diameter of  $e \in \mce$. We set $h = \max_{K \in \mct} h_K$.  
+%
+%We define our broken Sobolev spaces with respect to the triangulation as 
+%\[
+%	H^m(\mct) \equiv \prod_{K \in \mct} H^m(K) . 
+%\]
+%We also define the piecewise $L^2$ inner product with respect to the triangulation by 
+%\[
+%	\ipx{ v , w }_{\mct} \equiv \sum_{K \in \mct} \int_K v \, w \, dx , 
+%\]
+%and the piecewise $L^2$ inner product with respect to the collection of faces/edges $\mce$ by 
+%\[
+%	\ips{ v , w }_{\mathcal{S}_h} \equiv \sum_{e \in \mathcal{S}_h} \int_e v \, w \, ds
+%\]
+%for all $\mathcal{S}_h \subseteq \mce$. 
+%Furthermore, we use bold-faced formatting to denote a vector-valued space;  
+%for example, we have 
+%\[
+%	\mathbf{L}^2(\mct) \equiv \big[ L^2(\mct) \big]^d . 
+%\]
+%For convenience, throughout the paper $\bvec{1}$ denotes the vector with all entries equal to 1 
+%and $\bvec{e}_j$ denotes the unit vector corresponding to the $j$-th Cartesian direction.  
+%Lastly, we let the space $\mathring{X}$ denote the function space $X \cap \mathring{L}^1(\Omega)$, 
+%where 
+%\[
+%	\mathring{L}^1(\Omega) \equiv \left\{ v \in L^1(\Omega) \ \middle| \  \int_\Omega v\, d x  = 0 \right\}.
+%\]
+%Thus, $\mathring{X}$ denotes the function space $X$ intersected with the set of zero-mean 
+%functions.  
+%
+%Next we introduce some standard notation for DG methods.  
+%Let $K^+, K^- \in \mct$, with $e = \partial K^- \cap \partial K^+\neq \emptyset$. 
+%Without a loss of generality, we assume the global labeling number of $K^+$ is larger than that of $K^-$.  
+%We then define the sided-flux values for $v$ as 
+%	\[
+%v^{+} \big|_e \equiv v \big|_{e \cap \partial K^+},  \qquad  
+%v^{-} \big|_e \equiv v \big|_{e \cap \partial K^-}, 
+%	\]
+%where $v |_{\partial K}$ is understood to be the trace of $v$ defined on $\overline{K}$. 
+%Suppose $K$ is a boundary simplex.  
+%We extend the sided-flux definitions to the boundary of $\Omega$ by 
+%	\[
+%v^\pm \big|_{\partial K \cap \partial \Omega} \equiv v \big|_{\partial K \cap \partial \Omega} .  
+%	\]
+%We also define jump and average operators on $\mce$ by 
+%	\[
+%\sjump{ v }  \equiv 
+%	\begin{cases}
+%v^- - v^+ & \text{on } \mce^I
+%	\\ 
+%v & \text{on } \mce^B
+%	\end{cases}
+%, \qquad \savg{v} \equiv \begin{cases}
+% \frac{v^- + v^+}{2}  & \text{on } \mce^I
+%	\\ 
+%v & \text{on } \mce^B
+%	\end{cases}.
+%	\]
+%For every $e\in \mce^I$, we unambiguously define the edge unit normal via $\bn^e \equiv \bvec{n}^{K^-}$, 
+%where the object on the right is the outward-pointing unit normal vector for $K^-$. 
+%We use subscripts to denote the scalar components of a vector.  
+%Thus, we denote the j-th component of $\bn^e$ by $n_{j}^e$ for all $j=1,2,\cdots, d$. 
+%If $e\in \mce^B$, then there exists a unique $K\in\mct$ such that 
+%$e \subset \partial K \cap \partial\Omega$, 
+%and we let $\bn^e \equiv \bvec{n}^K$.  
+%When referring to the full collection of all face normals, 
+%we use the notation $\bn$, 
+%with the convention that the restriction satisfies $\left.\bn\right|_e = \bn^e$.
+%
+%
+% If $\bvec{v} \in \mathbf{H}^1(\mct)$, we define the jump and average of the vector-valued 
+%function component-wise by letting 
+%$\sjump{\bvec{v}}_j \equiv \sjump{v_j}$ and $\savg{\bvec{v}}_j \equiv \savg{v_j}$.  
+%Lastly, we define a gradient operator for our broken Sobolev spaces.  
+%To this end, we define $\nabla_h : H^1(\mct) \to \mathbf{L}^2(\mct)$ by 
+%\[
+%	\nabla_h v \big|_K \equiv \nabla v \big|_K \qquad \forall K \in \mct 
+%\]
+%for all $v \in H^1(\mct)$.  
+%Thus, the ``broken" gradient operator is just the piecewise restriction of the 
+%standard gradient operator with respect to the mesh.  
+%Note that the broken gradient operator preserves the multi-valued nature 
+%of broken Sobolev functions.  
+%
+%For a fixed integer $r \geq 0$, we define the standard discontinuous Galerkin (DG) 
+%finite element space $V_r^h \subset C^\infty(\mct) \subset H^1(\mct)$ by 
+%\[
+%	V_r^h \equiv \prod_{K \in \mct} \mathcal{P}_r(K) , 
+%\]
+%where $\mathcal{P}_r(K)$ denotes the set of all polynomials on $K$ with degree not exceeding $r$.  
+%The analogous vector-valued DG space is given by $\bvec{V}_r^h \equiv \big[ V_r^h \big]^d$.  
+%Most of the approximation methods below assume $r \geq 1$, although both LDG and DWDG 
+%methods have been extended to the case $r=0$.  
+%We also define the $L^2$ projection operator $\mathbb{P}_h : L^2(\Omega) \to V^h_r$ 
+%by 
+%	\[
+%\ipx{ \mathbb{P}_h v , \varphi_h }_{\mct} \equiv \ipx{ v , \varphi_h}_{\mct} \qquad \forall \varphi_h \in V^h_r ,
+%	\]
+%for all $v \in L^2(\Omega)$.  
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	\subsection{Penalization and Boundary Conditions}
+%	\label{penalty-section}
+%
+%We now develop the background that will motivate 
+%the techniques used to eliminate both interior and boundary penalization 
+%in the DWDG method.  
+%We begin by summarizing many of the known results concerning DG methods 
+%that are stable without the introduction of penalization.  
+%We will see that, in many instances, necessary penalization can be restricted to the 
+%boundary faces/edges as a means to weakly enforce boundary conditions.  
+%We will also see that, in general, the need for penalization depends upon many 
+%factors including 
+%the underlying mesh and the orientation of the interior face/edge normal vectors, 
+%the degree of the polynomial basis, 
+%and the spatial dimension.  
+%
+%We first consider the IPDG methods, 
+%\cite{Baker77,DouglasDupont76,RiviereWheelerGirault00,RiviereWheelerGirault01,Wheeler78}.
+%These primal methods are generalizations of Nitche's method \cite{Nitsche71}
+%where additional interior consistency and stability (penalization) terms 
+%are added in the numerical formulation.  
+%Interestingly, by working with only piecewise polynomials, the IPDG method is occasionally 
+%stable without the introduction of penalty terms.  
+%The nonsymmetric form is both stable and optimally convergent in the 
+%broken energy norm in both one and two spatial dimensions 
+%when $r \geq 2$, \cite{burman_ern7}.  
+%The symmetric form is stable in two and three dimensions 
+%when $r = 1$, \cite{burman_ern3}, 
+%and in one dimension for $r \geq 2$, \cite{burman_ern}.  
+%However, in general, it is well-know that IPDG methods are not stable without the 
+%addition of penalization terms on both the interior and the boundary faces/edges.  
+%The primary issue is the fact that without penalization, the IPDG method 
+%does not necessarily have a mechanism to allow for communication across simplex boundaries.  
+%Thus, the IPDG method has no means to capture information about discontinuities 
+%without interior penalization.  
+%The building block for IPDG methods is the piecewise gradient operator $\nabla_h$.  
+%Observe, any piecewise constant function is in the nullspace of $\nabla_h$.  
+%Consequently, the $L^2$ norm of a function in $H^1(\mct)$ cannot be controlled 
+%by only the $H^1(\mct)$ semi-norm yielding a lack of stability for IPDG methods 
+%without using penalization. 
+%
+%LDG methods, introduced in \cite{Cockburn98}, 
+%are known to be stable with optimal convergence as long as any 
+%positive interior and boundary penalization is used.  
+%It turns out that penalization is not always necessary for LDG methods.  
+%The need for penalization is related to the mesh $\mct$, the 
+%dimension $d$, the face/edge normal vectors $\bn$, and the degree of the piecewise polynomial basis $r$, 
+%where the choice of the face/edge normal vectors $\bn$ determines how the interior jump 
+%terms are defined.  
+%In \cite{BurmanStamm}, it was shown that the LDG method is stable with optimal convergence 
+%when penalization is applied to only part of the polynomial spectrum.  
+%By analyzing the spectrum of the corresponding matrix problem 
+%for Poisson's equation with Dirichlet boundary data in \cite{kirby-14}, 
+%it was shown that stability of the LDG method is directly related to 
+%the choice of the face/edge normal vectors $\bn$ and that the null space of the corresponding matrix 
+%increases if there is a simplex that has all inward or outward facing normals.  
+%If no such simplex exists, then the LDG method is stable in two dimensions using only 
+%boundary penalization.    
+%Analogously, if all of the interior normals are chosen to face one direction for a one-dimensional 
+%problem, then stability is based entirely upon the enforcement of the boundary condition.  
+%Lastly, in \cite{Marazzina}, it was shown that the LDG method is stable using Cartesian grids 
+%when jump terms are added over only a part of the boundary of the domain.  
+%
+%We see that in many cases, LDG methods do not require interior stabilization terms 
+%as long at the interior face/edge normal vectors are oriented correctly, 
+%and boundary stabilization is necessary for only part of the boundary.  
+%In particular, for one dimensional problems, 
+%if all interior normals face one direction, no interior penalization is needed and 
+%boundary penalization is only necessary at one of the nodes for the boundary.  
+%The necessary boundary penalization occurs only at the boundary node whose normal vector 
+%faces opposite the direction of the interior normals.  
+%We note that, for approximating Dirichlet boundary value problems, 
+%the boundary data appears naturally in the LDG formulation when discretizing the auxiliary variable, 
+%which represents the derivative of the unknown solution.  
+%Therefore, we can ``naturally" enforce the Dirichlet boundary data at the boundary node whose 
+%normal vector aligns with the interior normal vectors.  
+%Changing the direction of all of the interior normal vectors, we can ``naturally" 
+%enforce the Dirichlet boundary data at the opposite boundary node.  
+%The main idea below for designing penalty-free methods for one-dimensional problems 
+%will be that all boundary data can be naturally enforced 
+%if we consider two independent auxiliary variables, 
+%where the boundary data is ``natural" for at least one of the auxiliary gradient approximations 
+%for all points along the boundary of the domain.  
+%By working with primal formulations, methods based on two independent auxiliary variables 
+%do not have an increased number of degrees of freedom.   
+%Hence, the main question becomes how to extend these results to higher-dimensional problems.  
+%We will see that such an extension is possible if we treat each dimension entirely 
+%independent of the others when forming auxiliary variables that correspond to 
+%partial derivative approximations.  
+%The above strategy for one-dimensional problems is summarized in Figure~\ref{bc_fig}.  
+%
+%\begin{figure}
+%\hh
+%\begin{tikzpicture}[>=latex,xscale=1.3]
+%\node[right] at (8,0) {$\Omega$};
+%\draw[very thick] (0,0) -- (8,0); 
+%\draw[very thick] (0,-0.3) -- (0,0.3);
+%\draw[very thick] (2,-0.3) -- (2,0.3);
+%\draw[very thick] (4,-0.3) -- (4,0.3);
+%\draw[very thick] (6,-0.3) -- (6,0.3);
+%\draw[very thick] (8,-0.3) -- (8,0.3);
+%\fill (0,1) circle (2pt);
+%\fill (2,0.7) circle (2pt);
+%\fill (4,0.7) circle (2pt);
+%\fill (6,0.7) circle (2pt);
+%\fill (2,1.3) circle (2pt);
+%\fill (4,1.3) circle (2pt);
+%\fill (6,1.3) circle (2pt);
+%\fill (8,1) circle (2pt);
+%\draw[->, dashed] (0,1) -- (0.5,1) node[right]{$n^+$};
+%\draw[->, thick] (2,1.3) -- (2.5,1.3) node[right]{$n^+$};
+%\draw[->, thick] (4,1.3) -- (4.5,1.3)node[right]{$n^+$};
+%\draw[->, thick] (6,1.3) -- (6.5,1.3)node[right]{$n^+$};
+%\draw[->, thick] (8,1) -- (8.5,1)node[right]{$n, n^+$};
+%\draw[->, thick] (0,1) -- (-0.5,1)node[left]{$n, n^-$};
+%\draw[->, thick] (2,0.7) -- (2-0.5,0.7)node[left]{$n^-$};
+%\draw[->, thick] (4,0.7) -- (4-0.5,0.7)node[left]{$n^-$};
+%\draw[->, thick] (6,0.7) -- (6-0.5,0.7)node[left]{$n^-$};
+%\draw[->, dashed] (8,1) -- (8-0.5,1)node[left]{$n^-$};
+%\node[below] at (0,-0.5) {Natural BC for $n^-$};
+%\node[below] at (8,-0.5) {Natural BC for $n^+$};
+%\end{tikzpicture}
+%\hh
+%\caption{Example showing that boundary data always appears naturally at either the 
+%right endpoint or the left endpoint of a one-dimensional domain when all of the 
+%interior normal vectors point a single direction.  
+%Let $n^\pm$ denote the collection of all interior and boundary nodal normals chosen such that 
+%all of the vectors point to the right/left.  
+%Then, $n^+$ aligns with the domain's unit outward normal vector at the right endpoint 
+%and $n^-$ aligns with the domain's unit outward normal vector at the left endpoint.  
+%Thus, the boundary condition at the right endpoint is said to appear naturally 
+%when using the choice $n^+$, 
+%and the boundary condition at the left endpoint is said to appear naturally 
+%when using the choice $n^-$.  
+%Since $n^+$ points in the opposite direction as the domain's unit outward normal vector 
+%at the left endpoint, LDG methods based on $n^+$ will require a penalization term 
+%to enforce the boundary condition at the left endpoint.  
+%Similarly, since $n^-$ points in the opposite direction as the domain's unit outward normal vector 
+%at the right endpoint, LDG methods based on $n^-$ will require a penalization term 
+%to enforce the boundary condition at the right endpoint.  
+%The key observation is that when using two independent auxiliary variables with one based 
+%on $n^+$ and one based on $n^-$, 
+%all boundary data becomes natural in the discretization. }
+%\label{bc_fig}
+%\end{figure}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	\subsection{DG Derivative Operators}
+%	\label{dg_derivatives-section}
+%
+%We now define the DG derivative operators that will be used throughout the paper.  
+%The DG derivative operators will correspond to the auxiliary variables in our 
+%nonstandard LDG-type methods that do not require penalization.  
+%Consequently, we will have to introduce some nonstandard notation.  
+%The primary building block for defining our DG derivative operators is a trace 
+%operator that takes into account the multi-valued property of broken Sobolev 
+%functions when restricted to an interior face/edge.  
+%For greater flexibility, we let our trace operators of a scalar broken Sobolev function be vector-valued.  
+%Thus, we will assume the face/edge trace value of a broken Sobolev function 
+%is uniquely chosen with respect to each Cartesian direction.  
+%To this end, we let $\bT : H^1(\mct) \to \mathbf{H}^{1/2}(\mce)$ denote a trace operator 
+%that can take $d$ independent values on a given face/edge.  
+%The trace operator is single-valued for each of the $d$ components.  
+%The vector-valued nature of our trace operators will allow us the freedom to treat each spatial 
+%dimension independently.  
+%
+%We define our DG derivative operators using simply 
+%an integration by parts formulation.  
+%We let $D_h : H^1(\mct) \to \bvec{V}^h_r$ denote a generic DG derivative operator. 
+%%with $\partial_{x_j, h} : H^1(\mct) \to V^h_r$ a DG partial derivative operator 
+%%representing the $j$th component of $D_h$.  
+%Then, we (locally) define the DG derivative operator $D_h$ by 
+%	\begin{equation} \label{DG_deriv_def}
+%\ipx{ D_h v , \bvec{\varphi}_h}_K \equiv \ips{ \bT(v) , \bvec{\varphi}_h^K \otimes \bvec{n}^K }_{\partial K} - 
+%\ipx{ v , \div \bvec{\varphi}_h }_K \qquad \forall \bvec{\varphi}_h \in \bvec{V}^h_r , \; \forall K \in \mct ,
+%	\end{equation}
+%for all $v \in H^1(\mct)$, where $\bvec{n}^K$ denotes the unit outward normal vector along $\partial K$; 
+%$\bvec{\varphi}_h^K\equiv \left.\bvec{\varphi}_h\right|_{\overline{K}}$; 
+%and $\otimes : \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}^d$ is defined by 
+%\[
+%	\left[ \bvec{a} \otimes \bvec{b} \right]_j \equiv a_j \, b_j \qquad \forall j = 1, 2, \ldots, d 
+%\]
+%for all $\bvec{a}, \bvec{b} \in \mathbb{R}^d$. 
+%Observe that the DG derivative operator is in the finite element space $\bvec{V}^h_r$, 
+%and it is not completely determined until such time as a specific choice 
+%for the trace operator $\bT$ is made.
+%However, the choice of the face/edge trace operator $\bT$ 
+%and the discrete space $V^h_r$ 
+%fully characterizes the corresponding DG derivative operator.  
+%
+%For comparison, the ``broken" gradient operator $\nabla_h$ is characterized by the local expression
+%\[
+%\ipx{ \nabla_h v , \bvec{\varphi} }_K  = \ips{ v , \bvec{\varphi}^K \cdot \bvec{n}^K }_{\partial K}  
+%	- \ipx{ v , \div{ \bvec{\varphi}} }_K  \qquad \forall \bvec{\varphi} \in \mathbf{H}^1(K) , \; 
+%	\forall K \in \mct ,
+%\]
+%for all $v \in H^1(\mct)$.  
+%The similarities become even more clear when looking at the component formulations:  
+%\begin{align*}
+%\ipx{ \left[ D_h v \right]_j v , \varphi_h }_K & \equiv  \ips{ T_j(v) , \varphi_h^K \, \rm{n}^{K}_j }_{\partial K} 
+%	- \ipx{ v , \partial_{x_j} \varphi_h}_{K} \qquad \forall \varphi_h \in V^h_r , \; \forall K \in \mct , \\ 
+%\ipx{ \left[ \nabla_h v \right]_j v , \varphi}_K & = \ips{v,\varphi^K \, \rm{n}^{K}_j}_{\partial K} 
+%	- \ipx{ v , \partial_{x_j} \varphi}_K \qquad \forall \varphi \in H^1(K) , \; \forall K \in \mct,
+%\end{align*}
+%for all $j = 1, 2, \ldots, d$, for all $v \in H^1(\mct)$, 
+%where $\text{n}^{K}_j \equiv \left[\bvec{n}^K \right]_j$.
+%Thus, the DG derivative operators amount to projections of the standard 
+%broken gradient operator that assume the argument has a single-valued trace 
+%when considering the individual partial derivative approximations.  
+%Observe, such an assumption only holds for functions in 
+%$H^1(\mct) \cap H^1(\Omega) \subset C^0(\Omega)$.  
+%
+%We make one more set of observations comparing the definition of the DG derivative operators 
+%to the variational characterization of the ``broken" gradient operator $\nabla_h$ associated with 
+%broken Sobolev spaces.  
+%The first observation is that the DG derivative operators map $H^1(\mct)$ into $\mathbf{V}^h_r$, 
+%while $\nabla_h$ maps $H^1(\mct)$ into $\mathbf{L}^2(\Omega)$ 
+%with the property that $\nabla_h \left( V^h_r \right) = \mathbf{V}^h_{r-1}$ 
+%for all $r \geq 1$.  
+%The second observation is that the trace operator 
+%associated with broken Sobolev spaces is in $H^{1/2}(\partial K)$ for each $K \in \mct$.  
+%Thus, the trace operator associated with $\nabla_h$ 
+%is a multi-valued scalar operator.  
+%In contrast, the trace operator associated with a DG derivative operator is vector-valued with 
+%each component a single-valued scalar operator. 
+%By enforcing a single-valued trace operator, 
+%we have the traces are defined in the weaker space $H^{1/2}(\mce)$.  
+%Since $H^{1/2}(\partial K) \subset H^{1/2}(\mce) \subset L^2(\partial K)$ for all $K \in \mct$, 
+%we have the formal continuous extension of a DG derivative operator 
+%\[
+%	\ipx{ \left[ D v \right]_j v , \varphi }_K 
+%	\equiv \ips{ T_j(v) , \varphi^K \, \rm{n}^{K}_j }_{\partial K} 
+%	- \ipx{ v , \partial_{x_j} \varphi}_{K} 
+%	\qquad \forall \varphi \in H^1(K) , \; \forall K \in \mct
+%\]	
+%for all $j = 1,2,\ldots,d$ 
+%is well-defined in $L^2(\Omega)$ 
+%if and only if $T_j(v) = v^K$ 
+%for all $K \in \mct$, (\cite{grisvard}).  
+%Yet, in this case, we exactly recover the local definition of $\nabla_h$.  
+%Furthermore, since $T_j(v)$ is not multi-valued, 
+%we also have $\jump{v} = 0$ on $\mce^I$, 
+%implying $v \in H^1(\Omega)$ and $\nabla_h = \nabla$.  
+%Consequently, 
+%DG methods based on DG derivative operators will inherit different stability properties than 
+%DG methods based on $\nabla_h$, as will be explored throughout the remainder of this paper.  
+%
+%
+%\begin{remark} \ 
+%\begin{enumerate}[(a)]
+%\item 
+%The main difference between our DG derivative operators and those considered 
+%in the Weak Galerkin Finite Element Method, introduced in \cite{wang2013weak}, 
+%is the vector-valued nature of our trace operators.  
+%The Weak Galerkin Finite Element Method uses scalar trace operators 
+%when defining a vector-valued gradient 
+%whereas our DG derivative operators define the gradient by considering 
+%the partial derivatives independently of each other, 
+%leading to vector-valued trace operators.  
+%\item 
+%Our DG derivative operators complement those of the Hybrid Discontinuous Galerkin method 
+%(HDG), defined in \cite{cockburn2009unified}, 
+%where the scalar single-valued trace is considered the unknown in the formulation.  
+%By treating the trace values as unknowns 
+%and introducing a Lagrange multiplier on the boundary of each element, 
+%the corresponding function approximation in $V^h_r$ 
+%can be determined in post-processing.  
+%\end{enumerate}
+%\end{remark}
+%
+%We now define some particular DG derivative operators that will be used 
+%throughout the remainder of the paper.  
+%
+%	\begin{definition}
+%Let $e \in \mce^I$ and suppose $K^+,K^-\in\mct$ are such that $e = \partial K^+\cap \partial K^-$.  We define the upwinding ($+$) and downwinding ($-$) trace operators  $\bT^+, \bT^- : H^1(\mct) \to \mathbf{H}^{1/2}(\mce)$, respectively, via 
+%	\[
+%T_j^+(v) \big|_e \equiv 
+%	\begin{cases} 
+%v^+ & \text{ if } n_j^e > 0,
+%	\\ 
+%v^- & \text{ if } n_j^e < 0,
+%	\\ 
+%\savg{v} & \text{ if } n_j^e = 0 , 
+%	\end{cases} 
+%\qquad T_j^-(v) \big|_e \equiv 
+%	\begin{cases} 
+%v^- & \text{ if } n_j^e > 0,
+%	\\ 
+%v^+ & \text{ if } n_j^e < 0, 
+%	\\ 
+%\savg{v} & \text{ if } n_j^e = 0 .
+%	\end{cases}
+%	\]
+%Suppose $e \in \mce^B$ such that $e = \partial K \cap \partial \Omega$. We define
+%	\[
+%T_j^\pm(v) \big|_e \equiv v \big|_{\partial K\cap \partial \Omega}   
+%	\]
+%for all $j = 1, 2, \ldots, d$.  
+%We define the central trace operator $\overline{\bT} : H^1(\mct) \to \mathbf{H}^{1/2}(\mce)$ by 
+%$\overline{\bT} \equiv \frac12 \left( \bT^+ + \bT^- \right)$.  
+%%Thus, the central trace operator is the same as the vector $\savg{ v \bvec{1} }$.  
+%If $\bvec{v} \in \mathbf{H}^1(\mct)$, we overload the operator  by defining  
+%$T_j(\bvec{v}) \equiv T_j (v_j)$ 
+%for $j=1,2,\ldots,d$ for $\bT = \bT^+, \bT^-, \overline{\bT}$.  
+%	\end{definition}
+%
+%Observe, in the above definition we have $\bT^\pm$ maps into the space $\mathbf{H}^{1/2}(\mce)$ 
+%independent of whether the argument is in $H^1(\mct)$ or $\mathbf{H}^1(\mct)$.  
+%Our goal is to define $d$ independent trace values, one corresponding to each Cartesian direction.  
+%If the function is vector-valued, we simply assign a trace/flux value for each individual component 
+%of the function.  
+%If the function is scalar, we treat the function as though it were vector-valued with all components 
+%duplicate values of the scalar function.  
+%Thus, we have $\bT^\pm (v) = \bT^\pm (v \bvec{1})$ for all $v \in H^1(\mct)$.     
+%In both cases, we choose our trace/flux values based upon the sign of the individual components 
+%of the normal vector.  
+%Such a convention will be useful in the presentation of the following. 
+%
+%While it appears that the values of $\bT^\pm$ depend on the choice of normal vector $\bn^e$, 
+%it turns out that this is not the case.
+%
+%	\begin{proposition}
+%The definitions of the trace operators $\bT^+, \bT^- : H^1(\mct) \to \mathbf{H}^{1/2}(\mce)$ 
+%are invariant to the choice of the edge unit normal vector $\bn$.
+%% as either $\bn^e \equiv \bvec{n}^{K^-}$ or $\bn^e \equiv \bvec{n}^{K^+}$.
+%	\end{proposition}
+%
+%Of course, in Section~\ref{dg_notation-section}, 
+%we have taken  $\bn^e \equiv \bvec{n}^{K^-}$ and will keep this convention.  The essential point is that $\bT^\pm$ has an intrinsic directionality, as we discuss later.
+%
+%	\begin{definition}
+%We define the upwinding, downwinding, and central DG derivative operators  $\nabla_h^+$, $\nabla_h^-$, and $\overline{\nabla}_h$ as the DG derivative operators  corresponding to the trace operators $\bT^+$, $\bT^-$, and $\overline{\bT}$, respectively,  in \eqref{DG_deriv_def}.  More precisely, when $\bT = \bT^+$, we have $D_h = \nabla_h^+$, \emph{et cetera}. 
+%	\end{definition}
+%
+%	\begin{definition}
+%	\label{upwind_jump_def}
+%We define the (interior) upwinding jump operator $\jump{\cdot} : H^1(\mct) \to \mathbf{H}^{1/2}(\mce^I)$  via
+%\[
+%	\jump{v} \big|_e \equiv \bT^- (v) - \bT^+ (v) \qquad \forall \, v \in H^1(\mct)
+%\]
+%for all $e \in \mce^I$.  As before, we overload the operator by defining  $\jump{\cdot} : \mathbf{H}^1(\mct) \to \mathbf{H}^{1/2}(\mce^I)$ 
+%via 
+%\[
+%	\jump{\bvec{v}} \big|_e \equiv \bT^- (\bvec{v}) - \bT^+ (\bvec{v}) 
+%		\qquad \forall \, \bvec{v} \in \mathbf{H}^1(\mct)
+%\] 
+%for all $e \in \mce^I$.  
+%We also define the upwinding (interior) face/edge unit vector $\bn^+$ by 
+%	\[
+%\left.n^+_j\right|_e \equiv \abs{n_j^e} ,
+%	\]
+%for all $j = 1, 2, \ldots, d$, for each $e\in \mce^I$.  We define the downwinding (interior) face/edge unit vector by $\bn^-\equiv -\bn^+$ on $\mce^I$.
+%	\end{definition}
+%
+%	\begin{remark}
+%With all of our definitions in place, we can express the upwinding ($+$) and downwinding ($-$) DG derivative operators globally via the following expressions: for all $v \in H^1(\mct)$,
+%	\begin{align}
+%	\label{upwind_global_aligned}
+%\ipx{ \nabla^\pm_h v , \bvec{\varphi}_h}_{\mct}  & = \ips{ \bT^\pm(v) , \jump{\bvec{\varphi}_h} \otimes \bn^+ }_{\mce^I} + \ips{ v , \bvec{\varphi}_h \cdot \bn }_{\mce^B}
+%	\\ 
+%& \qquad - \ipx{ v , \div \bvec{\varphi}_h }_{\mct} \qquad \forall \bvec{\varphi}_h \in \mathbf{V}^h_r 
+%	\nonumber
+%	\end{align}
+%or, equivalently, 
+%	\begin{align}
+%	\label{upwind_global}
+%\ipx{ \nabla^\pm_h v , \bvec{\varphi}_h}_{\mct}  & = \ips{ \bT^\pm(v) , \left[\bvec{\varphi}_h\right] \otimes \bn }_{\mce^I} + \ips{ v , \bvec{\varphi}_h \cdot \bn}_{\mce^B}
+%	\\ 
+%& \qquad - \ipx{ v , \div \bvec{\varphi}_h }_{\mct} \qquad \forall \bvec{\varphi}_h \in \mathbf{V}^h_r ,
+%	\nonumber
+%	\end{align}
+%using the identity
+%	\begin{equation}
+%[\phi] \, n_j = \jump{\phi}_jn^+_j .
+%	\end{equation}
+%Similarly, the central DG derivative operator can be defined globally via the following expressions: for all $v \in H^1(\mct)$,
+%	\begin{align}
+%	\label{central_global_aligned}
+%\ipx{ \overline{\nabla}_h v , \bvec{\varphi}_h}_{\mct} & = \ips{ \savg{v} , \jump{\bvec{\varphi}_h} \cdot \bn^+ }_{\mce^I} + \ips{ v , \bvec{\varphi}_h \cdot \bn }_{\mce^B}
+%	\\ 
+%& \qquad - \ipx{ v , \div \bvec{\varphi}_h }_{\mct}  \qquad \forall \bvec{\varphi}_h \in \mathbf{V}^h_r 
+%	\nonumber 
+%	\end{align}
+%or, equivalently,
+%	\begin{align} 
+%	\label{central_global} 
+%\ipx{ \overline{\nabla}_h v , \bvec{\varphi}_h}_{\mct} & = \ips{ \savg{v} , \sjump{\bvec{\varphi}_h} \cdot \bn }_{\mce^I} + \ips{ v , \bvec{\varphi}_h \cdot \bn }_{\mce^B}
+%	\\ 
+%& \qquad - \ipx{ v , \div \varphi_h }_{\mct} \qquad \forall \bvec{\varphi}_h \in \mathbf{V}^h_r .
+%	\nonumber 
+%	\end{align}
+%	\end{remark}
+%
+%\begin{remark} \
+%\begin{enumerate}[(a)]
+%	\item 
+%An example of how the trace operators are defined can be found in Figure~\ref{traces_fig}.  
+%Observe, on interior faces/edges, $T_j^+$ corresponds to trace values from the positive $x_j$ 
+%(Cartesian) direction and $T_j^-$ corresponds to the trace values from the negative $x_j$ 
+%(Cartesian) direction.
+%	\item 
+%The upwinding face/edge unit vector $\bn^+$ has all nonnegative components.  
+%Thus, $\bn^+$ may not actually be a normal vector for all interior faces/edges.  
+%Whether or not $\bn^+$ is actually a normal vector for some $e \in \mce^I$ 
+%depends on the orientation of the corresponding face/edge.  
+%When the upwinding face/edge normal vector is actually a normal vector for some $e \in \mce^I$, 
+%we have the upwinding/downwinding trace vectors are comprised of $d$ copies of a single 
+%trace value.  
+%Examples of how the upwinding face/edge normal vectors are defined can be 
+%found in Figure~\ref{normals_fig}.  
+%\item 
+%For all $v \in H^1(\Omega)$, we have $\nabla_h v = \nabla v$ and 
+%$\nabla^+_h v = \nabla^-_h v = \overline{\nabla}_h v = \mathbb{P}_h \nabla v$, 
+%(\cite{FengLewisNeilan13}).
+%
+%	\item 
+%A simple calculation reveals that on the set of interior edges, $\mce^I$, 
+%	\[
+%\bT^\pm(v) = \savg{v} \bvec{1} \mp \frac{1}{2} \jump{v} ,
+%	\]
+%for all $v \in H^1(\mct)$.  
+%	\item
+%If we replace our trace operators with 
+%$\bT^\pm(v) \equiv v^\pm \bvec{1}$, we would have the alternative 
+%DG derivative operators $D^\pm_h$ defined by 
+%%the standard discretizations 
+%\begin{align}
+%	\ipx{ D^\pm_h v , \bvec{\varphi}_h}_{\mct} 
+%	& \equiv \ips{ v^\pm , \sjump{\bvec{\varphi}_h} \cdot \bn }_{\mce^I} 
+%		+ \ips{ v , \bvec{\varphi}_h \cdot \bn }_{\mce^B} \\ 
+%		\nonumber & \qquad - \ipx{ v , \div \bvec{\varphi}_h }_{\mct} 
+%		\qquad \forall \bvec{\varphi}_h \in \mathbf{V}^h_r 
+%\end{align} 
+%for all $v \in H^1(\mct)$. However, with this formulation, we no longer have sign control for the components of the face/edge normal vector on interior faces/edges.   Consequently, our interior face/edge normal vectors are no longer all aligned with each other.  
+%	\item 
+%All of the definitions involving the DG derivative operators $\nabla^\pm_h$ and $\overline{\nabla}_h$ could be established using the equivalent definition 
+%	\begin{equation} \label{trace_label}
+%T_j^\pm(v) = \savg{v} \mp \frac12 \text{sign}(n_j) \sjump{v} 
+%	\end{equation}
+%for all $v \in H^1(\mct)$, where $n_j$ corresponds to the $j^{\rm th}$ component of the standard face/edge normal vector $\bn$. Thus, existing DG codes are easily modified to construct upwinding/downwinding  DG derivative operators. 
+%	\end{enumerate}
+%	\end{remark}
+%
+%%
+%\begin{figure}
+%\hh
+%\begin{tikzpicture}[>=latex,scale=0.75, transform shape]
+%\draw (0,0) -- (4,0) -- (4,4) -- (0,4) -- cycle;
+%\draw (0,2) -- (4,2); 
+%\draw (2,0) -- (2,4); 
+%\draw[->,blue,thick] (1,2) -- (1,2.5)node[above,blue]  {\tiny $\bn^e$}; 
+%\draw[->,blue,thick] (3,2) -- (3,2.5)node[above,blue]{\tiny $\bn^e$}; 
+%\draw[->,blue,thick] (2,3) -- (2.5,3)node[right,blue]  {\tiny $\bn^e$}; 
+%\draw[->,blue,thick] (2,1) -- (2.5,1)node[right,blue] {\tiny $\bn^e$}; 
+%\node[above left,blue] at (4.0,2) {$T^+_y$};
+%\node[below left,red] at (4,2) {$T^-_y$};
+%\node[above right,blue] at (0,2) {$T^+_y$};
+%\node[below right,red] at (0,2) {$T^-_y$};
+%\node[above left,red] at (2,0) {$T^-_x$};
+%\node[above right,blue] at (2,0) {$T^+_x$};
+%\node[below left,red] at (2,4) {$T^-_x$};
+%\node[below right,blue] at (2,4) {$T^+_x$};
+%%\draw[->,red,very thick] (1,2) -- (1,1.5); 
+%%\draw[->,red,very thick] (3,2) -- (3,1.5); 
+%%\draw[->,red,very thick] (2,3) -- (1.5,3); 
+%%\draw[->,red,very thick] (2,1) -- (1.5,1); 
+%%\node[right,blue] at (2.5,3) {\tiny $\bn^e$};
+%%\node[right,blue] at (3,2.5) {\tiny $\bvec{n}^+$};
+%%\node[right,blue] at (1,2.5) {\tiny $\bvec{n}^+$};
+%%\node[right,blue] at (2.5,1) {\tiny $\bvec{n}^+$};
+%%\node[left,red] at (1.5,3) {\tiny $\bvec{n}^-$};
+%%\node[right,red] at (3,1.5) {\tiny $\bvec{n}^-$};
+%%\node[right,red] at (1,1.5) {\tiny $\bvec{n}^-$};
+%%\node[left,red] at (1.5,1) {\tiny $\bvec{n}^-$};
+%%\draw[->,red,thick] (0,1) -- (-0.5,1);
+%%\draw[->,red,thick] (0,3) -- (-0.5,3);
+%%\draw[->,red,thick] (1,0) -- (1,-0.5);
+%%\draw[->,red,thick] (3,0) -- (3,-0.5);
+%%\draw[->,blue,thick] (1,4) -- (1,4.5);
+%%\draw[->,blue,thick] (3,4) -- (3,4.5);
+%%\draw[->,blue,thick] (4,1) -- (4.5,1);
+%%\draw[->,blue,thick] (4,3) -- (4.5,3);
+%\end{tikzpicture}
+%\hh
+%\begin{tikzpicture}[>=latex,scale=0.75, transform shape]
+%\draw (0,0) -- (4,0) -- (0,4) -- cycle;
+%\draw (4,4) -- (0,4) -- (4,0) -- cycle;
+%\draw[thick] (0,4) -- (4,0);
+%\node[above left,blue] at (2.5,2) {$T^+_y$};
+%\node[below right,blue] at (2.4,2) {$T^+_x$};
+%\node[above left,red] at (2,1.5) {$T^-_x$};
+%\node[below right,red] at (2.1,1.5) {$T^-_y$};
+%\draw[->,blue,dashed] (1,3) -- (1,3.5);
+%\draw[->,blue,dashed] (1,3) -- (1.5,3);
+%\draw[->,blue,thick] (1,3) -- (1.5,3.5) node[above right] {$\bn^e$};
+%%\draw[->,thick] (1,3) -- (0.5,2.5);
+%\draw[->,red,dashed] (1,3) -- (0.5,3);
+%\draw[->,red,dashed] (1,3) -- (1,2.5);
+%\node at (0.5,0.5) {$K^-$};\node at (3.5,3.5) {$K^+$};
+%\end{tikzpicture}
+%%\hh
+%%\begin{tikzpicture}[>=latex,scale=0.75, transform shape]
+%%\draw (0,0) -- (4,0) -- (0,4) -- cycle;
+%%\draw (4,4) -- (0,4) -- (4,0) -- cycle;
+%%\draw[thick] (0,4) -- (4,0);
+%%\node[above left,red] at (1.6,2) {$T^-_x$};
+%%\node[below right,red] at (1.5,2) {$T^-_y$};
+%%\draw[->,red,dashed] (3,1) -- (3,0.5);
+%%\draw[->,red,dashed] (3,1) -- (2.5,1);
+%%\draw[->,blue,thick] (3,1) -- (3.5,1.5)node[above right] {$\bn^e$};
+%%\draw[->,thick] (3,1) -- (2.5,0.5);
+%%\node at (0.5,0.5) {$K^-$};\node at (3.5,3.5) {$K^+$};
+%%\end{tikzpicture}
+%\hh
+%\begin{tikzpicture}[>=latex,scale=0.75, transform shape]
+%\draw (0,0) -- (4,0) -- (4,4) -- cycle;
+%\draw (4,4) -- (0,4) -- (0,0) -- cycle;
+%\draw[thick] (0,0) -- (4,4);
+%\node[above left,blue] at (2.25,2) {$T^+_y$};
+%\node[below right,blue] at (1.75,2) {$T^+_x$};
+%\node[above left,red] at (1.5,1.25) {$T^-_x$};
+%\node[below right,red] at (1,1.25) {$T^-_y$};
+%\draw[->,blue,dashed] (3,3) -- (3,3.5);
+%\draw[->,blue,dashed] (3,3) -- (3.5,3);
+%%\draw[->,thick] (3,3) -- (2.5,3.5);
+%\draw[->,blue,thick] (3,3) -- (3.5,2.5) node[below right] {$\bn^e$};
+%\draw[->,red,dashed] (3,3) -- (2.5,3);
+%\draw[->,red,dashed] (3,3) -- (3,2.5);
+%\node at (0.5,3.5) {$K^-$};\node at (3.5,0.5) {$K^+$};
+%\end{tikzpicture}
+%%\hh
+%%\begin{tikzpicture}[>=latex,scale=0.75, transform shape]
+%%\draw (0,0) -- (4,0) -- (4,4) -- cycle;
+%%\draw (4,4) -- (0,4) -- (0,0) -- cycle;
+%%\draw[thick] (0,0) -- (4,4);
+%%\node[above left,red] at (2.25,2) {$T^-_x$};
+%%\node[below right,red] at (1.75,2) {$T^-_y$};
+%%\draw[->,red,dashed] (1,1) -- (1,0.5);
+%%\draw[->,red,dashed] (1,1) -- (0.5,1);
+%%\draw[->,thick] (1,1) -- (0.5,1.5);
+%%\draw[->,blue,thick] (1,1) -- (1.5,0.5) node[below right] {$\bn^e$};
+%%%\draw[->,dashed] (0.5,1) -- (0.5,1.5);
+%%%\draw[->,dashed] (1,0.5) -- (1.5,0.5);
+%%\node at (0.5,3.5) {$K^-$};\node at (3.5,0.5) {$K^+$};
+%%\end{tikzpicture}
+%\hh
+%\caption{
+%Example of how the components of the trace operators $\bT^\pm$ are chosen 
+%for different orientations of an interior face/edge in two dimensions.  
+%}
+%\label{traces_fig}
+%\end{figure}
+%%
+%
+%%
+%\begin{figure}
+%\hh
+%\begin{tikzpicture}[>=latex,scale=0.85, transform shape]
+%\draw (0,0) -- (4,0) -- (4,4) -- (0,4) -- cycle;
+%\draw (0,2) -- (4,2); 
+%\draw (2,0) -- (2,4); 
+%\draw[->,blue,very thick] (1,2) -- (1,2.5); 
+%\draw[->,blue,very thick] (3,2) -- (3,2.5); 
+%\draw[->,blue,very thick] (2,3) -- (2.5,3); 
+%\draw[->,blue,very thick] (2,1) -- (2.5,1); 
+%\draw[->,red,very thick] (1,2) -- (1,1.5); 
+%\draw[->,red,very thick] (3,2) -- (3,1.5); 
+%\draw[->,red,very thick] (2,3) -- (1.5,3); 
+%\draw[->,red,very thick] (2,1) -- (1.5,1); 
+%\node[right,blue] at (2.5,3) {\tiny $\bvec{n}^+$};
+%\node[right,blue] at (3,2.5) {\tiny $\bvec{n}^+$};
+%\node[right,blue] at (1,2.5) {\tiny $\bvec{n}^+$};
+%\node[right,blue] at (2.5,1) {\tiny $\bvec{n}^+$};
+%\node[left,red] at (1.5,3) {\tiny $\bvec{n}^-$};
+%\node[right,red] at (3,1.5) {\tiny $\bvec{n}^-$};
+%\node[right,red] at (1,1.5) {\tiny $\bvec{n}^-$};
+%\node[left,red] at (1.5,1) {\tiny $\bvec{n}^-$};
+%\draw[->,red,thick] (0,1) -- (-0.5,1);
+%\draw[->,red,thick] (0,3) -- (-0.5,3);
+%\draw[->,red,thick] (1,0) -- (1,-0.5);
+%\draw[->,red,thick] (3,0) -- (3,-0.5);
+%\draw[->,blue,thick] (1,4) -- (1,4.5);
+%\draw[->,blue,thick] (3,4) -- (3,4.5);
+%\draw[->,blue,thick] (4,1) -- (4.5,1);
+%\draw[->,blue,thick] (4,3) -- (4.5,3);
+%\end{tikzpicture}
+%\hh
+%\begin{tikzpicture}[>=latex,scale=0.85, transform shape]
+%\draw (0,0) -- (4,0) -- (4,4) -- (0,4)--cycle;
+%%\draw (4,4) -- (0,4) -- (0,0) -- cycle;
+%\draw[thick] (0,4) -- (4,0);
+%%\draw[blue,->] (2,2) -- (2.5,1.5);
+%%\draw[->] (2,2) -- (1.5,2.5);
+%\draw[->,blue,very thick] (2,2) -- (2.5,2.5);
+%\draw[->,red,very thick] (2,2) -- (1.5,1.5);
+%\draw[->,blue,dashed] (2,2) -- (2,2.5);
+%\draw[->,blue,dashed] (2,2) -- (2.5,2);
+%\draw[->,red,dashed] (2,2) -- (2,1.5);
+%\draw[->,red,dashed] (2,2) -- (1.5,2);
+%\node at (0.5,0.5) {$K^-$};\node at (3.5,3.5) {$K^+$};
+%\node[above] at (3.5,0) {$e$};
+%%\node[right,blue] at (2.5,1.5) {\tiny $\bn^e$};
+%%\node[left] at (1.5,2.5) {\tiny $\bvec{n}^{K^-}$};
+%\node[above right,blue] at (2.5,2.5) {\tiny $\bvec{n}^+=\bn^e$};
+%\node[below left,red] at (1.5,1.5) {\tiny $-\bn^e=\bvec{n}^-$};
+%\draw[->,red,thick] (0,2) -- (-0.5,2);
+%\draw[->,red,thick] (2,0) -- (2,-0.5);
+%\draw[->,blue,thick] (2,4) -- (2,4.5);
+%\draw[->,blue,thick] (4,2) -- (4.5,2);
+%\end{tikzpicture}
+%\hh 
+%\begin{tikzpicture}[>=latex,scale=0.85, transform shape]
+%\draw (0,0) -- (4,0) -- (4,4) -- cycle;
+%\draw (4,4) -- (0,4) -- (0,0) -- cycle;
+%\draw[thick] (0,0) -- (4,4);
+%\draw[blue,->] (2,2) -- (2.5,1.5);
+%\draw[->] (2,2) -- (1.5,2.5);
+%\draw[->,blue,very thick] (2,2) -- (2.5,2.5);
+%\draw[->,red,very thick] (2,2) -- (1.5,1.5);
+%\draw[->,blue,dashed] (2,2) -- (2,2.5);
+%\draw[->,blue,dashed] (2,2) -- (2.5,2);
+%\draw[->,red,dashed] (2,2) -- (2,1.5);
+%\draw[->,red,dashed] (2,2) -- (1.5,2);
+%\node[below right] at (0,4) {$K^-$};
+%\node[above left] at (4,0) {$K^+$};
+%\node[above] at (0.5,0) {$e$};
+%\node[right,blue] at (2.5,1.5) {\tiny $\bn^e$};
+%%\node[left] at (1.5,2.5) {\tiny $\bvec{n}^{K^-}$};
+%\node[right,blue] at (2.5,2.5) {\tiny $\bvec{n}^+$};
+%\node[left,red] at (1.5,1.5) {\tiny $\bvec{n}^-$};
+%\draw[->,red,thick] (0,2) -- (-0.5,2);
+%\draw[->,red,thick] (2,0) -- (2,-0.5);
+%\draw[->,blue,thick] (2,4) -- (2,4.5);
+%\draw[->,blue,thick] (4,2) -- (4.5,2);
+%\end{tikzpicture}
+%\hh 
+%\caption{Examples showing how the face/edge normal vectors are defined.}
+%\label{normals_fig}
+%\end{figure}
+%
+%A major advantage of using DG derivative operators is that boundary data 
+%appears naturally in the definition of the discrete derivative.  
+%Thus, we introduce some extra notation that emphasizes the natural 
+%enforcement of boundary conditions.  
+%To account for Neumann boundary data 
+%and to later formulate the DG approximation methods for Poisson's equation, 
+%we also introduce DG divergence operators.  
+%Lastly, we use the new boundary data notation to state the formal adjoint operators 
+%for our DG derivatives.  
+%
+%\begin{definition}
+%The upwinding, downwinding, and central DG derivative operators with known 
+%Dirichlet boundary data $g \in H^{1/2}(\partial \Omega)$, 
+%$\nabla^\pm_{h,g}$ and $\overline{\nabla}_{h,g}$, 
+%are defined by 
+%\begin{align*} 
+%	\ipx{ \nabla^\pm_{h,g} v , \bvec{\varphi}_h}_{\mct} 
+%	& = \ips{ \bT^\pm(v) , \jump{\bvec{\varphi}_h} \otimes \bn^+ }_{\mce^I} 
+%		+ \ips{ g , \bvec{\varphi}_h \cdot \bn }_{\mce^B} 
+%		- \ipx{ v , \div \bvec{\varphi}_h }_{\mct} 
+%		\qquad \forall \bvec{\varphi}_h \in \mathbf{V}^h_r \\ 
+%	\ipx{ \overline{\nabla}_{h,g} v , \bvec{\varphi}_h}_{\mct} 
+%	& = \ips{ \savg{v} , \jump{\bvec{\varphi}_h} \cdot \bn^+ }_{\mce^I} 
+%		+ \ips{ g , \bvec{\varphi}_h \cdot \bn }_{\mce^B} 
+%		- \ipx{ v , \div \bvec{\varphi}_h }_{\mct} 
+%		\qquad \forall \bvec{\varphi}_h \in \mathbf{V}^h_r  
+%\end{align*}
+%for all $v \in H^1(\mct)$.
+%\end{definition}
+%
+%\begin{remark}
+%This definition is equivalent to defining the underlying trace operators $\bT_g$ by 
+%$\bT_g \equiv \bT$ on all interior faces/edges and 
+%$\bT_g \equiv g \bvec{1}$ on all boundary faces/edges 
+%for $\bT = \bT^+, \bT^-, \overline{\bT}$.   
+%\end{remark}
+%
+%\begin{definition}
+%Let $D_h$ denote a DG derivative operator with components $\partial_{x_j, h}$.  
+%Then, the divergence operator associated with $D_h$ is defined as 
+%$\div_h$, where 
+%\[
+%	\div_h \bvec{v} \equiv \sum_{j=1}^d \partial_{x_j, h} v_j 
+%\]
+%for all $\bvec{v} \in \mathbf{H}^1(\mct)$.  
+%In particular, $\div^\pm_h$ denotes the divergence operator associated with $\nabla^\pm_h$ 
+%and $\div^a_h$ denotes the divergence operator associated with $\overline{\nabla}_h$.  
+%\end{definition}
+%
+%\begin{definition}
+%The upwinding, downwinding, and central DG divergence operators with known 
+%Neumann boundary data $g \in L^2(\partial \Omega)$, 
+%$\div^\pm_{h,g}$ and $\div^a_{h,g}$, 
+%are defined by 
+%\begin{align*}
+%	\ipx{ {\div^\pm_{h,g}} \bvec{v} , \varphi_h}_{\mct} 
+%		& \equiv \sum_{j=1}^d \ipx{ \left[ {\nabla^\pm_{h,0}} v_j \right]_j , \varphi_h}_{\mct} 
+%			+ \ips{ g , \varphi_h }_{\mce^B}  \qquad \forall \varphi_h \in V^h \\ 
+%	\ipx{ {\div^a_{h,g}} \bvec{v} , \varphi_h}_{\mct} 
+%		& \equiv \sum_{j=1}^d \ipx{ \left[ {\overline{\nabla}_{h,0}} v_j \right]_j , \varphi_h}_{\mct} 
+%			+ \ips{ g , \varphi_h }_{\mce^B} 	\qquad \forall \varphi_h \in V^h 
+%\end{align*}
+%for all $\bvec{v} \in \mathbf{H}^1(\mct)$.
+%\end{definition}
+%
+%\begin{remark}
+%This definition is equivalent to defining the underlying trace operators $\widehat{\bT}_g$ by 
+%$\widehat{\bT}_g \equiv \bT$ on all interior faces/edges and 
+%$\widehat{\bT}_g \equiv \frac{g}{\bn \cdot \bn} \bn$ on all boundary faces/edges 
+%for $\bT = \bT^+, \bT^-, \overline{\bT}$, 
+%and then letting 
+%${\div_{h,g}} \bvec{v} \equiv \sum_{j=1}^d \big[ \widehat{D}_{h,g} v_j \big]_j$ 
+%for $\widehat{D}_{h,g}$ the underlying DG derivative operator corresponding to $\widehat{\bT}_g$.  
+%Using this formulation, the correct boundary integrals are built into the underlying 
+%DG derivative operators.  
+%An alternative formulation where the boundary data is in $\mathbf{H}^1(\mce^B)$ 
+%can be found in \cite{FengLewisNeilan13}.  
+%\end{remark}
+%
+%\begin{theorem}(\cite{FengLewisNeilan13}) 
+%The formal adjoint of the operator $\div_h^\pm$ (respectively $\div^a_h$) is 
+%$-\nabla^\mp_{h,0}$ (respectively $-\overline{\nabla}_{h,0}$) 
+%with respect to the inner product $(\cdot, \cdot)_{\mct}$ over the space $V^h_r$.  
+%Likewise, the formal adjoint of the operator $\div_{h,g}^\pm$ (respectively $\div^a_{h,g}$) is 
+%$-\nabla^\mp_h$ (respectively $-\overline{\nabla}_h$) 
+%with respect to the inner product $(\cdot, \cdot)_{\mct}$ over the space $V^h_r$.
+%\end{theorem}  
+%
+%\begin{remark} \ 
+%\begin{enumerate}[(a)] 
+%\item
+%Observe, the above result perfectly mirrors the analogous result for Sobolev functions:
+%for all $v \in H^1(\Omega)$, there holds 
+%$( \nabla v , \bvec{\varphi} )_\Omega = - (v , \div \bvec{\varphi})_\Omega$ 
+%for all $\bvec{\varphi} \in \mathbf{H}^1_0(\Omega)$.  
+%\item
+%Let $v \in H^1(\mct)$.  
+%Then, for comparison, we have 
+%\begin{align} \label{broken_deriv_global_aligned} 
+%	\ipx{ \nabla_h v , \bvec{\varphi}}_{\mct} 
+%	& = - \ipx{ v , \div \bvec{\varphi} }_{\mct} %+ \ips{v , \bvec{\varphi} \cdot \bn}_{\mce^B} \\ 
+%	 + \ips{ \jump{v} , \savg{\bvec{\varphi}} \otimes \bn^+ }_{\mce^I} 
+%		+ \ips{ \savg{v} , \jump{\bvec{\varphi}} \cdot \bn^+ }_{\mce^I} , \\ 
+%	\label{broken_deriv_global} 
+%	\ipx{ \nabla_h v , \bvec{\varphi}}_{\mct} 
+%	& = - \ipx{ v , \div \bvec{\varphi} }_{\mct} %+ \ips{v , \bvec{\varphi} \cdot \bn}_{\mce^B} \\ 
+%	 + \ips{ \sjump{v} , \savg{\bvec{\varphi}} \cdot \bn }_{\mce^I} 
+%		+ \ips{ \savg{v} , \sjump{\bvec{\varphi}} \cdot \bn }_{\mce^I} 
+%\end{align}
+%for all $\bvec{\varphi} \in \mathbf{H}_0^1(\mct)$.  
+%Observe, the extra terms over the interior faces/edges are all due to the fact the interior traces 
+%are multi-valued as compared to using a vector-valued trace.  
+%\end{enumerate}
+%\end{remark}
+%
+%We end this section by stating the relationships between various DG derivative operators 
+%and the standard piecewise gradient operator.  
+%The following equivalencies will be helpful for comparing various DG methods.  
+%We also include a result that verifies the effectiveness of treating 
+%both an upwinding and downwinding DG derivative approximation independently 
+%with regards to continuity.  
+%The continuity result serves as the motivation for using dual-winding techniques.    
+% 
+%\begin{lemma} \label{comparisons_lemma}
+%Let $v \in H^1(\mct)$ and $\bvec{\varphi}_h \in \mathbf{V}^h_r$.  
+%Then, there holds 
+%\begin{align*}
+%	\ipx{ \nabla^\pm_h v , \bvec{\varphi}_h }_{\mct} 
+%	& = \ipx{ \nabla_h v , \bvec{\varphi}_h }_{\mct} 
+%		- \ips{ \jump{v} , \bT^\mp ( \bvec{\varphi}_h ) \otimes \bn^+ }_{\mce^I} , \\ 
+%	\ipx{ \overline{\nabla}_h v , \bvec{\varphi}_h}_{\mct} 
+%	& = \ipx{ \nabla_h v , \bvec{\varphi}_h }_{\mct} 
+%		- \ips{ \jump{v} , \savg{\bvec{\varphi}_h} \otimes \bn^+ }_{\mce^I} . 
+%\end{align*}
+%Using the alternative formulation based on the traces defined by \eqref{trace_label}, 
+%we have 
+%\begin{align*}
+%	\ipx{ \nabla^\pm_h v , \bvec{\varphi}_h }_{\mct} 
+%	& = \ipx{ \nabla_h v , \bvec{\varphi}_h }_{\mct} 
+%		- \ips{ \sjump{v} , \bT^\mp (\bvec{\varphi}_h) \cdot \bn^+ }_{\mce^I} , \\ 
+%	\ipx{ \overline{\nabla}_h v , \bvec{\varphi}_h}_{\mct} 
+%	& = \ipx{ \nabla_h v , \bvec{\varphi}_h }_{\mct} 
+%		- \ips{ \sjump{v} , \savg{\bvec{\varphi}_h} \cdot \bn^+ }_{\mce^I} . 
+%\end{align*}
+%\end{lemma}
+%
+%\begin{proof}
+%The first set of relationships hold by comparing 
+%\eqref{upwind_global_aligned} and \eqref{central_global_aligned} 
+%with \eqref{broken_deriv_global_aligned}. 
+%The second set of relationships hold by comparing 
+%\eqref{upwind_global} and \eqref{central_global} 
+%with \eqref{broken_deriv_global}.
+%  
+%\end{proof}
+%
+%\begin{remark} 
+%In contrast to the standard piecewise gradient operator, we see that both $\nabla^\pm_h$ 
+%and $\overline{\nabla}_h$ implicitly incorporate jump information for the argument $v$.  
+%In Section~\ref{ldg-section}, we will see that the LDG method corresponds to 
+%a DG derivative operator that resembles $\overline{\nabla}_h$.  
+%Thus, we can see why any positive penalization is sufficient for LDG while 
+%IPDG methods that correspond to $\nabla_h$ typically require sufficiently positive penalty terms.  
+%\end{remark}
+% 
+%\begin{lemma}\label{constant_lemma}
+%Let $v_h \in V^h_r$.  
+%Suppose $\nabla^+_h v_h = \bvec{0}$ and $\nabla^-_h v_h = \bvec{0}$.  
+%Then $v_h$ is a continuous, constant-valued function over $\Omega$.  
+%Furthermore, if 
+%$\nabla^+_{h,0} v_h = \bvec{0}$, $\nabla^-_{h,0} v_h = \bvec{0}$, 
+%and at least one boundary simplex in $\mct$ has no more than one boundary face/edge, 
+%then $v_h = 0$.  
+%\end{lemma}
+%
+%\begin{proof}
+%We first show $v_h$ is continuous.  
+%By \eqref{upwind_global_aligned}, we have 
+%\begin{align*}
+%	0 & = \ipx{ \nabla^-_h v_h - \nabla^+_h v_h , \bvec{\varphi}_h }_{\mct} \\ 
+%	& = \ips{ \bT^-(v_h) - \bT^+(v_h) , \jump{\bvec{\varphi}_h} \otimes \bn^+ }_{\mce^I} \\ 
+%	& = \ips{ \jump{v_h} , \jump{\bvec{\varphi}_h} \otimes \bn^+ }_{\mce^I}   
+%\end{align*}
+%for all $\bvec{\varphi}_h \in \mathbf{V}^h_r$.  
+%Letting $\bvec{\varphi}_h = v_h \bvec{1}$, we have $\jump{v_h}_j = 0$ for 
+%some $j = 1, 2, \ldots, d$ along each interior face/edge.  
+%Hence, $v_h$ is continuous.  
+%
+%We now show $v_h$ is constant-valued.  
+%By the continuity of $v_h$, we have $v_h \in H^1(\Omega) \cap V^h_r$.  
+%Then, by Lemma~\ref{comparisons_lemma}, we have 
+%\begin{align*}
+%	0 & = \ipx{ \nabla^\pm_h v_h , \bvec{\varphi}_h }_{\mct} \\ 
+%	& = \ipx{ \nabla_h v_h , \bvec{\varphi}_h }_{\mct} 
+%		- \ips{ \jump{v_h} , \bT^\mp(\bvec{\varphi}_h) \otimes \bn^+ }_{\mce^I} \\ 
+%	& = \ipx{ \nabla_h v_h , \bvec{\varphi}_h }_{\mct} 
+%\end{align*}
+%for all $\bvec{\varphi}_h \in \mathbf{V}^h_r$.  
+%Since $v_h \in H^1(\Omega)$, letting $\bvec{\varphi}_h = \nabla_h v_h$ implies 
+%$\nabla_h v_h = \bvec{0}$.  
+%Therefore, $v_h$ is constant-valued over $\Omega$.  
+%
+%The proof of the second part of the result can be found in \cite{LewisNeilan12,FengLewisNeilan13}.  
+% 
+%\end{proof}
+%
+%\begin{corollary}\label{dwdg_h1norm}
+%Define $\tbar{\cdot}_{1,h} : H^1(\mct) \to [0, \infty)$ by 
+%$\tbar{v}_{1,h}^2 \equiv \frac12 \| \nabla^+_h v \|^2_{L^2(\Omega)} 
+%	+ \frac12 \| \nabla^-_h v \|^2_{L^2(\Omega)}$ 
+%for all $v \in H^1(\mct)$.  
+%Then, $\tbar{\cdot}_{1,h}$ defines a semi-norm on $V^h_r$ and a norm on $\mathring{V}^h_r$.  
+%\end{corollary}
+%
+%\begin{remark} \ 
+%\begin{enumerate}[(a)]
+%\item 
+%By knowing both the upwinding DG derivative and the dowwinding DG derivative, 
+%we effectively know both the upwind trace value and the downwind trace value.  
+%Thus, we can recover information concerning jumps and averages.  
+%\item 
+%Lemma~\ref{constant_lemma} provides insight into how DG methods can be developed 
+%that do not rely upon penalization to achieve stability.  
+%The result provides a discrete analogue to the fact that
+%if $v \in H^1(\Omega)$ and $\nabla v = \bvec{0}$, 
+%then $v$ must be constant-valued.  
+%\end{enumerate}
+%\end{remark}
+%
+%
+%	\section{The DWDG Method}
+%	\label{dwdg-section}
+%
+%Using the above upwinding and downwinding DG derivative operators, we can now 
+%formulate the DWDG method for \eqref{problem_neumann}: 
+%find $u_h \in V^h_r$ such that 
+%\begin{align}\label{DWDG_neumann} 
+%	- \frac{ \div_{h,g}^- \nabla_h^+ u_h + \div_{h,g}^+ \nabla_h^- u_h}{2} 
+%		+ j_h(u_h)  
+%		& = \mathbb{P}_h f , 
+%\end{align}
+%where $j_h : H^1(\mct) \to V^h_r$ is the (interior penalty) operator satisfying 
+%\[
+%	\ipx{ j_h(v), \varphi_h }_{\mct} = \ips{ \gamma \jump{v} , \jump{\varphi_h} }_{\mce^I} 
+%	\qquad \forall \varphi_h \in V^h_r 
+%\]
+%for $\gamma$ a piecewise constant penalty function with $\gamma_e = C$ or $\gamma_e = C h_e^{-1}$ 
+%for some constant $C$.  
+%%satisfying $\gamma \big|_e = \gamma_e h_e^{-1}$ for all $e \in \mce^I$.  
+%Equivalently, the DWDG method can be defined by: 
+%find $u_h \in V^h_r$ such that 
+%\begin{align} \label{DWDG}
+%	& \frac12 \ipx{ \nabla^+_h u_h , \nabla^+_h \varphi_h }_{\mct} 
+%		+ \frac12 \ipx{ \nabla^-_h u_h , \nabla^-_h \varphi_h }_{\mct} 
+%		+ \ips{ \gamma \jump{u_h} , \jump{\varphi_h} }_{\mce^I} \\ 
+%	\nonumber & \qquad 
+%	= \ipx{f , \varphi_h}_{\mct} + \ips{ g , \varphi_h}_{\mce^B} 
+%\end{align}
+%for all $\varphi_h \in V^h_r$.  
+%
+%\begin{theorem} \label{existence_uniqueness}
+%Suppose $\gamma \geq 0$.  
+%The solution $u_h$ for \eqref{DWDG} exists and is unique up to an additive constant.  
+%Furthermore, the solution $u_h$ is unique in the space $\mathring{V}^h_r$.  
+%\end{theorem}
+%
+%\begin{proof}
+%Since the problem is linear and posed in a finite-dimensional setting, it suffices to 
+%show that if $f = 0$ and $g = 0$, then $u_h$ is a continuous, constant-valued function.  
+%Letting $\varphi_h = u_h$ in \eqref{DWDG} and setting $f = 0$ and $g = 0$, we have 
+%$\tbar{u_h}_{1,h} = 0$ 
+%and the result follows by Lemma~\ref{constant_lemma} and Corollary~\ref{dwdg_h1norm}.  
+% 
+%\end{proof}
+%
+%\begin{remark} 
+%The penalty term in \eqref{DWDG_neumann} and \eqref{DWDG} is added for flexibility.  
+%By the proof for Theorem~\ref{existence_uniqueness}, we see that we can set $\gamma = 0$.  
+%Below, we will see that the DWDG method actually exhibits optimal convergence even for 
+%some negative penalty parameters when $\mct$ is quasi-uniform.  
+%\end{remark}
+%
+%By introducing two auxiliary variables, we can equivalently express the DWDG in mixed form 
+%as follows: 
+%Find $u_h \in \mathring{V}^h_r, \bvec{\sigma}^\pm_h \in \mathbf{V}^h_r$ such that 
+%\begin{subequations}\label{DWDG_mixed}
+%\begin{alignat}{2}
+%	\label{dwdg_mix1} 
+%	\frac12 \ipx{ \bvec{\sigma}^+_h + \bvec{\sigma}^-_h , \nabla \varphi_h }_{\mct} 
+%		- \frac12 \ips{ \bT^- \left( \bvec{\sigma}^+_h \right) 
+%			+ \bT^+ \left( \bvec{\sigma}^-_h \right) , \jump{\varphi_h} \otimes \bn^+ }_{\mce^I} & \\ 
+%		\nonumber 
+%		+ \ips{ \gamma \jump{u_h} , \jump{\varphi_h} }_{\mce^I} 
+%	= \ipx{f,\varphi_h}_{\mct} + \ips{g, \varphi_h}_{\mce^B} , & && \forall \varphi_h \in V^h_r , \\ 
+%	\label{dwdg_mix2} 
+%	\ipx{ \bvec{\sigma}^+_h , \bvec{w}^+_h }_{\mct} 
+%	= \ipx{ \nabla^+_h u_h , \bvec{w}^+_h }_{\mct} , & \qquad && \forall \bvec{w}^+_h \in \mathbf{V}^h_r , \\ 
+%	\label{dwdg_mix3} 
+%	\ipx{ \bvec{\sigma}^-_h , \bvec{w}^-_h }_{\mct} 
+%	= \ipx{ \nabla^-_h u_h , \bvec{w}^-_h }_{\mct} , & && \forall \bvec{w}^-_h \in \mathbf{V}^h_r . 
+%\end{alignat}
+%\end{subequations}
+%Thus, unlike LDG methods, the DWDG method incorporates two auxiliary variables 
+%representing approximations for the gradient.  
+%The differences in the two gradient approximations provide an indicator for discontinuities 
+%in $u_h$.  
+%
+%We now develop consistency and convergence results for the DWDG method.  
+%To this end, we will need to consider both the semi-norm induced by the 
+%bilinear form associated with the DWDG method and the 
+%discrete $H^1$ semi-norm defined in Corollary~\ref{dwdg_h1norm}.  
+%The main tool used in the convergence analysis is the fact that the discrete $H^1$ semi-norm 
+%$\tbar{\cdot}_{1,h}$ can be used to control the interior jumps of a function in $V^h_r$, 
+%a technical result that will be shown in Section~\ref{dwdg_facts-section}. 
+%We will also relate the DWDG norms with the semi-norms induced by symmetric IPDG methods and 
+%LDG methods in Sections~\ref{ipdg-section} and \ref{ldg-section}.  
+%With these norm equivalencies in hand, we immediately obtain explicit stability results 
+%and inverse inequalities for the DWDG method.  
+%
+%First, we 
+%define the bilinear form associated with the left-hand side of \eqref{DWDG} as 
+%\begin{equation} \label{bil_form}
+%	B_h \left( v_h , w_h \right) := 
+%		\frac12 \ipx{ \nab_h^+ v_h , \nab_h^+ w_h }_{\mct} 
+%			+ \frac12 \ipx{ \nab_h^- v_h , \nab_h^- w_h }_{\mct} 
+%		+ \ips{ \gamma \jump{v_h} , \jump{w_h} }_{\mce^I} .  
+%\end{equation}
+%Then all solutions $u_h \in V^h_r$ satisfy 
+%\[
+%	B_h \left( u_h , \varphi_h \right) = F_h \left( \varphi_h \right) , \qquad \forall \varphi_h \in V^h , 
+%\]
+%where the functional $F_h : V^h_r \to \mathbb{R}$ is defined by 
+%\[
+%	F_h (w_h) \equiv \ipx{ f , w_h }_{\mct} + \ips{ g , w_h }_{\mce^B} 
+%\]
+%for all $w_h \in V^h_r$.  
+%
+%\begin{remark} \ 
+%\begin{enumerate}[(a)]
+%\item
+%By \eqref{DWDG}, we see that the DWDG method is symmetric.  
+%Furthermore, we see by \cite{LewisNeilan12} and Theorem~\ref{existence_uniqueness} 
+%that the matrix associated with $B_h$ corresponds to averaging two symmetric nonnegative definite 
+%matrices to form a symmetric positive definite matrix when approximating 
+%Poisson's equation with Dirichlet boundary conditions or Neumann boundary conditions 
+%with the restriction to $\mathring{V}^h_r$.  
+%\item
+%The bilinear form $B_h$ can be trivially extended to arguments in $H^1(\mct) \times H^1(\mct)$ 
+%by the definition of the DG derivative operators.  
+%In this context, we immediately see that $B_h$ is self-adjoint.  
+%However, positivity would not hold in $H^1(\mct)$ since the null space of $\nabla_h^\pm$ 
+%is only continuous constant-valued functions when restricted to $V^h_r$.  
+%\end{enumerate}
+%\end{remark}
+%
+%\begin{lemma}\label{dwdg_consistency}
+%{\bf Approximate Consistency:}  
+%Let $u \in H^2(\Omega)$ such that $\frac{\partial u}{\partial n} = g$ on $\partial \Omega$.  
+%Then, 
+%\[
+%	B_h(u , v_h) 
+%	= \ipx{f,v_h}_{\Omega} + \ips{g,v_h}_{\partial \Omega}  
+%		+ \ips{ \nabla u - \savg{\mathbb{P}_h \nabla u } , \jump{ v_h} \otimes \bn^+ }_{\mce^I}
+%\]
+%for all $v_h \in V^h_r$. 
+%\end{lemma}
+%
+%\begin{proof}
+%Since $u \in H^1(\Omega)$, we have 
+%$\nabla^\pm_h u = \overline{\nabla}_h u = \mathbb{P}_h \nabla_h u = \mathbb{P}_h \nabla u$ 
+%and $\jump{u} \big|_e = \bvec{0}$ for all $e \in \mce^I$.   
+%Let $v_h \in V^h_r$.  
+%Then, by \eqref{broken_deriv_global_aligned}, 
+%\begin{align*}
+%	\ipx{f,v_h}_{\Omega} + \ips{g,v_h}_{\partial \Omega} 
+%	& = - \ipx{ \div \nabla u , v_h }_{\mct} + \ips{ g , v_h}_{\mce^B} \\ 
+%	& = \ipx{ \nabla u , \nabla_h v_h }_{\mct} 
+%		- \ips{ \jump{ \nabla u } , \savg{v_h} \bn^+ }_{\mce^I} 
+%		- \ips{ \savg{ \nabla u } , \jump{ v_h} \otimes \bn^+ }_{\mce^I} \\ 
+%	& = \ipx{ \nabla u , \nabla_h v_h }_{\mct} 
+%		- \ips{ \nabla u , \jump{ v_h} \otimes \bn^+ }_{\mce^I} \\ 
+%	& = \ipx{ \mathbb{P}_h \nabla u , \nabla_h v_h }_{\mct} 
+%		- \ips{ \nabla u  , \jump{ v_h} \otimes \bn^+ }_{\mce^I} \\ 
+%	& = \ipx{ \mathbb{P}_h \nabla u , \overline{\nabla}_h v_h }_{\mct} 
+%		+ \ips{ \savg{\mathbb{P}_h \nabla u } - \nabla u  , \jump{ v_h} \otimes \bn^+ }_{\mce^I} \\ 
+%	& = B(u, v_h) 
+%		+ \ips{ \savg{\mathbb{P}_h \nabla u } - \nabla u  , \jump{ v_h} \otimes \bn^+ }_{\mce^I} , 
+%\end{align*}
+%and the result follows.  
+% 
+%\end{proof}
+%
+%\begin{remark} \ 
+%\begin{enumerate}[(a)]  
+%\item 
+%In order to introduce the central DG derivative operator, the function $\nabla u$ must 
+%be projected into $\mathbf{V}^h_r$.  
+%As a result, the consistency result contains a perturbation.  
+%If $u \in H^2(\Omega)$, we can bound the perturbation and still obtain optimal convergence 
+%rates as seen below.  
+%\item 
+%The consistency result holds without a perturbation when interpreting the DWDG method in 
+%mixed form.  
+%Suppose $u \in H^2(\Omega)$ such that $\frac{\partial u}{\partial n} = g$ on $\partial \Omega$.  
+%Then, $\nabla^\pm_h u = \mathbb{P}_h \nabla u$, $\jump{u} = \bvec{0}$, and 
+%$\nabla u = \bT^\pm(\nabla u)$ on $\mce^I$.  
+%Thus, there holds 
+%\[
+%	\ipx{ \nabla u , \bvec{w}^\pm_h }_{\mct} = \ipx{ \nabla^\pm_h u , \bvec{w}^\pm_h }_{\mct} 
+%	\qquad \forall \bvec{w}^\pm_h \in \mathbf{V}^h_r 
+%\]
+%with 
+%\begin{align*} 
+%	\ipx{f,v_h}_{\Omega} + \ips{g,v_h}_{\partial \Omega} 
+%	& = - \ipx{ \div \nabla u , \varphi_h }_{\mct} 
+%		+ \ips{ g , \varphi_h}_{\mce^B}   \\ 
+%	& = \ipx{ \nabla u , \nabla \varphi_h }_{\mct} 
+%		- \ips{ \jump{\nabla u} , \savg{ \varphi_h} \bn^+ }_{\mce^I} 
+%		- \ips{ \savg{\nabla u} , \jump{\varphi_h} \otimes \bn^+ }_{\mce^I} \\  
+%	& = \ipx{ \nabla u , \nabla \varphi_h }_{\mct} 
+%		- \ips{ \savg{\nabla u} , \jump{\varphi_h} \otimes \bn^+ }_{\mce^I} 
+%		+ \ips{ \gamma \jump{u} , \jump{\varphi_h} }_{\mce^I} \\ 
+%	& = \ipx{ \nabla u , \nabla \varphi_h }_{\mct} 
+%		- \ips{ \bT^\pm(\nabla u) , \jump{\varphi_h} \otimes \bn^+ }_{\mce^I} 
+%		+ \ips{ \gamma \jump{u} , \jump{\varphi_h} }_{\mce^I}
+%\end{align*} 
+%for all $\varphi_h \in V^h_r$.  
+%Thus, \eqref{DWDG_mixed} holds with $u_h = u$ in \eqref{dwdg_mix2} and \eqref{dwdg_mix3} 
+%and $\bvec{\sigma}^\pm_h = \nabla u$ in \eqref{dwdg_mix1}.  
+%Observe, in Lemma~\ref{dwdg_consistency}, the approximation is due to the fact that, 
+%in the primal form representation, we have $\bvec{\sigma}^\pm_h = \mathbb{P}_h \nabla u$.  
+%\end{enumerate}
+%\end{remark}
+%
+%Next, we define the norm induced by $B_h$, $\tbar{\cdot}_{B_h} : V^h_r \to [0,\infty)$,  by 
+%\begin{equation} \label{dwdg_norm}
+%	\tbar{v_h}_{B_h}^2 \equiv 
+%		\frac12 \left\| \nabla^+_h v_h \right\|_{L^2(\mct)}^2 
+%		+ \frac12 \left\| \nabla^-_h v_h \right\|_{L^2(\mct)}^2 
+%	+ \sum_{e \in \mce^I} \gamma_e \big\| \jump{v_h} \big\|_{L^2(e)}^2
+%\end{equation}
+%for all $v_h \in V^h_r$.  
+%Then, by Theorem~\ref{existence_uniqueness}, 
+%we have $\tbar{\cdot}_{B_h}$ is a semi-norm on $V^h$ 
+%and a norm on $\mathring{V}^h_r$.  
+%We also recall the auxiliary semi-norm $\tbar{\cdot}_{1,h}$ 
+%defined in Corollary~\ref{dwdg_h1norm} by 
+%\begin{equation} \label{dwdg_norm2}
+%	\tbar{v_h}_{1,h}^2 \equiv \frac{1}{2} 
+%		\left\| \nabla^+_h v_h \right\|_{L^2(\mct)}^2 
+%		+ \frac12 \left\| \nabla^-_h v_h \right\|_{L^2(\mct)}^2  
+%\end{equation}
+%for all $v_h \in V^h_r$, 
+%and observe the relationship 
+%\[
+%	\tbar{v_h}_{B_h}^2 = \tbar{v_h}_{1,h}^2 
+%		+ \sum_{e \in \mce^I} \gamma_e \big\| \jump{v_h} \big\|_{L^2(e)}^2 . 
+%\]
+%
+%We end this section by simply stating the convergence results for the DWDG method 
+%applied to \eqref{problem_neumann}.  
+%The convergence results require some of the preliminary 
+%results found in Section~\ref{dwdg_facts-section} due to the fact that the bounds 
+%are in the semi-norm $\tbar{\cdot}_{1,h}$, not the semi-norm induced by the 
+%bilinear form $\tbar{\cdot}_{B_h}$.  
+%See \cite{LewisNeilan12} for more details.  
+%Convergence results in the semi-norm $\tbar{\cdot}_{B_h}$ can also be obtained from 
+%generalizing definitions found in \cite{unified} as will be described in Section~\ref{unified-section}.  
+%
+%\begin{lemma}\label{existence_uniqueness_lemma_negative_penalty}
+%Suppose that the triangulation is quasi-uniform.   
+%%and that each simplex in the triangulation has at most one boundary face/edge.  
+%Then there exists a unique solution to \eqref{DWDG} in $\mathring{V}^h_r$ 
+%provided $\gamma_{\min} > - C_*$, 
+%where $C_*$ is defined in Lemma~\ref{lemma_jump_bound}.   
+%\end{lemma}
+%
+%\noindent
+%The proof follows directly from Lemma~\ref{constant_lemma} 
+%and Lemma~\ref{lemma_jump_bound} below.  
+%We note that the lemma is a generalization of Theorem~\ref{existence_uniqueness} that 
+%accounts for the presence of nonpositive penalization at the cost of a quasi-uniformity assumption 
+%for the mesh.  
+%
+%\begin{theorem}\label{DWDG_optimal_energy}
+%Suppose that $\gamma_{\min} > 0$.  Let $u_h \in V^h_r$ be the unique solution 
+%to \eqref{DWDG} in $\mathring{V}^h_r$ and $u \in H^{s+1}(\Omega)$ be the 
+%unique solution to \eqref{problem_neumann} in $\mathring{H}^{s+1}(\Omega)$ with $1 \leq s \leq r$.  
+%Then there holds 
+%\[
+%	\tbar{u - u_h}_{1,h} \leq C \left( \sqrt{\gamma_{\max}} + \frac{1}{\sqrt{\gamma_{\min}} } \right)
+%		h^s \big| u \big|_{H^{s+1}(\Omega)} . 
+%\]
+%Moreover, if the triangulation is quasi-uniform and $\gamma_{\min} > - C_*$, then 
+%\[
+%	\tbar{u - u_h}_{1,h} \leq C \left( \sqrt{\left|\gamma_{\max} \right|} + \frac{1}{\sqrt{\gamma_{\min}}+C_*} \right) 
+%		h^s \big| u \big|_{H^{s+1}(\Omega)} . 
+%\] 
+%\end{theorem}
+%
+%
+%\begin{theorem}\label{DWDG_optimal_L2}
+%Suppose that $\gamma_{\min} > 0$.  Let $u_h \in V^h_r$ be the unique solution 
+%to \eqref{DWDG} in $\mathring{V}^h_r$ and $u \in H^{s+1}(\Omega)$ be the 
+%unique solution to \eqref{problem_neumann} in $\mathring{H}^{s+1}(\Omega)$ with $1 \leq s \leq r$.  
+%Then there holds 
+%\[
+%	\big\|u - u_h \big\|_{L^2(\Omega)} \leq C \left( \sqrt{\gamma_{\max}} + \frac{1}{\sqrt{\gamma_{\min}} } \right)^2
+%		h^{s+1} \big| u \big|_{H^{s+1}(\Omega)} . 
+%\]
+%Moreover, if the triangulation is quasi-uniform and $\gamma_{\min} > - C_*$, then 
+%\[
+%	\big\|u - u_h \big\|_{L^2(\Omega)} \leq C \left( \sqrt{\left|\gamma_{\max} \right|} + \frac{1}{\sqrt{\gamma_{\min}}+C_*} \right)^2 
+%		h^{s+1} \big| u \big|_{H^{s+1}(\Omega)} . 
+%\]
+%\end{theorem}
+%
+%\begin{remark}
+%We have the DWDG method is optimally convergent for quasi-uniform meshes 
+%when $\gamma \equiv 0$.  
+%In \cite{LewisNeilan12}, numerical tests for the Dirichlet problem on a graded mesh 
+%imply that the quasi-uniformity assumption can potentially be weakened.  
+%Numerical tests for the Neumman problem can be found in Section~\ref{numerics-section}.  
+%\end{remark}
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	\subsection{Norm Equivalencies for the DWDG Method}
+%	\label{dwdg_facts-section}
+%
+%In this section, we show that the two semi-norms $\tbar{\cdot}_{B_h}$ and $\tbar{\cdot}_{1,h}$ 
+%are equivalent in $V^h_r$ when the triangulation is quasi-uniform.  
+%Thus, we will show that the interior stabilization terms associated with the bilinear form $B_h$ 
+%can be controlled by the semi-norm $\tbar{\cdot}_{1,h}$.  
+%Such a result can be viewed as an analytic extension of Lemma~\ref{constant_lemma}.  
+%We also remark that the following proofs can be extended to quadrilateral meshes 
+%by choosing $V^h_r = \prod_{K \in \mct} \mathcal{Q}_r(K)$,  
+%the standard tensor product spaces formed by $\mathcal{P}_r(K)$.  
+%
+%First, we define an enriching operator that maps the discrete space $V^h_r$ into an $H^1(\Omega)$ 
+%subspace for $r \geq 1$.  
+%To ease presentation, we also define the weighted $L^2$ norm 
+%\[
+%	\left\| h_{\cT}^{-1} v \right\|_{L^2(\mct)} \equiv \bigg( \sum_{K \in \mct} h_K^{-2} \| v \|_{L^2(K)}^2 
+%	\bigg)^{1/2} . 
+%\]
+%Next, we state and prove two lemmas that immediately yield the desired norm equivalency.  
+%
+%\begin{lemma} \label{DPoincareLemma}
+%There exists an operator $\mI_h:V^h_r \to V^h_r \cap H^1(\Ome)$ such that
+%\begin{align} \label{DPoincareA}
+%	\tbar{ \mI_h v_h }_{1,h}
+%	& \le \tbar{ v_h }_{1,h}
+%\end{align} 
+%for all $v_h \in V^h_r$.  
+%Moreover, if the triangulation $\mct$ is quasi-uniform, there holds 
+%\begin{align} \label{DPoincareB}
+%	\left\| h_{\cT}^{-1} \left( v_h - \mI_h v_h \right) \right\|_{L^2(\mct)} 
+%	&\leq C \bigg( \tbar{ v_h }_{1,h} 
+%		+ \Big(\sum_{e\in \mce^I} h_e^{-1} \big\|\jump{v_h}\big\|_{L^2(e)}^2\Big)^{1/2} \bigg).
+%\end{align}
+%\end{lemma}
+%
+%\begin{proof}
+%We define the operator $\mI_h:V^h_r \to V^h_r \cap H^1(\Ome)$
+%to satisfy 
+%\begin{align}\label{mIDef}
+%	\ipx{\nab \mI_h v_h,\nab \varphi_h}_{\mct} 
+%	= \ipx{\overline{\nab}_{h} v_h, \overline{\nab}_{h} \varphi_h}_{\mct}
+%		\quad \forall \varphi_h\in V^h_r \cap H^1(\Ome) 
+%\end{align}
+%and 
+%\[ 
+%	\frac{1}{| \Omega |} \int_\Omega v_h \, dx = \frac{1}{| \Omega |} \int_\Omega \mI_h v_h \, dx , 
+%\] 
+%i.e., $\mI_h v_h$ is the  elliptic-type projection into $V^h_r \cap H^1(\Ome)$.
+%Since $\mI_h v_h \in H^1(\Omega)$, we have  
+%\begin{equation} \label{ell_proj} 
+%	\ipx{\overline{\nab}_{h}(v_h -\mI_h v_h),\overline{\nab}_{h} \varphi_h}_{\mct} = 0 
+%		\quad \forall \varphi_h \in V^h_r \cap H^1(\Ome). 
+%\end{equation} 
+%Furthermore, $\overline{\nab}_h \mI_h v_h = \nab \mI_h v_h$, 
+%and we have
+%\begin{align*}
+%	\tbar{\mI_h v_h}_{1,h}^2 
+%	& = \|\nab \mI_h v_h\|^2_{L^2(\Ome)} \\
+%	& = \ipx{\overline{\nab}_{h} v_h,\overline{\nab}_{h} \mI_h v_h}_{\mct} \\ 
+%	& \le \big\|\overline{\nab}_{h} v_h\big\|_{L^2(\Ome)} \big\|\overline{\nab}_{h} \mI_h v_h \big\|_{L^2(\Ome)} \\ 
+%	& \le \tbar{v_h}_{1,h} \big\|\overline{\nab}_{h} \mI_h v_h \big\|_{L^2(\Ome)} \\ 
+%	& = \tbar{v_h}_{1,h} \tbar{\mI_h v_h}_{1,h} 
+%\end{align*}
+%using the fact that 
+%\[
+%	\big\| \overline{\nabla}_h v_h \big\|^2_{L^2(\Omega)} 
+%	\leq \tbar{ v_h }_{1,h} 
+%\]
+%as shown in Section~\ref{ldg-section}.  
+%Thus, \eqref{DPoincareA} holds.
+%
+%Since $\Omega$ is convex, we have by elliptic regularity 
+%there exists $\varphi\in H^2(\Ome)$ such that  
+%\begin{alignat*}{2}
+%	- \Delta \varphi & = v_h - \mI_h v_h && \qquad \text{in } \Omega, \\ 
+%	\frac{\partial \varphi}{\partial n} & = 0 && \qquad \text{on } \partial \Omega  
+%\end{alignat*}
+%and 
+%\begin{align}\label{ERegularity}
+% \big\|\varphi \big\|_{H^2(K)}\le C \big\|v_h - \mI_h v_h \big\|_{L^2(K)}
+% \end{align}
+% for all $K \in \mct$.  
+% %
+%Choose $\varphi_h \in V^h_r \cap H^1(\Omega)$ such that 
+%$\|\varphi-\varphi_h\|_{H^1(K)}\le C h_K \|\varphi\|_{H^2(K)}$ for all $K \in \mct$.  
+%Observe, by Lemma~\ref{dwdg_consistency}, 
+%\begin{align*}
+%\|v_h - \mI_h v_h \|_{L^2(\Ome)}^2 
+%	& = - \ipx{ \Del \varphi , v_h - \mI_h v_h }_{\mct} \\ 
+%	&= \ipx{ \nab \varphi,\nab(v_h - \mI_h v_h)}_{\mct} 
+%		- \ips{ \nab \varphi, \jump{v_h} \otimes \bn^+ }_{\mce^I} \\
+%	&= \ipx{ \overline{\nab}_h \varphi,\nab(v_h - \mI_h v_h)}_{\mct} 
+%		- \ips{ \nab \varphi ,\jump{v_h} \otimes \bn^+ }_{\mce^I} \\
+%	&= \ipx{ \overline{\nab}_h \varphi,\overline{\nab}_h (v_h - \mI_h v_h) }_{\mct} 
+%		+ \ips{ \savg{ \overline{\nab}_h \varphi} - \nab \varphi , \jump{v_h} \otimes \bn^+ }_{\mce^I} 
+%\end{align*}
+%for all $v_h \in V^h_r$.  
+%Let $\varphi_h\in V^h\cap H^1(\Ome)$ satisfy 
+%$\|\varphi-\varphi_h\|_{H^1(\Ome)}\le C h\|\varphi\|_{H^2(\Ome)}$.
+%We then have by \eqref{ell_proj} 
+%%%
+%\begin{align*}
+%	\|v_h - \mI_h v_h \|_{L^2(\Ome)}^2 
+%	& = \ipx{ \overline{\nab}_h \varphi,\overline{\nab}_h (v_h - \mI_h v_h) }_{\mct} 
+%		+ \ips{ \savg{ \overline{\nab}_h \varphi} - \nab \varphi , \jump{v_h} \otimes \bn^+ }_{\mce^I} \\
+%	& = \ipx{ \overline{\nab}_h ( \varphi -\varphi_h ), 
+%			\overline{\nab}_h (v_h - \mI_h v_h) }_{\mct} 
+%		+ \ips{ \savg{ \overline{\nab}_h \varphi} - \nab \varphi , \jump{v_h} \otimes \bn^+ }_{\mce^I} \\
+%	&\le \left\| \overline{\nab}_h (\varphi - \varphi_h) \right\|_{L^2(\Ome)} 
+%			\left\| \overline{\nab}_{h} (v_h-\mI_h v_h) \right\|_{L^2(\Ome)} \\
+%		&\qquad + \Big(\sum_{e\in \mce^I} h_e 
+%			\big\| \nab \varphi - \savg{\overline{\nab}_h \varphi} \big\|_{L^2(e)}^2\Big)^{1/2}
+%			\Big(\sum_{e\in \mce^I} h_e^{-1}\big\|\jump{v_h}\big\|_{L^2(e)}^2\Big)^{1/2}.
+%\end{align*}
+%Since $\nab_{h} \varphi_h$ is the $L^2$ projection of $\nab \varphi$,
+%and $\nab_{h} \varphi_h = \nab \varphi_h$, we have by a scaling argument, \eqref{ERegularity}, and \eqref{DPoincareA},
+%%
+%\begin{align*}
+%\|v_h - \mI_h v_h \|_{L^2(\Ome)}^2
+%&\le C h\Big( \left\|\overline{\nab}_{h} (v_h - \mI_h v_h) \right\|_{L^2(\Ome)} 
+%+ \Big(\sum_{e\in \mce^I} h_e^{-1} \big\|\jump{v_h}\big\|_{L^2(e)}^2\Big)^{1/2}\Big) \|v_h - \mI_h v_h\|_{L^2(\Ome)}\\
+%%
+%&\le C h\Big( \tbar{v_h}_{1,h} 
+%+ \Big(\sum_{e\in \mce^I} h_e^{-1} \big\|\jump{v_h}\big\|_{L^2(e)}^2\Big)^{1/2}\Big) \|v_h - \mI_h v_h\|_{L^2(\Ome)}.
+%\end{align*}
+%Dividing by $\|v_h - \mI_h v_h\|_{L^2(\Ome)}$  and invoking the quasi-uniformity of the mesh 
+%we obtain the result.  
+% 
+%\end{proof}
+%
+%%%%%%%
+%%%%%%%
+%
+%\begin{lemma} \label{lemma_jump_bound}
+%Suppose $\mct$ is quasi-uniform.  Then 
+%there exists a constant $C_* > 0$ such that 
+%\[
+%	C_* \sum_{e \in \mce^I} h_e^{-1} \big\| \jump{v_h} \big\|_{L^2(e)}^2 
+%		\leq \tbar{v_h}_{1,h}^2 
+%\]
+%for all $v_h \in V^h$.  
+%\end{lemma}
+%
+%\begin{proof}
+%By the algebraic identity $\frac12 \left( a^2 + b^2 \right) = \frac14 (a+b)^2 + \frac14 (a-b)^2$, 
+%we have 
+%\begin{equation}\label{abExpand}
+%	\tbar{v_h}_{1,h}^2 = \left\| \overline{\nabla}_h v_h \right\|^2_{L^2(\Omega)} 
+%		+ \frac14 \left\| \nabla_h^+ v_h - \nabla_h^- v_h \right\|^2_{L^2(\Omega)} .  
+%\end{equation}
+%Then, by the definition of the discrete derivative operators, we have 
+%\begin{align*}
+%	\ipx{\nab_{h}^+v_h - \nab_{h}^- v_h,\bvec{\varphi}_h}_{\mct} 
+%	= \ips{ \jump{v_h},\jump{\bvec{\varphi}_h} \otimes \bn^+ }_{\mce^I} 
+%	\quad \forall \bvec{\varphi}_h \in \mathbf{V}^h_r.
+%\end{align*}
+%%
+%Setting $\bvec{\varphi}_h \big|_K = h_K^{-1} v_h \bvec{1} \big|_K \forall K\in \mct$ yields 
+%\begin{align*}
+%	\ipx{\nab_{h}^+v_h - \nab_{h}^- v_h,\bvec{\varphi}_h}_{\mct} 
+%	\geq C \sum_{e\in \mce^I} h_e^{-1} \big\|\jump{v_h}\big\|_{L^2(e)}^2.
+%\end{align*}
+%We then obtain the following lower bound of $\|\nab_{h}^+ v_h - \nab_{h}^- v_h\|_{L^2(\Ome)}$:
+%%
+%\begin{align*}
+%%\label{DiffEstimate}
+%\|\nab_{h}^+v_h- \nab_{h}^- v_h\|_{L^2(\Ome)} 
+%	= \sup_{\bvec{\varphi}_h\in \bV_h\backslash\{\bvec{0}\}} \frac{ \ipx{\nab_{h}^+ v_h - \nab_{h}^- v_h, 
+%		\bvec{\varphi}_h}_{\mct}}{\|\bvec{\varphi}_h\|_{L^2(\Ome)}}
+%	\geq C \frac{\sum_{e\in \mce^I} h_e^{-1} \big\|\jump{v_h}\big\|_{L^2(e)}^2}{
+%		\|h^{-1}_{\mathcal{T}} v_h\|_{L^2(\Ome)}}.
+%\end{align*}
+%Combining the last estimate with the identity \eqref{abExpand} we obtain 
+%%
+%\begin{align}\label{IStep}
+%\sum_{e\in \mce^I} h_e^{-1}  \big\|\jump{v_h}\big\|_{L^2(e)}^2 \leq C 
+%	\left\|h^{-1}_{\mathcal{T}} v_h\right\|_{L^2(\mct)} \tbar{v_h}_{1,h}\qquad \forall v_h\in V_h.
+%\end{align}
+%
+%Let $\mI_h v_h\in V_h\cap H^1(\Ome)$ be the enriching operator
+%constructed in Lemma \ref{DPoincareLemma}.  Since $\jump{\mI_h v_h}=\bvec{0}$
+%across interior faces/edges we have by \eqref{IStep}, \eqref{DPoincareA} and \eqref{DPoincareB},
+%%
+%\begin{align*}
+%\sum_{e\in \mce^I} h_e^{-1}  \big\|\jump{v_h}\big\|_{L^2(e)}^2 
+%&\le C \left\|h^{-1}_{\mathcal{T}} (v_h-\mI_h v_h) \right\|_{L^2(\mct)} \tbar{v_h-\mI_h v_h}_{1,h}\\
+%%
+%&\le C\Big[ \tbar{v_h}_{1,h} + \Big(\sum_{e\in \mce^I} h_e^{-1} \big\|\jump{v_h}\big\|_{L^2(e)}^2\Big)^{1/2}\Big] \tbar{v_h}_{1,h} .
+%\end{align*}
+%%
+%Finally, using Young's inequality, we obtain 
+%\begin{align*}
+%\sum_{e\in \mce^I} h_e^{-1} \big\|\jump{v_h}\big\|_{L^2(e)}^2 \le C \tbar{v_h}_{1,h}^2.
+%\end{align*}
+%The proof is complete.
+% 
+%\end{proof}
+%
+%%%%%%%
+%%%%%%%
+%
+%\begin{theorem}
+%If $\mct$ is quasi-uniform, then the two semi-norms $\tbar{\cdot}_{B_h}$ and $\tbar{\cdot}_{1,h}$ 
+%are equivalent over $V^h_r$ independent of $h$. 
+%\end{theorem}
+%
+%\begin{proof}
+%By definition, we have $\tbar{v_h}_{1,h} \leq \tbar{v_h}_{B_h}$ for all $v_h \in V^h$.  
+%Using Lemmas \ref{DPoincareLemma} and \ref{lemma_jump_bound}, we have 
+%\begin{align*}
+%	\tbar{v_h}_{B_h}^2 
+%	& = \tbar{v_h}_{1,h}^2 + \sum_{e \in \mce^I} \gamma_e \big\| \jump{v_h} \big\|_{L^2(e)}^2 \\ 
+%	& \leq \tbar{v_h}_{1,h}^2 
+%		+ \gamma_{\text{max}} \, \max_{e \in \mce^I} h_e \, 
+%			\sum_{e \in \mce^I} h_e^{-1} \big\| \jump{v_h} \big\|_{L^2(e)}^2 \\ 
+%	& \leq (1 + C) \tbar{v_h}_{1,h} 
+%\end{align*} 
+%for all $v_h \in V^h$.  
+%The proof is complete. 
+%  
+%\end{proof}
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	
+%	\subsection{DWDG and the Symmetric IPDG Method}
+%	\label{ipdg-section}
+%
+%We compare the DWDG method with the symmetric IPDG method in this section.  
+%In particular, we explicitly derive the equivalency between the standard semi-norms 
+%associated with the IPDG method and the semi-norms $\tbar{\cdot}_{1,h}$ and $\tbar{\cdot}_{B_h}$ 
+%associated with the DWDG method.  
+%Using the equivalence of semi-norms, we immediately obtain inverse estimates for the DWDG method.  
+%For ease of presentation and consistency with the classical presentation of the IPDG method, 
+%we use the alternative formulation for the DWDG method based on 
+%the trace operators defined by \eqref{trace_label}.  
+%Alternatively, we could restate the IPDG method using the upwinding jump operators 
+%defined in Definition~\ref{upwind_jump_def}.  
+%
+%Define the two auxiliary semi-norms $\tbar{\cdot}, \tbar{\cdot}_{\alpha_h}$ over $H^2(\mct)$ by 
+%\begin{align*}
+%	\tbar{v}^2 & \equiv 
+%		\sum_{K \in \mct} \| \nabla v \|^2_{L^2(K)} 
+%		+ \sum_{e \in \mce^I} \left( 2 \frac{\gamma_\alpha}{h_e} \big\| \sjump{v} \big\|_{L^2(e)}^2 
+%			+ \frac{h_e}{\gamma_\alpha} \big\| \savg{\nabla v} \big\|_{L^2(e)}^2 \right) , \\ 
+%	\tbar{v}_{\alpha_h}^2 & \equiv 
+%		\sum_{K \in \mct} \| \nabla v_h \|^2_{L^2(K)} 
+%		- \sum_{e \in \mce^I} \left( 2 \big\langle \sjump{v} , \savg{\nabla v} \cdot \bn \big\rangle_e 
+%			- \gamma_\alpha h_e^{-1} \big\| \sjump{v} \big\|_{L^2(e)}^2 \right) , 
+%\end{align*}
+%where $\tbar{\cdot}_{\alpha_h}$ is induced by the bilinear form 
+%$\alpha_h(\cdot,\cdot) : H^2(\mct) \times H^2(\mct) \to \mathbb{R}$ defined by 
+%\[
+%	\alpha_h(v,w) \equiv \sum_{K \in \mct} \big( \nabla v , \nabla w \big)_K 
+%		- \sum_{e \in \mce^I} \bigg( \big\langle \savg{ \partial_{\bn} v} , \sjump{ w } \big\rangle_e 
+%			+ \big\langle \sjump{v} , \savg{ \partial_{\bn} w } \big\rangle_e 
+%			- \gamma_\alpha h_e^{-1} \big\langle \sjump{v} , \sjump{w} \big\rangle_e \bigg) . 
+%\]
+%Notice, the above two semi-norms correspond to the symmetric IPDG discretization of Poisson's equation, 
+%\cite{unified}.  
+%We first show that the semi-norms are equivalent to $\tbar{\cdot}_{B_h}$ over $V^h_r$.  
+%
+%\begin{lemma}
+%The semi-norms $\tbar{\cdot}_{B_h}$ and $\tbar{\cdot}_{\alpha_h}$ are equivalent over $V^h_r$.  
+%\end{lemma}
+%
+%\begin{proof}
+%Let $v_h \in V^h_r$.  
+%By the definition of $\nabla^\pm_h v_h$, we have 
+%\begin{align*}
+%	\big\| \nabla_h^\pm v_h \big\|_{L^2(\Omega)}^2 
+%	& = \ipx{ \nabla_h^\pm v_h , \nabla_h^\pm v_h }_{\mct} \\ 
+%	& = \ipx{ \nabla v_h , \nabla_h^\pm v_h }_{\mct} 
+%		- \ips{ \sjump{v_h} , \savg{\nabla^\pm_h v_h} \cdot \bn }_{\mce^I} 
+%		\mp \frac12 \sum_{j=1}^d \ips{ \sjump{v_h} | n_j | , 
+%			\sjump{ \nabla_h^\pm v_h} \cdot \bvec{e}_j }_{\mce^I} \\ 
+%	& = \ipx{ \nabla v_h , \nabla v_h }_{\mct} 
+%		- \ips{ \sjump{v_h} , \savg{\nabla^\pm_h v_h} \cdot \bn }_{\mce^I} 
+%		- \ips{ \sjump{v_h} , \savg{\nabla v_h} \cdot \bn }_{\mce^I} 
+%		\\ & \qquad 
+%		\mp \frac12 \sum_{j=1}^d \ips{ \sjump{v_h} | n_j | , 
+%			\sjump{ \nabla_h^\pm v_h} \cdot \bvec{e}_j }_{\mce^I} 
+%		\mp \frac12 \sum_{j=1}^d \ips{ \sjump{v_h} | n_j | , 
+%			\sjump{ \nabla v_h} \cdot \bvec{e}_j }_{\mce^I} . 
+%\end{align*}
+%Thus, 
+%\begin{align*}
+%	\tbar{v_h}_{1,h}^2 
+%	& = \frac12 \big\| \nabla_h^+ v_h \big\|_{L^2(\Omega)}^2 
+%		+ \frac12 \big\| \nabla^-_h v_h \big\|_{L^2(\Omega)}^2 \\ 
+%	& = \ipx{ \nabla v_h , \nabla v_h }_{\mct} 
+%		- \ips{ \sjump{v_h} , \savg{\nabla v_h} \cdot \bn }_{\mce^I} 
+%		- \ips{ \sjump{v_h} , \savg{\overline{\nabla}_h v_h} \cdot \bn }_{\mce^I} \\ 
+%	& = \tbar{v_h}_{\alpha_h}^2 
+%		+ \ips{ \sjump{v_h} , \savg{\nabla v_h - \overline{\nabla}_h v_h} \cdot \bn }_{\mce^I} 
+%		- \sum_{e \in \mce^I} \gamma_\alpha h_e^{-1} \big\| \sjump{v_h} \big\|_{L^2(e)}^2 , 
+%\end{align*}
+%and it follows that 
+%\begin{align} \label{ipdg_norm_lemma_eq}
+%	\tbar{v_h}_{B_h}^2 
+%	& = \tbar{v_h}_{\alpha_h}^2 
+%		+ \ips{ \sjump{v_h} , \savg{\nabla v_h - \overline{\nabla}_h v_h} \cdot \bn }_{\mce^I} 
+%		+ \sum_{e \in \mce^I} \left( \gamma_e h_e - \gamma_\alpha \right) h_e^{-1} 
+%			\big\| \jump{v_h} \big\|_{L^2(e)}^2 . 
+%\end{align}
+%Assuming $\left| \gamma_e h_e - \gamma_\alpha \right| \leq C_\gamma$ for all $e \in \mce^I$ 
+%for some constant $C_\gamma$, we have 
+%\begin{align*}
+%	\sum_{e \in \mce^I} \left( \gamma_e h_e - \gamma_\alpha \right) h_e^{-1} 
+%		\big\| \jump{v_h} \big\|_{L^2(e)}^2 
+%	\leq C \tbar{v_h}_{\#}^2  
+%\end{align*}
+%for $\# = B_h, \alpha_h$.  
+%Let $\mathcal{T}_{h,e} \equiv \{ K \in \mct \mid \partial K \cap e \neq \emptyset \}$ for all $e \in \mce^I$.  
+%By scaling arguments, we have for $\beta > 0$, 
+%\begin{align*}
+%	\left| \ips{ \sjump{v_h} , \savg{\nabla_* v_h} \cdot \bn }_{\mce^I} \right|
+%	& \leq \sum_{e \in \mce^I} \frac{1}{\sqrt{h_e}} \big\| \sjump{v_h} \big\|_{L^2(e)} 
+%		\, \sqrt{h_e} \big\| \savg{\nabla_* v_h} \big\|_{L^2(e)} \\ 
+%	& \leq \sum_{e \in \mce^I} \frac{1}{2 \beta h_e} \big\| \sjump{v_h} \big\|_{L^2(e)}^2 
+%		+ \sum_{e \in \mce^I} \frac{\beta h_e}{2} \big\| \savg{\nabla_* v_h} \big\|_{L^2(e)}^2 \\ 
+%	& \leq \sum_{e \in \mce^I} \frac{1}{2 \beta h_e} \big\| \sjump{v_h} \big\|_{L^2(e)}^2 
+%		+ \sum_{e \in \mce^I} \sum_{K_e \in \mathcal{T}_{h,e}} 
+%			C \frac{\beta h_e}{2 h_{K_e}} \big\| \nabla_* v_h\big\|_{L^2(K_e)}^2 \\ 
+%	& \leq \sum_{e \in \mce^I} \frac{1}{2 \beta h_e} \big\| \jump{v_h} \big\|_{L^2(e)}^2 
+%		+ C \frac{\beta}{2} \sum_{e \in \mce^I} \sum_{K_e \in \mathcal{T}_{h,e}}  
+%			\big\| \nabla_* v_h\big\|_{L^2(K_e)}^2  
+%\end{align*}
+%for $\nabla_* = \nabla , \overline{\nabla}_h$.  
+%Thus, for $\beta$ sufficiently small and using the fact 
+%$\big\| \overline{\nabla}_h v_h \big\|_{L^2(\Omega)} \leq \tbar{v_h}_{1,h}$, 
+%see \eqref{abExpand}, we have 
+%\begin{align*}
+%	\sum_{e \in \mce^I} \frac{1}{2 \beta h_e} \big\| \sjump{v_h} \big\|_{L^2(e)}^2
+%	& \leq C \tbar{v_h} , \\ 
+%	\sum_{e \in \mce^I} \frac{1}{2 \beta h_e} \big\| \sjump{v_h} \big\|_{L^2(e)}^2
+%	& \leq C \tbar{v_h}_{1,h} , \\ 
+%	\sum_{e \in \mce^I} C \frac{\beta}{2} \big\| \nabla v_h\big\|_{L^2(K_e)}^2 
+%	& \leq \frac12 \tbar{v_h}_{\alpha_h}^2 , \\ 
+%	\sum_{e \in \mce^I} C \frac{\beta}{2} \big\| \overline{\nabla}_h v_h\big\|_{L^2(K_e)}^2 
+%	& \leq \frac12 \tbar{v_h}_{1,h}^2
+%\end{align*}
+%Combining the above estimates with \eqref{ipdg_norm_lemma_eq}, 
+%we have there exists constants $C_1$, $C_2$ 
+%independent of $h$ such that 
+%\[
+%	C_1 \tbar{v_h}_{B_h} \leq \tbar{v_h}_{\alpha_h} \leq C_2 \tbar{v_h}_{B_h} . 
+%\]
+%The proof is complete. 
+% 
+%\end{proof}
+%
+%Consequently, we have the following theorem concerning the various discrete $H^1$ norms:
+%
+%\begin{theorem} \label{ipdg_dwdg_norm_equivalence}
+%The semi-norms 
+%$\tbar{\cdot}_{B_h}$, $\tbar{\cdot}_{\alpha_h}$, and $\tbar{\cdot}$ 
+%are equivalent over $V^h_r$ independent of $h$.
+%Furthermore, if $\mct$ is quasi-uniform, then the semi-norms 
+%$\tbar{\cdot}_{1,h}$, $\tbar{\cdot}_{B_h}$, $\tbar{\cdot}_{\alpha_h}$, and $\tbar{\cdot}$ 
+%are equivalent over $V^h_r$ independent of $h$.  
+%\end{theorem}
+%
+%\noindent
+%The equivalence of the various discrete norms immediately yields an inverse inequality 
+%for functions in $V^h_r$ using the semi-norm $\tbar{\cdot}_{1,h}$:
+%
+%\begin{lemma}
+%{\bf Inverse Inequality}:  
+%If $\mct$ is globally quasi-uniform, then for every $v_h \in V^h_r$, 
+%\[
+%	\tbar{v_h}_{1,h} \leq C \, h^{-1} \, \| v_h \|_{L^2(\Omega)} , 
+%\]
+%for some $C > 0$ that is independent of $h$.  
+%\end{lemma}
+%
+%\begin{proof}
+%Since $v_h \in H^2(\mct)$, we have 
+%\[
+%	\tbar{v_h}_{1,h} \leq 
+%	\tbar{v_h}_{B_h} \leq 
+%	C \tbar{v_h}_{\alpha_h} \leq 
+%	\widetilde{C} h^{-1} \big\| v \big\|_{L^2(\Omega)}
+%\]
+%by Theorem~\ref{ipdg_dwdg_norm_equivalence} and the quasi-uniformity of the mesh.  
+%The proof is complete.  
+% 
+%\end{proof} 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	
+%	\subsection{DWDG and the LDG Method}
+%	\label{ldg-section}
+%
+%DG derivative operator notation allows us to easily derive explicit relationships between  
+%DWDG and the primal form of LDG.  
+%In the following, we assume $\nabla^\pm_h$ are defined using the (equivalent) 
+%alternative trace operator defined in \eqref{trace_label}.  
+%Define the bilinear form $L_h : V^h \times V^h \to \mathbb{R}$ by 
+%\[
+%	L_h (v_h , w_h ) \equiv \ipx{ \overline{\nabla}_h v_h , \overline{\nabla}_h w_h }_{\mct} 
+%		+ \ips{ \gamma \sjump{v_h} , \sjump{w_h} }_{\mce^I} . 
+%\]
+%Then, by \cite{FengLewisNeilan13}, 
+%we have $L_h$ is the bilinear form associated with the 
+%LDG method for Poisson's equation with Neumann boundary data.  
+%We do note that the above representation is not for the most general form of the 
+%LDG method as defined in \cite{Cockburn98}.  
+%
+%Observe, 
+%\begin{align*}
+%	\ipx{ \overline{\nabla}_h v_h , \overline{\nabla}_h w_h }_{\mct}
+%	& = \frac14 \ipx{ \nabla_h^+ v_h , \nabla_h^+ w_h }_{\mct} 
+%		+ \frac14 \ipx{ \nabla_h^+ v_h , \nabla_h^- w_h }_{\mct} 
+%		+ \frac14 \ipx{ \nabla_h^- v_h , \nabla_h^+ w_h }_{\mct} \\ 
+%		& \qquad 
+%		+ \frac14 \ipx{ \nabla_h^- v_h , \nabla_h^- w_h }_{\mct}. 
+%\end{align*}
+%Thus, we have 
+%\begin{equation}\label{ldg_decomp}
+%	L_h(v_h, w_h) = \frac12 B_h(v_h,w_h) + S_h(v_h,w_h) 
+%\end{equation}
+%for the symmetric bilinear form $S_h$ defined by 
+%\[
+%	S_h(v_h, w_h) \equiv \frac14 \ipx{ \nabla_h^+ v_h , \nabla_h^- w_h }_{\mct} 
+%		+ \frac14 \ipx{ \nabla_h^- v_h , \nabla_h^+ w_h }_{\mct} 
+%		+ \frac12 \ips{ \gamma \sjump{v_h} , \sjump{w_h} }_{\mce^I} . 
+%\]
+%
+%Using the polarization identity, we have 
+%\begin{align*}
+%	\ipx{ \overline{\nabla}_h v_h , \overline{\nabla}_h v_h }_{\mct}
+%	& = \frac12 \tbar{v_h}_{1,h}^2 + \frac12 \ipx{ \nabla_h^- v_h , \nabla_h^+ v_h }_{\mct} \\ 
+%	& = \frac12 \tbar{v_h}_{1,h}^2 + \frac12 \| \overline{\nabla}_h v_h \|_{L^2(\Omega)}^2 
+%		- \frac18 \| \nabla_h^+ v_h - \nabla_h^- v_h \|_{L^2(\Omega)}^2 . 
+%\end{align*}
+%Therefore, 
+%\begin{align*}
+%	\tbar{v_h}_{B_h}^2 
+%	& = \tbar{v_h}_{L_h}^2 + \frac14 \| \nabla_h^+ v_h - \nabla_h^- v_h \|_{L^2(\Omega)}^2 , 
+%\end{align*}
+%and it follows that 
+%\[
+%	\tbar{v_h}_{B_h}^2 \geq \tbar{v_h}_{L_h}^2 
+%\]
+%for all $v_h \in V^h$.  
+%We also have
+%\begin{align*}
+%	\ipx{ \nabla_h^+ v_h - \nabla_h^- v_h , \varphi_h \bvec{e}_j }_{\mct} 
+%	& = \ips{ \sjump{v_h} , \sjump{\varphi_h} \, \left| n_j \right| }_{\mce^I} . 
+%\end{align*}
+%Thus, $\| \cdot \|_{B_h}$ resembles $\| \cdot \|_{L_h}$ perturbed by a positive jump 
+%penalization term.  
+%
+%We can interpret the relationship between LDG and DWDG in another way if we 
+%add and subtract $\frac12 B_h(v_h, w_h)$ on the right hand side of \eqref{ldg_decomp}.  
+%Then, we have 
+%\begin{align*}
+%	L_h(v_h, w_h) & = B_h(v_h, w_h) + \widetilde{S}_h (v_h, w_h) , 
+%\end{align*}
+%where 
+%\begin{align*}
+%	\widetilde{S}_h (v_h, w_h)
+%	& \equiv \frac14 \ipx{ \nabla_h^+ v_h , \nabla_h^+ w_h }_{\mct} 
+%		+ \frac14 \ipx{ \nabla_h^+ v_h , \nabla_h^- w_h }_{\mct} 
+%		+ \frac14 \ipx{ \nabla_h^- v_h , \nabla_h^+ w_h }_{\mct} \\ 
+%		& \qquad + \frac14 \ipx{ \nabla_h^- v_h , \nabla_h^- w_h }_{\mct} \\ 
+%	& = \frac14 \ipx{ \div_{0,h}^+ \nabla_h^+ v_h - \div_{0,h}^+ \nabla_h^- v_h 
+%		- \div_{0,h}^- \nabla_h^+ v_h + \div_{0,h}^- \nabla_h^- v_h , w_h }_{\mct} . 
+%\end{align*}
+%Thus, $\widetilde{S}_h$ is a particular example of a {\em numerical moment}, 
+%see \cite{FengLewis_ldg1d,FengLewis_ldgnd,FengLewisNeilan13,diss}.  
+%Assuming we have a uniform Cartesian grid and are using piecewise constant basis functions, 
+%the above bilinear form $\widetilde{S}_h$ is equivalent to 
+%\[
+%	\frac14 \sum_{j=1}^d h_j^2 \delta_{x_j , h_j}^2 \delta_{x_j, h_j}^2 v 
+%	\approx \frac14 h^2 \sum_{j=1}^d \frac{\partial^4}{\partial x_j^4} v 
+%\]
+%for $v \in C^4(\Omega)$.  %, as shown in \cite{FengLewis_ldgnd,diss}.  
+%Thus, we have $\widetilde{S}_h$ behaves like a fourth-order derivative stabilization term
+%scaled by $h^2$.  
+%
+%Another observation is that LDG often has a wider stencil than DWDG.  
+%On a Cartesian grid, DWDG uses only nearest neighbor information 
+%(assuming the labeling is the natural ordering when using the definitions 
+%corresponding to \eqref{trace_label}).  
+%In contrast, $\widetilde{S}_h$ goes beyond the nearest neighbor to calculate the second 
+%derivatives $\div_{h,0}^\pm \nabla_h^\pm v_h$.  
+%This is due to the fact that the operator $\div_{h,0}^+ \nabla_h^+$ extends two neighbors 
+%upwind from a given simplex 
+%and the operator $\div_{h,0}^- \nabla_h^-$ extends two neighbors downwind from a given simplex.  
+%Alternatively, the operator $\div_{h,0}^+ \nabla_h^-$ 
+%extends one neighbor downwind from a given simplex, 
+%and then captures the nearest upwind neighbor of the given simplex 
+%through the sided divergence operator.  
+%As seen in \cite{FengLewisNeilan13}, 
+%for piecewise constant basis functions on a uniform mesh in one dimension, 
+%DWDG corresponds to the standard 3-point FD operator $\delta_{x,h}^2$ while 
+%LDG corresponds to the 3-point FD operator $\delta_{x,2h}^2$.  
+%We do note that using a mixed formulation, LDG may have nearest-neighbor structure 
+%for both the unknown function and the auxiliary variable.   
+%
+%\begin{remark} \ 
+%\begin{enumerate}[(a)]
+%\item
+%DWDG achieves stability without penalization through a ``vanishing" fourth order 
+%derivative approximation perturbation of the LDG method.  
+%The perturbation actually decreases the size of the stencil for DWDG when compared 
+%with the primal form of LDG.  
+%\item
+%An example of a function in the nullspace of $\overline{\nabla}_{0,h}$ can be found 
+%in Figure~\ref{LDG_nullspace_fig}.  
+%Thus, unlike DWDG, LDG does not have a unique solution for the Dirichlet problem 
+%without the addition of penalization.  
+%Observe, the example does not satisfy the boundary condition.  
+%Furthermore, the example is independent of the orientation for the interior face/edge normal 
+%vectors due to the fact the function has an average value of zero along all interior faces/edges.   
+%If a boundary penalty term is added, the example no longer corresponds to a solution.  
+%\end{enumerate}
+%\end{remark}
+%
+%\begin{figure}
+%\hh
+%\begin{tikzpicture}[scale=1.5]
+%\draw (0,0) rectangle (3,3);
+%
+%\draw (0,3) -- (3,0);
+%\draw (0,2) -- (2,0);
+%\draw (0,1) -- (1,0);
+%\draw (1,3) -- (3,1);
+%\draw (2,3) -- (3,2);
+%\draw (1,0) -- (1,3);
+%\draw (2,0) -- (2,3);
+%\draw (0,1) -- (3,1);
+%\draw (0,2) -- (3,2);
+%
+%\node at (0.1,0.1) {\tiny 1};
+%\node at (0.1,0.75) {\tiny -1};
+%\node at (0.25,0.9) {\tiny 1};
+%\node at (0.1,1.1) {\tiny -1};
+%\node at (0.1,1.75) {\tiny 0};
+%\node at (0.25,1.9) {\tiny 0};
+%\node at (0.1,2.1) {\tiny 0};
+%\node at (0.1,2.75) {\tiny 1};
+%\node at (0.25,2.9) {\tiny -1};
+%
+%\node at (1.1,0.1) {\tiny 0};
+%\node at (1.1,0.75) {\tiny 1};
+%\node at (1.25,0.9) {\tiny -1};
+%\node at (1.1,1.1) {\tiny 1};
+%\node at (1.1,1.75) {\tiny -1};
+%\node at (1.25,1.9) {\tiny 1};
+%\node at (1.1,2.1) {\tiny -1};
+%\node at (1.1,2.75) {\tiny 0};
+%\node at (1.25,2.9) {\tiny 0};
+%
+%\node at (2.1,0.1) {\tiny -1};
+%\node at (2.1,0.75) {\tiny 0};
+%\node at (2.25,0.9) {\tiny 0};
+%\node at (2.1,1.1) {\tiny 0};
+%\node at (2.1,1.75) {\tiny 1};
+%\node at (2.25,1.9) {\tiny -1};
+%\node at (2.1,2.1) {\tiny 1};
+%\node at (2.1,2.75) {\tiny -1};
+%\node at (2.25,2.9) {\tiny 1};
+%
+%\node at (0.75,0.1) {\tiny 0};
+%\node at (0.9,0.25) {\tiny 0};
+%\node at (0.9,0.9) {\tiny -1};
+%\node at (0.75,1.1) {\tiny 1};
+%\node at (0.9,1.25) {\tiny -1};
+%\node at (0.9,1.9) {\tiny 1};
+%\node at (0.75,2.1) {\tiny -1};
+%\node at (0.9,2.25) {\tiny 1};
+%\node at (0.9,2.9) {\tiny 0};
+%
+%\node at (1.75,0.1) {\tiny -1};
+%\node at (1.9,0.25) {\tiny 1};
+%\node at (1.9,0.9) {\tiny 0};
+%\node at (1.75,1.1) {\tiny 0};
+%\node at (1.9,1.25) {\tiny 0};
+%\node at (1.9,1.9) {\tiny -1};
+%\node at (1.75,2.1) {\tiny 1};
+%\node at (1.9,2.25) {\tiny -1};
+%\node at (1.9,2.9) {\tiny 1};
+%
+%\node at (2.75,0.1) {\tiny 1};
+%\node at (2.9,0.25) {\tiny -1};
+%\node at (2.9,0.9) {\tiny 1};
+%\node at (2.75,1.1) {\tiny -1};
+%\node at (2.9,1.25) {\tiny 1};
+%\node at (2.9,1.9) {\tiny 0};
+%\node at (2.75,2.1) {\tiny 0};
+%\node at (2.9,2.25) {\tiny 0};
+%\node at (2.9,2.9) {\tiny -1};
+%
+%\end{tikzpicture}
+%\hh
+%\caption{
+%Example of a function in the nullspace of $\overline{\nabla}_{0,h}$, cf. \cite{brezzi}.  
+%The function is piecewise linear with the value of 1, -1, or 0 at each node in the mesh.  
+%Note, the function is not in the nullspace of $\overline{\nabla}_h$.   }
+%\label{LDG_nullspace_fig}
+%\end{figure}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	
+%	\subsection{DWDG and the MD-LDG Method}
+%	\label{mdldg-section}
+%
+%We now consider the MD-LDG method 
+%introduced and analyzed by Cockburn and Dong in \cite{CockburnDong07}.  
+%The MD-LDG method is so named because it exhibits optimal convergence without the addition 
+%of interior penalization.  
+%In fact, the method only requires penalization on part of the boundary.  
+%The key idea for the method is to judiciously pick a single trace value on each interior face/edge
+%such that the sign of the face/edge normal vector is controlled.  
+%On interior faces/edges, we will have $T_j (v) = v^+$, $v^-$, or $\big\{ v \big\}$ independent of $j$.  
+%Thus, the MD-LDG method has a mechanism to overcome the fact that the stability of 
+%standard LDG methods is not independent of how $\bn$ is chosen.    
+%We will see that ideas from DWDG can be used to further eliminate the need for 
+%boundary penalization when using MD-LDG.  
+%First, we formulate the MD-LDG method in primal form using DG derivative operator notation.  
+%
+%We first define the discrete broken derivative operator associated with the MD-LDG method.  
+%Let $\bvec{v}_0$ be any nonzero piecewise constant vector in $\bvec{H} (\text{div} , \Omega)$, 
+%%see \cite{}, 
+%and let 
+%\[
+%	\Gamma_{\bvec{v}_0}^- \equiv \left\{ e \in \mce \mid \bvec{v}_0 \cdot \bn_e < 0 \right\} , 
+%	\qquad 
+%	\Gamma_{\bvec{v}_0}^+ \equiv \mce \setminus \Gamma_{\bvec{v}_0}^- . 
+%\]
+%Define $\bvec{\beta}_0 : \mce \to \mathbb{R}$ such that, for $e \in \partial K \cap \mce$, 
+%\[
+%	\bvec{\beta}_0 \cdot \bvec{n}^K(e) = \frac12 \text{sign}  \big( \bvec{v}_0 \cdot \bvec{n}^K(e) \big) , 
+%\]
+%where $\bvec{n}^K(e)$ is the outward unit normal of $K$ along $e$.  
+%Then, we define the trace operator by 
+%\begin{equation} \label{mdldg_trace}
+%	T_j(v) \equiv \begin{cases}
+%	\big\{ v \big\} + \bvec{\beta}_0 \cdot \bn \big[ v \big]  & \text{if } e \in \mce^I , \\ 
+%	v & \text{if } e \in \mce^B 
+%	\end{cases}
+%\end{equation}
+%for all $j = 1,2,\ldots,d$.  
+%Observe, 
+%\[
+%	\big\{ v \big\} \mp \frac12 \big[ v \big] = v^\pm  
+%\]
+%on $\mce^I$.  
+%Thus, we have 
+%$T_j(v) \in \left\{ v^+ , v^- \right\}$ on $\mce^I$ whenever $\bvec{v}_0 \cdot \bvec{n}^K \neq 0$, 
+%where the value is determined entirely by the choice of $\bvec{v}_0$ and $\bn$.  
+%Using the trace operator, we let 
+%$D^{\bvec{v}_0}_h$ denote the discrete broken derivative operator for the MD-LDG method 
+%corresponding to $\bvec{v}_0$ 
+%and $D^{\bvec{v}_0}_{h,g}$ denote the discrete broken derivative operator where 
+%$T_j(v) = g$ on $\mce^B$ in \eqref{mdldg_trace}.  
+%
+%Using the discrete broken derivative operator, the MD-LDG method has the primal form:
+%find $u_h \in V_r^h$ such that 
+%\begin{align} \label{mdldg}
+%	& \ipx{ D^{\bvec{v}_0}_{h,g} u_h , D^{\bvec{v}_0}_{h,0} w_h }_{\mct} 
+%	+ \sum_{e \in \mce^B} \gamma_e \ips{ u_h - g , w_h }_{e}  
+%	= \ipx{ f , w_h }_{\mct} 
+%	\qquad \forall w_h \in V_r^h , 
+%\end{align}
+%where $\gamma_e$ is a nonnegative constant defined on the face/edge $e$ such that 
+%$\gamma_e \equiv 0$ if $e \in \Gamma_{\bvec{v}_0}^+$.  
+%Thus, the MD-LDG method does not require interior penalization and 
+%only requires boundary penalization on the boundary faces/edges such that 
+%$\bvec{v}_0 \cdot \bn_e \geq 0$.  
+%If $\bvec{v}_0$ is chosen such that $\Gamma_{\bvec{v}_0}^+ = \emptyset$, then the MD-LDG 
+%method is stable without the addition of artificial stability terms.  
+%The approximation is called minimal-dissipation due to the fact each of the jump terms 
+%in the approximate potential induces a loss of energy 
+%when interpreting Poisson's equations as an advection-diffusion equation.  
+%In practice, the arbitrary vector $\bvec{v}_0$ is chosen to correspond to an underlying 
+%advection field characterized by a vector $\bvec{v}$.  
+%
+%The proof of the fact that the MD-LDG method is well-defined can be found in \cite{CockburnDong07} 
+%where the analogue of Lemma~\ref{constant_lemma} is shown using a similar argument 
+%with a well-chosen test function in $V_r^h$.   
+%The choice of the test function relies on the following facts:
+%\begin{enumerate}[(i)]
+%\item
+%Given the faces/edges $e_1, \ldots, e_k$ of the simplex $K$ 
+%and functions $\bvec{\sigma} \in \bvec{L}^2(K)$ and $\xi_i \in L^2(e_i)$ for $i=1,\dots,k$, 
+%there exists a unique function $\bvec{V} \in \bvec{V}^h_r$ such that
+%\begin{align*}
+%	\ipx{ \bvec{V} - \bvec{\sigma} , \bvec{w_h} }_K & = 0 
+%		\qquad \forall \bvec{w}_h \in \left[ \mathbb{P}_{r-1}(K) \right]^d , \\ 
+%	\ips{ \bvec{V} \cdot \bvec{n} - \xi_i , w_h }_{e_i} & = 0 , 
+%		\qquad \forall w_h \in \mathbb{P}_r(e_i) , \; i = 1 , \ldots, k . 
+%\end{align*}
+%\item
+%There is at least one face/edge $e$ of $K$ on which 
+%$\left( \frac12 - \bvec{\beta}_0 \cdot \bn_e \right) = 0$.  
+%\end{enumerate}
+%Then, if $D^{\bvec{v}_0}_h v_h = \bvec{0}$, we have  
+%\[
+%	\ipx{ \nabla v_h , \nabla v_h }_{\mct} 
+%		+ \ips{ 1 , ( \frac12 - \bvec{\beta}_0 \cdot \bn )^2 \big[ v_h \big]^2 }_{\mce} 
+%	= 0 , 
+%\]
+%where the test function is chosen such that on the simplex $K \in \mct$, we have the function $\bvec{V}$ 
+%with the choice $\bvec{\sigma} = \nabla v_h \in \mathcal{P}_{r-1}(K)$ and 
+%$\xi_i = - \left( \frac12 - \bvec{\beta}_0 \cdot \bn_{e_i} \right) \big[ v_h \big] \bn \cdot \bn_{e_i}$ 
+%for all faces/edges $e_i$ such that $e_i \neq e_K$.  
+%Thus, we have $v_h$ is constant-valued and continuous.  
+%
+%\begin{remark} \ 
+%\begin{enumerate}[(a)]
+%\item 
+%The MD-LDG method chooses a single scalar-valued trace determined by the orientation of the 
+%face/edge normals $\bn$.  
+%This is different from the idea of the DWDG method where the trace operator is 
+%vector-valued and each component is determined by the corresponding component of the 
+%local face/edge normal vectors.  
+%Thus, the two methods naturally extend the one-dimensional stability results for LDG using 
+%two different strategies.  
+%However, both methods are always strategically choosing between the two natural trace values 
+%that appear on an interior face/edge.  
+%\item
+%The MD-LDG method exploits the fact that functions in $\mathcal{P}_r(K)$ are 
+%uniquely determined by a gradient defined in $\mathcal{P}_{r-1}(K)$ and trace values 
+%defined on ($d$-1)-dimensional faces/edges.  
+%By correctly choosing the interior or exterior limit on $e \subset \partial K$ for all $K \in \mct$, 
+%the MD-LDG method ensures the existence of a sufficient test function defined on each simplex 
+%that can force both gradient values and jump values to be zero concurrently.  
+%\item
+%Sufficient penalization in the MD-LDG method can be eliminated 
+%using the idea from DWDG that both the upwinding derivative operator and the 
+%downwinding derivative operator should be treated independently of each other.  
+%By using both $D^{\bvec{v}_0}_h$ and $D^{-\bvec{v}_0}_h$ to form the approximate problem:
+%find $u_h \in V_r^h$ such that 
+%\begin{align*} 
+%	& \frac12 \ipx{ D^{\bvec{v}_0}_{h,g} u_h , D^{\bvec{v}_0}_{h,0} w_h }_{\mct} 
+%	+ \frac12 \ipx{ D^{-\bvec{v}_0}_{h,g} u_h , D^{-\bvec{v}_0}_{h,0} w_h }_{\mct} 
+%	+ \sum_{e \in \Gamma_h} 
+%		\gamma_e \ips{ u_h - g , w_h }_{e}  \\ 
+%	& \qquad \qquad = \ipx{ f , w_h }_{\mct} 
+%	\qquad \forall w_h \in V_r^h , 
+%\end{align*}
+%where $D^{-\bvec{v}_0}_h$ denotes the discrete broken derivative operator for the MD-LDG method 
+%corresponding to $-\bvec{v}_0$, 
+%penalization is only necessary on the set  
+%$\Gamma_h \equiv \mce^B \setminus \left( \Gamma_{\bvec{v}_0}^- \cup \Gamma_{\bvec{v}_0}^+ \right)$.  
+%By the choice of $\bvec{v}_0$, one can ensure $\Gamma_h = \emptyset$.  
+%\end{enumerate}  
+%\end{remark}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	
+%	\subsection{DWDG and the Unified DG Framework}
+%	\label{unified-section}
+%
+%We end this section by considering the DWDG method in the context of the unified DG 
+%framework found in \cite{unified}.  
+%To this end, we will need to introduce a generalization for the unified framework.  
+%We let the ``scalar" numerical flux $\widehat{u}$ be vector-valued.  
+%Thus, we let $\widehat{u} : H^1(\mct) \to \bvec{T}(\mce)$, 
+%where $T(\mce) \equiv \prod_{K \in \mct} L^2(\partial K)$.  
+%Next, we define the lifting operators $r : \bvec{T}(\mce) \to \bvec{V}^h_r$ 
+%and $\ell : \bvec{T}(\mce^I) \to \bvec{V}^h_r$ by 
+%\begin{alignat}{2}
+%	\ipx{ r ( \bvec{v} ) , \bvec{\varphi} }_{\mct} 
+%		& \equiv - \ips{ \bvec{v} , \savg{\bvec{\varphi}} }_{\mce^I} 
+%			- \ips{ \bvec{v} , \bvec{\varphi} }_{\mce^B} 
+%		&& \qquad \forall \bvec{\varphi} \in \bvec{V}^h_r , \\ 
+%	\ipx{ \ell ( \bvec{v} ) , \bvec{\varphi} }_{\mct} 
+%		& \equiv - \ips{ \bvec{v} , \sjump{\bvec{\varphi}} \otimes \bn }_{\mce^I}  
+%		&& \qquad \forall \bvec{\varphi} \in \bvec{V}^h_r .  
+%\end{alignat}
+%Using the generalized ``scalar" flux and lifting operator $\ell$, 
+%we can express the DWDG method in the context of the unified framework.  
+%To this end, we only need to specify the corresponding numerical fluxes 
+%$\widehat{u}$ and $\widehat{\sigma}$ (see \cite{unified} for notation).  
+%
+%To define the DWDG method with no penalization, we let 
+%\[
+%	\widehat{u}_j^\pm(u_h) \equiv \savg{u_h} \mp \frac12 \text{sign}(n_j)\sjump{u_h}  
+%	\text{ on } \mce^I , \qquad 
+%	\widehat{u}^\pm(u_h) \equiv u_h \text{ on } \mce^B , 
+%\]
+%and 
+%\[
+%	\widehat{\sigma}_j^\pm (\sigma_h) 
+%		\equiv \savg{\sigma_h}_j \mp \frac12 \text{sign}(n_j)\sjump{\sigma_h}_j  
+%	\text{ on } \mce^I , \qquad 
+%	\widehat{\sigma}^\pm (\sigma_h) \equiv \sigma_h \text{ on } \mce^B  
+%\]
+%for all $j = 1, 2, \ldots, d$.  
+%Observe, this is equivalent to letting the vector-valued function $\beta$ be defined by 
+%$\beta_j \equiv \mp \frac12 \text{sign}(n_j)$ and removing the dot product in the 
+%definition of the LDG method in \cite{unified} equation (3.25).  
+%Then, the penalty-free DWDG method is given by: 
+%Find $u_h \in V^h_r$ and $\sigma^\pm_h \in \bvec{V}^h_r$ such that for all $K \in \mct$, 
+%we have 
+%\begin{alignat*}{2}
+%	\int_K \sigma^\pm_h \cdot \bvec{\tau} dx & = - \int_K u_h \div \bvec{\tau} \, dx 
+%		+ \int_{\partial K} \left( \widehat{u}^\pm (u_h) \otimes \bvec{n} \right) \cdot \bvec{\tau} \, ds 
+%		&& \qquad \forall \bvec{\tau} \in \bvec{V}^h_r , \\ 
+%	\frac12 \int_K \left( \sigma^+_h + \sigma^-_h \right) \cdot \nabla v dx & = \int_K f v \, dx 
+%		+ \frac12 \int_{\partial K} \left( \widehat{\sigma}^+(\sigma^-_h) 
+%			+ \widehat{\sigma}^-(\sigma^+_h) \right) \cdot \bvec{n} v \, ds 
+%		&& \qquad \forall v \in V^h_r  , 
+%\end{alignat*}
+%where we have extended equations (1.2) and (1.3) in \cite{unified} 
+%to account for multiple approximations for $\sigma = \nabla u$.  
+%
+%Using the lifting operators, we have 
+%\begin{align*}
+%	\sigma^\mp_h & = \nabla_h u_h + r\left( \sjump{ \widehat{u}^\pm(u_h) - u_h \bvec{1} } \otimes \bn \right) 
+%		+ \ell \left( \savg{ \widehat{u}^\pm(u_h) - u_h \bvec{1} } \otimes \bn \right) \\ 
+%	& = \nabla_h u_h + r\left( \sjump{u_h} \bn \right) + \ell \left( \mp \frac12 \bn^+ \sjump{u_h} \right) \\ 
+%	& \equiv \nabla_h u_h + \tau
+%\end{align*}
+%Then, 
+%\begin{align*}
+%	\widehat{\sigma}^\pm \left(\sigma_h^\mp \right) 
+%	& = \savg{\nabla_h u_h} + \savg{\tau} + \beta \otimes \sjump{ \nabla_h u_h } 
+%		+ \beta \otimes \sjump{\tau} . 
+%\end{align*}
+%Thus, we can redefine the bilinear form $B_h$ that is associated with the penalty-free DWDG method 
+%for \eqref{problem_neumann} by 
+%\begin{align*}
+%	B_h (u_h , v) 
+%	& = \ipx{ \nabla_h u_h , \nabla_h v }_{\mct} 
+%		- \ips{ \sjump{u_h} , \savg{ \nabla_h v } \cdot \bn }_{\mce^I} 
+%		- \ips{ \savg{\nabla_h u_h} , \sjump{v} \bn }_{\mce^I} \\ 
+%		%& \qquad \mp \frac12 \ips{ \sjump{u_h} , \sjump{\nabla_h v} \cdot \bn^+}_{\mce^I} 
+%		%\mp \frac12 \ips{ \sjump{\nabla_h u_h} , \sjump{ v } \cdot \bn^+}_{\mce^I} \\ 
+%		& \qquad 
+%		+ \ipx{ r \left( \sjump{u_h} \bn \right) , r \left( \sjump{v} \bn \right) }_{\mct} 
+%		+ \frac14 \ipx{ \ell \left( \sjump{u_h} \bn \right) , \ell \left( \sjump{v} \bn \right) }_{\mct} , 
+%\end{align*}
+%and we observe that many of the terms cancel when compared to the bilinear form for the LDG method.  
+%
+%\begin{remark} \ 
+%\begin{enumerate}[(a)]
+%\item 
+%The traces/fluxes for the DWDG method expressed in mixed form are consistent 
+%according to the definition in \cite{unified}. 
+%\item 
+%The traces/fluxes are conservative in each component, according to the definition in \cite{unified}.  
+%Furthermore, the bilinear form associated with the DWDG method is self-adjoint.  
+%Hence, the DWDG method has optimal rates of convergence in 
+%the energy norm induced by $B_h$ and in the $L^2$ norm 
+%by extending the results in the unified framework to account for vector-valued ``scalar" fluxes.  
+%\item 
+%As recorded in \cite{unified}, the stencil for the LDG method can be reduced for one-dimensional 
+%problems by choosing $\beta$ correctly, i.e., $\beta = \pm \frac12$.  
+%Thus, we see that the DWDG method successfully extends this idea to high dimensions.  
+%\end{enumerate}
+%\end{remark}
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\section{Numerical Experiments}\label{numerics-section}
+%
+%We now perform a couple of numerical experiments which support the theoretical results 
+%and error estimates for the DWDG discretization of problem \eqref{problem_neumann} 
+%given by \eqref{DWDG}. 
+%In all of the following tests, we use a uniform Cartesian grid 
+%and set the penalty parameter $\gamma = 0$.  
+%Building the matrix representation of the bilinear form $B_h$ defined by \eqref{bil_form}, 
+%we observe that the underlying matrix is symmetric, non-negative definite with a nullspace 
+%corresponding to only constant-valued functions.  
+%Thus, the solution is unique in the space $\mathring{V}^h_r$.  
+%We also observe that the matrix representation preserves the nearest neighbor property 
+%as discussed at the end of Section~\ref{ldg-section}.  
+%In all tests, the resulting linear system of equations was solved using an algebraic 
+%multigrid method paired with a conjugate gradient iterative solver at the coarse level.  
+%We observed optimal performance of the multigrid solver.  
+%More details about the solver will be in a forthcoming paper.  
+%For now, we only mention that the underlying structure of the matrix problem guaranteed by DWDG 
+%can be highly exploited at the solver level.  
+%
+%%%%%%%%%%%
+%
+%	\subsection{Test 1}
+%	
+%In the first test, we choose the data such that the exact solution of \eqref{problem_neumann} 
+%on the unit square domain $\Omega=[0,1]\times[0,1]$ is given by
+%\begin{eqnarray*}
+%u(x,y)=\sin(2\pi x)\cos(2\pi y).
+%\end{eqnarray*}
+%The errors for the DWDG approximation using $r=1,2,3$ and varying $h$ 
+%can be found in Table (\ref{tab:test1}).  
+%By using linear regression for  the errors, we can see that the errors in Table \ref{tab:test1} obey 
+%the error rules 
+%\begin{alignat*}{2}
+%  r=1, \qquad 
+%  &\norm{u-u_h}_{L^2}\approx1.51  h^{1.9206}, \qquad 
+%  &&\norm{\nabla u-\nabla_h u_h}_{L^2}\approx  8.99 h^{0.9671}, \\
+%  &\norm{\nabla u-\nabla_h^\pm u_h}_{L^2}\approx  8.09 h^{1.0455}, \qquad 
+%  &&\norm{\nabla u-\overline{\nabla}_h u_h}_{L^2}\approx 7.25 h^{1.0212}. \\
+%  r=2, \qquad 
+%  &\norm{u-u_h}_{L^2} \approx 1.72 h^{3.0425}, \qquad 
+%  &&\norm{\nabla u-\nabla_h u_h}_{L^2}\approx   12.00 h^{2.0196}, \\
+%  &\norm{\nabla u-\nabla^\pm_h u_h}_{L^2} \approx   10.81 h^{2.0157}, \qquad 
+%  &&\norm{\nabla u-\overline{\nabla}_h u_h}_{L^2}\approx 9.69 h^{2.0045}. \\
+%  r=3, \qquad 
+%  &\norm{u-u_h}_{L^2} \approx  1.22 h^{3.9665}, \qquad 
+%  &&\norm{\nabla u-\nabla_h u_h}_{L^2}\approx  11.60 h^{2.9688}, \\
+%  &\norm{\nabla u-\nabla^\pm_h u_h}_{L^2} \approx   10.66 h^{2.9886}, \qquad 
+%  &&\norm{\nabla u-\overline{\nabla}_h u_h}_{L^2}\approx  9.75 h^{2.9923}. 
+%\end{alignat*}
+%%
+%These linear regressions indicate that the DWDG method for this problem has 
+%optimal convergence rates. 
+%
+%\begin{table}[!htp]
+%\caption{Errors of the computed solution in Test 1. }
+%\label{tab:test1}
+%\begin{center}
+%\begin{tabular}{llccccc}
+%\toprule 
+%&$h$&$\|u-u_h\|_{{L^2}}$&$\|\nabla u- \nabla_h u_h\|_{{L^2}}$&$\|\nabla u- \nabla_h^+ u_h\|_{{L^2}}$
+%&$\|\nabla u- \nabla^-_h u_h\|_{{L^2}}$&$\|\nabla u- \overline{\nabla}_h u_h\|_{{L^2}}$\\
+%\midrule
+%$r=1$&$1/4$& $9.06\times 10^{-2}$ &$ 2.22\times 10^{0}$&$ 1.90\times 10^{0}$&$ 1.90\times 10^{0}$&$ 1.78\times 10^{0}$
+%\\&$1/8$& $2.91\times 10^{-2}$ &$ 1.25\times 10^{0}$&$ 9.35\times 10^{-1}$&$ 9.35 \times 10^{-1}$&$ 8.62 \times 10^{-1}$
+%\\&$1/16$& $7.93\times 10^{-3}$ &$ 6.38\times 10^{-1}$&$ 4.42\times 10^{-1}$&$ 4.42\times 10^{-1}$&$ 4.24\times 10^{-1}$
+%\\&$1/32$& $2.03\times 10^{-3}$ &$ 3.20\times 10^{-1}$&$ 2.12\times 10^{-1}$&$ 2.12\times 10^{-1}$&$ 2.09\times 10^{-1}$
+%\\&$1/64$& $5.10\times 10^{-4}$ &$ 1.60\times 10^{-1}$&$ 1.04\times 10^{-1}$&$ 1.04\times 10^{-1}$&$ 1.04\times 10^{-1}$
+%\\&$1/128$& $1.28\times 10^{-4}$ &$ 8.02\times 10^{-2}$&$ 5.15\times 10^{-2}$&$ 5.15\times 10^{-2}$&$ 5.14\times 10^{-2}$
+%\\
+%\midrule 
+%$r=2$&$1/4$& $2.65\times 10^{-2}$ &$ 7.48\times 10^{-1}$&$ 6.64\times 10^{-1}$&$ 6.64\times 10^{-1}$&$ 6.03\times 10^{-1}$
+%\\&$1/8$& $3.01\times 10^{-3}$ &$ 1.78\times 10^{-1}$&$ 1.64\times 10^{-1}$&$ 1.64\times 10^{-1}$&$ 1.50\times 10^{-1}$
+%\\&$1/16$& $3.60\times 10^{-4}$ &$ 4.36\times 10^{-2}$&$ 4.02\times 10^{-2}$&$ 4.02\times 10^{-2}$&$ 3.73\times 10^{-2}$
+%\\&$1/32$& $4.44\times 10^{-5}$ &$ 1.08\times 10^{-2}$&$ 9.92\times 10^{-3}$&$ 9.92\times 10^{-3}$&$ 9.30\times 10^{-3}$
+%\\&$1/64$& $5.51\times 10^{-6}$ &$ 2.71\times 10^{-3}$&$ 2.47\times 10^{-3}$&$ 2.47\times 10^{-3}$&$ 2.32\times 10^{-3}$
+%\\&$1/128$& $6.86\times 10^{-7}$ &$ 6.76\times 10^{-4}$ &$ 6.16\times 10^{-4}$ &$ 6.16\times 10^{-4}$ &$ 5.80\times 10^{-4}$
+%\\
+%\midrule 
+%$r=3$&$1/4$& $4.74\times 10^{-3}$ &$ 1.79\times 10^{-1}$&$ 1.62\times 10^{-1}$&$ 1.62\times 10^{-1}$&$ 1.48\times 10^{-1}$
+%\\&$1/8$& $3.30\times 10^{-4}$ &$ 2.51\times 10^{-2}$&$ 2.21\times 10^{-2}$&$ 2.21\times 10^{-2}$&$ 2.00\times 10^{-2}$
+%\\&$1/16$& $2.11\times 10^{-5}$ &$ 3.20\times 10^{-3}$&$ 2.75\times 10^{-3}$&$ 2.75\times 10^{-3}$&$ 2.48\times 10^{-3}$
+%\\&$1/32$& $1.33\times 10^{-6}$ &$ 4.01\times 10^{-4}$&$ 3.41\times 10^{-4}$&$ 3.41\times 10^{-4}$&$ 3.07\times 10^{-4}$
+%\\&$1/64$& $8.29\times 10^{-8}$ &$ 5.01\times 10^{-5}$&$ 4.24\times 10^{-5}$&$ 4.24\times 10^{-5}$&$ 3.82\times 10^{-5}$
+%\\&$1/128$& $5.22\times 10^{-9}$ &$ 6.27\times 10^{-6}$&$ 5.29\times 10^{-6}$&$ 5.29\times 10^{-6}$&$ 4.76\times 10^{-6}$
+%\\ 
+%\bottomrule
+%\end{tabular}
+%\end{center}
+%\end{table}
+%
+%%%%%%%%%%%
+%
+%	\subsection{Test 2}
+%	
+%In the second test, we choose the data such that the exact solution of \eqref{problem_neumann} 
+%on the domain $\Omega=[-1,1]\times[-1,1]$ is given by
+%\begin{eqnarray*}
+%u(x,y)=x^3+y^3.
+%\end{eqnarray*}
+%The errors for the DWDG approximation using $r=1,2,3$ and varying $h$ 
+%can be found in Table (\ref{tab:test1}).  
+%By using linear regression for  the errors, we can see that the errors in Table \ref{tab:test2} obey 
+%the error rules
+%\begin{alignat*}{2}
+%  r=1, \qquad 
+%  &\norm{u-u_h}_{L^2}\approx 4.77  h^{1.9727}, \qquad 
+%  &&\norm{\nabla u-\nabla_h u_h}_{L^2}\approx  10.44 h^{0.9961}, \\
+%  &\norm{\nabla u-\nabla_h^\pm u_h}_{L^2}\approx  9.73 h^{0.9785}, \qquad 
+%  &&\norm{\nabla u-\overline{\nabla}_h u_h}_{L^2}\approx 9.49 h^{0.9723}. \\
+%  r=2, \qquad 
+%  &\norm{u-u_h}_{L^2} \approx 0.64 h^{3.1161}, \qquad 
+%  &&\norm{\nabla u-\nabla_h u_h}_{L^2}\approx   5.22^{1.9999}, \\
+%  &\norm{\nabla u-\nabla^\pm_h u_h}_{L^2} \approx   3.46 h^{2.0395}, \qquad 
+%  &&\norm{\nabla u-\overline{\nabla}_h u_h}_{L^2}\approx 2.78 h^{2.0861}.  
+%\end{alignat*}
+%%
+%These linear regressions indicate that the DWDG method for this problem also has 
+%optimal convergence rates. 
+%Furthermore, when $r=\text{degree }(u)$, our numerical approximation is exact. 
+%
+%\begin{table}[!htp]
+%\caption{Errors of the computed solution in Test 2. }
+%\label{tab:test2}
+%\begin{center}
+%\begin{tabular}{llccccc}
+%\toprule 
+%&$h$&$\|u-u_h\|_{{L^2}}$&$\|\nabla u- \nabla_h u_h\|_{{L^2}}$&$\|\nabla u- \nabla_h^+ u_h\|_{{L^2}}$
+%&$\|\nabla u- \nabla^-_h u_h\|_{{L^2}}$&$\|\nabla u- \overline{\nabla}_h u_h\|_{{L^2}}$\\
+%\midrule
+%$r=1$&$1/4$& $2.97\times 10^{-1}$ &$ 2.61\times 10^{0}$&$ 2.42\times 10^{0}$&$ 2.42\times 10^{0}$&$ 2.36\times 10^{0}$
+%\\&$1/8$& $8.08\times 10^{-2}$ &$ 1.32\times 10^{0}$&$ 1.30\times 10^{0}$&$ 1.30 \times 10^{0}$&$ 1.29 \times 10^{0}$
+%\\&$1/16$& $2.07\times 10^{-2}$ &$ 6.62\times 10^{-1}$&$ 6.59\times 10^{-1}$&$ 6.59\times 10^{-1}$&$ 6.58\times 10^{-1}$
+%\\&$1/32$& $5.20\times 10^{-3}$ &$ 3.31\times 10^{-1}$&$ 3.31\times 10^{-1}$&$ 3.31\times 10^{-1}$&$ 3.31\times 10^{-1}$
+%\\&$1/64$& $1.30\times 10^{-3}$ &$ 1.66\times 10^{-1}$&$ 1.66\times 10^{-1}$&$ 1.66\times 10^{-1}$&$ 1.66\times 10^{-1}$
+%\\&$1/128$& $3.25\times 10^{-4}$ &$ 8.28\times 10^{-2}$&$ 8.28\times 10^{-2}$&$ 8.28\times 10^{-2}$&$ 8.28\times 10^{-2}$
+%\\
+%\midrule 
+%$r=2$&$1/4$& $9.17\times 10^{-3}$ &$ 3.26\times 10^{-1}$&$ 2.11\times 10^{-1}$&$ 2.11\times 10^{-1}$&$ 1.64\times 10^{-1}$
+%\\&$1/8$& $9.55\times 10^{-4}$ &$ 8.15\times 10^{-2}$&$ 4.92\times 10^{-2}$&$ 4.92\times 10^{-2}$&$ 3.55\times 10^{-2}$
+%\\&$1/16$& $1.06\times 10^{-4}$ &$ 2.04\times 10^{-2}$&$ 1.18\times 10^{-2}$&$ 1.18\times 10^{-2}$&$ 8.14\times 10^{-3}$
+%\\&$1/32$& $1.23\times 10^{-5}$ &$ 5.10\times 10^{-3}$&$ 2.90\times 10^{-3}$&$ 2.90\times 10^{-3}$&$ 1.94\times 10^{-3}$
+%\\&$1/64$& $1.49\times 10^{-6}$ &$ 1.27\times 10^{-3}$&$ 7.17\times 10^{-4}$&$ 7.17\times 10^{-4}$&$ 4.74\times 10^{-4}$
+%\\&$1/128$& $1.85\times 10^{-7}$ &$ 3.19\times 10^{-4}$ &$ 1.78\times 10^{-4}$ &$ 1.78\times 10^{-4}$ &$ 1.17\times 10^{-4}$
+%\\
+%\midrule 
+%$r=3$&$1/4$& $3.12\times 10^{-9}$ &$ 2.67\times 10^{-8}$&$ 2.56\times 10^{-8}$&$ 2.63\times 10^{-8}$&$ 2.48\times 10^{-8}$
+%\\
+%\bottomrule 
+%\end{tabular}
+%\end{center}
+%\end{table}
+%
+%\begin{remark} \ 
+%\begin{enumerate}[(a)] 
+%\item 
+%In the above tests, we see that while the approximation converges with the same order in all 
+%of the discrete versions of the $H^1$ semi-norm, 
+%the approximation corresponding to the centered gradient operator $\overline{\nabla}_h$ 
+%appears the most accurate while the approximation corresponding to the standard 
+%piecewise gradient operator $\nabla_h$ appears the least accurate.   
+%\item 
+%We also observe that the upwind and downwind discrete gradient operators appear 
+%to have the same accuracy.  However, the two approximations are not the same, 
+%as indicated by the fact that $\overline{\nabla}_h u_h$ is more accurate.  
+%\end{enumerate}
+%\end{remark}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	\section{Conclusion}
+%	\label{conclusion-section}
+%
+%In this paper, we utilized the new DG derivative operator framework found in 
+%\cite{FengLewisNeilan13} to formulate a penalty free DG method for second order elliptic 
+%problems while also using the framework to explore the stability of various other DG methods.  
+%By comparing the two semi-norms associated with the DWDG method and also 
+%comparing the DWDG method with the IPDG method, we are able to derive standard 
+%numerical results for the DWDG method applied to Poisson's equation with Neumann boundary 
+%conditions including 
+%continuity, non-negativity, approximate consistency, equivalency, and an inverse inequality.  
+%By comparing the DWDG method with the LDG method, we gained deeper insight into the 
+%stability properties of the DWDG method in the context of numerical moments.  
+%Finally, we were able to further reduce the sufficient penalization for the MD-LDG method 
+%by applying the dual-winding technique of averaging two discretizations based upon 
+%edge normal vectors with opposite orientations.  
+%The approximation properties were then supported by the numerical tests found in 
+%Section~\ref{numerics-section}.   
+%
+%We end this paper by presenting an immediate application of the norm equivalencies 
+%developed in Section~\ref{ipdg-section}.  
+%By relating the norm associated with DWDG and the ``standard" $H^1(\mct)$ semi-norm 
+%$\tbar{\cdot}$, we can immediately obtain $L^p$ estimates bounding $\tbar{\cdot}_{1,h}$ 
+%over the discrete space $V^h_r$:   
+%\begin{lemma}
+%%{\bf Lemma 2.2 in CH for IPDG}:
+%Suppose the dimension of space is two ($d=2$) and $\mct$ is globally quasi-uniform.  
+%For any $v_h \in V^h_r$ and any $2 \leq p < \infty$, 
+%\[
+%	\left\| v_h - \frac{1}{| \Omega |} \int_\Omega v_h \, dx \right\|_{L^p(\Omega)} 
+%	\leq C \tbar{v_h}_{1,h} , 
+%\]
+%and, consequently, 
+%\[
+%	\big\| v_h \big\|_{L^p(\Omega)} \leq C \left( \tbar{v_h}_{1,h} + \big\| v_h \big\|_{L^2(\Omega)} \right) . 
+%\]
+%\end{lemma}
+%
+%\begin{proof}
+%By Theorem~\ref{ipdg_dwdg_norm_equivalence} and \cite{Brenner03,LasisSuli03}, we have 
+%\begin{align*}
+%	\left\| v_h - \frac{1}{| \Omega |} \int_\Omega v_h \, dx \right\|_{L^p(\Omega)} 
+%	& \leq C \tbar{v_h} 
+%	\leq \widetilde{C} \tbar{v_h}_{1,h} .  
+%\end{align*}
+%The proof is complete.  
+% 
+%\end{proof}
+%
+%\noindent 
+%Thus, the norm equivalencies found in this paper lay the foundation for 
+%obtaining the necessary estimates for applying the DWDG method to other second and 
+%forth order PDE problems. 
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%\begin{thebibliography}{99}
+%
+%\bibitem{unified} 
+%{\sc D. Arnold, F. Brezzi, B. Cockburn, and D. Marini},
+%{\em  Unified analysis of discontinuous {G}alerkin methods for elliptic problems},
+%SIAM J. Numer. Anal., 39:1749--1779, 2001.  
+%
+%\bibitem{Baker77}
+%{\sc G. A. Baker}, 
+%{\em Finite element methods for elliptic equations using nonconforming elements},
+%Math. Comp., 31:45--59, 1977.
+%
+%\bibitem{Brenner03}
+%{\sc S.C.~Brenner}, 
+%{\em Poincar\`e-Friedrichs inequalities for piecewise $H^1$ functions}, 
+%SIAM J. Numer. Anal., 41(1):306--324, 2003.  
+%
+%\bibitem{Brenner}
+%{\sc S.C.~Brenner and L.R.~Scott}, 
+%{\em The Mathematical Theory of Finite Element Methods (Third edition)}, 
+%Springer, 2008.
+%
+%\bibitem{brezzi}
+%{\sc F.~Brezzi, M.~Manzini, D.~Marini, P.~Pietra, and A.~Russo}, 
+%{\em Discontinuous finite elements for Diffusion problems}, 
+%Francesco Brioschi (1824-1897) Convegno di Studi Matematici, 
+%October 22-23, 1997, 
+%Ist. Lomb. Acc. Sc. Lett., Incontro di studio N. 16, 197-217, 1999.
+%
+%\bibitem{burman_ern}
+%{\sc E.~Burman, A.~Ern, I.~Mozolevski, and B.~Stamm}, 
+%{\em The symmetric discontinuous Galerkin method does not need stabilization 
+%in 1D for polynomial orders $p \geq 2$},
+%C. R. Math. Acad. Sci. Paris, vol. 345, num. 10, p. 599-602, 2007. 
+%
+%\bibitem{burman_ern3}
+%{\sc E.~Burman and B. Stamm}, 
+%{\em Low order discontinuous Galerkin methods for second order elliptic problems}, 
+%Technical Report 04-2007, EPFL-IACS, 2007.
+%
+%\bibitem{BurmanStamm}
+%{\sc E.~Burman and B.~Stamm}, 
+%{\em Local discontinuous Galerkin method for diffusion equations with reduced stabilization}, 
+%Comm. in Comp. Phy., 5:498--524, 2009.
+%
+%\bibitem{Ciarlet78}
+%{\sc P.~G.~Ciarlet},
+%{\em The Finite Element Method for Elliptic Problems},
+%North-Holland, Amsterdam, 1978.
+%
+%\bibitem{CockburnDong07}
+%{\sc B.~Cockburn and B.~Dong},
+%{\em An analysis of the minimal dissipation local discontinuous
+%Galerkin method for convection-diffusion problems},
+%J. Sci. Comput., 32(2):233--262, 2007.
+%
+%\bibitem{cockburn2009unified} 
+%{\sc B. Cockburn,  J. Gopalakrishnan,  and R. Lazarov},
+%{\em  Unified hybridization of discontinuous Galerkin, mixed, and continuous Galerkin methods for second order elliptic problems},
+%SIAM J. Numer. Anal., 47:1319--1365, 2009.
+%
+%\bibitem{Cockburn98}
+%{\sc B.~Cockburn and C-W.~Shu},
+%{\em The local discontinuous Galerkin 
+%method for time-dependent convection-diffusion systems},
+%SIAM J. Numer. Anal., 35(6):2440--2463, 1998.
+%
+%\bibitem{DouglasDupont76}
+%{\sc J. Douglas, Jr. and T. Dupont}, 
+%{\em Interior Penalty Procedures for Elliptic and Parabolic
+%Galerkin Methods}, Lecture Notes in Phys. 58, Springer-Verlag, Berlin, 1976.
+%
+% 
+%
+%\bibitem{FengLewis_ldg1d}
+%{\sc X.~Feng and T.~Lewis}, 
+%{\em Local discontinuous Galerkin methods for one-dimensional 
+% second order fully nonlinear elliptic and parabolic equations}, 
+% J. Sci. Comput. (2014) 59:129--157.  
+%
+%\bibitem{FengLewis_ldgnd}
+%{\sc X.~Feng and T.~Lewis}, 
+%{\em Nonstandard local discontinuous Galerkin methods for 
+%fully nonlinear second order elliptic and parabolic equations in high dimensions}, 
+%in preparation.  
+%
+%\bibitem{FengLewisNeilan13}
+%{\sc X.~Feng, T.~Lewis, and M.~Neilan},
+%{\em  Discontinuous Galerkin 
+%finite element differential calculus and applications to numerical solutions 
+%of linear and nonlinear partial differential equations}, 
+%submitted. arXiv:1302.6984 [math.NA].
+%
+%\bibitem{grisvard}
+%{\sc P.~Grisvard}, 
+%{\em Elliptic Problems in Nonsmooth Domains}, 
+%Pitman, 1985.  
+%
+%\bibitem{LasisSuli03}
+%{\sc A.~Lasis and E.~S\"uli}, 
+%{\em Poincar\`e-type inequalities for broken Sobolev spaces}, 
+%Oxford University Computing Laboratories, Numerical Analysis Technical Report, 03(10), 2003.  
+%
+%\bibitem{diss}
+%{\sc T.~Lewis}, 
+%{\em Finite Difference and Discontinuous Galerkin Finite Element Methods 
+%for Fully Nonlinear Second Order Partial Differential Equations}, 
+%Ph.D. Thesis, University of Tennessee, 2013.  
+%%{\tt http://trace.tennessee.edu/utk_graddiss/2446}. 
+%
+%\bibitem{LewisNeilan12}
+%{\sc T.~Lewis and M.~Neilan},
+%{\em Convergence analysis of a symmetric dual-wind discontinuous Galerkin method},
+%J. Sci. Comput., 59(3):602--625, 2014. 
+%
+%\bibitem{Marazzina}
+%{\sc D.~Marazzina}, 
+%{\em Mixed discontinuous Galerkin methods with minimal stabilization}, 
+%Communications to SIMAI Congress, ISSN 1827--9015, Vol. 2, 2007.
+%
+%\bibitem{Nitsche71}
+%{\sc J.~A.~Nitsche,} 
+%{\em \"Uber ein Variationspirinzip zur L\"osung Dirichlet-Problemen bei Verwendung
+%von Teilr\"aumen, die keinen Randbedingungen unteworfen sind}, 
+%Abh. Math. Sem. Univ. Hamburg, 36:9--15, 1971.
+%
+%\bibitem{burman_ern7}
+%{\sc J.~T. Oden, I.~Babu\u{u}ska, and C.~Baumann}, 
+%{\em A discontinuous $hp$ finite element method for diffusion problems}, 
+%J. Comput. Phys., 146(2):491-519, 1998. 
+%
+%\bibitem{RiviereWheelerGirault00}
+%{\sc B.~Rivi\`ere, M.F.~Wheeler, and V.~Girault},
+%{\em Improved energy estimates for interior penalty, 
+%constrained and discontinuous Galerkin methods for elliptic problems. I.},
+% Comput. Geosci., 3(3--4):337--360, 1999.
+% 
+% \bibitem{RiviereWheelerGirault01}
+% {\sc B.~Rivi\`ere, M.F.~Wheeler, and V.~Girault},
+%{\em A priori error estimates for finite element methods based 
+%on discontinuous approximation spaces for elliptic problems},
+%SIAM J. Numer. Anal. 39(3):902--931, 2001. 
+%
+%\bibitem{kirby-14}
+%{\sc S.~J. Sherwin, R.~M. Kirby, J.~Peir\'o, R.~L. Taylor, and O.~C. Zienkiewicz}, 
+%{\em On 2D elliptic discontinuous Galerkin Methods}, 
+%Int. J. Numer. Meth. Engng, 65:752?784, 2006.
+%
+%\bibitem{wang2013weak} 
+%{\sc J. Wang and X. Ye},
+%{\em  A weak Galerkin finite element method for second-order elliptic problems},
+%J. Comput. Appl. Math., 241:103--115, 2013.
+%
+%\bibitem{Wheeler78}
+%{\sc M. F. Wheeler}, 
+%{\em An elliptic collocation-finite element method with interior penalties}, 
+%SIAM J. Numer. Anal., 15:152--161, 1978.
+%
+%\end{thebibliography}
+
+
+
+

@@ -1,0 +1,53 @@
+\contentsline {section}{List of Figures}{3}{section*.1}
+\contentsline {section}{List of Tables}{3}{section*.2}
+\contentsline {section}{\numberline {1}Preliminaries}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}Linear Algebra Preliminaries}{3}{subsection.1.1}
+\contentsline {subsubsection}{\numberline {1.1.1}Common Properties}{3}{subsubsection.1.1.1}
+\contentsline {subsubsection}{\numberline {1.1.2}Similar and diagonalization}{6}{subsubsection.1.1.2}
+\contentsline {subsubsection}{\numberline {1.1.3}Eigenvalues and Eigenvectors}{7}{subsubsection.1.1.3}
+\contentsline {subsubsection}{\numberline {1.1.4}Unitary matrices}{7}{subsubsection.1.1.4}
+\contentsline {subsubsection}{\numberline {1.1.5}Hermitian matrices}{8}{subsubsection.1.1.5}
+\contentsline {subsubsection}{\numberline {1.1.6}Positive definite matrices}{9}{subsubsection.1.1.6}
+\contentsline {subsubsection}{\numberline {1.1.7}Normal matrices}{10}{subsubsection.1.1.7}
+\contentsline {subsubsection}{\numberline {1.1.8}Common Theorems}{11}{subsubsection.1.1.8}
+\contentsline {subsection}{\numberline {1.2}Calculus Preliminaries}{12}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Norms' Preliminaries}{16}{subsection.1.3}
+\contentsline {subsubsection}{\numberline {1.3.1}Vector Norms}{16}{subsubsection.1.3.1}
+\contentsline {subsubsection}{\numberline {1.3.2}Matrix Norms}{17}{subsubsection.1.3.2}
+\contentsline {section}{\numberline {2}Direct Method}{19}{section.2}
+\contentsline {subsection}{\numberline {2.1}For square or rectangular matrices $A\in \mathbb {C}^{m,n}, m\geq n$}{19}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}Singular Value Decomposition}{19}{subsubsection.2.1.1}
+\contentsline {subsubsection}{\numberline {2.1.2}QR Decomposition}{19}{subsubsection.2.1.2}
+\contentsline {subsection}{\numberline {2.2}For square matrices $A\in \mathbb {C}^{n,n}$}{19}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}LU Decomposition}{19}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}Cholesky Decomposition}{19}{subsubsection.2.2.2}
+\contentsline {section}{\numberline {3}Iterative Method}{19}{section.3}
+\contentsline {subsection}{\numberline {3.1}General Iterative Scheme}{19}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Jacobi Method}{19}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Gauss-Seidel Method}{19}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Richardson Method}{19}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Successive Over Relaxation (SOR) Method}{19}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}Minimal Correction Method}{19}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.7}Steepest Descent Method}{19}{subsection.3.7}
+\contentsline {subsection}{\numberline {3.8}Conjugate Gradients Method}{19}{subsection.3.8}
+\contentsline {section}{\numberline {4}Eigenvalue Problems}{19}{section.4}
+\contentsline {section}{\numberline {5}Euler Method}{19}{section.5}
+\contentsline {subsection}{\numberline {5.1}Euler's method}{20}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Trapezoidal Method}{23}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Theta Method}{25}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Midpoint Rule Method}{25}{subsection.5.4}
+\contentsline {section}{\numberline {6}Multistep Methond}{27}{section.6}
+\contentsline {subsection}{\numberline {6.1}The Adams Method}{27}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}The Order and Convergence of Multistep Methods}{28}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Method of A-stable verification for Multistep Methods }{29}{subsection.6.3}
+\contentsline {section}{\numberline {7}Runge-Kutta Methods}{29}{section.7}
+\contentsline {subsection}{\numberline {7.1}Quadrature Formulas}{29}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Explicit Runge-Kutta Formulas}{29}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.3}Implicit Runge-Kutta Formulas}{29}{subsection.7.3}
+\contentsline {subsection}{\numberline {7.4}Collocation Runge-Kutta Formulas}{29}{subsection.7.4}
+\contentsline {subsection}{\numberline {7.5}Method of A-stable verification for Runge-Kutta Method }{29}{subsection.7.5}
+\contentsline {subsection}{\numberline {7.6}Problems}{30}{subsection.7.6}
+\contentsline {section}{Appendices}{33}{problem.7.3}
+\contentsline {section}{\numberline {A}Lecture notes}{33}{section.1}
+\contentsline {section}{\numberline {B}Trigonometric formula tables}{33}{section.2}
+\contentsline {section}{\numberline {C}Trigonometric tables}{33}{section.3}

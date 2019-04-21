@@ -1,0 +1,108 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{License}{section.1}% 2
+\BOOKMARK [1][-]{section.2}{Simple instructions for a basic exam}{}% 3
+\BOOKMARK [2][-]{subsection.2.1}{The documentclass command}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.2}{Asking for the student's name}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.3}{Asking questions}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.4}{Questions with parts, and subparts, and subsubparts}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.5}{Leaving space for the answers}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.6}{Headers and footers}{section.2}% 9
+\BOOKMARK [1][-]{section.3}{The documentclass command}{}% 10
+\BOOKMARK [2][-]{subsection.3.1}{The option addpoints}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.2}{The option answers}{section.3}% 12
+\BOOKMARK [1][-]{section.4}{Questions and points}{}% 13
+\BOOKMARK [2][-]{subsection.4.1}{Questions}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.2}{Questions with parts and subparts \(and subsubparts\)}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.3}{Point values for the questions}{section.4}% 16
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Where the points will be printed}{subsection.4.3}% 17
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Printing the points at the end of the question}{subsection.4.3}% 18
+\BOOKMARK [3][-]{subsubsection.4.3.3}{Half points}{subsection.4.3}% 19
+\BOOKMARK [3][-]{subsubsection.4.3.4}{Surrounding the points: Parentheses, brackets, or a box}{subsection.4.3}% 20
+\BOOKMARK [3][-]{subsubsection.4.3.5}{Using a substitute for the word ``points''}{subsection.4.3}% 21
+\BOOKMARK [3][-]{subsubsection.4.3.6}{Using marginpointname and enlarging the margins}{subsection.4.3}% 22
+\BOOKMARK [3][-]{subsubsection.4.3.7}{Completely customizing the points}{subsection.4.3}% 23
+\BOOKMARK [3][-]{subsubsection.4.3.8}{Questions that begin with a parts environment}{subsection.4.3}% 24
+\BOOKMARK [3][-]{subsubsection.4.3.9}{Adding up the points for a question}{subsection.4.3}% 25
+\BOOKMARK [3][-]{subsubsection.4.3.10}{Margin sizes when using pointsinmargin and pointsinrightmargin}{subsection.4.3}% 26
+\BOOKMARK [2][-]{subsection.4.4}{Custom question number lines: The qformat command}{section.4}% 27
+\BOOKMARK [3][-]{subsubsection.4.4.1}{Adding up the points for a question}{subsection.4.4}% 28
+\BOOKMARK [2][-]{subsection.4.5}{Titled questions}{section.4}% 29
+\BOOKMARK [3][-]{subsubsection.4.5.1}{titledquestion}{subsection.4.5}% 30
+\BOOKMARK [3][-]{subsubsection.4.5.2}{thequestiontitle}{subsection.4.5}% 31
+\BOOKMARK [2][-]{subsection.4.6}{Bonus points}{section.4}% 32
+\BOOKMARK [2][-]{subsection.4.7}{Counting the questions and adding up the points}{section.4}% 33
+\BOOKMARK [2][-]{subsection.4.8}{Referring to specific questions by number \(cross references\)}{section.4}% 34
+\BOOKMARK [2][-]{subsection.4.9}{Customizing the numbers}{section.4}% 35
+\BOOKMARK [2][-]{subsection.4.10}{Customizing the list parameters}{section.4}% 36
+\BOOKMARK [1][-]{section.5}{Multiple choice questions}{}% 37
+\BOOKMARK [2][-]{subsection.5.1}{The choices environment}{section.5}% 38
+\BOOKMARK [2][-]{subsection.5.2}{The oneparchoices environment}{section.5}% 39
+\BOOKMARK [2][-]{subsection.5.3}{The checkboxes environment}{section.5}% 40
+\BOOKMARK [2][-]{subsection.5.4}{The oneparcheckboxes environment}{section.5}% 41
+\BOOKMARK [2][-]{subsection.5.5}{Solutions to multiple choice questions}{section.5}% 42
+\BOOKMARK [2][-]{subsection.5.6}{Customizations}{section.5}% 43
+\BOOKMARK [1][-]{section.6}{Escaping the indentation: uplevel and fullwidth}{}% 44
+\BOOKMARK [2][-]{subsection.6.1}{Including instructions for a group of questions}{section.6}% 45
+\BOOKMARK [2][-]{subsection.6.2}{Naming the parts of a long exam}{section.6}% 46
+\BOOKMARK [3][-]{subsubsection.6.2.1}{Using uplevel and fullwidth}{subsection.6.2}% 47
+\BOOKMARK [3][-]{subsubsection.6.2.2}{Using the standard sectioning commands}{subsection.6.2}% 48
+\BOOKMARK [1][-]{section.7}{Leaving space for the answers}{}% 49
+\BOOKMARK [2][-]{subsection.7.1}{Leaving blank space}{section.7}% 50
+\BOOKMARK [2][-]{subsection.7.2}{Printing an empty box}{section.7}% 51
+\BOOKMARK [2][-]{subsection.7.3}{Printing lined space}{section.7}% 52
+\BOOKMARK [2][-]{subsection.7.4}{Printing dotted lined space}{section.7}% 53
+\BOOKMARK [2][-]{subsection.7.5}{Short answer questions}{section.7}% 54
+\BOOKMARK [2][-]{subsection.7.6}{Printing the answers to short answer questions}{section.7}% 55
+\BOOKMARK [1][-]{section.8}{Solutions}{}% 56
+\BOOKMARK [2][-]{subsection.8.1}{Solution environments}{section.8}% 57
+\BOOKMARK [2][-]{subsection.8.2}{The appearance of the solution}{section.8}% 58
+\BOOKMARK [3][-]{subsubsection.8.2.1}{Printing the solution in a box}{subsection.8.2}% 59
+\BOOKMARK [3][-]{subsubsection.8.2.2}{Printing the solution on a shaded background}{subsection.8.2}% 60
+\BOOKMARK [3][-]{subsubsection.8.2.3}{Printing the solution with no framing or shading}{subsection.8.2}% 61
+\BOOKMARK [2][-]{subsection.8.3}{Customizing the solution}{section.8}% 62
+\BOOKMARK [3][-]{subsubsection.8.3.1}{The title}{subsection.8.3}% 63
+\BOOKMARK [3][-]{subsubsection.8.3.2}{Solution emphasis}{subsection.8.3}% 64
+\BOOKMARK [3][-]{subsubsection.8.3.3}{Advanced customizations}{subsection.8.3}% 65
+\BOOKMARK [2][-]{subsection.8.4}{Leaving space for the answers when solutions aren't printed}{section.8}% 66
+\BOOKMARK [3][-]{subsubsection.8.4.1}{Cancelling the space from the optional arguments}{subsection.8.4}% 67
+\BOOKMARK [2][-]{subsection.8.5}{Changes depending on whether or not solutions are being printed}{section.8}% 68
+\BOOKMARK [1][-]{section.9}{Grading tables and point tables}{}% 69
+\BOOKMARK [2][-]{subsection.9.1}{Grading tables indexed by question number or by page number}{section.9}% 70
+\BOOKMARK [2][-]{subsection.9.2}{Point tables indexed by question number or by page number}{section.9}% 71
+\BOOKMARK [2][-]{subsection.9.3}{Table entries as clickable links}{section.9}% 72
+\BOOKMARK [2][-]{subsection.9.4}{Grading ranges, partial grading tables, and partial point tables}{section.9}% 73
+\BOOKMARK [2][-]{subsection.9.5}{pointsofquestion}{section.9}% 74
+\BOOKMARK [2][-]{subsection.9.6}{pointsonpage}{section.9}% 75
+\BOOKMARK [2][-]{subsection.9.7}{Bonus grading tables and bonus point tables}{section.9}% 76
+\BOOKMARK [2][-]{subsection.9.8}{Combined grading tables and combined point tables}{section.9}% 77
+\BOOKMARK [2][-]{subsection.9.9}{Changing the total points in a table}{section.9}% 78
+\BOOKMARK [2][-]{subsection.9.10}{Customizing the tables}{section.9}% 79
+\BOOKMARK [1][-]{section.10}{Changing the page margins}{}% 80
+\BOOKMARK [1][-]{section.11}{Headers and footers}{}% 81
+\BOOKMARK [2][-]{subsection.11.1}{Page styles: Headers and/or footers}{section.11}% 82
+\BOOKMARK [2][-]{subsection.11.2}{The three parts of the header}{section.11}% 83
+\BOOKMARK [3][-]{subsubsection.11.2.1}{Using header, firstpageheader and runningheader}{subsection.11.2}% 84
+\BOOKMARK [3][-]{subsubsection.11.2.2}{Using lhead, chead and rhead}{subsection.11.2}% 85
+\BOOKMARK [2][-]{subsection.11.3}{The three parts of the footer}{section.11}% 86
+\BOOKMARK [3][-]{subsubsection.11.3.1}{Using footer, firstpagefooter and runningfooter}{subsection.11.3}% 87
+\BOOKMARK [3][-]{subsubsection.11.3.2}{Using lfoot, cfoot, and rfoot}{subsection.11.3}% 88
+\BOOKMARK [2][-]{subsection.11.4}{Leaving extra room for multiple line headers and footers}{section.11}% 89
+\BOOKMARK [2][-]{subsection.11.5}{Horizontal rules}{section.11}% 90
+\BOOKMARK [2][-]{subsection.11.6}{Listing the number of pages in the exam}{section.11}% 91
+\BOOKMARK [2][-]{subsection.11.7}{Treating the last page differently}{section.11}% 92
+\BOOKMARK [2][-]{subsection.11.8}{Treating odd and even numbered pages differently}{section.11}% 93
+\BOOKMARK [2][-]{subsection.11.9}{Questions that span multiple pages}{section.11}% 94
+\BOOKMARK [3][-]{subsubsection.11.9.1}{Questions continuing from the previous page}{subsection.11.9}% 95
+\BOOKMARK [3][-]{subsubsection.11.9.2}{Questions that continue onto the next page}{subsection.11.9}% 96
+\BOOKMARK [2][-]{subsection.11.10}{Examples}{section.11}% 97
+\BOOKMARK [3][-]{subsubsection.11.10.1}{Example:}{subsection.11.10}% 98
+\BOOKMARK [3][-]{subsubsection.11.10.2}{Example:}{subsection.11.10}% 99
+\BOOKMARK [3][-]{subsubsection.11.10.3}{Example:}{subsection.11.10}% 100
+\BOOKMARK [3][-]{subsubsection.11.10.4}{Example:}{subsection.11.10}% 101
+\BOOKMARK [3][-]{subsubsection.11.10.5}{Example:}{subsection.11.10}% 102
+\BOOKMARK [3][-]{subsubsection.11.10.6}{Example:}{subsection.11.10}% 103
+\BOOKMARK [3][-]{subsubsection.11.10.7}{Example:}{subsection.11.10}% 104
+\BOOKMARK [3][-]{subsubsection.11.10.8}{Example:}{subsection.11.10}% 105
+\BOOKMARK [1][-]{section.12}{Cover pages}{}% 106
+\BOOKMARK [2][-]{subsection.12.1}{Headers and footers}{section.12}% 107
+\BOOKMARK [2][-]{subsection.12.2}{Listing the number of cover pages}{section.12}% 108

@@ -1,0 +1,108 @@
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}
+\contentsline {subsection}{\numberline {1.1}License}{5}{subsection.1.1}
+\contentsline {section}{\numberline {2}Simple instructions for a basic exam}{6}{section.2}
+\contentsline {subsection}{\numberline {2.1}The \texttt {\char `\\documentclass} command}{6}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Asking for the student's name}{6}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Asking questions}{7}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Questions with parts, and subparts, and subsubparts}{7}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Leaving space for the answers}{9}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Headers and footers}{10}{subsection.2.6}
+\contentsline {section}{\numberline {3}The \texttt {\char `\\documentclass} command}{11}{section.3}
+\contentsline {subsection}{\numberline {3.1}The option \texttt {addpoints}}{11}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}The option \texttt {answers}}{12}{subsection.3.2}
+\contentsline {section}{\numberline {4}Questions and points}{13}{section.4}
+\contentsline {subsection}{\numberline {4.1}Questions}{13}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Questions with parts and subparts (and subsubparts)}{14}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Point values for the questions}{17}{subsection.4.3}
+\contentsline {subsubsection}{\numberline {4.3.1}Where the points will be printed}{17}{subsubsection.4.3.1}
+\contentsline {subsubsection}{\numberline {4.3.2}Printing the points at the end of the question}{19}{subsubsection.4.3.2}
+\contentsline {subsubsection}{\numberline {4.3.3}Half points}{21}{subsubsection.4.3.3}
+\contentsline {subsubsection}{\numberline {4.3.4}Surrounding the points: Parentheses, brackets, or a box}{21}{subsubsection.4.3.4}
+\contentsline {subsubsection}{\numberline {4.3.5}Using a substitute for the word ``points''}{23}{subsubsection.4.3.5}
+\contentsline {subsubsection}{\numberline {4.3.6}Using \texttt {\char `\\marginpointname} and enlarging the margins}{25}{subsubsection.4.3.6}
+\contentsline {subsubsection}{\numberline {4.3.7}Completely customizing the points}{25}{subsubsection.4.3.7}
+\contentsline {subsubsection}{\numberline {4.3.8}Questions that begin with a parts environment}{27}{subsubsection.4.3.8}
+\contentsline {subsubsection}{\numberline {4.3.9}Adding up the points for a question}{28}{subsubsection.4.3.9}
+\contentsline {subsubsection}{\numberline {4.3.10}Margin sizes when using \texttt {\char `\\pointsinmargin} and \texttt {\char `\\pointsinrightmargin}}{30}{subsubsection.4.3.10}
+\contentsline {subsection}{\numberline {4.4}Custom question number lines: The \texttt {\char `\\qformat} command}{31}{subsection.4.4}
+\contentsline {subsubsection}{\numberline {4.4.1}Adding up the points for a question}{32}{subsubsection.4.4.1}
+\contentsline {subsection}{\numberline {4.5}Titled questions}{33}{subsection.4.5}
+\contentsline {subsubsection}{\numberline {4.5.1}\texttt {\char `\\titledquestion}}{33}{subsubsection.4.5.1}
+\contentsline {subsubsection}{\numberline {4.5.2}\texttt {\char `\\thequestiontitle}}{34}{subsubsection.4.5.2}
+\contentsline {subsection}{\numberline {4.6}Bonus points}{34}{subsection.4.6}
+\contentsline {subsection}{\numberline {4.7}Counting the questions and adding up the points}{36}{subsection.4.7}
+\contentsline {subsection}{\numberline {4.8}Referring to specific questions by number (cross references)}{37}{subsection.4.8}
+\contentsline {subsection}{\numberline {4.9}Customizing the numbers}{38}{subsection.4.9}
+\contentsline {subsection}{\numberline {4.10}Customizing the list parameters}{40}{subsection.4.10}
+\contentsline {section}{\numberline {5}Multiple choice questions}{41}{section.5}
+\contentsline {subsection}{\numberline {5.1}The \texttt {choices} environment}{41}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}The \texttt {oneparchoices} environment}{42}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}The \texttt {checkboxes} environment}{43}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}The \texttt {oneparcheckboxes} environment}{43}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Solutions to multiple choice questions}{44}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.6}Customizations}{44}{subsection.5.6}
+\contentsline {section}{\numberline {6}Escaping the indentation: \texttt {\char `\\uplevel} and \texttt {\char `\\fullwidth}}{46}{section.6}
+\contentsline {subsection}{\numberline {6.1}Including instructions for a group of questions}{46}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Naming the parts of a long exam}{50}{subsection.6.2}
+\contentsline {subsubsection}{\numberline {6.2.1}Using \texttt {\char `\\uplevel} and \texttt {\char `\\fullwidth}}{50}{subsubsection.6.2.1}
+\contentsline {subsubsection}{\numberline {6.2.2}Using the standard sectioning commands}{51}{subsubsection.6.2.2}
+\contentsline {section}{\numberline {7}Leaving space for the answers}{52}{section.7}
+\contentsline {subsection}{\numberline {7.1}Leaving blank space}{52}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Printing an empty box}{53}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.3}Printing lined space}{54}{subsection.7.3}
+\contentsline {subsection}{\numberline {7.4}Printing dotted lined space}{56}{subsection.7.4}
+\contentsline {subsection}{\numberline {7.5}Short answer questions}{58}{subsection.7.5}
+\contentsline {subsection}{\numberline {7.6}Printing the answers to short answer questions}{60}{subsection.7.6}
+\contentsline {section}{\numberline {8}Solutions}{61}{section.8}
+\contentsline {subsection}{\numberline {8.1}Solution environments}{61}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}The appearance of the solution}{62}{subsection.8.2}
+\contentsline {subsubsection}{\numberline {8.2.1}Printing the solution in a box}{62}{subsubsection.8.2.1}
+\contentsline {subsubsection}{\numberline {8.2.2}Printing the solution on a shaded background}{63}{subsubsection.8.2.2}
+\contentsline {subsubsection}{\numberline {8.2.3}Printing the solution with no framing or shading}{64}{subsubsection.8.2.3}
+\contentsline {subsection}{\numberline {8.3}Customizing the solution}{64}{subsection.8.3}
+\contentsline {subsubsection}{\numberline {8.3.1}The title}{65}{subsubsection.8.3.1}
+\contentsline {subsubsection}{\numberline {8.3.2}Solution emphasis}{65}{subsubsection.8.3.2}
+\contentsline {subsubsection}{\numberline {8.3.3}Advanced customizations}{66}{subsubsection.8.3.3}
+\contentsline {subsection}{\numberline {8.4}Leaving space for the answers when solutions aren't printed}{66}{subsection.8.4}
+\contentsline {subsubsection}{\numberline {8.4.1}Cancelling the space from the optional arguments}{67}{subsubsection.8.4.1}
+\contentsline {subsection}{\numberline {8.5}Changes depending on whether or not solutions are being printed}{68}{subsection.8.5}
+\contentsline {section}{\numberline {9}Grading tables and point tables}{69}{section.9}
+\contentsline {subsection}{\numberline {9.1}Grading tables indexed by question number or by page number}{69}{subsection.9.1}
+\contentsline {subsection}{\numberline {9.2}Point tables indexed by question number or by page number}{72}{subsection.9.2}
+\contentsline {subsection}{\numberline {9.3}Table entries as clickable links}{74}{subsection.9.3}
+\contentsline {subsection}{\numberline {9.4}Grading ranges, partial grading tables, and partial point tables}{75}{subsection.9.4}
+\contentsline {subsection}{\numberline {9.5}\texttt {\char `\\pointsofquestion}}{75}{subsection.9.5}
+\contentsline {subsection}{\numberline {9.6}\texttt {\char `\\pointsonpage}}{76}{subsection.9.6}
+\contentsline {subsection}{\numberline {9.7}Bonus grading tables and bonus point tables}{77}{subsection.9.7}
+\contentsline {subsection}{\numberline {9.8}Combined grading tables and combined point tables}{78}{subsection.9.8}
+\contentsline {subsection}{\numberline {9.9}Changing the total points in a table}{79}{subsection.9.9}
+\contentsline {subsection}{\numberline {9.10}Customizing the tables}{80}{subsection.9.10}
+\contentsline {section}{\numberline {10}Changing the page margins}{83}{section.10}
+\contentsline {section}{\numberline {11}Headers and footers}{84}{section.11}
+\contentsline {subsection}{\numberline {11.1}Page styles: Headers and/or footers}{84}{subsection.11.1}
+\contentsline {subsection}{\numberline {11.2}The three parts of the header}{85}{subsection.11.2}
+\contentsline {subsubsection}{\numberline {11.2.1}Using \texttt {\char `\\header}, \texttt {\char `\\firstpageheader} and \texttt {\char `\\runningheader}}{86}{subsubsection.11.2.1}
+\contentsline {subsubsection}{\numberline {11.2.2}Using \texttt {\char `\\lhead}, \texttt {\char `\\chead} and \texttt {\char `\\rhead}}{87}{subsubsection.11.2.2}
+\contentsline {subsection}{\numberline {11.3}The three parts of the footer}{88}{subsection.11.3}
+\contentsline {subsubsection}{\numberline {11.3.1}Using \texttt {\char `\\footer}, \texttt {\char `\\firstpagefooter} and \texttt {\char `\\runningfooter}}{88}{subsubsection.11.3.1}
+\contentsline {subsubsection}{\numberline {11.3.2}Using \texttt {\char `\\lfoot}, \texttt {\char `\\cfoot}, and \texttt {\char `\\rfoot}}{88}{subsubsection.11.3.2}
+\contentsline {subsection}{\numberline {11.4}Leaving extra room for multiple line headers and footers}{89}{subsection.11.4}
+\contentsline {subsection}{\numberline {11.5}Horizontal rules}{90}{subsection.11.5}
+\contentsline {subsection}{\numberline {11.6}Listing the number of pages in the exam}{92}{subsection.11.6}
+\contentsline {subsection}{\numberline {11.7}Treating the last page differently}{92}{subsection.11.7}
+\contentsline {subsection}{\numberline {11.8}Treating odd and even numbered pages differently}{93}{subsection.11.8}
+\contentsline {subsection}{\numberline {11.9}Questions that span multiple pages}{94}{subsection.11.9}
+\contentsline {subsubsection}{\numberline {11.9.1}Questions continuing from the previous page}{94}{subsubsection.11.9.1}
+\contentsline {subsubsection}{\numberline {11.9.2}Questions that continue onto the next page}{96}{subsubsection.11.9.2}
+\contentsline {subsection}{\numberline {11.10}Examples}{97}{subsection.11.10}
+\contentsline {subsubsection}{\numberline {11.10.1}Example:}{97}{subsubsection.11.10.1}
+\contentsline {subsubsection}{\numberline {11.10.2}Example:}{98}{subsubsection.11.10.2}
+\contentsline {subsubsection}{\numberline {11.10.3}Example:}{99}{subsubsection.11.10.3}
+\contentsline {subsubsection}{\numberline {11.10.4}Example:}{100}{subsubsection.11.10.4}
+\contentsline {subsubsection}{\numberline {11.10.5}Example:}{102}{subsubsection.11.10.5}
+\contentsline {subsubsection}{\numberline {11.10.6}Example:}{103}{subsubsection.11.10.6}
+\contentsline {subsubsection}{\numberline {11.10.7}Example:}{104}{subsubsection.11.10.7}
+\contentsline {subsubsection}{\numberline {11.10.8}Example:}{105}{subsubsection.11.10.8}
+\contentsline {section}{\numberline {12}Cover pages}{106}{section.12}
+\contentsline {subsection}{\numberline {12.1}Headers and footers}{107}{subsection.12.1}
+\contentsline {subsection}{\numberline {12.2}Listing the number of cover pages}{107}{subsection.12.2}

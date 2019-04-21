@@ -1,0 +1,163 @@
+\documentclass[cmbright]{mymmaauth}
+
+\usepackage{moreverb}
+
+	\usepackage{latexsym}
+	\usepackage{booktabs}
+	\usepackage{color}
+	\usepackage{bm}
+	\usepackage{enumerate}
+	\usepackage{tikz}
+	\usepackage{amsthm}
+
+\usepackage[colorlinks,bookmarksopen,bookmarksnumbered,citecolor=red,urlcolor=red]{hyperref}
+
+\newcommand\BibTeX{{\rmfamily B\kern-.05em \textsc{i\kern-.025em b}\kern-.08em
+T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\def\volumeyear{2015}
+\def\volumenumber{00}
+\def\DOI{sim.000}
+
+\newcommand{\rmv}[1]{\textcolor{blue}{\sout{#1}}}
+\newcommand{\crm}[1]{\textcolor{blue}{\cancel{#1}}}
+\newcommand{\notes}[1]{\textcolor{blue}{#1} }%
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\hF}{\widehat{F}}
+\newcommand{\cE}{\mathcal{E}_h}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\hcP}{\widetilde{\mathcal{P}}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\bfR}{\mathbf{R}}
+\newcommand{\bv}{{\bm v}}
+\newcommand{\Ome}{\Omega}
+\newcommand{\oOme}{\overline{\Omega}} 
+\renewcommand{\div}{\mbox{\rm div\,}}
+\newcommand{\curl}{\mbox{\rm curl\,}}
+\newcommand{\tr}{\mbox{\rm tr}}
+\newcommand{\mce}{\mathcal{E}_h}
+\newcommand{\mct}{\mathcal{T}_h}
+\newcommand{\bV}{\bm V}
+\newcommand{\bT}{\bm T}
+\newcommand{\bn}{\bm n}
+\newcommand{\p}{\partial}
+\newcommand{\Div}{{\rm div}}
+\newcommand{\nab}{\nabla}
+\newcommand{\bH}{\bm H}
+\newcommand{\bC}{\bm C}
+\newcommand{\bl}{\big\langle}
+\newcommand{\br}{\big\rangle}
+\newcommand{\Bl}{\Big\langle}
+\newcommand{\Br}{\Big\rangle}
+\newcommand{\bcurl}{{\bf curl}}
+\newcommand{\Del}{\Delta}
+\newcommand{\btau}{{\bm \tau}}
+\newcommand{\bR}{{\bm R}}
+\newcommand{\bL}{{\bm L}}
+\newcommand{\bw}{{\bm w}}
+\newcommand{\bP}{{\bm {P}}}
+\newcommand{\bsigma}{{\bm \sigma}}
+\newcommand{\bq}{\bm q}
+\newcommand{\us}{\tilde}
+\newcommand{\bA}{\bm A}
+\newcommand{\bld}[1]{\boldsymbol{#1}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\bg}{\bm g}
+\newcommand{\bz}{\bm z}
+\newcommand{\bmu}{\bm \mu}
+\newcommand{\bW}{\bm W}
+\newcommand{\pol}{\mathcal{P}}
+\newcommand{\nonum}{\nonumber}
+\newcommand{\bpol}{\boldsymbol{\mathcal{P}}}
+\newcommand{\mI}{\mathcal{I}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\bcV}{{\boldsymbol{\mathcal{V}}}}
+\newcommand{\bbp}{\mathbb{P}}
+\newcommand{\bcQ}{\boldsymbol{\mathcal{Q}}}
+\newcommand{\bu}{\bm u}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\jump}[1]{\big[\hspace{-0.065cm}\big[{#1}\big]\hspace{-0.065cm}\big]}
+\newcommand{\avg}[1]{\big\{\hspace{-0.095cm}\big\{{#1}\big\}\hspace{-0.095cm}\big\}}
+\newcommand{\sjump}[1]{\big[{#1}\big]}
+\newcommand{\savg}[1]{\big\{ {#1} \big\} }
+\newcommand{\abs}[1]{\big| {#1} \big| }
+\newcommand{\tbar}[1]{\left|\hspace{-0.045cm}\left|\hspace{-0.045cm}\left|{#1}\right|\hspace{-0.045cm}\right|\hspace{-0.045cm}\right|}
+\newcommand{\ipx}[1]{ \Big( {#1} \Big) } 
+\newcommand{\ips}[1]{ \Big\langle {#1} \Big\rangle}
+\newcommand{\hh}{\hspace*{\fill}}
+
+\if@mathematic
+   \def\bvec#1{\ensuremath{\mathchoice
+                     {\mbox{\boldmath$\displaystyle\mathbf{#1}$}}
+                     {\mbox{\boldmath$\textstyle\mathbf{#1}$}}
+                     {\mbox{\boldmath$\scriptstyle\mathbf{#1}$}}
+                     {\mbox{\boldmath$\scriptscriptstyle\mathbf{#1}$}}}}
+\else
+   \def\bvec#1{\ensuremath{\mathchoice
+                     {\mbox{\boldmath$\displaystyle#1$}}
+                     {\mbox{\boldmath$\textstyle#1$}}
+                     {\mbox{\boldmath$\scriptstyle#1$}}
+                     {\mbox{\boldmath$\scriptscriptstyle#1$}}}}
+\fi
+
+
+
+	\newtheorem{remark}{Remark}[section]
+	\newtheorem{theorem}{Theorem}[section]
+	\newtheorem{lemma}{Lemma}[section]
+	\newtheorem{proposition}{Proposition}[section]
+	\newtheorem{corollary}{Corollary}[section]
+	\newtheorem{definition}{Definition}[section]
+
+	\begin{document}
+
+	\runninghead{W.~Feng et al.}
+
+
+	\title{Discontinuous Galerkin Derivative Operators with Applications to 
+Second Order Elliptic Problems and Stability}
+
+\author{W.~Feng\affil{a}, T.L.~Lewis\affil{b}\corrauth\ and S.M.~Wise\affil{a}}
+
+\address{\affilnum{a}Mathematics Department, The University of Tennessee, Knoxville, TN, 37996
+	\\
+\affilnum{b}Department of Mathematics and Statistics, 
+The University of North Carolina at Greensboro, Greensboro, NC, 27402}
+
+\corraddr{E-mail: tllewis3@uncg.edu}
+
+\cgs{NSF DMS number}
+\begin{abstract}
+A discontinuous Galerkin (DG) finite element interior calculus is used as 
+\end{abstract}
+
+\MOS{XXX; XXX}
+	
+	\keywords{
+discontinuous Galerkin methods, symmetric, error estimates, numerical differentiation, stabilization}
+
+	\maketitle
+
+	\vspace{-6pt}
+
+	\section{Introduction}
+	\label{intro-section}
+
+In this paper, we further develop t
+
+
+	\begin{subequations} 
+	\label{problem_neumann}
+	\label{PDE}
+	\begin{alignat}{2}
+-\Del u & =f \qquad &&\text{in }\Ome,
+	\\
+\frac{\partial u}{\partial n} & =g\qquad &&\text{on }\p\Ome, 
+	\end{alignat}
+	\end{subequations}
+\end{document}
+
+

@@ -1,0 +1,33 @@
+\begin{thebibliography}{1}
+
+\bibitem{allen1979microscopic}
+{\sc S.~M. Allen and J.~W. Cahn}, {\em A microscopic theory for antiphase
+  boundary motion and its application to antiphase domain coarsening}, Acta
+  Metallurgica, 27 (1979), pp.~1085--1095.
+
+\bibitem{feng2007analysis}
+{\sc X.~Feng, Y.~He, and C.~Liu}, {\em Analysis of finite element
+  approximations of a phase field model for two-phase fluids}, Mathematics of
+  Computation, 76 (2007), pp.~539--571.
+
+\bibitem{feng2003numerical}
+{\sc X.~Feng and A.~Prohl}, {\em Numerical analysis of the allen-cahn equation
+  and approximation for mean curvature flows}, Numerische Mathematik, 94
+  (2003), pp.~33--65.
+
+\bibitem{freefem++}
+{\sc F.~Hecht, O.~Pironneau, A.~Le~Hyaric, and K.~Ohtsuka}, {\em Freefem++
+  manual}, 2005.
+
+\bibitem{kessler2004posteriori}
+{\sc D.~Kessler, R.~H. Nochetto, and A.~Schmidt}, {\em A posteriori error
+  control for the allen--cahn problem: circumventing gronwall's inequality},
+  ESAIM: Mathematical Modelling and Numerical Analysis, 38 (2004),
+  pp.~129--142.
+
+\bibitem{shen2010numerical}
+{\sc J.~Shen and X.~Yang}, {\em Numerical approximations of allen-cahn and
+  cahn-hilliard equations}, Discrete Continuous Dynamical. Syst. A, 28 (2010),
+  pp.~1669--1691.
+
+\end{thebibliography}
